@@ -1,19 +1,24 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'google_signin_service.dart';
+import 'session_service.dart';
 
 class AuthService {
   final FirebaseAuth _firebaseAuth;
   final GoogleSignInService _googleSignInService;
   final FirebaseCrashlytics? _crashlytics;
+  final SessionService? _sessionService;
 
   AuthService({
     FirebaseAuth? firebaseAuth,
     GoogleSignInService? googleSignInService,
     FirebaseCrashlytics? crashlytics,
+    SessionService? sessionService,
   })  : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
         _googleSignInService = googleSignInService ?? GoogleSignInService(),
-        _crashlytics = crashlytics;
+        _crashlytics = crashlytics,
+        _sessionService = sessionService;
 
   // Get current user
   User? get currentUser => _firebaseAuth.currentUser;
@@ -166,6 +171,7 @@ class AuthService {
   Future<void> signOut() async {
     try {
       await _googleSignInService.signOut();
+      await _sessionService?.clearSession();
     } catch (e) {
       await _crashlytics?.recordError(
         e,
@@ -175,6 +181,34 @@ class AuthService {
       );
       rethrow;
     }
+  }
+
+  // Save user session
+  Future<void> saveUserSession() async {
+    try {
+      final user = _firebaseAuth.currentUser;
+      if (user != null && _sessionService != null) {
+        await _sessionService!.saveSession(user.uid, user.email ?? '');
+      }
+    } catch (e) {
+      await _crashlytics?.recordError(
+        e,
+        null,
+        fatal: false,
+        information: ['Session save failed'],
+      );
+      rethrow;
+    }
+  }
+
+  // Check if valid session exists
+  bool hasValidSession() {
+    return _sessionService?.hasValidSession() ?? false;
+  }
+
+  // Get session data
+  Map<String, dynamic>? getSessionData() {
+    return _sessionService?.getSession();
   }
 
   // Delete user account

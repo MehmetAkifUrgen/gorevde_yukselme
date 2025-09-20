@@ -3,11 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../models/question_model.dart';
 import '../services/questions_api_service.dart';
 import '../repositories/questions_repository.dart';
-
-// Shared Preferences Provider
-final sharedPreferencesProvider = Provider<SharedPreferences>((ref) {
-  throw UnimplementedError('SharedPreferences must be initialized in main()');
-});
+import 'auth_providers.dart';
 
 // Questions API Service Provider
 final questionsApiServiceProvider = Provider<QuestionsApiService>((ref) {
@@ -240,4 +236,41 @@ final randomQuestionsProvider = Provider.family<List<Question>, int>((ref, count
     loading: () => [],
     error: (_, __) => [],
   );
+});
+
+// API Categories Provider - Gets all categories from API
+final apiCategoriesProvider = FutureProvider<List<String>>((ref) async {
+  final apiService = ref.watch(questionsApiServiceProvider);
+  final response = await apiService.fetchAllQuestions();
+  return apiService.getAvailableCategories(response);
+});
+
+// API Professions Provider - Gets all professions for a specific category
+final apiProfessionsProvider = FutureProvider.family<List<String>, String>((ref, category) async {
+  final apiService = ref.watch(questionsApiServiceProvider);
+  final response = await apiService.fetchAllQuestions();
+  return apiService.getAvailableProfessions(response, category);
+});
+
+// API Subjects Provider - Gets all subjects for a specific category and profession
+final apiSubjectsProvider = FutureProvider.family<List<String>, ({String category, String profession})>((ref, params) async {
+  final apiService = ref.watch(questionsApiServiceProvider);
+  final response = await apiService.fetchAllQuestions();
+  return apiService.getAvailableSubjects(response, params.category, params.profession);
+});
+
+// API Questions Count Provider - Gets total number of questions in API
+final apiQuestionsCountProvider = FutureProvider<int>((ref) async {
+  final apiService = ref.watch(questionsApiServiceProvider);
+  final response = await apiService.fetchAllQuestions();
+  final questions = apiService.convertApiQuestionsToQuestions(response);
+  return questions.length;
+});
+
+// API Category Questions Count Provider - Gets number of questions for a specific category
+final apiCategoryQuestionsCountProvider = FutureProvider.family<int, String>((ref, category) async {
+  final apiService = ref.watch(questionsApiServiceProvider);
+  final response = await apiService.fetchAllQuestions();
+  final questions = apiService.convertApiQuestionsToQuestions(response, filterByCategory: category);
+  return questions.length;
 });

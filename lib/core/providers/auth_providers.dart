@@ -1,17 +1,32 @@
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../services/auth_service.dart';
 import '../services/firestore_service.dart';
 import '../services/google_signin_service.dart';
+import '../services/session_service.dart';
 import '../models/user_model.dart';
+
+// SharedPreferences Provider
+final sharedPreferencesProvider = Provider<SharedPreferences>((ref) {
+  throw UnimplementedError('SharedPreferences should be overridden in main.dart');
+});
+
+// Session Service Provider
+final sessionServiceProvider = Provider<SessionService>((ref) {
+  final sharedPreferences = ref.watch(sharedPreferencesProvider);
+  return SessionService(sharedPreferences);
+});
 
 // Auth Service Provider
 final authServiceProvider = Provider<AuthService>((ref) {
   final googleSignInService = ref.watch(googleSignInServiceProvider);
+  final sessionService = ref.watch(sessionServiceProvider);
   return AuthService(
     googleSignInService: googleSignInService,
     crashlytics: FirebaseCrashlytics.instance,
+    sessionService: sessionService,
   );
 });
 
@@ -73,6 +88,8 @@ class AuthNotifier extends StateNotifier<AsyncValue<firebase_auth.User?>> {
         password: password,
       );
       if (credential?.user != null) {
+        // Oturumu kaydet
+        await _authService.saveUserSession();
         state = AsyncValue.data(credential!.user);
       }
     } catch (error, stackTrace) {
@@ -151,6 +168,8 @@ class AuthNotifier extends StateNotifier<AsyncValue<firebase_auth.User?>> {
           );
         }
         
+        // Oturumu kaydet
+        await _authService.saveUserSession();
         state = AsyncValue.data(credential.user);
       }
     } catch (error, stackTrace) {

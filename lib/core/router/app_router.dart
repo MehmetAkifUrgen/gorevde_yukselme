@@ -10,6 +10,7 @@ import '../../features/exam/presentation/pages/exam_simulation_page.dart';
 import '../../features/subscription/presentation/pages/subscription_page.dart';
 import '../navigation/main_navigation.dart';
 import '../../core/models/question_model.dart';
+import '../../core/providers/auth_providers.dart';
 
 class AppRouter {
   static const String login = '/login';
@@ -25,78 +26,83 @@ class AppRouter {
   static const String profile = '/profile';
   static const String subscription = '/subscription';
 
-  static final GoRouter router = GoRouter(
-    initialLocation: login,
-    errorBuilder: (context, state) => Scaffold(
-      body: Center(
-        child: Text('Page not found: ${state.uri}'),
+  static GoRouter createRouter(WidgetRef ref) {
+    final authState = ref.watch(authStateProvider);
+    final isAuthenticated = authState.value != null;
+    
+    return GoRouter(
+      initialLocation: isAuthenticated ? home : login,
+      errorBuilder: (context, state) => Scaffold(
+        body: Center(
+          child: Text('Page not found: \${state.uri}'),
+        ),
       ),
-    ),
-    routes: [
-      GoRoute(
-        path: login,
-        builder: (context, state) => const LoginPage(),
-      ),
-      GoRoute(
-        path: registration,
-        builder: (context, state) => const RegistrationPage(),
-      ),
-      GoRoute(
-        path: forgotPassword,
-        builder: (context, state) => const ForgotPasswordPage(),
-      ),
-      GoRoute(
-        path: emailVerification,
-        builder: (context, state) {
-          final email = state.uri.queryParameters['email'] ?? '';
-          return EmailVerificationPage(email: email);
-        },
-      ),
-      GoRoute(
-        path: home,
-        builder: (context, state) => const MainNavigation(initialIndex: 0),
-      ),
-      GoRoute(
-        path: questionPool,
-        builder: (context, state) => const MainNavigation(initialIndex: 1),
-      ),
-      GoRoute(
-        path: randomQuestionsPractice,
-        builder: (context, state) {
-          final questions = state.extra as List<Question>?;
-          if (questions == null || questions.isEmpty) {
-            return const _PlaceholderPage(title: 'Rastgele Sorular - Soru bulunamadı');
-          }
-          return RandomQuestionsPracticePage(questions: questions);
-        },
-      ),
-      GoRoute(
-        path: examSimulation,
-        builder: (context, state) => const ExamSimulationPage(),
-      ),
-      GoRoute(
-        path: starredQuestions,
-        builder: (context, state) => const MainNavigation(initialIndex: 2),
-      ),
-      GoRoute(
-        path: performanceAnalysis,
-        builder: (context, state) => const MainNavigation(initialIndex: 3),
-      ),
-      GoRoute(
-        path: profile,
-        builder: (context, state) => const MainNavigation(initialIndex: 4),
-      ),
-      GoRoute(
-        path: subscription,
-        builder: (context, state) => const SubscriptionPage(),
-      ),
-    ],
-  );
+      routes: [
+        GoRoute(
+          path: login,
+          builder: (context, state) => const LoginPage(),
+        ),
+        GoRoute(
+          path: registration,
+          builder: (context, state) => const RegistrationPage(),
+        ),
+        GoRoute(
+          path: forgotPassword,
+          builder: (context, state) => const ForgotPasswordPage(),
+        ),
+        GoRoute(
+          path: emailVerification,
+          builder: (context, state) {
+            final email = state.uri.queryParameters['email'] ?? '';
+            return EmailVerificationPage(email: email);
+          },
+        ),
+        GoRoute(
+          path: home,
+          builder: (context, state) => const MainNavigation(initialIndex: 0),
+        ),
+        GoRoute(
+          path: questionPool,
+          builder: (context, state) => const MainNavigation(initialIndex: 1),
+        ),
+        GoRoute(
+          path: randomQuestionsPractice,
+          builder: (context, state) {
+            final questions = state.extra as List<Question>?;
+            if (questions == null || questions.isEmpty) {
+              return const _PlaceholderPage(title: 'Rastgele Sorular - Soru bulunamadı');
+            }
+            return RandomQuestionsPracticePage(questions: questions);
+          },
+        ),
+        GoRoute(
+          path: examSimulation,
+          builder: (context, state) => const ExamSimulationPage(),
+        ),
+        GoRoute(
+          path: starredQuestions,
+          builder: (context, state) => const MainNavigation(initialIndex: 2),
+        ),
+        GoRoute(
+          path: performanceAnalysis,
+          builder: (context, state) => const MainNavigation(initialIndex: 3),
+        ),
+        GoRoute(
+          path: profile,
+          builder: (context, state) => const MainNavigation(initialIndex: 4),
+        ),
+        GoRoute(
+          path: subscription,
+          builder: (context, state) => const SubscriptionPage(),
+        ),
+      ],
+    );
+  }
 }
 
 // Provider for the router
 final routerProvider = Provider<GoRouter>((ref) {
-  return AppRouter.router;
+  return AppRouter.createRouter(ref as WidgetRef);
 });
 
 // Placeholder page for routes not yet implemented
