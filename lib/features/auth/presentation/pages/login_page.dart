@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/router/app_router.dart';
+import '../../../../core/utils/validation_utils.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
@@ -135,20 +136,13 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         TextFormField(
                           controller: _emailController,
                           keyboardType: TextInputType.emailAddress,
+                          autocorrect: false,
                           decoration: const InputDecoration(
                             labelText: 'E-posta',
                             hintText: 'ornek@email.com',
                             prefixIcon: Icon(Icons.email_outlined),
                           ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'E-posta adresi gerekli';
-                            }
-                            if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
-                              return 'Geçerli bir e-posta adresi girin';
-                            }
-                            return null;
-                          },
+                          validator: ValidationUtils.validateEmail,
                         ),
                         
                         const SizedBox(height: 16),
@@ -172,15 +166,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                               },
                             ),
                           ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Şifre gerekli';
-                            }
-                            if (value.length < 6) {
-                              return 'Şifre en az 6 karakter olmalı';
-                            }
-                            return null;
-                          },
+                          validator: ValidationUtils.validatePassword,
                         ),
                         
                         const SizedBox(height: 24),

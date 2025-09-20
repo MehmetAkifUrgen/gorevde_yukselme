@@ -4,6 +4,8 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/router/app_router.dart';
 import '../../../../core/models/user_model.dart';
+import '../../../../core/utils/validation_utils.dart';
+import '../../widgets/password_strength_indicator.dart';
 
 class RegistrationPage extends ConsumerStatefulWidget {
   const RegistrationPage({super.key});
@@ -161,20 +163,13 @@ class _RegistrationPageState extends ConsumerState<RegistrationPage> {
                         // Name Field
                         TextFormField(
                           controller: _nameController,
+                          textCapitalization: TextCapitalization.words,
                           decoration: const InputDecoration(
                             labelText: 'Ad Soyad',
                             hintText: 'Adınızı ve soyadınızı girin',
                             prefixIcon: Icon(Icons.person_outlined),
                           ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Ad soyad gerekli';
-                            }
-                            if (value.trim().split(' ').length < 2) {
-                              return 'Lütfen ad ve soyadınızı girin';
-                            }
-                            return null;
-                          },
+                          validator: ValidationUtils.validateFullName,
                         ),
                         
                         const SizedBox(height: 16),
@@ -183,20 +178,13 @@ class _RegistrationPageState extends ConsumerState<RegistrationPage> {
                         TextFormField(
                           controller: _emailController,
                           keyboardType: TextInputType.emailAddress,
+                          autocorrect: false,
                           decoration: const InputDecoration(
                             labelText: 'E-posta',
                             hintText: 'ornek@email.com',
                             prefixIcon: Icon(Icons.email_outlined),
                           ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'E-posta adresi gerekli';
-                            }
-                            if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
-                              return 'Geçerli bir e-posta adresi girin';
-                            }
-                            return null;
-                          },
+                          validator: ValidationUtils.validateEmail,
                         ),
                         
                         const SizedBox(height: 16),
@@ -234,9 +222,10 @@ class _RegistrationPageState extends ConsumerState<RegistrationPage> {
                         TextFormField(
                           controller: _passwordController,
                           obscureText: _obscurePassword,
+                          onChanged: (value) => setState(() {}),
                           decoration: InputDecoration(
                             labelText: 'Şifre',
-                            hintText: 'En az 6 karakter',
+                            hintText: 'Güçlü bir şifre oluşturun',
                             prefixIcon: const Icon(Icons.lock_outlined),
                             suffixIcon: IconButton(
                               icon: Icon(
@@ -249,16 +238,16 @@ class _RegistrationPageState extends ConsumerState<RegistrationPage> {
                               },
                             ),
                           ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Şifre gerekli';
-                            }
-                            if (value.length < 6) {
-                              return 'Şifre en az 6 karakter olmalı';
-                            }
-                            return null;
-                          },
+                          validator: ValidationUtils.validatePassword,
                         ),
+                        
+                        // Password Strength Indicator
+                        if (_passwordController.text.isNotEmpty) ...[
+                          const SizedBox(height: 8),
+                          PasswordStrengthIndicator(password: _passwordController.text),
+                          const SizedBox(height: 8),
+                          PasswordRequirementsWidget(password: _passwordController.text),
+                        ],
                         
                         const SizedBox(height: 16),
                         
@@ -281,15 +270,10 @@ class _RegistrationPageState extends ConsumerState<RegistrationPage> {
                               },
                             ),
                           ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Şifre tekrarı gerekli';
-                            }
-                            if (value != _passwordController.text) {
-                              return 'Şifreler eşleşmiyor';
-                            }
-                            return null;
-                          },
+                          validator: (value) => ValidationUtils.validateConfirmPassword(
+                            value,
+                            _passwordController.text,
+                          ),
                         ),
                         
                         const SizedBox(height: 16),
