@@ -5,13 +5,11 @@ import '../../features/auth/presentation/pages/login_page.dart';
 import '../../features/auth/presentation/pages/registration_page.dart';
 import '../../features/auth/presentation/pages/forgot_password_page.dart';
 import '../../features/auth/presentation/pages/email_verification_page.dart';
-import '../../features/home/presentation/pages/home_page.dart';
-import '../../features/questions/presentation/pages/question_pool_page.dart';
-// import '../../features/exam/presentation/pages/exam_simulation_page.dart';
-// import '../../features/starred/presentation/pages/starred_questions_page.dart';
-// import '../../features/performance/presentation/pages/performance_analysis_page.dart';
-// import '../../features/profile/presentation/pages/profile_page.dart';
-// import '../../features/subscription/presentation/pages/subscription_page.dart';
+import '../../features/questions/presentation/pages/random_questions_practice_page.dart';
+import '../../features/exam/presentation/pages/exam_simulation_page.dart';
+import '../../features/subscription/presentation/pages/subscription_page.dart';
+import '../navigation/main_navigation.dart';
+import '../../core/models/question_model.dart';
 
 class AppRouter {
   static const String login = '/login';
@@ -20,6 +18,7 @@ class AppRouter {
   static const String emailVerification = '/email-verification';
   static const String home = '/home';
   static const String questionPool = '/question-pool';
+  static const String randomQuestionsPractice = '/random-questions-practice';
   static const String examSimulation = '/exam-simulation';
   static const String starredQuestions = '/starred-questions';
   static const String performanceAnalysis = '/performance-analysis';
@@ -55,31 +54,41 @@ class AppRouter {
       ),
       GoRoute(
         path: home,
-        builder: (context, state) => const HomePage(),
+        builder: (context, state) => const MainNavigation(initialIndex: 0),
       ),
       GoRoute(
         path: questionPool,
-        builder: (context, state) => const QuestionPoolPage(),
+        builder: (context, state) => const MainNavigation(initialIndex: 1),
+      ),
+      GoRoute(
+        path: randomQuestionsPractice,
+        builder: (context, state) {
+          final questions = state.extra as List<Question>?;
+          if (questions == null || questions.isEmpty) {
+            return const _PlaceholderPage(title: 'Rastgele Sorular - Soru bulunamadı');
+          }
+          return RandomQuestionsPracticePage(questions: questions);
+        },
       ),
       GoRoute(
         path: examSimulation,
-        builder: (context, state) => const _PlaceholderPage(title: 'Sınav Simülasyonu'),
+        builder: (context, state) => const ExamSimulationPage(),
       ),
       GoRoute(
         path: starredQuestions,
-        builder: (context, state) => const _PlaceholderPage(title: 'Favoriler'),
+        builder: (context, state) => const MainNavigation(initialIndex: 2),
       ),
       GoRoute(
         path: performanceAnalysis,
-        builder: (context, state) => const _PlaceholderPage(title: 'Performans Analizi'),
+        builder: (context, state) => const MainNavigation(initialIndex: 3),
       ),
       GoRoute(
         path: profile,
-        builder: (context, state) => const _PlaceholderPage(title: 'Profil'),
+        builder: (context, state) => const MainNavigation(initialIndex: 4),
       ),
       GoRoute(
         path: subscription,
-        builder: (context, state) => const _PlaceholderPage(title: 'Abonelik'),
+        builder: (context, state) => const SubscriptionPage(),
       ),
     ],
   );

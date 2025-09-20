@@ -17,26 +17,6 @@ class HomePage extends ConsumerStatefulWidget {
 }
 
 class _HomePageState extends ConsumerState<HomePage> {
-  int _selectedIndex = 0;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-    
-    switch (index) {
-      case 0:
-        // Already on home
-        break;
-      case 1:
-        context.go(AppRouter.profile);
-        break;
-      case 2:
-        // Settings - could be part of profile or separate
-        context.go(AppRouter.profile);
-        break;
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -207,31 +187,6 @@ class _HomePageState extends ConsumerState<HomePage> {
             const SizedBox(height: 24),
           ],
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: AppTheme.secondaryWhite,
-        selectedItemColor: AppTheme.primaryNavyBlue,
-        unselectedItemColor: AppTheme.darkGrey,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            activeIcon: Icon(Icons.home),
-            label: 'Ana Sayfa',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_outlined),
-            activeIcon: Icon(Icons.person),
-            label: 'Profil',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings_outlined),
-            activeIcon: Icon(Icons.settings),
-            label: 'Ayarlar',
-          ),
-        ],
       ),
     );
   }

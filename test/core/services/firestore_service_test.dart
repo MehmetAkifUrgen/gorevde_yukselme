@@ -12,7 +12,6 @@ import 'firestore_service_test.mocks.dart';
   CollectionReference,
   DocumentReference,
   DocumentSnapshot,
-  QuerySnapshot,
   Query,
   WriteBatch,
   FirebaseCrashlytics,
@@ -24,7 +23,7 @@ void main() {
     late MockCollectionReference<Map<String, dynamic>> mockCollectionRef;
     late MockDocumentReference<Map<String, dynamic>> mockDocumentRef;
     late MockDocumentSnapshot<Map<String, dynamic>> mockDocumentSnapshot;
-    late MockQuerySnapshot<Map<String, dynamic>> mockQuerySnapshot;
+
     late MockQuery<Map<String, dynamic>> mockQuery;
     late MockWriteBatch mockWriteBatch;
     late MockFirebaseCrashlytics mockFirebaseCrashlytics;
@@ -34,7 +33,6 @@ void main() {
       mockCollectionRef = MockCollectionReference<Map<String, dynamic>>();
       mockDocumentRef = MockDocumentReference<Map<String, dynamic>>();
       mockDocumentSnapshot = MockDocumentSnapshot<Map<String, dynamic>>();
-      mockQuerySnapshot = MockQuerySnapshot<Map<String, dynamic>>();
       mockQuery = MockQuery<Map<String, dynamic>>();
       mockWriteBatch = MockWriteBatch();
       mockFirebaseCrashlytics = MockFirebaseCrashlytics();
@@ -328,10 +326,10 @@ void main() {
         ];
 
         when(mockFirestore.batch()).thenReturn(mockWriteBatch);
-        when(mockWriteBatch.set(any, any)).thenReturn(mockWriteBatch);
-        when(mockWriteBatch.update(any, any)).thenReturn(mockWriteBatch);
-        when(mockWriteBatch.delete(any)).thenReturn(mockWriteBatch);
-        when(mockWriteBatch.commit()).thenAnswer((_) async {});
+        when(mockWriteBatch.set(any, any)).thenAnswer((_) => mockWriteBatch);
+        when(mockWriteBatch.update(any, any)).thenAnswer((_) => mockWriteBatch);
+        when(mockWriteBatch.delete(any)).thenAnswer((_) => mockWriteBatch);
+        when(mockWriteBatch.commit()).thenAnswer((_) async => Future<void>.value());
 
         // Act
         await firestoreService.performBatch(operations);
@@ -357,7 +355,7 @@ void main() {
         final exception = Exception('Batch failed');
 
         when(mockFirestore.batch()).thenReturn(mockWriteBatch);
-        when(mockWriteBatch.set(any, any)).thenReturn(mockWriteBatch);
+        when(mockWriteBatch.set(any, any)).thenAnswer((_) => mockWriteBatch);
         when(mockWriteBatch.commit()).thenThrow(exception);
 
         // Act & Assert

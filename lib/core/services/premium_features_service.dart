@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/subscription_model.dart';
 import 'subscription_service.dart';
+import 'ad_service.dart';
 
 /// Service for managing premium feature access and restrictions
 class PremiumFeaturesService {
@@ -11,6 +12,7 @@ class PremiumFeaturesService {
   PremiumFeaturesService._internal();
 
   final SubscriptionService _subscriptionService = SubscriptionService();
+  final AdService _adService = AdService();
   late StreamSubscription<SubscriptionModel?> _subscriptionSubscription;
   
   // Stream controller for premium status changes
@@ -38,6 +40,7 @@ class PremiumFeaturesService {
   /// Initialize the premium features service
   Future<void> initialize() async {
     await _loadUsageData();
+    await _adService.initialize();
     
     // Listen to subscription changes
     _subscriptionSubscription = _subscriptionService.subscriptionStream.listen(
@@ -73,7 +76,8 @@ class PremiumFeaturesService {
     if (_isPremium) return true;
     
     _checkDailyReset();
-    return _dailyQuestionCount < maxDailyQuestions;
+    final totalAvailable = _adService.getTotalAvailableQuestions(maxDailyQuestions);
+    return _dailyQuestionCount < totalAvailable;
   }
   
   /// Get remaining questions for today
@@ -81,7 +85,9 @@ class PremiumFeaturesService {
     if (_isPremium) return -1; // Unlimited
     
     _checkDailyReset();
-    return (maxDailyQuestions - _dailyQuestionCount).clamp(0, maxDailyQuestions);
+    final baseRemaining = (maxDailyQuestions - _dailyQuestionCount).clamp(0, maxDailyQuestions);
+    final totalAvailable = _adService.getTotalAvailableQuestions(maxDailyQuestions);
+    return (totalAvailable - _dailyQuestionCount).clamp(0, totalAvailable);
   }
   
   /// Record a question asked
@@ -90,6 +96,12 @@ class PremiumFeaturesService {
     
     _checkDailyReset();
     _dailyQuestionCount++;
+    
+    // If we're beyond the base limit, consume an unlocked question
+    if (_dailyQuestionCount > maxDailyQuestions && _adService.hasUnlockedQuestions()) {
+      await _adService.consumeUnlockedQuestion();
+    }
+    
     await _saveUsageData();
   }
   
@@ -129,6 +141,9 @@ class PremiumFeaturesService {
   String getRestrictionMessage(String feature) {
     switch (feature) {
       case 'questions':
+        if (_adService.canUnlockMoreQuestions()) {
+          return 'Günlük soru limitiniz doldu. ${_adService.getAdProgressMessage()} veya Premium üyelik alın.';
+        }
         return 'Günlük soru limitiniz doldu. Premium üyelik ile sınırsız soru sorabilirsiniz.';
       case 'bookmarks':
         return 'Maksimum $maxBookmarks yer imi oluşturabilirsiniz. Premium üyelik ile sınırsız yer imi ekleyebilirsiniz.';
@@ -139,6 +154,31 @@ class PremiumFeaturesService {
       default:
         return 'Bu özellik premium üyeler için ayrılmıştır.';
     }
+  }
+  
+  /// Get ad service instance for external access
+  AdService get adService => _adService;
+  
+  /// Check if user can unlock questions via ads
+  bool canUnlockQuestionsViaAds() {
+    return !_isPremium && _adService.canUnlockMoreQuestions();
+  }
+  
+  /// Get total available questions including ad-unlocked ones
+  int getTotalAvailableQuestions() {
+    if (_isPremium) return -1; // Unlimited
+    return _adService.getTotalAvailableQuestions(maxDailyQuestions);
+  }
+  
+  /// Get ad progress information for UI
+  Map<String, dynamic> getAdProgressInfo() {
+    return {
+      'canUnlock': canUnlockQuestionsViaAds(),
+      'adsWatched': _adService.adsWatchedToday,
+      'adsNeeded': _adService.getAdsNeededForNextUnlock(),
+      'unlockedQuestions': _adService.unlockedQuestionsToday,
+      'progressMessage': _adService.getAdProgressMessage(),
+    };
   }
   
   /// Check and reset daily counters if needed

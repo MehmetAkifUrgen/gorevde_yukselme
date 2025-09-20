@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:gorevde_yukselme/core/providers/auth_providers.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/router/app_router.dart';
 import '../../../../core/utils/validation_utils.dart';
@@ -49,14 +50,38 @@ class _LoginPageState extends ConsumerState<LoginPage> {
       _isLoading = true;
     });
 
-    // Simulate Google sign-in process
-    await Future.delayed(const Duration(seconds: 2));
+    try {
+      await ref.read(authNotifierProvider.notifier).signInWithGoogle();
 
-    if (mounted) {
-      setState(() {
-        _isLoading = false;
-      });
-      context.go(AppRouter.home);
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+        context.go(AppRouter.home);
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+        
+        String errorMessage = 'Google ile giriş sırasında bir hata oluştu';
+        
+        if (e.toString().contains('network-request-failed')) {
+          errorMessage = 'İnternet bağlantısı yok. Lütfen bağlantınızı kontrol edin';
+        } else if (e.toString().contains('sign_in_canceled')) {
+          errorMessage = 'Google giriş işlemi iptal edildi';
+        } else if (e.toString().contains('sign_in_failed')) {
+          errorMessage = 'Google girişi başarısız oldu';
+        }
+        
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(errorMessage),
+            backgroundColor: AppTheme.errorRed,
+          ),
+        );
+      }
     }
   }
 

@@ -4,6 +4,10 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/models/question_model.dart';
 import '../../../../core/providers/app_providers.dart';
+import '../../../../core/providers/auth_providers.dart';
+import '../../../../core/router/app_router.dart';
+import '../../../../core/services/premium_features_service.dart';
+import '../../../ads/presentation/widgets/ad_unlock_button.dart';
 import '../widgets/question_card.dart';
 import '../widgets/category_filter_chip.dart';
 import '../widgets/font_size_slider.dart';
@@ -17,6 +21,7 @@ class QuestionPoolPage extends ConsumerStatefulWidget {
 
 class _QuestionPoolPageState extends ConsumerState<QuestionPoolPage> {
   final ScrollController _scrollController = ScrollController();
+  final PremiumFeaturesService _premiumService = PremiumFeaturesService();
   
   @override
   void dispose() {
@@ -123,26 +128,35 @@ class _QuestionPoolPageState extends ConsumerState<QuestionPoolPage> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             color: AppTheme.lightGrey,
-            child: Row(
+            child: Column(
               children: [
-                Text(
-                  '${filteredQuestions.length} soru bulundu',
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: AppTheme.darkGrey,
-                  ),
+                Row(
+                  children: [
+                    Text(
+                      '${filteredQuestions.length} soru bulundu',
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: AppTheme.darkGrey,
+                      ),
+                    ),
+                    const Spacer(),
+                    ElevatedButton.icon(
+                      onPressed: filteredQuestions.isNotEmpty ? () {
+                        _startRandomQuestions(context, filteredQuestions);
+                      } : null,
+                      icon: const Icon(Icons.play_arrow),
+                      label: const Text('Rastgele Başla'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppTheme.successGreen,
+                        foregroundColor: AppTheme.secondaryWhite,
+                      ),
+                    ),
+                  ],
                 ),
-                const Spacer(),
-                ElevatedButton.icon(
-                  onPressed: filteredQuestions.isNotEmpty ? () {
-                    _startRandomQuestions(context, filteredQuestions);
-                  } : null,
-                  icon: const Icon(Icons.play_arrow),
-                  label: const Text('Rastgele Başla'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppTheme.successGreen,
-                    foregroundColor: AppTheme.secondaryWhite,
-                  ),
-                ),
+                // Question limit and ad unlock section
+                if (!_premiumService.isPremium) ...[
+                  const SizedBox(height: 12),
+                  _buildQuestionLimitSection(),
+                ],
               ],
             ),
           ),
@@ -207,6 +221,54 @@ class _QuestionPoolPageState extends ConsumerState<QuestionPoolPage> {
     );
   }
 
+  Widget _buildQuestionLimitSection() {
+    final remainingQuestions = _premiumService.getRemainingQuestions();
+    final totalAvailable = _premiumService.getTotalAvailableQuestions();
+    final canUnlockViaAds = _premiumService.canUnlockQuestionsViaAds();
+    
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: AppTheme.secondaryWhite,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: AppTheme.lightGrey),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(
+                Icons.quiz,
+                size: 20,
+                color: AppTheme.primaryNavyBlue,
+              ),
+              const SizedBox(width: 8),
+              Text(
+                'Günlük Soru Limiti',
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  fontWeight: FontWeight.w600,
+                  color: AppTheme.primaryNavyBlue,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'Kalan soru: $remainingQuestions / $totalAvailable',
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: AppTheme.darkGrey,
+            ),
+          ),
+          if (canUnlockViaAds) ...[
+             const SizedBox(height: 12),
+             const AdUnlockButton(isCompact: true),
+           ],
+        ],
+      ),
+    );
+  }
+
   void _showFontSizeDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -224,15 +286,54 @@ class _QuestionPoolPageState extends ConsumerState<QuestionPoolPage> {
   }
 
   void _startRandomQuestions(BuildContext context, List<Question> questions) {
-    // TODO: Navigate to random question practice mode
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Rastgele soru modu yakında eklenecek'),
-      ),
+    if (questions.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Uygun soru bulunamadı'),
+          backgroundColor: AppTheme.errorRed,
+        ),
+      );
+      return;
+    }
+
+    // Filter questions based on user's profession if available
+    final userProfile = ref.read(currentUserProfileProvider).value;
+    List<Question> filteredQuestions = questions;
+    
+    if (userProfile != null) {
+      filteredQuestions = questions.where((question) {
+        return question.targetProfessions.contains(userProfile.profession);
+      }).toList();
+      
+      // If no profession-specific questions found, use all questions
+      if (filteredQuestions.isEmpty) {
+        filteredQuestions = questions;
+      }
+    }
+
+    // Navigate to random questions practice page
+    context.push(
+      AppRouter.randomQuestionsPractice,
+      extra: filteredQuestions,
     );
   }
 
   void _handleQuestionAnswered(Question question, int selectedIndex) {
+    // Check if user can ask questions
+    if (!_premiumService.canAskQuestion()) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(_premiumService.getRestrictionMessage('questions')),
+          backgroundColor: AppTheme.errorRed,
+          duration: const Duration(seconds: 4),
+        ),
+      );
+      return;
+    }
+
+    // Record question asked for limit tracking
+    _premiumService.recordQuestionAsked();
+    
     // Update question statistics
     ref.read(questionsProvider.notifier).updateQuestionStats(
       question.id,
@@ -250,6 +351,9 @@ class _QuestionPoolPageState extends ConsumerState<QuestionPoolPage> {
         duration: const Duration(seconds: 3),
       ),
     );
+    
+    // Refresh the UI to update question limits
+    setState(() {});
   }
 
   void _toggleQuestionStar(Question question) {

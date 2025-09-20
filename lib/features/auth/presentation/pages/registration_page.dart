@@ -26,7 +26,6 @@ class _RegistrationPageState extends ConsumerState<RegistrationPage> {
   bool _obscurePassword = true;
   bool _obscureConfirmPassword = true;
   bool _acceptTerms = false;
-  UserProfession? _selectedProfession;
 
   @override
   void dispose() {
@@ -44,16 +43,6 @@ class _RegistrationPageState extends ConsumerState<RegistrationPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Kullanım koşullarını kabul etmelisiniz'),
-          backgroundColor: AppTheme.errorRed,
-        ),
-      );
-      return;
-    }
-
-    if (_selectedProfession == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Lütfen mesleğinizi seçin'),
           backgroundColor: AppTheme.errorRed,
         ),
       );
@@ -113,14 +102,38 @@ class _RegistrationPageState extends ConsumerState<RegistrationPage> {
       _isLoading = true;
     });
 
-    // Simulate Google sign-up process
-    await Future.delayed(const Duration(seconds: 2));
+    try {
+      await ref.read(authNotifierProvider.notifier).signInWithGoogle();
 
-    if (mounted) {
-      setState(() {
-        _isLoading = false;
-      });
-      context.go(AppRouter.home);
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+        context.go(AppRouter.home);
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+        
+        String errorMessage = 'Google ile giriş sırasında bir hata oluştu';
+        
+        if (e.toString().contains('network-request-failed')) {
+          errorMessage = 'İnternet bağlantısı yok. Lütfen bağlantınızı kontrol edin';
+        } else if (e.toString().contains('sign_in_canceled')) {
+          errorMessage = 'Google giriş işlemi iptal edildi';
+        } else if (e.toString().contains('sign_in_failed')) {
+          errorMessage = 'Google girişi başarısız oldu';
+        }
+        
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(errorMessage),
+            backgroundColor: AppTheme.errorRed,
+          ),
+        );
+      }
     }
   }
 
@@ -213,34 +226,7 @@ class _RegistrationPageState extends ConsumerState<RegistrationPage> {
                           validator: ValidationUtils.validateEmail,
                         ),
                         
-                        const SizedBox(height: 16),
-                        
-                        // Profession Dropdown
-                        DropdownButtonFormField<UserProfession>(
-                          value: _selectedProfession,
-                          decoration: const InputDecoration(
-                            labelText: 'Meslek',
-                            hintText: 'Mesleğinizi seçin',
-                            prefixIcon: Icon(Icons.work_outlined),
-                          ),
-                          items: UserProfession.values.map((profession) {
-                            return DropdownMenuItem(
-                              value: profession,
-                              child: Text(profession.displayName),
-                            );
-                          }).toList(),
-                          onChanged: (value) {
-                            setState(() {
-                              _selectedProfession = value;
-                            });
-                          },
-                          validator: (value) {
-                            if (value == null) {
-                              return 'Lütfen mesleğinizi seçin';
-                            }
-                            return null;
-                          },
-                        ),
+                      
                         
                         const SizedBox(height: 16),
                         

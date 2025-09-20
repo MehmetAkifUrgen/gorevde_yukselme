@@ -76,7 +76,7 @@ class SubscriptionService {
 
       // Load products and restore purchases
       await _loadProducts();
-      await _restorePurchases();
+      await restorePurchases();
 
       _isInitialized = true;
       debugPrint('SubscriptionService initialized successfully');
@@ -317,12 +317,20 @@ class SubscriptionService {
   }
 
   /// Restore previous purchases
-  Future<void> _restorePurchases() async {
+  Future<void> restorePurchases() async {
     try {
       await _inAppPurchase.restorePurchases();
       debugPrint('Restore purchases completed');
     } catch (e) {
       debugPrint('Error restoring purchases: $e');
+      _purchaseController.add(PurchaseResult(
+        status: PurchaseStatus.failed,
+        productId: null,
+        transactionId: null,
+        purchaseToken: null,
+        purchaseDate: null,
+        error: 'Satın alımlar geri yüklenirken hata oluştu: ${e.toString()}',
+      ));
     }
   }
 

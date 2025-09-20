@@ -96,7 +96,7 @@ class ApiQuestionsDemo extends ConsumerWidget {
               child: Consumer(
                 builder: (context, ref, child) {
                   final professionsAsync = ref.watch(
-                    availableProfessionsProvider(selectedCategory!),
+                    availableProfessionsProvider(selectedCategory),
                   );
                   
                   return professionsAsync.when(
@@ -122,12 +122,12 @@ class ApiQuestionsDemo extends ConsumerWidget {
                         if (value != null) {
                           ref.read(questionsStateProvider.notifier)
                               .loadQuestionsByCategoryAndProfession(
-                                selectedCategory!,
+                                selectedCategory,
                                 value,
                               );
                         } else {
                           ref.read(questionsStateProvider.notifier)
-                              .loadQuestionsByCategory(selectedCategory!);
+                              .loadQuestionsByCategory(selectedCategory);
                         }
                       },
                     ),

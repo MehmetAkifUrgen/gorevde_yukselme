@@ -245,6 +245,10 @@ class SubscriptionNotifier extends StateNotifier<SubscriptionModel?> {
     await _subscriptionService.purchaseSubscription(productId);
   }
 
+  Future<void> restorePurchases() async {
+    await _subscriptionService.restorePurchases();
+  }
+
   bool get hasActiveSubscription => _subscriptionService.hasActiveSubscription;
   
   bool hasPremiumFeature(PremiumFeature feature) {

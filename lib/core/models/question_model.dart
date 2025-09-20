@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'user_model.dart';
 
 enum QuestionDifficulty {
@@ -92,13 +93,26 @@ extension QuestionDifficultyExtension on QuestionDifficulty {
         return 'Zor';
     }
   }
+
+  Color get color {
+    switch (this) {
+      case QuestionDifficulty.easy:
+        return const Color(0xFF4CAF50); // Green
+      case QuestionDifficulty.medium:
+        return const Color(0xFFFF9800); // Orange
+      case QuestionDifficulty.hard:
+        return const Color(0xFFF44336); // Red
+    }
+  }
 }
 
 extension QuestionCategoryExtension on QuestionCategory {
+  // Remove static displayName - will be replaced with dynamic API-based service
+  // Temporary static displayName for migration
   String get displayName {
     switch (this) {
       case QuestionCategory.electricalElectronics:
-        return 'Elektrik-Elektronik';
+        return 'Elektrik Elektronik';
       case QuestionCategory.construction:
         return 'İnşaat';
       case QuestionCategory.computerTechnology:
@@ -106,9 +120,26 @@ extension QuestionCategoryExtension on QuestionCategory {
       case QuestionCategory.machineTechnology:
         return 'Makine Teknolojisi';
       case QuestionCategory.generalRegulations:
-        return 'Genel Mevzuat';
+        return 'Genel Yönetmelikler';
       case QuestionCategory.programmingLanguages:
         return 'Programlama Dilleri';
+    }
+  }
+  
+  Color get color {
+    switch (this) {
+      case QuestionCategory.electricalElectronics:
+        return const Color(0xFF2196F3);
+      case QuestionCategory.construction:
+        return const Color(0xFF4CAF50);
+      case QuestionCategory.computerTechnology:
+        return const Color(0xFF9C27B0);
+      case QuestionCategory.machineTechnology:
+        return const Color(0xFFFF9800);
+      case QuestionCategory.generalRegulations:
+        return const Color(0xFFF44336);
+      case QuestionCategory.programmingLanguages:
+        return const Color(0xFF607D8B);
     }
   }
 }

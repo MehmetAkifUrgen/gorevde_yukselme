@@ -254,6 +254,9 @@ final userProfileProvider = StreamProvider.family<User?, String>((ref, userId) {
         notificationsEnabled: data['notificationsEnabled'] ?? true,
         questionsAnsweredToday: data['questionsAnsweredToday'] ?? 0,
         weakAreas: List<String>.from(data['weakAreas'] ?? []),
+        createdAt: data['createdAt'] != null 
+          ? DateTime.parse(data['createdAt']) 
+          : DateTime.now(),
       );
     }
     return null;

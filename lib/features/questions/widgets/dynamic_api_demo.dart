@@ -7,7 +7,6 @@ class DynamicApiDemo extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final questionsState = ref.watch(questionsStateProvider);
     final availableCategories = ref.watch(availableCategoriesProvider);
     final selectedCategory = ref.watch(selectedCategoryProvider);
     final selectedProfession = ref.watch(selectedProfessionProvider);
@@ -16,7 +15,7 @@ class DynamicApiDemo extends ConsumerWidget {
     
     // Watch available professions only if a category is selected
     final availableProfessions = selectedCategory != null 
-        ? ref.watch(availableProfessionsProvider(selectedCategory!))
+        ? ref.watch(availableProfessionsProvider(selectedCategory))
         : const AsyncValue<List<String>>.data([]);
 
     return Scaffold(
