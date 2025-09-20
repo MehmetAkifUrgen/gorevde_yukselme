@@ -226,12 +226,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         // Forgot Password Link
                         TextButton(
                           onPressed: () {
-                            // TODO: Implement forgot password
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('Şifre sıfırlama özelliği yakında eklenecek'),
-                              ),
-                            );
+                            context.push(AppRouter.forgotPassword);
                           },
                           child: Text(
                             'Şifremi Unuttum?',

@@ -52,7 +52,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDznwathzmuxalrSiXhIzpyQdc4QNUnB08',
-    appId: '1:933845628166:android:d477038a7946c986219a87',
+    appId: '1:933845628166:android:efac05c85088a0e2219a87',
     messagingSenderId: '933845628166',
     projectId: 'gorevdeyukselme-3d32f',
     storageBucket: 'gorevdeyukselme-3d32f.firebasestorage.app',
@@ -60,11 +60,13 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyC2jc9AzqFsXsbli1_r7b0kBeILtkG7pQU',
-    appId: '1:933845628166:ios:4747ba3515a29240219a87',
+    appId: '1:933845628166:ios:9c908fc1d41c7d32219a87',
     messagingSenderId: '933845628166',
     projectId: 'gorevdeyukselme-3d32f',
     storageBucket: 'gorevdeyukselme-3d32f.firebasestorage.app',
-    iosBundleId: 'com.gyudsoft',
+    androidClientId: '933845628166-h6bmdd9gj3rk5m5lgkv2k62gqi8d801j.apps.googleusercontent.com',
+    iosClientId: '933845628166-4rt8461pls7smu34a77bft67767uhkff.apps.googleusercontent.com',
+    iosBundleId: 'com.gyudsoft.apps',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(

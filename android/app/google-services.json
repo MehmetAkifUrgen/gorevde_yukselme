@@ -7,12 +7,33 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:933845628166:android:d477038a7946c986219a87",
+        "mobilesdk_app_id": "1:933845628166:android:efac05c85088a0e2219a87",
         "android_client_info": {
-          "package_name": "com.gyudsoft"
+          "package_name": "com.gyudsoft.apps"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "933845628166-ashfctrtn2o0rq6ipsf10o44vqat5dv4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gyudsoft.apps",
+            "certificate_hash": "9912b919bdd05c70aafec4bfd9d93ab4c1e8d1b2"
+          }
+        },
+        {
+          "client_id": "933845628166-l0lqq3c6smkmqmebavh99r7m46cfejnf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gyudsoft.apps",
+            "certificate_hash": "3b1c86d7911ad63a2f17cd5a575e24de96e32a1e"
+          }
+        },
+        {
+          "client_id": "933845628166-22vb551ktpt93jdu4pj1q2jh5m1562gf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDznwathzmuxalrSiXhIzpyQdc4QNUnB08"
@@ -20,7 +41,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "933845628166-22vb551ktpt93jdu4pj1q2jh5m1562gf.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "933845628166-4rt8461pls7smu34a77bft67767uhkff.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.gyudsoft.apps"
+              }
+            }
+          ]
         }
       }
     }

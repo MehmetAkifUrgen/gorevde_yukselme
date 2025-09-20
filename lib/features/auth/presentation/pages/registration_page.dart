@@ -5,6 +5,7 @@ import '../../../../core/theme/app_theme.dart';
 import '../../../../core/router/app_router.dart';
 import '../../../../core/models/user_model.dart';
 import '../../../../core/utils/validation_utils.dart';
+import '../../../../core/providers/auth_providers.dart';
 import '../../widgets/password_strength_indicator.dart';
 
 class RegistrationPage extends ConsumerStatefulWidget {
@@ -63,22 +64,47 @@ class _RegistrationPageState extends ConsumerState<RegistrationPage> {
       _isLoading = true;
     });
 
-    // Simulate registration process
-    await Future.delayed(const Duration(seconds: 2));
-
-    if (mounted) {
-      setState(() {
-        _isLoading = false;
-      });
-      
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Hesap başarıyla oluşturuldu!'),
-          backgroundColor: AppTheme.successGreen,
-        ),
+    try {
+      await ref.read(authNotifierProvider.notifier).createUserWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text,
+        displayName: _nameController.text.trim(),
       );
-      
-      context.go(AppRouter.home);
+
+      // Send email verification
+      await ref.read(authNotifierProvider.notifier).sendEmailVerification();
+
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+        
+        // Navigate to email verification page
+        context.go('${AppRouter.emailVerification}?email=${Uri.encodeComponent(_emailController.text.trim())}');
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+        
+        String errorMessage = 'Kayıt sırasında bir hata oluştu';
+        
+        if (e.toString().contains('email-already-in-use')) {
+          errorMessage = 'Bu e-posta adresi zaten kullanımda';
+        } else if (e.toString().contains('weak-password')) {
+          errorMessage = 'Şifre çok zayıf';
+        } else if (e.toString().contains('invalid-email')) {
+          errorMessage = 'Geçersiz e-posta adresi';
+        }
+        
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(errorMessage),
+            backgroundColor: AppTheme.errorRed,
+          ),
+        );
+      }
     }
   }
 

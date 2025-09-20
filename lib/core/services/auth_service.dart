@@ -95,6 +95,49 @@ class AuthService {
     }
   }
 
+  // Send email verification
+  Future<void> sendEmailVerification() async {
+    try {
+      final user = _firebaseAuth.currentUser;
+      if (user != null && !user.emailVerified) {
+        await user.sendEmailVerification();
+      } else if (user == null) {
+        throw Exception('No user is currently signed in');
+      } else {
+        throw Exception('Email is already verified');
+      }
+    } on FirebaseAuthException catch (e) {
+      await _crashlytics?.recordError(
+        e,
+        null,
+        fatal: false,
+        information: ['Email verification failed'],
+      );
+      rethrow;
+    }
+  }
+
+  // Check if email is verified
+  bool get isEmailVerified => _firebaseAuth.currentUser?.emailVerified ?? false;
+
+  // Reload user to get updated verification status
+  Future<void> reloadUser() async {
+    try {
+      final user = _firebaseAuth.currentUser;
+      if (user != null) {
+        await user.reload();
+      }
+    } catch (e) {
+      await _crashlytics?.recordError(
+        e,
+        null,
+        fatal: false,
+        information: ['User reload failed'],
+      );
+      rethrow;
+    }
+  }
+
   // Update user profile
   Future<void> updateUserProfile({
     String? displayName,

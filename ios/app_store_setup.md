@@ -12,7 +12,7 @@ Bu dosya, App Store Connect'te in-app purchase (uygulama içi satın alma) özel
 
 ### Gerekli Bilgiler:
 - Uygulama adı: "Görevde Yükselme"
-- Bundle ID: `com.gyudsoft` (Info.plist'te tanımlı)
+- Bundle ID: `com.gyudsoft.apps` (Info.plist'te tanımlı)
 - Kategori: Education (Eğitim)
 - Yaş sınırı: 4+
 - Gizlilik politikası URL'si

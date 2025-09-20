@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../features/auth/presentation/pages/login_page.dart';
 import '../../features/auth/presentation/pages/registration_page.dart';
+import '../../features/auth/presentation/pages/forgot_password_page.dart';
+import '../../features/auth/presentation/pages/email_verification_page.dart';
 import '../../features/home/presentation/pages/home_page.dart';
 import '../../features/questions/presentation/pages/question_pool_page.dart';
 // import '../../features/exam/presentation/pages/exam_simulation_page.dart';
@@ -14,6 +16,8 @@ import '../../features/questions/presentation/pages/question_pool_page.dart';
 class AppRouter {
   static const String login = '/login';
   static const String registration = '/registration';
+  static const String forgotPassword = '/forgot-password';
+  static const String emailVerification = '/email-verification';
   static const String home = '/home';
   static const String questionPool = '/question-pool';
   static const String examSimulation = '/exam-simulation';
@@ -37,6 +41,17 @@ class AppRouter {
       GoRoute(
         path: registration,
         builder: (context, state) => const RegistrationPage(),
+      ),
+      GoRoute(
+        path: forgotPassword,
+        builder: (context, state) => const ForgotPasswordPage(),
+      ),
+      GoRoute(
+        path: emailVerification,
+        builder: (context, state) {
+          final email = state.uri.queryParameters['email'] ?? '';
+          return EmailVerificationPage(email: email);
+        },
       ),
       GoRoute(
         path: home,

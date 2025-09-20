@@ -166,6 +166,27 @@ class AuthNotifier extends StateNotifier<AsyncValue<firebase_auth.User?>> {
     }
   }
 
+  Future<void> sendEmailVerification() async {
+    try {
+      await _authService.sendEmailVerification();
+    } catch (error, stackTrace) {
+      state = AsyncValue.error(error, stackTrace);
+    }
+  }
+
+  Future<void> reloadUser() async {
+    try {
+      await _authService.reloadUser();
+      // Update state with reloaded user
+      final user = _authService.currentUser;
+      state = AsyncValue.data(user);
+    } catch (error, stackTrace) {
+      state = AsyncValue.error(error, stackTrace);
+    }
+  }
+
+  bool get isEmailVerified => _authService.isEmailVerified;
+
   Future<void> signOut() async {
     try {
       await _authService.signOut();
