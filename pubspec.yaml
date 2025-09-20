@@ -28,6 +28,9 @@ dependencies:
   # Utilities
   equatable: ^2.0.5
   
+  # HTTP Client
+  http: ^1.2.2
+  
   # Storage
   shared_preferences: ^2.3.2
   

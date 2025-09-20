@@ -43,7 +43,8 @@ class UserNotifier extends StateNotifier<User?> {
   }
 }
 
-// Questions State Provider
+// Legacy Questions State Provider (kept for backward compatibility)
+// Note: Consider migrating to questionsStateProvider from questions_providers.dart
 final questionsProvider = StateNotifierProvider<QuestionsNotifier, List<Question>>((ref) {
   return QuestionsNotifier();
 });
