@@ -55,6 +55,7 @@ class QuestionsApiService {
   List<Question> convertApiQuestionsToQuestions(
     ApiQuestionsResponse apiResponse, {
     String? filterByCategory,
+    String? filterByMinistry,
     String? filterByProfession,
     String? filterBySubject,
   }) {
@@ -74,6 +75,7 @@ class QuestionsApiService {
         questions,
         categoryData,
         categoryName,
+        filterByMinistry,
         filterByProfession,
         filterBySubject,
       );
@@ -86,39 +88,83 @@ class QuestionsApiService {
     List<Question> questions,
     Map<String, Map<String, List<ApiQuestion>>> categoryData,
     String categoryName,
+    String? filterByMinistry,
     String? filterByProfession,
     String? filterBySubject,
   ) {
-    for (final professionEntry in categoryData.entries) {
-      final professionName = professionEntry.key;
-      
-      // Skip if filtering by profession and this doesn't match
-      if (filterByProfession != null && professionName != filterByProfession) {
-        continue;
+    // Note: categoryData structure is actually Category > Ministry > Profession > Subject
+    // But the type signature shows Map<String, Map<String, List<ApiQuestion>>> which is 3-level
+    // This is because the API response model doesn't match the actual JSON structure
+    // We need to handle this by accessing raw JSON data for 4-level filtering
+    
+    if (_rawJsonData == null) {
+      print('ERROR: _rawJsonData is null in _processCategory');
+      return;
+    }
+    
+    try {
+      final categoryRawData = _rawJsonData![categoryName] as Map<String, dynamic>?;
+      if (categoryRawData == null) {
+        print('ERROR: Category "$categoryName" not found in raw JSON');
+        return;
       }
       
-      final subjects = professionEntry.value;
-      
-      for (final subjectEntry in subjects.entries) {
-        final subjectName = subjectEntry.key;
+      // Process ministries (second level)
+      for (final ministryEntry in categoryRawData.entries) {
+        final ministryName = ministryEntry.key;
         
-        // Skip if filtering by subject and this doesn't match
-        if (filterBySubject != null && subjectName != filterBySubject) {
+        // Skip if filtering by ministry and this doesn't match
+        if (filterByMinistry != null && ministryName != filterByMinistry) {
           continue;
         }
         
-        final apiQuestions = subjectEntry.value;
+        final ministryData = ministryEntry.value as Map<String, dynamic>?;
+        if (ministryData == null) continue;
         
-        for (final apiQuestion in apiQuestions) {
-          final question = _convertApiQuestionToQuestion(
-            apiQuestion,
-            categoryName,
-            professionName,
-            subjectName,
-          );
-          questions.add(question);
+        // Process professions (third level)
+        for (final professionEntry in ministryData.entries) {
+          final professionName = professionEntry.key;
+          
+          // Skip if filtering by profession and this doesn't match
+          if (filterByProfession != null && professionName != filterByProfession) {
+            continue;
+          }
+          
+          final professionData = professionEntry.value as Map<String, dynamic>?;
+          if (professionData == null) continue;
+          
+          // Process subjects (fourth level)
+          for (final subjectEntry in professionData.entries) {
+            final subjectName = subjectEntry.key;
+            
+            // Skip if filtering by subject and this doesn't match
+            if (filterBySubject != null && subjectName != filterBySubject) {
+              continue;
+            }
+            
+            final subjectData = subjectEntry.value as List<dynamic>?;
+            if (subjectData == null) continue;
+            
+            // Convert to ApiQuestion objects and process
+            for (final questionData in subjectData) {
+              try {
+                final apiQuestion = ApiQuestion.fromJson(questionData as Map<String, dynamic>);
+                final question = _convertApiQuestionToQuestion(
+                  apiQuestion,
+                  categoryName,
+                  professionName,
+                  subjectName,
+                );
+                questions.add(question);
+              } catch (e) {
+                print('ERROR: Failed to parse question: $e');
+              }
+            }
+          }
         }
       }
+    } catch (e) {
+      print('ERROR: Failed to process category "$categoryName": $e');
     }
   }
 

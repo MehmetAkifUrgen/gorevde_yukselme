@@ -111,21 +111,28 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
         print('Exam - Decoded subject: $decodedSubject');
         
         // NOTE:
-        // Data hierarchy: Category (exam type) > Ministry > Profession
-        // Our conversion maps Profession into the "subject" dimension.
-        // Therefore:
-        // - filterByCategory should use routeExamType (top-level category)
-        // - filterByProfession should use ministry
-        // - filterBySubject should use profession
+        // Data hierarchy: Category (exam type) > Ministry > Profession > Subject
+        // URL structure: /exam/category/ministry/profession/subject
+        // API mapping:
+        // - category should use routeExamType (top-level category)
+        // - ministry should use category (ministry)
+        // - profession should use profession (actual profession)
+        // - subject should use subject
         final List<Question> filtered = await ref
             .read(
-              questionsByCategoryProfessionAndSubjectProvider((
+              questionsByCategoryMinistryProfessionAndSubjectProvider((
                 category: decodedRouteExamType,
+                ministry: decodedCategory,
                 profession: decodedProfession,
                 subject: decodedSubject,
               )).future,
             );
+        
+        print('Exam - Filtered questions count: ${filtered.length}');
+        print('Exam - First few questions: ${filtered.take(3).map((q) => q.questionText.substring(0, 50)).toList()}');
+        
         if (filtered.isEmpty) {
+          print('Exam - No questions found for category: $decodedRouteExamType, profession: $decodedCategory, subject: $decodedSubject');
           _showErrorDialog('Sorular yüklenemedi. Lütfen tekrar deneyin.');
           return;
         }

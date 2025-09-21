@@ -19,6 +19,13 @@ abstract class QuestionsRepository {
     String subject, {
     bool forceRefresh = false,
   });
+  Future<List<Question>> getQuestionsByCategoryMinistryProfessionAndSubject(
+    String category,
+    String ministry,
+    String profession,
+    String subject, {
+    bool forceRefresh = false,
+  });
   Future<List<String>> getAvailableCategories({bool forceRefresh = false});
   Future<List<String>> getAvailableProfessions(String category, {bool forceRefresh = false});
   Future<List<String>> getAvailableSubjects(String category, String profession, {bool forceRefresh = false});
@@ -97,6 +104,24 @@ class QuestionsRepositoryImpl implements QuestionsRepository {
     return _apiService.convertApiQuestionsToQuestions(
       apiResponse,
       filterByCategory: category,
+      filterByProfession: profession,
+      filterBySubject: subject,
+    );
+  }
+
+  // New method for 4-level filtering: Category > Ministry > Profession > Subject
+  Future<List<Question>> getQuestionsByCategoryMinistryProfessionAndSubject(
+    String category,
+    String ministry,
+    String profession,
+    String subject, {
+    bool forceRefresh = false,
+  }) async {
+    final apiResponse = await _getApiResponse(forceRefresh: forceRefresh);
+    return _apiService.convertApiQuestionsToQuestions(
+      apiResponse,
+      filterByCategory: category,
+      filterByMinistry: ministry,
       filterByProfession: profession,
       filterBySubject: subject,
     );

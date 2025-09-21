@@ -73,6 +73,17 @@ final questionsByCategoryProfessionAndSubjectProvider = FutureProvider.family<Li
   );
 });
 
+// Add: Questions by Category, Ministry, Profession and Subject Provider (4-level filtering)
+final questionsByCategoryMinistryProfessionAndSubjectProvider = FutureProvider.family<List<Question>, ({String category, String ministry, String profession, String subject})>((ref, params) async {
+  final repository = ref.watch(questionsRepositoryProvider);
+  return repository.getQuestionsByCategoryMinistryProfessionAndSubject(
+    params.category,
+    params.ministry,
+    params.profession,
+    params.subject,
+  );
+});
+
 // Cache Status Provider
 final cacheStatusProvider = FutureProvider<bool>((ref) async {
   final repository = ref.watch(questionsRepositoryProvider);
