@@ -8,6 +8,8 @@ class QuestionsApiService {
   static const String _baseUrl = 'https://mehmetakifurgen.github.io/gorevde_yukselme/sorular.json';
   
   final http.Client _httpClient;
+  Map<String, dynamic>? _rawJsonData;
+  ApiQuestionsResponse? apiResponse;
   
   QuestionsApiService({http.Client? httpClient}) 
       : _httpClient = httpClient ?? http.Client();
@@ -25,7 +27,16 @@ class QuestionsApiService {
 
       if (response.statusCode == 200) {
         final Map<String, dynamic> jsonData = json.decode(response.body);
-        return ApiQuestionsResponse.fromJson(jsonData);
+        print('DEBUG: API Response keys: ${jsonData.keys.toList()}');
+        print('DEBUG: API Response structure sample: ${jsonData.entries.take(1).map((e) => '${e.key}: ${e.value.runtimeType}').join(', ')}');
+        
+        // Store raw JSON data for subject extraction
+        _rawJsonData = jsonData;
+        
+        // Parse and store API response
+        apiResponse = ApiQuestionsResponse.fromJson(jsonData);
+        
+        return apiResponse!;
       } else {
         throw QuestionsApiException(
           'Failed to fetch questions: ${response.statusCode}',
@@ -45,6 +56,7 @@ class QuestionsApiService {
     ApiQuestionsResponse apiResponse, {
     String? filterByCategory,
     String? filterByProfession,
+    String? filterBySubject,
   }) {
     final List<Question> questions = [];
     
@@ -63,6 +75,7 @@ class QuestionsApiService {
         categoryData,
         categoryName,
         filterByProfession,
+        filterBySubject,
       );
     }
     
@@ -74,6 +87,7 @@ class QuestionsApiService {
     Map<String, Map<String, List<ApiQuestion>>> categoryData,
     String categoryName,
     String? filterByProfession,
+    String? filterBySubject,
   ) {
     for (final professionEntry in categoryData.entries) {
       final professionName = professionEntry.key;
@@ -87,6 +101,12 @@ class QuestionsApiService {
       
       for (final subjectEntry in subjects.entries) {
         final subjectName = subjectEntry.key;
+        
+        // Skip if filtering by subject and this doesn't match
+        if (filterBySubject != null && subjectName != filterBySubject) {
+          continue;
+        }
+        
         final apiQuestions = subjectEntry.value;
         
         for (final apiQuestion in apiQuestions) {
@@ -137,36 +157,13 @@ class QuestionsApiService {
   }
   
   List<UserProfession> _mapProfessionNameToEnum(String professionName) {
-    switch (professionName.toLowerCase()) {
-      case 'idare memuru':
-      case 'İdare memuru':
-        return [UserProfession.generalRegulations];
-      case 'şef':
-        return [UserProfession.generalRegulations];
-      case 'yazı işleri müdürü':
-        return [UserProfession.generalRegulations];
-      case 'ikinci müdür':
-        return [UserProfession.generalRegulations];
-      case 'idari işler müdürü':
-        return [UserProfession.generalRegulations];
-      case 'infaz koruma baş memurluğu':
-        return [UserProfession.generalRegulations];
-      case 'zabıt katibi':
-        return [UserProfession.generalRegulations];
-      default:
-        return [UserProfession.generalRegulations]; // Default
-    }
+    // Dinamik meslek eşlemesi - tüm meslekler için genel düzenlemeler kullanılıyor
+    return [UserProfession.generalRegulations];
   }
   
   QuestionCategory _mapCategoryNameToEnum(String categoryName) {
-    switch (categoryName.toLowerCase()) {
-      case 'görevde yükselme':
-        return QuestionCategory.generalRegulations;
-      case 'ünvan değişikliği':
-        return QuestionCategory.generalRegulations;
-      default:
-        return QuestionCategory.generalRegulations;
-    }
+    // Dinamik kategori eşlemesi - tüm kategoriler için genel düzenlemeler kullanılıyor
+    return QuestionCategory.generalRegulations;
   }
 
   /// Gets available categories from the API response
@@ -189,8 +186,75 @@ class QuestionsApiService {
     String categoryName,
     String professionName,
   ) {
+    print('getAvailableSubjects - categoryName: $categoryName');
+    print('getAvailableSubjects - professionName: $professionName');
+    print('getAvailableSubjects - available categories: ${apiResponse.categories.keys.toList()}');
+    
     final categoryData = apiResponse.categories[categoryName];
-    return categoryData?[professionName]?.keys.toList() ?? [];
+    print('getAvailableSubjects - categoryData found: ${categoryData != null}');
+    
+    if (categoryData != null) {
+      print('getAvailableSubjects - available professions in category: ${categoryData.keys.toList()}');
+      
+      final professionData = categoryData[professionName];
+      if (professionData != null) {
+        print('getAvailableSubjects - profession "$professionName" found');
+        final subjects = professionData.keys.toList();
+        print('getAvailableSubjects - subjects found: $subjects');
+        return subjects;
+      } else {
+        print('getAvailableSubjects - profession "$professionName" not found in category');
+      }
+    }
+    
+    print('getAvailableSubjects - returning empty list');
+    return [];
+  }
+
+  List<String> getAvailableSubjectsForMinistryAndProfession({
+    required String categoryName,
+    required String ministryName,
+    required String professionName,
+  }) {
+    print('getAvailableSubjectsForMinistryAndProfession called with:');
+    print('  categoryName: $categoryName');
+    print('  ministryName: $ministryName');
+    print('  professionName: $professionName');
+    
+    if (_rawJsonData == null) {
+      print('ERROR: _rawJsonData is null');
+      return [];
+    }
+    
+    try {
+      // Access raw JSON data directly to get subjects
+      final categoryData = _rawJsonData![categoryName] as Map<String, dynamic>?;
+      if (categoryData == null) {
+        print('ERROR: Category "$categoryName" not found in raw JSON');
+        return [];
+      }
+      
+      final ministryData = categoryData[ministryName] as Map<String, dynamic>?;
+      if (ministryData == null) {
+        print('ERROR: Ministry "$ministryName" not found in category "$categoryName"');
+        return [];
+      }
+      
+      final professionData = ministryData[professionName] as Map<String, dynamic>?;
+      if (professionData == null) {
+        print('ERROR: Profession "$professionName" not found in ministry "$ministryName"');
+        return [];
+      }
+      
+      // professionData keys are subject names (e.g., "2017 Çıkmış Sorular")
+      final subjects = professionData.keys.toList();
+      print('Found ${subjects.length} subjects: $subjects');
+      
+      return subjects;
+    } catch (e) {
+      print('ERROR: Failed to parse subjects from raw JSON: $e');
+      return [];
+    }
   }
 
   void dispose() {

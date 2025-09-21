@@ -12,27 +12,76 @@ class ApiQuestionsResponse with _$ApiQuestionsResponse {
   }) = _ApiQuestionsResponse;
 
   factory ApiQuestionsResponse.fromJson(Map<String, dynamic> json) {
+    print('DEBUG: ApiQuestionsResponse.fromJson called with json keys: ${json.keys.toList()}');
     final Map<String, Map<String, Map<String, List<ApiQuestion>>>> categories = {};
     
     for (final entry in json.entries) {
       final categoryName = entry.key;
-      final categoryData = entry.value as Map<String, dynamic>;
+      print('DEBUG: Processing category: $categoryName');
+      print('DEBUG: Category data type: ${entry.value.runtimeType}');
       
+      if (entry.value is! Map<String, dynamic>) {
+        print('ERROR: Expected Map<String, dynamic> for category $categoryName, got ${entry.value.runtimeType}');
+        continue;
+      }
+      
+      final categoryData = entry.value as Map<String, dynamic>;
       final Map<String, Map<String, List<ApiQuestion>>> professions = {};
       
       for (final professionEntry in categoryData.entries) {
         final professionName = professionEntry.key;
-        final professionData = professionEntry.value as Map<String, dynamic>;
+        print('DEBUG: Processing profession: $professionName in category: $categoryName');
+        print('DEBUG: Profession data type: ${professionEntry.value.runtimeType}');
         
+        if (professionEntry.value is! Map<String, dynamic>) {
+          print('ERROR: Expected Map<String, dynamic> for profession $professionName, got ${professionEntry.value.runtimeType}');
+          continue;
+        }
+        
+        final professionData = professionEntry.value as Map<String, dynamic>;
         final Map<String, List<ApiQuestion>> subjects = {};
         
         for (final subjectEntry in professionData.entries) {
           final subjectName = subjectEntry.key;
-          final questionsList = (subjectEntry.value as List)
-              .map((q) => ApiQuestion.fromJson(q as Map<String, dynamic>))
-              .toList();
+          print('DEBUG: Processing subject: $subjectName in profession: $professionName');
+          print('DEBUG: Subject data type: ${subjectEntry.value.runtimeType}');
           
-          subjects[subjectName] = questionsList;
+          // Subject data is a Map with year keys (e.g., "2017 Çıkmış Sorular")
+          if (subjectEntry.value is! Map<String, dynamic>) {
+            print('ERROR: Expected Map<String, dynamic> for subject $subjectName, got ${subjectEntry.value.runtimeType}');
+            print('DEBUG: Subject data content: ${subjectEntry.value}');
+            continue;
+          }
+          
+          try {
+            final subjectData = subjectEntry.value as Map<String, dynamic>;
+            final List<ApiQuestion> allQuestions = [];
+            
+            // Process each year's questions
+            for (final yearEntry in subjectData.entries) {
+              final yearName = yearEntry.key;
+              print('DEBUG: Processing year: $yearName for subject: $subjectName');
+              
+              if (yearEntry.value is! List) {
+                print('ERROR: Expected List for year $yearName in subject $subjectName, got ${yearEntry.value.runtimeType}');
+                continue;
+              }
+              
+              final yearQuestions = (yearEntry.value as List)
+                  .map((q) => ApiQuestion.fromJson(q as Map<String, dynamic>))
+                  .toList();
+              
+              allQuestions.addAll(yearQuestions);
+              print('DEBUG: Added ${yearQuestions.length} questions from year: $yearName');
+            }
+            
+            subjects[subjectName] = allQuestions;
+            print('DEBUG: Successfully processed ${allQuestions.length} total questions for subject: $subjectName');
+          } catch (e, stackTrace) {
+            print('ERROR: Failed to process questions for subject $subjectName: $e');
+            print('DEBUG: Stack trace: $stackTrace');
+            print('DEBUG: Raw subject data: ${subjectEntry.value}');
+          }
         }
         
         professions[professionName] = subjects;
@@ -41,6 +90,7 @@ class ApiQuestionsResponse with _$ApiQuestionsResponse {
       categories[categoryName] = professions;
     }
     
+    print('DEBUG: ApiQuestionsResponse.fromJson completed with ${categories.length} categories');
     return ApiQuestionsResponse(categories: categories);
   }
 

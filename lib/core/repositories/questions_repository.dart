@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/api_question_model.dart';
 import '../models/question_model.dart';
-import '../models/user_model.dart';
 import '../services/questions_api_service.dart';
 
 abstract class QuestionsRepository {
@@ -12,6 +11,12 @@ abstract class QuestionsRepository {
   Future<List<Question>> getQuestionsByCategoryAndProfession(
     String category,
     String profession, {
+    bool forceRefresh = false,
+  });
+  Future<List<Question>> getQuestionsByCategoryProfessionAndSubject(
+    String category,
+    String profession,
+    String subject, {
     bool forceRefresh = false,
   });
   Future<List<String>> getAvailableCategories({bool forceRefresh = false});
@@ -78,6 +83,22 @@ class QuestionsRepositoryImpl implements QuestionsRepository {
       apiResponse,
       filterByCategory: category,
       filterByProfession: profession,
+    );
+  }
+
+  @override
+  Future<List<Question>> getQuestionsByCategoryProfessionAndSubject(
+    String category,
+    String profession,
+    String subject, {
+    bool forceRefresh = false,
+  }) async {
+    final apiResponse = await _getApiResponse(forceRefresh: forceRefresh);
+    return _apiService.convertApiQuestionsToQuestions(
+      apiResponse,
+      filterByCategory: category,
+      filterByProfession: profession,
+      filterBySubject: subject,
     );
   }
 

@@ -377,17 +377,30 @@ class _AdWatchingDialogState extends ConsumerState<AdWatchingDialog>
   }
 
   Future<void> _watchAd() async {
+    if (!mounted) return;
+    
     _progressController.reset();
     _progressController.forward();
     
-    await ref.read(adWatchingStateProvider.notifier).watchAd();
-    
-    final state = ref.read(adWatchingStateProvider);
-    if (state.questionsUnlocked) {
-      // Show success animation and close dialog after delay
-      await Future.delayed(const Duration(seconds: 2));
+    try {
+      await ref.read(adWatchingStateProvider.notifier).watchAd();
+      
+      // Check if widget is still mounted before accessing providers
+      if (!mounted) return;
+      
+      final state = ref.read(adWatchingStateProvider);
+      if (state.questionsUnlocked) {
+        // Show success animation and close dialog after delay
+        await Future.delayed(const Duration(seconds: 2));
+        if (mounted) {
+          Navigator.of(context).pop(true); // Return true to indicate success
+        }
+      }
+    } catch (e) {
+      // Handle any errors gracefully
       if (mounted) {
-        Navigator.of(context).pop(true); // Return true to indicate success
+        // You can show an error message or handle the error as needed
+        Navigator.of(context).pop(false); // Return false to indicate failure
       }
     }
   }

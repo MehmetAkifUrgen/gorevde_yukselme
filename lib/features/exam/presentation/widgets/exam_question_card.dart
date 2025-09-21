@@ -24,17 +24,17 @@ class ExamQuestionCard extends StatelessWidget {
   Color _getOptionColor(int index) {
     if (!showCorrectAnswer && !isReviewMode) {
       return selectedAnswerIndex == index 
-          ? AppTheme.primaryNavyBlue.withOpacity(0.1)
+          ? AppTheme.primaryNavyBlue.withValues(alpha: 0.1)
           : Colors.transparent;
     }
 
     // Review mode or showing correct answer
     if (index == question.correctAnswerIndex) {
-      return AppTheme.successGreen.withOpacity(0.2);
+      return AppTheme.successGreen.withValues(alpha: 0.2);
     }
     
     if (selectedAnswerIndex == index && index != question.correctAnswerIndex) {
-      return AppTheme.errorRed.withOpacity(0.2);
+      return AppTheme.errorRed.withValues(alpha: 0.2);
     }
     
     return Colors.transparent;
@@ -108,7 +108,7 @@ class ExamQuestionCard extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
-                    color: question.difficulty.color.withOpacity(0.2),
+                    color: question.difficulty.color.withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Text(
@@ -185,7 +185,7 @@ class ExamQuestionCard extends StatelessWidget {
                   ),
                 ),
               );
-            }).toList(),
+            }),
             
             // Explanation (only shown in review mode)
             if (showCorrectAnswer && question.explanation.isNotEmpty) ...[

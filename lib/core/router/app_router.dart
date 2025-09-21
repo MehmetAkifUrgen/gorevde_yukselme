@@ -8,6 +8,9 @@ import '../../features/auth/presentation/pages/email_verification_page.dart';
 import '../../features/questions/presentation/pages/random_questions_practice_page.dart';
 import '../../features/exam/presentation/pages/exam_simulation_page.dart';
 import '../../features/subscription/presentation/pages/subscription_page.dart';
+import '../../features/ministry/presentation/pages/ministry_list_page.dart';
+import '../../features/profession/presentation/pages/profession_list_page.dart';
+import '../../features/subject/presentation/pages/subject_list_page.dart';
 import '../navigation/main_navigation.dart';
 import '../../core/models/question_model.dart';
 import '../../core/providers/auth_providers.dart';
@@ -94,6 +97,52 @@ class AppRouter {
         GoRoute(
           path: subscription,
           builder: (context, state) => const SubscriptionPage(),
+        ),
+        GoRoute(
+          path: '/ministry-list/:examType',
+          builder: (context, state) {
+            final examType = state.pathParameters['examType']!;
+            return MinistryListPage(examType: examType);
+          },
+        ),
+        GoRoute(
+          path: '/profession-list/:examType/:ministry',
+          builder: (context, state) {
+            final examType = state.pathParameters['examType']!;
+            final ministry = state.pathParameters['ministry']!;
+            return ProfessionListPage(
+              examType: examType,
+              category: ministry, // ministry'yi category olarak geç
+            );
+          },
+        ),
+        GoRoute(
+          path: '/subject-list/:examType/:ministry/:profession',
+          builder: (context, state) {
+            final examType = state.pathParameters['examType']!;
+            final ministry = state.pathParameters['ministry']!;
+            final profession = state.pathParameters['profession']!;
+            return SubjectListPage(
+              examType: examType,
+              category: ministry, // ministry'yi category olarak geç
+              profession: profession,
+            );
+          },
+        ),
+        GoRoute(
+          path: '/exam/:examType/:ministry/:profession/:subject',
+          builder: (context, state) {
+            final examType = state.pathParameters['examType']!;
+            final ministry = state.pathParameters['ministry']!;
+            final profession = state.pathParameters['profession']!;
+            final subject = state.pathParameters['subject']!;
+            return ExamSimulationPage(
+              routeExamType: examType,
+              category: ministry, // ministry'yi category olarak geç
+              profession: profession,
+              subject: subject,
+            );
+          },
         ),
       ],
     );

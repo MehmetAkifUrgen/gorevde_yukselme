@@ -63,6 +63,16 @@ final questionsByCategoryAndProfessionProvider = FutureProvider.family<List<Ques
   return repository.getQuestionsByCategoryAndProfession(params.category, params.profession);
 });
 
+// Add: Questions by Category, Profession and Subject Provider
+final questionsByCategoryProfessionAndSubjectProvider = FutureProvider.family<List<Question>, ({String category, String profession, String subject})>((ref, params) async {
+  final repository = ref.watch(questionsRepositoryProvider);
+  return repository.getQuestionsByCategoryProfessionAndSubject(
+    params.category,
+    params.profession,
+    params.subject,
+  );
+});
+
 // Cache Status Provider
 final cacheStatusProvider = FutureProvider<bool>((ref) async {
   final repository = ref.watch(questionsRepositoryProvider);
@@ -250,6 +260,31 @@ final apiProfessionsProvider = FutureProvider.family<List<String>, String>((ref,
   final apiService = ref.watch(questionsApiServiceProvider);
   final response = await apiService.fetchAllQuestions();
   return apiService.getAvailableProfessions(response, category);
+});
+
+// API Ministries Provider - Gets all ministries (first level keys) for a specific category
+final apiMinistriesProvider = FutureProvider.family<List<String>, String>((ref, category) async {
+  final apiService = ref.watch(questionsApiServiceProvider);
+  final response = await apiService.fetchAllQuestions();
+  return apiService.getAvailableProfessions(response, category); // This actually returns ministries for the category
+});
+
+// API Professions For Ministry Provider - Gets all professions for a specific category and ministry
+final apiProfessionsForMinistryProvider = FutureProvider.family<List<String>, ({String category, String ministry})>((ref, params) async {
+  final apiService = ref.watch(questionsApiServiceProvider);
+  final response = await apiService.fetchAllQuestions();
+  return apiService.getAvailableSubjects(response, params.category, params.ministry); // This actually returns professions for the ministry
+});
+
+// API Subjects For Ministry And Profession Provider - Gets all subjects for a specific category, ministry and profession
+final apiSubjectsForMinistryAndProfessionProvider = FutureProvider.family<List<String>, ({String category, String ministry, String profession})>((ref, params) async {
+  final apiService = ref.watch(questionsApiServiceProvider);
+  await apiService.fetchAllQuestions(); // This loads the data into the service
+  return apiService.getAvailableSubjectsForMinistryAndProfession(
+    categoryName: params.category,
+    ministryName: params.ministry,
+    professionName: params.profession,
+  );
 });
 
 // API Subjects Provider - Gets all subjects for a specific category and profession
