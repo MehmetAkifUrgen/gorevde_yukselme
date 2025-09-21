@@ -246,13 +246,14 @@ final starredQuestionsProvider = Provider<List<Question>>((ref) {
   );
 });
 
-// Random Questions Provider (for practice mode)
+// Random Questions Provider (for practice mode) - Tüm soruları döndürür
 final randomQuestionsProvider = Provider.family<List<Question>, int>((ref, count) {
   final questionsState = ref.watch(questionsStateProvider);
   return questionsState.when(
     data: (questions) {
       final shuffled = List<Question>.from(questions)..shuffle();
-      return shuffled.take(count).toList();
+      // Kısıtlama kaldırıldı - tüm soruları döndür
+      return shuffled;
     },
     loading: () => [],
     error: (_, __) => [],

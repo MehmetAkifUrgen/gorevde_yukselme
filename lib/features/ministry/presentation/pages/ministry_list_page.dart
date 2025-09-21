@@ -127,9 +127,6 @@ class MinistryListPage extends ConsumerWidget {
   }
 
   Widget _buildMinistryCard(BuildContext context, WidgetRef ref, String ministry, String decodedExamType) {
-    // Bakanlık için soru sayısını almak için category ve profession parametrelerini kullanıyoruz
-    final questionsCountAsync = ref.watch(apiCategoryQuestionsCountProvider(decodedExamType));
-    
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       child: Card(
@@ -171,27 +168,7 @@ class MinistryListPage extends ConsumerWidget {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      const SizedBox(height: 4),
-                      questionsCountAsync.when(
-                        data: (count) => Text(
-                          'Sorular mevcut',
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: AppTheme.darkGrey,
-                          ),
-                        ),
-                        loading: () => Text(
-                          'Yükleniyor...',
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: AppTheme.darkGrey,
-                          ),
-                        ),
-                        error: (_, __) => Text(
-                          'Soru sayısı alınamadı',
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: Colors.red,
-                          ),
-                        ),
-                      ),
+                      // Removed 'Sorular mevcut' text as requested
                     ],
                   ),
                 ),

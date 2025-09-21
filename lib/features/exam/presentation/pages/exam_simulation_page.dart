@@ -14,6 +14,7 @@ import '../widgets/exam_timer_widget.dart';
 import '../widgets/exam_progress_bar.dart';
 import '../widgets/exam_question_card.dart';
 import '../widgets/exam_results_modal.dart';
+import '../widgets/solution_popup.dart';
 import 'package:gorevde_yukselme/features/questions/presentation/widgets/font_size_slider.dart';
 
 class ExamSimulationPage extends ConsumerStatefulWidget {
@@ -47,6 +48,7 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
   int _remainingSeconds = 0;
   int? _selectedAnswerIndex;
   bool _showResults = false;
+  bool _showAnswerFeedback = false;
 
   @override
   void initState() {
@@ -136,11 +138,12 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
           _showErrorDialog('Sorular yüklenemedi. Lütfen tekrar deneyin.');
           return;
         }
-        final int takeCount = math.min(filtered.length, mode.defaultQuestionCount);
+        // Tüm soruları kullan, kısıtlama yok
         final List<Question> shuffled = List<Question>.from(filtered)..shuffle();
-        questions = shuffled.take(takeCount).toList();
+        questions = shuffled;
       } else {
-        final List<Question> randomQuestions = ref.read(randomQuestionsProvider(mode.defaultQuestionCount));
+        // Tüm random soruları al (kısıtlama yok)
+        final List<Question> randomQuestions = ref.read(randomQuestionsProvider(0));
         if (randomQuestions.isEmpty) {
           _showErrorDialog('Sorular yüklenemedi. Lütfen tekrar deneyin.');
           return;
@@ -216,11 +219,18 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
     );
 
     setState(() {
-      _selectedAnswerIndex = null;
+      _showAnswerFeedback = true;
     });
 
-    Future.delayed(const Duration(milliseconds: 500), () {
-      _nextQuestion();
+    // Show feedback for 2 seconds, then move to next question
+    Future.delayed(const Duration(milliseconds: 2000), () {
+      if (mounted) {
+        setState(() {
+          _showAnswerFeedback = false;
+          _selectedAnswerIndex = null;
+        });
+        _nextQuestion();
+      }
     });
   }
 
@@ -232,6 +242,7 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
       ref.read(currentExamProvider.notifier).nextQuestion();
       setState(() {
         _selectedAnswerIndex = null;
+        _showAnswerFeedback = false;
       });
     } else {
       _completeExam();
@@ -246,6 +257,7 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
       ref.read(currentExamProvider.notifier).previousQuestion();
       setState(() {
         _selectedAnswerIndex = null;
+        _showAnswerFeedback = false;
       });
     }
   }
@@ -330,6 +342,21 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
     );
   }
 
+  void _showSolution() {
+    final Exam? exam = ref.read(currentExamProvider);
+    if (exam == null) return;
+    
+    final currentQuestion = exam.questions[exam.currentQuestionIndex];
+    
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => SolutionPopup(
+        solutionText: currentQuestion.explanation,
+        questionText: currentQuestion.questionText,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final Exam? exam = ref.watch(currentExamProvider);
@@ -387,6 +414,7 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
         totalQuestions: exam.totalQuestions,
         correctAnswers: exam.correctAnswers,
         incorrectAnswers: exam.incorrectAnswers,
+        blankAnswers: exam.blankAnswers,
         scorePercentage: exam.scorePercentage,
         timeTaken: Duration(seconds: (exam.durationInMinutes * 60) - _remainingSeconds),
         categoryPerformance: const {},
@@ -452,7 +480,9 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
                 onAnswerSelected: _selectAnswer,
                 isReviewMode: exam.status == ExamStatus.completed,
                 showCorrectAnswer: exam.status == ExamStatus.completed,
+                showAnswerFeedback: _showAnswerFeedback,
                 fontSize: fontSize,
+                onShowSolution: _showSolution,
               ),
             ),
           ),

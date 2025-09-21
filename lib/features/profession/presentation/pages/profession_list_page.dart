@@ -131,9 +131,13 @@ class ProfessionListPage extends ConsumerWidget {
   }
 
   Widget _buildProfessionCard(BuildContext context, WidgetRef ref, String profession, String decodedExamType, String decodedCategory) {
-    // Use examType (top-level category) and the selected profession to get subjects
+    // Use examType (top-level category), ministry (decodedCategory) and profession to get subjects
     final questionsCountAsync = ref.watch(
-      apiSubjectsProvider((category: decodedExamType, profession: profession))
+      apiSubjectsForMinistryAndProfessionProvider((
+        category: decodedExamType, 
+        ministry: decodedCategory, 
+        profession: profession
+      ))
     );
     
     return Container(

@@ -9,7 +9,9 @@ class ExamQuestionCard extends StatelessWidget {
   final Function(int) onAnswerSelected;
   final bool isReviewMode;
   final bool showCorrectAnswer;
+  final bool showAnswerFeedback;
   final double fontSize;
+  final VoidCallback? onShowSolution;
 
   const ExamQuestionCard({
     super.key,
@@ -18,17 +20,19 @@ class ExamQuestionCard extends StatelessWidget {
     required this.onAnswerSelected,
     this.isReviewMode = false,
     this.showCorrectAnswer = false,
+    this.showAnswerFeedback = false,
     this.fontSize = 16.0,
+    this.onShowSolution,
   });
 
   Color _getOptionColor(int index) {
-    if (!showCorrectAnswer && !isReviewMode) {
+    if (!showCorrectAnswer && !isReviewMode && !showAnswerFeedback) {
       return selectedAnswerIndex == index 
           ? AppTheme.primaryNavyBlue.withValues(alpha: 0.1)
           : Colors.transparent;
     }
 
-    // Review mode or showing correct answer
+    // Review mode, showing correct answer, or showing feedback
     if (index == question.correctAnswerIndex) {
       return AppTheme.successGreen.withValues(alpha: 0.2);
     }
@@ -41,13 +45,13 @@ class ExamQuestionCard extends StatelessWidget {
   }
 
   Color _getOptionBorderColor(int index) {
-    if (!showCorrectAnswer && !isReviewMode) {
+    if (!showCorrectAnswer && !isReviewMode && !showAnswerFeedback) {
       return selectedAnswerIndex == index 
           ? AppTheme.primaryNavyBlue
           : Colors.grey[300]!;
     }
 
-    // Review mode or showing correct answer
+    // Review mode, showing correct answer, or showing feedback
     if (index == question.correctAnswerIndex) {
       return AppTheme.successGreen;
     }
@@ -60,7 +64,7 @@ class ExamQuestionCard extends StatelessWidget {
   }
 
   Widget _getOptionIcon(int index) {
-    if (!showCorrectAnswer && !isReviewMode) {
+    if (!showCorrectAnswer && !isReviewMode && !showAnswerFeedback) {
       return Icon(
         selectedAnswerIndex == index 
             ? Icons.radio_button_checked
@@ -71,7 +75,7 @@ class ExamQuestionCard extends StatelessWidget {
       );
     }
 
-    // Review mode or showing correct answer
+    // Review mode, showing correct answer, or showing feedback
     if (index == question.correctAnswerIndex) {
       return const Icon(
         Icons.check_circle,
@@ -155,7 +159,7 @@ class ExamQuestionCard extends StatelessWidget {
               return Container(
                 margin: const EdgeInsets.only(bottom: 12),
                 child: InkWell(
-                  onTap: isReviewMode ? null : () => onAnswerSelected(index),
+                  onTap: (isReviewMode || showAnswerFeedback) ? null : () => onAnswerSelected(index),
                   borderRadius: BorderRadius.circular(8),
                   child: Container(
                     padding: const EdgeInsets.all(16),
@@ -186,6 +190,79 @@ class ExamQuestionCard extends StatelessWidget {
                 ),
               );
             }),
+            
+            // Boş Bırak seçeneği
+            if (!isReviewMode && !showAnswerFeedback) ...[
+              const SizedBox(height: 8),
+              Container(
+                margin: const EdgeInsets.only(bottom: 12),
+                child: InkWell(
+                  onTap: () => onAnswerSelected(-1), // -1 boş bırakma için
+                  borderRadius: BorderRadius.circular(8),
+                  child: Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: selectedAnswerIndex == -1 
+                          ? Colors.orange[100] 
+                          : Colors.grey[50],
+                      border: Border.all(
+                        color: selectedAnswerIndex == -1 
+                            ? Colors.orange[400]! 
+                            : Colors.grey[300]!,
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(
+                          selectedAnswerIndex == -1 
+                              ? Icons.radio_button_checked 
+                              : Icons.radio_button_unchecked,
+                          color: selectedAnswerIndex == -1 
+                              ? Colors.orange[600] 
+                              : Colors.grey[500],
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Text(
+                            'Boş Bırak',
+                            style: TextStyle(
+                              fontSize: fontSize * 0.9,
+                              height: 1.4,
+                              fontStyle: FontStyle.italic,
+                              color: selectedAnswerIndex == -1 
+                                  ? Colors.orange[700] 
+                                  : Colors.grey[600],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+            
+            // Show Solution Button (only shown when answer feedback is active and callback is provided)
+            if (showAnswerFeedback && onShowSolution != null) ...[
+              const SizedBox(height: 16),
+              Center(
+                child: ElevatedButton.icon(
+                  onPressed: onShowSolution,
+                  icon: const Icon(Icons.lightbulb_outline),
+                  label: const Text('Çözümü Gör'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppTheme.accentGold,
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                ),
+              ),
+            ],
             
             // Explanation (only shown in review mode)
             if (showCorrectAnswer && question.explanation.isNotEmpty) ...[

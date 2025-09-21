@@ -136,7 +136,7 @@ class ExamResultsModal extends StatelessWidget {
                   _buildStatRow('Yanlış Cevap', '${result.incorrectAnswers}', 
                       color: AppTheme.errorRed),
                   const SizedBox(height: 8),
-                  _buildStatRow('Boş Cevap', '${result.totalQuestions - result.correctAnswers - result.incorrectAnswers}', 
+                  _buildStatRow('Boş Cevap', '${result.blankAnswers}', 
                       color: Colors.grey[600]!),
                   const SizedBox(height: 8),
                   _buildStatRow('Süre', _formatDuration(result.timeTaken)),

@@ -80,14 +80,35 @@ class Exam extends Equatable {
     int correct = 0;
     for (final entry in userAnswers.entries) {
       final question = questions.firstWhere((q) => q.id == entry.key);
-      if (question.isCorrectAnswer(entry.value)) {
+      if (entry.value != -1 && question.isCorrectAnswer(entry.value)) {
         correct++;
       }
     }
     return correct;
   }
 
-  int get incorrectAnswers => answeredQuestions - correctAnswers;
+  int get incorrectAnswers {
+    int incorrect = 0;
+    for (final entry in userAnswers.entries) {
+      final question = questions.firstWhere((q) => q.id == entry.key);
+      // Sadece -1 olmayan (boş bırakılmayan) ve yanlış cevapları say
+      if (entry.value != -1 && !question.isCorrectAnswer(entry.value)) {
+        incorrect++;
+      }
+    }
+    return incorrect;
+  }
+
+  int get blankAnswers {
+    int blank = 0;
+    for (final entry in userAnswers.entries) {
+      if (entry.value == -1) {
+        blank++;
+      }
+    }
+    // Hiç cevaplanmayan soruları da ekle
+    return blank + (totalQuestions - userAnswers.length);
+  }
 
   double get scorePercentage => 
       totalQuestions > 0 ? (correctAnswers / totalQuestions) * 100 : 0;
@@ -128,6 +149,7 @@ class ExamResult extends Equatable {
   final int totalQuestions;
   final int correctAnswers;
   final int incorrectAnswers;
+  final int blankAnswers;
   final double scorePercentage;
   final Duration timeTaken;
   final Map<QuestionCategory, int> categoryPerformance; // category -> correct answers
@@ -140,6 +162,7 @@ class ExamResult extends Equatable {
     required this.totalQuestions,
     required this.correctAnswers,
     required this.incorrectAnswers,
+    required this.blankAnswers,
     required this.scorePercentage,
     required this.timeTaken,
     required this.categoryPerformance,
@@ -154,6 +177,7 @@ class ExamResult extends Equatable {
         totalQuestions,
         correctAnswers,
         incorrectAnswers,
+        blankAnswers,
         scorePercentage,
         timeTaken,
         categoryPerformance,
@@ -187,11 +211,11 @@ extension ExamTypeExtension on ExamType {
   int get defaultQuestionCount {
     switch (this) {
       case ExamType.fullExam:
-        return 60;
+        return 100;
       case ExamType.miniExam:
-        return 15;
+        return 30;
       case ExamType.practiceMode:
-        return 10;
+        return 20;
     }
   }
 }
