@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   // Color Scheme as per PRD
-  static const Color primaryNavyBlue = Color(0xFF003087);
+  static const Color primaryNavyBlue = Color(0xFF1E3A8A);
   static const Color secondaryWhite = Color(0xFFFFFFFF);
   static const Color accentGold = Color(0xFFFFD700);
   static const Color successGreen = Color(0xFF28A745);

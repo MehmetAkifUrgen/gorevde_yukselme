@@ -6,6 +6,9 @@ import '../../../../core/models/user_preferences.dart';
 import '../../../../core/models/user_statistics.dart';
 import '../../../../core/providers/auth_providers.dart';
 import '../../../subscription/presentation/widgets/ad_banner_widget.dart';
+import '../../../../core/widgets/support_dialog.dart';
+import '../widgets/change_password_dialog.dart';
+import '../widgets/delete_account_dialog.dart';
 
 class ProfileSettingsPage extends ConsumerStatefulWidget {
   const ProfileSettingsPage({super.key});
@@ -15,32 +18,6 @@ class ProfileSettingsPage extends ConsumerStatefulWidget {
 }
 
 class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
-  double fontSize = 16.0;
-  bool notificationsEnabled = true;
-  bool darkModeEnabled = false;
-  bool soundEnabled = true;
-  String selectedLanguage = 'Turkish';
-
-  @override
-  void initState() {
-    super.initState();
-    _loadUserPreferences();
-  }
-
-  void _loadUserPreferences() {
-    final currentUser = ref.read(currentUserProfileProvider);
-    currentUser.whenData((user) {
-      if (user != null && user.preferences != null) {
-        setState(() {
-          fontSize = user.preferences!.fontSize;
-          notificationsEnabled = user.preferences!.notificationsEnabled;
-          darkModeEnabled = user.preferences!.darkModeEnabled;
-          soundEnabled = user.preferences!.soundEnabled;
-          selectedLanguage = user.preferences!.language == 'tr' ? 'Turkish' : 'English';
-        });
-      }
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +25,7 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
     
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Profile & Settings'),
+        title: const Text('Profil ve Ayarlar'),
         backgroundColor: AppTheme.lightTheme.primaryColor,
         actions: [
           IconButton(
@@ -85,9 +62,7 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
                 _buildStatisticsSection(user),
                 const SizedBox(height: 24),
                 
-                // Preferences Section
-                _buildPreferencesSection(),
-                const SizedBox(height: 24),
+
                 
                 // Account Section
                 _buildAccountSection(user),
@@ -168,30 +143,19 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
             ),
             const SizedBox(height: 8),
             
-            // Profession and Subscription
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _buildInfoChip(
-                  _getProfessionDisplayName(user.profession),
-                  Icons.work,
-                  Colors.blue,
-                ),
-                const SizedBox(width: 8),
-                _buildInfoChip(
-                  _getSubscriptionDisplayName(user.subscriptionStatus),
-                  Icons.star,
-                  user.subscriptionStatus == SubscriptionStatus.premium
-                      ? Colors.amber
-                      : Colors.grey,
-                ),
-              ],
+            // Subscription
+            _buildInfoChip(
+              _getSubscriptionDisplayName(user.subscriptionStatus),
+              Icons.star,
+              user.subscriptionStatus == SubscriptionStatus.premium
+                  ? Colors.amber
+                  : Colors.grey,
             ),
             
             if (user.subscriptionStatus == SubscriptionStatus.premium && user.subscriptionExpiryDate != null) ...[
               const SizedBox(height: 8),
               Text(
-                'Premium expires: ${_formatDate(user.subscriptionExpiryDate!)}',
+                'Premium süresi: ${_formatDate(user.subscriptionExpiryDate!)}',
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                   color: Colors.grey[600],
                 ),
@@ -203,25 +167,12 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
     );
   }
 
-  String _getProfessionDisplayName(UserProfession profession) {
-    switch (profession) {
-      case UserProfession.electricalElectronicEngineer:
-        return 'Electrical Engineer';
-      case UserProfession.constructionEngineer:
-        return 'Construction Engineer';
-      case UserProfession.computerTechnician:
-        return 'Computer Technician';
-      case UserProfession.machineTechnician:
-        return 'Machine Technician';
-      case UserProfession.generalRegulations:
-        return 'General Regulations';
-    }
-  }
+
 
   String _getSubscriptionDisplayName(SubscriptionStatus status) {
     switch (status) {
       case SubscriptionStatus.free:
-        return 'Free';
+        return 'Ücretsiz';
       case SubscriptionStatus.premium:
         return 'Premium';
     }
@@ -271,7 +222,7 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Your Statistics',
+              'İstatistikleriniz',
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
@@ -281,7 +232,7 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
               children: [
                 Expanded(
                   child: _buildStatCard(
-                    'Questions Solved',
+                    'Çözülen Sorular',
                     '${statistics.totalQuestionsAnswered}',
                     Icons.quiz,
                     Colors.blue,
@@ -290,7 +241,7 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
                 const SizedBox(width: 12),
                 Expanded(
                   child: _buildStatCard(
-                    'Accuracy',
+                    'Doğruluk Oranı',
                     '${statistics.averageScore.toStringAsFixed(1)}%',
                     Icons.track_changes,
                     Colors.green,
@@ -303,8 +254,8 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
               children: [
                 Expanded(
                   child: _buildStatCard(
-                    'Study Streak',
-                    '${statistics.currentStreak} days',
+                    'Çalışma Serisi',
+                    '${statistics.currentStreak} gün',
                     Icons.local_fire_department,
                     Colors.orange,
                   ),
@@ -312,8 +263,8 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
                 const SizedBox(width: 12),
                 Expanded(
                   child: _buildStatCard(
-                    'Study Time',
-                    '${(statistics.totalStudyTimeMinutes / 60).toStringAsFixed(1)}h',
+                    'Çalışma Süresi',
+                    '${(statistics.totalStudyTimeMinutes / 60).toStringAsFixed(1)}s',
                     Icons.timer,
                     Colors.purple,
                   ),
@@ -357,62 +308,7 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
     );
   }
 
-  Widget _buildPreferencesSection() {
-    return Card(
-      elevation: 2,
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Preferences',
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 16),
-            
-            // Font Size
-            _buildFontSizeSlider(),
-            const Divider(),
-            
-            // Notifications
-            _buildSwitchTile(
-              'Notifications',
-              'Receive study reminders and updates',
-              Icons.notifications,
-              notificationsEnabled,
-              (value) => setState(() => notificationsEnabled = value),
-            ),
-            
-            // Dark Mode
-            _buildSwitchTile(
-              'Dark Mode',
-              'Switch to dark theme',
-              Icons.dark_mode,
-              darkModeEnabled,
-              (value) => setState(() => darkModeEnabled = value),
-            ),
-            
-            // Sound
-            _buildSwitchTile(
-              'Sound Effects',
-              'Enable sound feedback',
-              Icons.volume_up,
-              soundEnabled,
-              (value) => setState(() => soundEnabled = value),
-            ),
-            
-            const Divider(),
-            
-            // Language
-            _buildLanguageSelector(),
-          ],
-        ),
-      ),
-    );
-  }
+
 
   Widget _buildAccountSection(User user) {
     return Card(
@@ -423,7 +319,7 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Account',
+              'Hesap',
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
@@ -432,8 +328,8 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
             
             if (user.subscriptionStatus != SubscriptionStatus.premium) ...[
               _buildActionTile(
-                'Upgrade to Premium',
-                'Unlock all features and remove ads',
+                'Premium\'a Yükselt',
+                'Tüm özelliklerin kilidini aç ve reklamları kaldır',
                 Icons.star,
                 Colors.amber,
                 _upgradeToPremium,
@@ -442,24 +338,17 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
             ],
             
             _buildActionTile(
-              'Change Password',
-              'Update your account password',
+              'Şifre Değiştir',
+              'Hesap şifrenizi güncelleyin',
               Icons.lock,
               Colors.blue,
               _changePassword,
             ),
             
+
             _buildActionTile(
-              'Privacy Settings',
-              'Manage your privacy preferences',
-              Icons.privacy_tip,
-              Colors.green,
-              _privacySettings,
-            ),
-            
-            _buildActionTile(
-              'Delete Account',
-              'Permanently delete your account',
+              'Hesabı Sil',
+              'Hesabınızı kalıcı olarak silin',
               Icons.delete_forever,
               Colors.red,
               _deleteAccount,
@@ -479,40 +368,33 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Support',
+              'Destek',
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
             ),
             const SizedBox(height: 16),
             
+
             _buildActionTile(
-              'Help Center',
-              'Find answers to common questions',
-              Icons.help,
-              Colors.blue,
-              _helpCenter,
-            ),
-            
-            _buildActionTile(
-              'Contact Support',
-              'Get help from our support team',
+              'Destek ile İletişim',
+              'Destek ekibimizden yardım alın',
               Icons.support_agent,
               Colors.green,
               _contactSupport,
             ),
             
             _buildActionTile(
-              'Rate App',
-              'Rate us on the App Store',
-              Icons.star_rate,
-              Colors.amber,
-              _rateApp,
-            ),
+                'Uygulamayı Değerlendir',
+                'App Store\'da bizi değerlendirin',
+                Icons.star_rate,
+                Colors.amber,
+                _rateApp,
+              ),
             
             _buildActionTile(
-              'Sign Out',
-              'Sign out of your account',
+              'Çıkış Yap',
+              'Hesabınızdan çıkış yapın',
               Icons.logout,
               Colors.red,
               _signOut,
@@ -523,76 +405,9 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
     );
   }
 
-  Widget _buildFontSizeSlider() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Font Size',
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        const SizedBox(height: 8),
-        Row(
-          children: [
-            const Text('A', style: TextStyle(fontSize: 12)),
-            Expanded(
-              child: Slider(
-                value: fontSize,
-                min: 12.0,
-                max: 24.0,
-                divisions: 6,
-                label: fontSize.round().toString(),
-                onChanged: (value) => setState(() => fontSize = value),
-              ),
-            ),
-            const Text('A', style: TextStyle(fontSize: 20)),
-          ],
-        ),
-      ],
-    );
-  }
 
-  Widget _buildSwitchTile(String title, String subtitle, IconData icon, bool value, ValueChanged<bool> onChanged) {
-    return ListTile(
-      leading: Icon(icon, color: AppTheme.lightTheme.primaryColor),
-      title: Text(title),
-      subtitle: Text(subtitle),
-      trailing: Switch(
-        value: value,
-        onChanged: onChanged,
-      ),
-      contentPadding: EdgeInsets.zero,
-    );
-  }
 
-  Widget _buildLanguageSelector() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Language',
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        const SizedBox(height: 8),
-        DropdownButtonFormField<String>(
-          value: selectedLanguage,
-          decoration: const InputDecoration(
-            border: OutlineInputBorder(),
-            contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-          ),
-          items: const [
-            DropdownMenuItem(value: 'Turkish', child: Text('Turkish')),
-            DropdownMenuItem(value: 'English', child: Text('English')),
-          ],
-          onChanged: (value) => setState(() => selectedLanguage = value!),
-        ),
-      ],
-    );
-  }
+
 
   Widget _buildActionTile(String title, String subtitle, IconData icon, Color color, VoidCallback onTap) {
     return ListTile(
@@ -618,7 +433,10 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
   }
 
   void _changePassword() {
-    // TODO: Navigate to change password page
+    showDialog(
+      context: context,
+      builder: (context) => const ChangePasswordDialog(),
+    );
   }
 
   void _privacySettings() {
@@ -626,7 +444,10 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
   }
 
   void _deleteAccount() {
-    // TODO: Show delete account confirmation dialog
+    showDialog(
+      context: context,
+      builder: (context) => const DeleteAccountDialog(),
+    );
   }
 
   void _helpCenter() {
@@ -634,7 +455,13 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
   }
 
   void _contactSupport() {
-    // TODO: Navigate to contact support
+    final userProfile = ref.read(currentUserProfileProvider).value;
+    if (userProfile != null) {
+      showDialog(
+        context: context,
+        builder: (context) => SupportDialog(userProfile: userProfile),
+      );
+    }
   }
 
   void _rateApp() {

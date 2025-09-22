@@ -1,0 +1,59 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Users collection - users can read/write their own data
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // User answers collection - users can read/write their own answers
+    match /user_answers/{document} {
+      allow read, write: if request.auth != null && request.auth.uid == resource.data.userId;
+      allow create: if request.auth != null && request.auth.uid == request.resource.data.userId;
+      allow delete: if request.auth != null && request.auth.uid == resource.data.userId;
+    }
+    
+    // Support requests collection - users can create and read their own support requests
+    match /support_requests/{document} {
+      allow read: if request.auth != null && request.auth.uid == resource.data.userId;
+      allow create: if request.auth != null && 
+                   request.auth.uid == request.resource.data.userId &&
+                   request.resource.data.keys().hasAll(['id', 'userId', 'userEmail', 'userName', 'subject', 'message', 'createdAt', 'status']) &&
+                   request.resource.data.userId == request.auth.uid &&
+                   request.resource.data.userEmail == request.auth.token.email &&
+                   request.resource.data.status == 'pending';
+      allow update: if request.auth != null && request.auth.uid == resource.data.userId;
+      allow delete: if request.auth != null && request.auth.uid == resource.data.userId;
+    }
+    
+    // Questions collection - read only for authenticated users
+    match /questions/{document} {
+      allow read: if request.auth != null;
+    }
+    
+    // Subjects collection - read only for authenticated users  
+    match /subjects/{document} {
+      allow read: if request.auth != null;
+    }
+    
+    // Exams collection - read only for authenticated users
+    match /exams/{document} {
+      allow read: if request.auth != null;
+    }
+    
+    // Performance data - users can read/write their own performance data
+    match /performance/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Subscription data - users can read their own subscription data
+    match /subscriptions/{userId} {
+      allow read: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Default deny all other access
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import '../services/auth_service.dart';
 import '../services/firestore_service.dart';
 import '../services/google_signin_service.dart';
@@ -268,13 +269,17 @@ final userProfileProvider = StreamProvider.family<User?, String>((ref, userId) {
           orElse: () => SubscriptionStatus.free,
         ),
         subscriptionExpiryDate: data['subscriptionExpiryDate'] != null 
-          ? DateTime.parse(data['subscriptionExpiryDate']) 
+          ? (data['subscriptionExpiryDate'] is Timestamp 
+              ? (data['subscriptionExpiryDate'] as Timestamp).toDate()
+              : DateTime.parse(data['subscriptionExpiryDate'].toString()))
           : null,
         notificationsEnabled: data['notificationsEnabled'] ?? true,
         questionsAnsweredToday: data['questionsAnsweredToday'] ?? 0,
         weakAreas: List<String>.from(data['weakAreas'] ?? []),
         createdAt: data['createdAt'] != null 
-          ? DateTime.parse(data['createdAt']) 
+          ? (data['createdAt'] is Timestamp 
+              ? (data['createdAt'] as Timestamp).toDate()
+              : DateTime.parse(data['createdAt'].toString()))
           : DateTime.now(),
       );
     }

@@ -5,14 +5,12 @@ class UserPreferences extends Equatable {
   final bool notificationsEnabled;
   final bool darkModeEnabled;
   final bool soundEnabled;
-  final String language;
 
   const UserPreferences({
     this.fontSize = 16.0,
     this.notificationsEnabled = true,
     this.darkModeEnabled = false,
     this.soundEnabled = true,
-    this.language = 'tr',
   });
 
   UserPreferences copyWith({
@@ -20,14 +18,12 @@ class UserPreferences extends Equatable {
     bool? notificationsEnabled,
     bool? darkModeEnabled,
     bool? soundEnabled,
-    String? language,
   }) {
     return UserPreferences(
       fontSize: fontSize ?? this.fontSize,
       notificationsEnabled: notificationsEnabled ?? this.notificationsEnabled,
       darkModeEnabled: darkModeEnabled ?? this.darkModeEnabled,
       soundEnabled: soundEnabled ?? this.soundEnabled,
-      language: language ?? this.language,
     );
   }
 
@@ -37,7 +33,6 @@ class UserPreferences extends Equatable {
       'notificationsEnabled': notificationsEnabled,
       'darkModeEnabled': darkModeEnabled,
       'soundEnabled': soundEnabled,
-      'language': language,
     };
   }
 
@@ -47,7 +42,6 @@ class UserPreferences extends Equatable {
       notificationsEnabled: json['notificationsEnabled'] as bool? ?? true,
       darkModeEnabled: json['darkModeEnabled'] as bool? ?? false,
       soundEnabled: json['soundEnabled'] as bool? ?? true,
-      language: json['language'] as String? ?? 'tr',
     );
   }
 
@@ -57,6 +51,5 @@ class UserPreferences extends Equatable {
         notificationsEnabled,
         darkModeEnabled,
         soundEnabled,
-        language,
       ];
 }

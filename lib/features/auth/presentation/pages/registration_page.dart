@@ -142,19 +142,15 @@ class _RegistrationPageState extends ConsumerState<RegistrationPage> {
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              AppTheme.primaryNavyBlue,
-              AppTheme.secondaryWhite,
-            ],
-          ),
+          color: AppTheme.primaryNavyBlue,
         ),
         child: SafeArea(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(24.0),
-            child: Form(
+          child: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Form(
               key: _formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -402,6 +398,9 @@ class _RegistrationPageState extends ConsumerState<RegistrationPage> {
                 ],
               ),
             ),
+                ),
+              ),
+            ],
           ),
         ),
       ),
