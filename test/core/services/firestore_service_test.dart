@@ -13,6 +13,8 @@ import 'firestore_service_test.mocks.dart';
   DocumentReference,
   DocumentSnapshot,
   Query,
+  QuerySnapshot,
+  QueryDocumentSnapshot,
   WriteBatch,
   FirebaseCrashlytics,
 ])
@@ -508,6 +510,68 @@ void main() {
         verify(mockFirestore.collection('user_performance')).called(1);
         verify(mockCollectionRef.doc(any)).called(1);
         verify(mockDocumentRef.set(any, any)).called(1);
+      });
+    });
+
+    group('Delete All User Data Methods', () {
+      test('should delete all user data successfully', () async {
+        // Arrange
+        const String userId = 'user123';
+        final mockQuerySnapshot = MockQuerySnapshot<Map<String, dynamic>>();
+        final mockDocumentSnapshot1 = MockQueryDocumentSnapshot<Map<String, dynamic>>();
+        final mockDocumentSnapshot2 = MockQueryDocumentSnapshot<Map<String, dynamic>>();
+        final mockDocumentRef1 = MockDocumentReference<Map<String, dynamic>>();
+        final mockDocumentRef2 = MockDocumentReference<Map<String, dynamic>>();
+
+        when(mockFirestore.batch()).thenReturn(mockWriteBatch);
+        when(mockWriteBatch.delete(any)).thenAnswer((_) => mockWriteBatch);
+        when(mockWriteBatch.commit()).thenAnswer((_) async {});
+
+        // Mock user_answers query
+        when(mockCollectionRef.where('userId', isEqualTo: userId))
+            .thenReturn(mockQuery);
+        when(mockQuery.get()).thenAnswer((_) async => mockQuerySnapshot);
+        when(mockQuerySnapshot.docs).thenReturn([mockDocumentSnapshot1, mockDocumentSnapshot2]);
+        when(mockDocumentSnapshot1.reference).thenReturn(mockDocumentRef1);
+        when(mockDocumentSnapshot2.reference).thenReturn(mockDocumentRef2);
+
+        // Act
+        await firestoreService.deleteAllUserData(userId: userId);
+
+        // Assert
+        verify(mockFirestore.batch()).called(1);
+        verify(mockWriteBatch.commit()).called(1);
+        
+        // Verify collections are accessed
+        verify(mockFirestore.collection('users')).called(1);
+        verify(mockFirestore.collection('user_answers')).called(1);
+        verify(mockFirestore.collection('support_requests')).called(1);
+        verify(mockFirestore.collection('user_performance')).called(1);
+        verify(mockFirestore.collection('subscriptions')).called(1);
+        verify(mockFirestore.collection('performance')).called(1);
+      });
+
+      test('should handle delete all user data error', () async {
+        // Arrange
+        const String userId = 'user123';
+        final exception = Exception('Delete failed');
+
+        when(mockFirestore.batch()).thenReturn(mockWriteBatch);
+        when(mockWriteBatch.delete(any)).thenAnswer((_) => mockWriteBatch);
+        when(mockWriteBatch.commit()).thenThrow(exception);
+
+        // Mock empty query results
+        final mockQuerySnapshot = MockQuerySnapshot<Map<String, dynamic>>();
+        when(mockCollectionRef.where('userId', isEqualTo: userId))
+            .thenReturn(mockQuery);
+        when(mockQuery.get()).thenAnswer((_) async => mockQuerySnapshot);
+        when(mockQuerySnapshot.docs).thenReturn([]);
+
+        // Act & Assert
+        expect(
+          () => firestoreService.deleteAllUserData(userId: userId),
+          throwsA(equals(exception)),
+        );
       });
     });
   });

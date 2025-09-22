@@ -1,33 +1,101 @@
-Restarted application in 352ms.
+Restarted application in 390ms.
 flutter: Geçerli oturum bulunamadı
-flutter: [DeleteAccountDialog] INFO: Starting account deletion process
-flutter: [DeleteAccountDialog] INFO: Current user: Bf71kQzc99MN4VQwWFLcdGLffpX2, email: deneme@gmail.com
-flutter: [DeleteAccountDialog] INFO: Starting re-authentication process
-flutter: [DeleteAccountDialog] INFO: Re-authentication successful
-flutter: [DeleteAccountDialog] INFO: Starting Firestore data deletion
-flutter: [DeleteAccountDialog] INFO: Starting Firestore data deletion for user: Bf71kQzc99MN4VQwWFLcdGLffpX2
-flutter: [DeleteAccountDialog] INFO: Adding user profile deletion to batch
-flutter: [DeleteAccountDialog] INFO: Querying user answers for deletion
-flutter: [DeleteAccountDialog] INFO: Found 0 user answers to delete
-flutter: [DeleteAccountDialog] INFO: Querying support requests for deletion
-flutter: [DeleteAccountDialog] INFO: Found 1 support requests to delete
-flutter: [DeleteAccountDialog] INFO: Adding support request 1758524644753 to deletion batch
-flutter: [DeleteAccountDialog] INFO: Committing batch deletion to Firestore
-flutter: [DeleteAccountDialog] ERROR: Error during Firestore data deletion
-flutter: [DeleteAccountDialog] Error details: [cloud_firestore/permission-denied] The caller does not have permission to execute the specified operation.
-flutter: [DeleteAccountDialog] Stack trace: #0      FirebaseFirestoreHostApi.writeBatchCommit (package:cloud_firestore_platform_interface/src/pigeon/messages.pigeon.dart:1227:7)
-flutter: <asynchronous suspension>
-flutter: #1      MethodChannelWriteBatch.commit (package:cloud_firestore_platform_interface/src/method_channel/method_channel_write_batch.dart:45:7)
-flutter: <asynchronous suspension>
-flutter: #2      _DeleteAccountDialogState._deleteUserData (package:gorevde_yukselme/features/profile/presentation/widgets/delete_account_dialog.dart:178:7)
-flutter: <asynchronous suspension>
-flutter: #3      _DeleteAccountDialogState._deleteAccount (package:gorevde_yukselme/features/profile/presentation/widgets/delete_account_dialog.dart:82:7)
-flutter: <asynchronous suspension>
+flutter: [AppRouter] Redirect check - Path: /login
+flutter: [AppRouter] isAuthenticated: false, isEmailVerified: false
+flutter: [AppRouter] No redirect needed
+flutter: [AppRouter] Redirect check - Path: /home
+flutter: [AppRouter] isAuthenticated: true, isEmailVerified: true
+flutter: [AppRouter] No redirect needed
+flutter: [AppRouter] Redirect check - Path: /login
+flutter: [AppRouter] isAuthenticated: false, isEmailVerified: false
+flutter: [AppRouter] No redirect needed
+flutter: [AppRouter] Redirect check - Path: /registration
+flutter: [AppRouter] isAuthenticated: false, isEmailVerified: false
+flutter: [AppRouter] No redirect needed
+flutter: [RegistrationPage] _handleRegistration - Starting
+flutter: [RegistrationPage] Starting registration process
+flutter: [RegistrationPage] Creating user with email and password
+flutter: [AuthNotifier] createUserWithEmailAndPassword - Starting for email: urgenakif@gmail.com
+flutter: [AuthNotifier] Calling AuthService.createUserWithEmailAndPassword
+flutter: [AuthNotifier] User credential received: urgenakif@gmail.com
+flutter: [AuthNotifier] Updating user profile with displayName: All Bab
+flutter: [AppRouter] Redirect check - Path: /home
+flutter: [AppRouter] isAuthenticated: true, isEmailVerified: false
+flutter: [AppRouter] Redirecting to email verification - email not verified
+flutter: [AppRouter] Redirect check - Path: /email-verification
+flutter: [AppRouter] isAuthenticated: true, isEmailVerified: false
+flutter: [AppRouter] Email verification page - allowing access
+flutter: [EmailVerificationPage] initState - Starting email verification process
+flutter: [EmailVerificationPage] Email: urgenakif@gmail.com
+flutter: [EmailVerificationPage] Waiting for user authentication...
+flutter: [EmailVerificationPage] User authenticated, sending verification email
+flutter: [EmailVerificationPage] _sendVerificationEmail - Starting
+flutter: [EmailVerificationPage] Calling authNotifierProvider.sendEmailVerification
+flutter: [AuthNotifier] sendEmailVerification - Starting
+flutter: [AuthService] Attempting to send email verification...
+flutter: [AuthService] Target user: urgenakif@gmail.com
+flutter: [AuthService] Current user: urgenakif@gmail.com
+flutter: [AuthService] Email verified: false
+flutter: [AuthService] Email verification sent successfully to: urgenakif@gmail.com
+flutter: [AuthNotifier] sendEmailVerification - Success
+flutter: [AuthNotifier] Creating user profile in Firestore
+flutter: [AuthNotifier] Firestore profile created successfully
+flutter: [AuthNotifier] Sending email verification
+flutter: [AuthService] Attempting to send email verification...
+flutter: [AuthService] Target user: urgenakif@gmail.com
+flutter: [AuthService] Current user: urgenakif@gmail.com
+flutter: [AuthService] Email verified: false
+flutter: ----------------FIREBASE CRASHLYTICS----------------
+flutter: [firebase_auth/too-many-requests] We have blocked all requests from this device due to unusual activity. Try again later.
 flutter:
-flutter: [DeleteAccountDialog] ERROR: Unexpected error during account deletion
-flutter: [DeleteAccountDialog] Error details: Exception: Kullanıcı verileri silinirken hata oluştu: [cloud_firestore/permission-denied] The caller does not have permission to execute the specified operation.
-flutter: [DeleteAccountDialog] Stack trace: #0      _DeleteAccountDialogState._deleteUserData (package:gorevde_yukselme/features/profile/presentation/widgets/delete_account_dialog.dart:182:7)
-flutter: <asynchronous suspension>
-flutter: #1      _DeleteAccountDialogState._deleteAccount (package:gorevde_yukselme/features/profile/presentation/widgets/delete_account_dialog.dart:82:7)
-flutter: <asynchronous suspension>
-flutter:
+Email verification failed
+flutter: ----------------------------------------------------
+flutter: [AuthNotifier] Failed to send email verification: [firebase_auth/too-many-requests] We have blocked all requests from this device due to unusual activity. Try again later.
+flutter: [AuthNotifier] Setting state with user: urgenakif@gmail.com
+flutter: [AuthNotifier] createUserWithEmailAndPassword completed successfully
+flutter: [RegistrationPage] User created successfully
+flutter: [RegistrationPage] Widget disposed after user creation, cannot navigate
+flutter: [EmailVerificationPage] _checkVerificationStatus - Starting
+flutter: [EmailVerificationPage] Reloading user...
+flutter: [AuthNotifier] reloadUser - Starting
+flutter: [AuthService] reloadUser - Current user: urgenakif@gmail.com
+flutter: [AuthService] reloadUser - Before reload: emailVerified=false
+flutter: [AuthService] reloadUser - After reload: emailVerified=false
+flutter: [AuthNotifier] reloadUser - User: urgenakif@gmail.com, Email verified: true
+flutter: [AuthService] isEmailVerified - User: urgenakif@gmail.com, Verified: true
+flutter: [AuthNotifier] isEmailVerified - Result: true
+flutter: [EmailVerificationPage] Email verification status - Notifier: true, State: false
+flutter: [EmailVerificationPage] Email not verified yet
+flutter: [EmailVerificationPage] _checkVerificationStatus - Starting
+flutter: [EmailVerificationPage] Reloading user...
+flutter: [AuthNotifier] reloadUser - Starting
+flutter: [AuthService] reloadUser - Current user: urgenakif@gmail.com
+flutter: [AuthService] reloadUser - Before reload: emailVerified=true
+flutter: [AuthService] reloadUser - After reload: emailVerified=true
+flutter: [AuthNotifier] reloadUser - User: urgenakif@gmail.com, Email verified: true
+flutter: [AuthService] isEmailVerified - User: urgenakif@gmail.com, Verified: true
+flutter: [AuthNotifier] isEmailVerified - Result: true
+flutter: [EmailVerificationPage] Email verification status - Notifier: true, State: false
+flutter: [EmailVerificationPage] Email not verified yet
+flutter: [EmailVerificationPage] _checkVerificationStatus - Starting
+flutter: [EmailVerificationPage] Reloading user...
+flutter: [AuthNotifier] reloadUser - Starting
+flutter: [AuthService] reloadUser - Current user: urgenakif@gmail.com
+flutter: [AuthService] reloadUser - Before reload: emailVerified=true
+flutter: [AuthService] reloadUser - After reload: emailVerified=true
+flutter: [AuthNotifier] reloadUser - User: urgenakif@gmail.com, Email verified: true
+flutter: [AuthService] isEmailVerified - User: urgenakif@gmail.com, Verified: true
+flutter: [AuthNotifier] isEmailVerified - Result: true
+flutter: [EmailVerificationPage] Email verification status - Notifier: true, State: false
+flutter: [EmailVerificationPage] Email not verified yet
+flutter: [EmailVerificationPage] _checkVerificationStatus - Starting
+flutter: [EmailVerificationPage] Reloading user...
+flutter: [AuthNotifier] reloadUser - Starting
+flutter: [AuthService] reloadUser - Current user: urgenakif@gmail.com
+flutter: [AuthService] reloadUser - Before reload: emailVerified=true
+flutter: [AuthService] reloadUser - After reload: emailVerified=true
+flutter: [AuthNotifier] reloadUser - User: urgenakif@gmail.com, Email verified: true
+flutter: [AuthService] isEmailVerified - User: urgenakif@gmail.com, Verified: true
+flutter: [AuthNotifier] isEmailVerified - Result: true
+flutter: [EmailVerificationPage] Email verification status - Notifier: true, State: false
+flutter: [EmailVerificationPage] Email not verified yet

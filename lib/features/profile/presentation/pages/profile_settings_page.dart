@@ -52,7 +52,7 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
           return SingleChildScrollView(
             padding: const EdgeInsets.all(16),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 // Profile Section
                 _buildProfileSection(user),

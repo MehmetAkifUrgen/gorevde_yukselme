@@ -8,6 +8,8 @@ import '../services/firestore_service.dart';
 import '../services/google_signin_service.dart';
 import '../services/session_service.dart';
 import '../models/user_model.dart';
+import '../models/user_preferences.dart';
+import '../models/user_statistics.dart';
 
 // SharedPreferences Provider
 final sharedPreferencesProvider = Provider<SharedPreferences>((ref) {
@@ -103,17 +105,22 @@ class AuthNotifier extends StateNotifier<AsyncValue<firebase_auth.User?>> {
     required String password,
     required String displayName,
   }) async {
+    print('[AuthNotifier] createUserWithEmailAndPassword - Starting for email: $email');
     state = const AsyncValue.loading();
     try {
+      print('[AuthNotifier] Calling AuthService.createUserWithEmailAndPassword');
       final credential = await _authService.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
       
+      print('[AuthNotifier] User credential received: ${credential?.user?.email}');
       if (credential?.user != null) {
+        print('[AuthNotifier] Updating user profile with displayName: $displayName');
         // Update display name
         await _authService.updateUserProfile(displayName: displayName);
         
+        print('[AuthNotifier] Creating user profile in Firestore');
         // Create user profile in Firestore
         await _firestoreService.createUserProfile(
           userId: credential!.user!.uid,
@@ -132,10 +139,28 @@ class AuthNotifier extends StateNotifier<AsyncValue<firebase_auth.User?>> {
           },
         );
         
+        print('[AuthNotifier] Firestore profile created successfully');
+        // Send email verification immediately after user creation
+        try {
+          print('[AuthNotifier] Sending email verification');
+          await _authService.sendEmailVerification(user: credential.user);
+          print('[AuthNotifier] Email verification sent successfully after user creation');
+        } catch (verificationError) {
+          print('[AuthNotifier] Failed to send email verification: $verificationError');
+          // Don't fail the entire registration process if email verification fails
+          // User can resend verification later
+        }
+        
+        print('[AuthNotifier] Setting state with user: ${credential.user?.email}');
         state = AsyncValue.data(credential.user);
+        print('[AuthNotifier] createUserWithEmailAndPassword completed successfully');
+      } else {
+        print('[AuthNotifier] No user credential received');
       }
     } catch (error, stackTrace) {
+      print('[AuthNotifier] Error in createUserWithEmailAndPassword: $error');
       state = AsyncValue.error(error, stackTrace);
+      rethrow;
     }
   }
 
@@ -143,10 +168,18 @@ class AuthNotifier extends StateNotifier<AsyncValue<firebase_auth.User?>> {
     state = const AsyncValue.loading();
     try {
       final credential = await _authService.signInWithGoogle();
-      if (credential?.user != null) {
+      
+      // Kullanıcı iptal etti veya credential null
+      if (credential == null) {
+        // State'i önceki duruma geri döndür (null user)
+        state = const AsyncValue.data(null);
+        return;
+      }
+      
+      if (credential.user != null) {
         // Check if user profile exists, if not create one
         final userDoc = await _firestoreService.getUserProfile(
-          userId: credential!.user!.uid,
+          userId: credential.user!.uid,
         );
         
         if (!userDoc.exists) {
@@ -172,9 +205,50 @@ class AuthNotifier extends StateNotifier<AsyncValue<firebase_auth.User?>> {
         // Oturumu kaydet
         await _authService.saveUserSession();
         state = AsyncValue.data(credential.user);
+      } else {
+        // Credential var ama user null - bu durumda da state'i null yap
+        state = const AsyncValue.data(null);
       }
     } catch (error, stackTrace) {
       state = AsyncValue.error(error, stackTrace);
+    }
+  }
+
+  Future<bool> isEmailRegisteredWithGoogle({required String email}) async {
+    try {
+      print('[AuthNotifier] Checking if email is registered with Google: $email');
+      final result = await _authService.isEmailRegisteredWithGoogle(email: email);
+      print('[AuthNotifier] Google check result for $email: $result');
+      return result;
+    } catch (error, stackTrace) {
+      print('[AuthNotifier] Error checking Google registration: $error');
+      return false;
+    }
+  }
+
+  Future<bool> isEmailRegistered({required String email}) async {
+    try {
+      print('[AuthNotifier] Checking if email is registered: $email');
+      final result = await _authService.isEmailRegistered(email: email);
+      print('[AuthNotifier] Email check result for $email: $result');
+      return result;
+    } catch (error, stackTrace) {
+      print('[AuthNotifier] Error checking email registration: $error');
+      state = AsyncValue.error(error, stackTrace);
+      // For safety, assume email is registered if we can't check properly
+      // This prevents duplicate registrations
+      return true;
+    }
+  }
+
+  Future<void> debugGoogleSignInForEmail({required String email}) async {
+    try {
+      print('[AuthNotifier] Starting debug Google Sign-In test for: $email');
+      await _authService.debugGoogleSignInForEmail(email: email);
+      print('[AuthNotifier] Debug Google Sign-In test completed for: $email');
+    } catch (error, stackTrace) {
+      print('[AuthNotifier] Error during debug Google Sign-In test: $error');
+      throw error;
     }
   }
 
@@ -188,24 +262,52 @@ class AuthNotifier extends StateNotifier<AsyncValue<firebase_auth.User?>> {
 
   Future<void> sendEmailVerification() async {
     try {
+      print('[AuthNotifier] sendEmailVerification - Starting');
       await _authService.sendEmailVerification();
+      print('[AuthNotifier] sendEmailVerification - Success');
     } catch (error, stackTrace) {
+      print('[AuthNotifier] sendEmailVerification - Error: $error');
       state = AsyncValue.error(error, stackTrace);
+      rethrow;
     }
   }
 
   Future<void> reloadUser() async {
     try {
+      print('[AuthNotifier] reloadUser - Starting');
       await _authService.reloadUser();
+      
       // Update state with reloaded user
       final user = _authService.currentUser;
+      print('[AuthNotifier] reloadUser - User: ${user?.email}, Email verified: ${user?.emailVerified}');
       state = AsyncValue.data(user);
+      
+      // Force Firebase auth state change by triggering a token refresh
+      if (user != null) {
+        print('[AuthNotifier] reloadUser - Forcing auth state update with token refresh');
+        try {
+          // Force token refresh to trigger authStateChanges stream
+          await user.getIdToken(true);
+          print('[AuthNotifier] reloadUser - Token refresh completed');
+        } catch (e) {
+          print('[AuthNotifier] reloadUser - Token refresh failed: $e');
+        }
+        
+        // Additional wait for state propagation
+        await Future.delayed(const Duration(milliseconds: 200));
+      }
     } catch (error, stackTrace) {
+      print('[AuthNotifier] reloadUser - Error: $error');
       state = AsyncValue.error(error, stackTrace);
+      rethrow;
     }
   }
 
-  bool get isEmailVerified => _authService.isEmailVerified;
+  bool get isEmailVerified {
+    final verified = _authService.isEmailVerified;
+    print('[AuthNotifier] isEmailVerified - Result: $verified');
+    return verified;
+  }
 
   Future<void> signOut() async {
     try {
@@ -220,11 +322,8 @@ class AuthNotifier extends StateNotifier<AsyncValue<firebase_auth.User?>> {
     try {
       final userId = _authService.userId;
       if (userId != null) {
-        // Delete user data from Firestore first
-        await _firestoreService.deleteDocument(
-          collection: 'users',
-          documentId: userId,
-        );
+        // Delete all user data from Firestore first
+        await _firestoreService.deleteAllUserData(userId: userId);
         
         // Delete Firebase Auth account
         await _authService.deleteAccount();
@@ -258,7 +357,7 @@ final userProfileProvider = StreamProvider.family<User?, String>((ref, userId) {
       final data = doc.data()!;
       return User(
         id: doc.id,
-        name: data['name'] ?? '',
+        name: data['displayName'] ?? data['name'] ?? '',
         email: data['email'] ?? '',
         profession: UserProfession.values.firstWhere(
           (p) => p.toString().split('.').last == (data['profession'] ?? 'electricalElectronicEngineer'),
@@ -281,6 +380,29 @@ final userProfileProvider = StreamProvider.family<User?, String>((ref, userId) {
               ? (data['createdAt'] as Timestamp).toDate()
               : DateTime.parse(data['createdAt'].toString()))
           : DateTime.now(),
+        lastLoginAt: data['lastLoginAt'] != null 
+          ? (data['lastLoginAt'] is Timestamp 
+              ? (data['lastLoginAt'] as Timestamp).toDate()
+              : DateTime.parse(data['lastLoginAt'].toString()))
+          : null,
+        isEmailVerified: data['isEmailVerified'] ?? false,
+        profileImageUrl: data['photoURL'] ?? data['profileImageUrl'],
+        target: data['target'] ?? 50,
+        preferences: UserPreferences(
+          fontSize: (data['fontSize'] as num?)?.toDouble() ?? 16.0,
+          notificationsEnabled: data['notificationsEnabled'] ?? true,
+          darkModeEnabled: data['darkModeEnabled'] ?? false,
+          soundEnabled: data['soundEnabled'] ?? true,
+        ),
+        statistics: UserStatistics(
+          totalQuestionsAnswered: data['totalQuestionsAnswered'] ?? 0,
+          correctAnswers: data['correctAnswers'] ?? 0,
+          totalExamsTaken: data['totalExamsTaken'] ?? 0,
+          averageScore: (data['averageScore'] ?? 0.0).toDouble(),
+          totalStudyTimeMinutes: data['totalStudyTimeMinutes'] ?? 0,
+          currentStreak: data['currentStreak'] ?? 0,
+          longestStreak: data['longestStreak'] ?? 0,
+        ),
       );
     }
     return null;
@@ -326,6 +448,35 @@ final authErrorProvider = Provider<String?>((ref) {
     loading: () => null,
     error: (error, _) => error.toString(),
   );
+});
+
+// Email Verified Provider - Reactive email verification status
+final isEmailVerifiedProvider = Provider<bool>((ref) {
+  final authState = ref.watch(authStateProvider);
+  
+  // Get verification status from authState only for consistency
+  final isVerifiedFromState = authState.when(
+    data: (user) => user?.emailVerified ?? false,
+    loading: () => false,
+    error: (_, __) => false,
+  );
+  
+  final isAuthenticated = authState.when(
+    data: (user) => user != null,
+    loading: () => false,
+    error: (_, __) => false,
+  );
+  
+  // If not authenticated, return false
+  if (!isAuthenticated) {
+    print('[isEmailVerifiedProvider] Not authenticated, Result: false');
+    return false;
+  }
+  
+  // For authenticated users, check verification status
+  print('[isEmailVerifiedProvider] Authenticated user, emailVerified: $isVerifiedFromState');
+  
+  return isVerifiedFromState;
 });
 
 // User Answers Stream Provider

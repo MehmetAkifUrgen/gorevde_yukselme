@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../../../../core/services/firestore_service.dart';
 
 class DeleteAccountDialog extends StatefulWidget {
   const DeleteAccountDialog({super.key});
@@ -139,44 +140,11 @@ class _DeleteAccountDialogState extends State<DeleteAccountDialog> {
 
   Future<void> _deleteUserData(String userId) async {
     _logInfo('Starting Firestore data deletion for user: $userId');
-    final firestore = FirebaseFirestore.instance;
-    final batch = firestore.batch();
-
+    
     try {
-      // Delete user profile
-      _logInfo('Adding user profile deletion to batch');
-      batch.delete(firestore.collection('users').doc(userId));
-
-      // Delete user answers
-      _logInfo('Querying user answers for deletion');
-      final answersQuery = await firestore
-          .collection('user_answers')
-          .where('userId', isEqualTo: userId)
-          .get();
-      
-      _logInfo('Found ${answersQuery.docs.length} user answers to delete');
-      for (final doc in answersQuery.docs) {
-        _logInfo('Adding user answer ${doc.id} to deletion batch');
-        batch.delete(doc.reference);
-      }
-
-      // Delete user support requests
-      _logInfo('Querying support requests for deletion');
-      final supportQuery = await firestore
-          .collection('support_requests')
-          .where('userId', isEqualTo: userId)
-          .get();
-      
-      _logInfo('Found ${supportQuery.docs.length} support requests to delete');
-      for (final doc in supportQuery.docs) {
-        _logInfo('Adding support request ${doc.id} to deletion batch');
-        batch.delete(doc.reference);
-      }
-
-      // Commit all deletions
-      _logInfo('Committing batch deletion to Firestore');
-      await batch.commit();
-      _logInfo('Firestore batch deletion completed successfully');
+      final firestoreService = FirestoreService();
+      await firestoreService.deleteAllUserData(userId: userId);
+      _logInfo('Firestore data deletion completed successfully');
     } catch (e, stackTrace) {
       _logError('Error during Firestore data deletion', e, stackTrace);
       throw Exception('Kullanıcı verileri silinirken hata oluştu: $e');

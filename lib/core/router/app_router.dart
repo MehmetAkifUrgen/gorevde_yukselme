@@ -31,10 +31,59 @@ class AppRouter {
 
   static GoRouter createRouter(WidgetRef ref) {
     final authState = ref.watch(authStateProvider);
-    final isAuthenticated = authState.value != null;
+    
+    // Authentication kontrolü - loading durumunda da false döndür
+    final isAuthenticated = authState.when(
+      data: (user) => user != null,
+      loading: () => false, // Loading durumunda authenticated değil
+      error: (_, __) => false, // Error durumunda authenticated değil
+    );
+    
+    // Email verification kontrolü - reactive provider kullan
+    final isEmailVerified = ref.watch(isEmailVerifiedProvider);
     
     return GoRouter(
       initialLocation: isAuthenticated ? home : login,
+      redirect: (context, state) {
+        print('[AppRouter] Redirect check - Path: ${state.uri.path}');
+        print('[AppRouter] isAuthenticated: $isAuthenticated, isEmailVerified: $isEmailVerified');
+        
+        // Email verification sayfası için özel kontrol - her zaman izin ver
+        if (state.uri.path == emailVerification) {
+          print('[AppRouter] Email verification page - allowing access');
+          return null;
+        }
+        
+        // Public sayfalar - authentication gerektirmez (email verification hariç)
+        final publicPaths = [login, registration, forgotPassword];
+        final isPublicPath = publicPaths.contains(state.uri.path);
+        
+        // Eğer authenticated değilse ve public path değilse login'e yönlendir
+        if (!isAuthenticated && !isPublicPath) {
+          print('[AppRouter] Redirecting to login - not authenticated');
+          return login;
+        }
+        
+        // Authenticated ama email doğrulanmamış kullanıcılar için
+        if (isAuthenticated && !isEmailVerified && !isPublicPath) {
+          print('[AppRouter] Redirecting to email verification - email not verified');
+          // Email verification sayfasına yönlendir
+          final currentUser = authState.value;
+          if (currentUser?.email != null) {
+            return '$emailVerification?email=${Uri.encodeComponent(currentUser!.email!)}';
+          }
+          return emailVerification;
+        }
+        
+        // Eğer authenticated ve email verified ise ve login sayfasındaysa home'a yönlendir
+        if (isAuthenticated && isEmailVerified && state.uri.path == login) {
+          print('[AppRouter] Redirecting to home - authenticated and verified');
+          return home;
+        }
+        
+        print('[AppRouter] No redirect needed');
+        return null; // Redirect yok
+      },
       errorBuilder: (context, state) => Scaffold(
         body: Center(
           child: Text('Page not found: \${state.uri}'),
@@ -43,7 +92,10 @@ class AppRouter {
       routes: [
         GoRoute(
           path: login,
-          builder: (context, state) => const LoginPage(),
+          builder: (context, state) {
+            final email = state.uri.queryParameters['email'] ?? '';
+            return LoginPage(email: email);
+          },
         ),
         GoRoute(
           path: registration,

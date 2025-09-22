@@ -2,7 +2,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:gorevde_yukselme/core/services/auth_service.dart';
 import 'package:gorevde_yukselme/core/services/google_signin_service.dart';
 
@@ -13,7 +12,6 @@ import 'auth_service_test.mocks.dart';
   User,
   UserCredential,
   GoogleSignInService,
-  FirebaseCrashlytics,
 ])
 void main() {
   group('AuthService Tests', () {
@@ -364,6 +362,183 @@ void main() {
           () => authService.updateUserProfile(displayName: testDisplayName),
           throwsA(isA<Exception>()),
         );
+      });
+    });
+
+    group('reloadUser', () {
+      test('should reload user successfully', () async {
+        // Arrange
+        when(mockFirebaseAuth.currentUser).thenReturn(mockUser);
+        when(mockUser.reload()).thenAnswer((_) async {});
+        when(mockUser.emailVerified).thenReturn(true);
+
+        // Act
+        await authService.reloadUser();
+
+        // Assert
+        verify(mockUser.reload()).called(1);
+        verify(mockFirebaseAuth.currentUser).called(2);
+      });
+
+      test('should throw exception when no user is signed in', () async {
+        // Arrange
+        when(mockFirebaseAuth.currentUser).thenReturn(null);
+
+        // Act & Assert
+        expect(
+          () => authService.reloadUser(),
+          throwsA(isA<Exception>()),
+        );
+      });
+
+      test('should handle reload error', () async {
+        // Arrange
+        when(mockFirebaseAuth.currentUser).thenReturn(mockUser);
+        final exception = FirebaseAuthException(
+          code: 'network-request-failed',
+          message: 'Network error occurred.',
+        );
+        when(mockUser.reload()).thenThrow(exception);
+
+        // Act & Assert
+        expect(
+          () => authService.reloadUser(),
+          throwsA(isA<FirebaseAuthException>()),
+        );
+      });
+    });
+
+    group('sendEmailVerification', () {
+      test('should send email verification successfully', () async {
+        // Arrange
+        when(mockFirebaseAuth.currentUser).thenReturn(mockUser);
+        when(mockUser.emailVerified).thenReturn(false);
+        when(mockUser.sendEmailVerification()).thenAnswer((_) async {});
+        when(mockUser.email).thenReturn('test@example.com');
+
+        // Act
+        await authService.sendEmailVerification();
+
+        // Assert
+        verify(mockUser.sendEmailVerification()).called(1);
+      });
+
+      test('should throw exception when no user is signed in', () async {
+        // Arrange
+        when(mockFirebaseAuth.currentUser).thenReturn(null);
+
+        // Act & Assert
+        expect(
+          () => authService.sendEmailVerification(),
+          throwsA(isA<Exception>()),
+        );
+      });
+
+      test('should throw exception when email is already verified', () async {
+        // Arrange
+        when(mockFirebaseAuth.currentUser).thenReturn(mockUser);
+        when(mockUser.emailVerified).thenReturn(true);
+        when(mockUser.email).thenReturn('test@example.com');
+
+        // Act & Assert
+        expect(
+          () => authService.sendEmailVerification(),
+          throwsA(isA<Exception>()),
+        );
+      });
+
+      test('should handle too-many-requests error', () async {
+        // Arrange
+        when(mockFirebaseAuth.currentUser).thenReturn(mockUser);
+        when(mockUser.emailVerified).thenReturn(false);
+        when(mockUser.email).thenReturn('test@example.com');
+        final exception = FirebaseAuthException(
+          code: 'too-many-requests',
+          message: 'Too many requests. Try again later.',
+        );
+        when(mockUser.sendEmailVerification()).thenThrow(exception);
+
+        // Act & Assert
+        expect(
+          () => authService.sendEmailVerification(),
+          throwsA(isA<FirebaseAuthException>()),
+        );
+      });
+    });
+
+    group('isEmailVerified', () {
+      test('should return true when email is verified', () {
+        // Arrange
+        when(mockFirebaseAuth.currentUser).thenReturn(mockUser);
+        when(mockUser.emailVerified).thenReturn(true);
+
+        // Act
+        final result = authService.isEmailVerified;
+
+        // Assert
+        expect(result, isTrue);
+      });
+
+      test('should return false when email is not verified', () {
+        // Arrange
+        when(mockFirebaseAuth.currentUser).thenReturn(mockUser);
+        when(mockUser.emailVerified).thenReturn(false);
+
+        // Act
+        final result = authService.isEmailVerified;
+
+        // Assert
+        expect(result, isFalse);
+      });
+
+      test('should return false when no user is signed in', () {
+        // Arrange
+        when(mockFirebaseAuth.currentUser).thenReturn(null);
+
+        // Act
+        final result = authService.isEmailVerified;
+
+        // Assert
+        expect(result, isFalse);
+      });
+    });
+
+    group('isSignedIn', () {
+      test('should return true when user is signed in', () {
+        // Arrange
+        when(mockFirebaseAuth.currentUser).thenReturn(mockUser);
+
+        // Act
+        final result = authService.isSignedIn;
+
+        // Assert
+        expect(result, isTrue);
+      });
+
+      test('should return false when no user is signed in', () {
+        // Arrange
+        when(mockFirebaseAuth.currentUser).thenReturn(null);
+
+        // Act
+        final result = authService.isSignedIn;
+
+        // Assert
+        expect(result, isFalse);
+      });
+    });
+
+    group('authStateChanges', () {
+      test('should return Firebase auth state changes stream', () {
+        // Arrange
+        final mockStream = Stream<User?>.fromIterable([mockUser, null]);
+        when(mockFirebaseAuth.authStateChanges()).thenAnswer((_) => mockStream);
+
+        // Act
+        final result = authService.authStateChanges;
+
+        // Assert
+        expect(result, isA<Stream<User?>>());
+        verify(mockFirebaseAuth.authStateChanges()).called(1);
       });
     });
   });

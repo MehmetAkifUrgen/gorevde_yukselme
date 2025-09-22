@@ -7,7 +7,12 @@ import '../../../../core/router/app_router.dart';
 import '../../../../core/utils/validation_utils.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
-  const LoginPage({super.key});
+  final String email;
+  
+  const LoginPage({
+    super.key,
+    this.email = '',
+  });
 
   @override
   ConsumerState<LoginPage> createState() => _LoginPageState();
@@ -19,6 +24,15 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   final _passwordController = TextEditingController();
   bool _isLoading = false;
   bool _obscurePassword = true;
+
+  @override
+  void initState() {
+    super.initState();
+    // Pre-fill email if provided from route
+    if (widget.email.isNotEmpty) {
+      _emailController.text = widget.email;
+    }
+  }
 
   @override
   void dispose() {
@@ -34,14 +48,65 @@ class _LoginPageState extends ConsumerState<LoginPage> {
       _isLoading = true;
     });
 
-    // Simulate login process
-    await Future.delayed(const Duration(seconds: 2));
+    print('[LoginPage] Attempting login with email: ${_emailController.text.trim()}');
+    
+    await ref.read(authNotifierProvider.notifier).signInWithEmailAndPassword(
+      email: _emailController.text.trim(),
+      password: _passwordController.text.trim(),
+    );
 
+    // AuthNotifier state'ini kontrol et
+    final authState = ref.read(authNotifierProvider);
+    
+    print('[LoginPage] Auth state after login attempt: ${authState.toString()}');
+    
     if (mounted) {
       setState(() {
         _isLoading = false;
       });
-      context.go(AppRouter.home);
+      
+      authState.when(
+        data: (user) {
+          print('[LoginPage] Login successful, user: ${user?.email}');
+          if (user != null) {
+            context.go(AppRouter.home);
+          } else {
+            print('[LoginPage] User is null despite successful login');
+          }
+        },
+        loading: () {
+          print('[LoginPage] Auth state is still loading');
+        },
+        error: (error, stackTrace) {
+          print('[LoginPage] Login error: $error');
+          String errorMessage = 'Giriş sırasında bir hata oluştu';
+          
+          if (error.toString().contains('user-not-found')) {
+            errorMessage = 'Bu e-posta adresi ile kayıtlı kullanıcı bulunamadı';
+          } else if (error.toString().contains('wrong-password')) {
+            errorMessage = 'Şifre yanlış';
+          } else if (error.toString().contains('invalid-email')) {
+            errorMessage = 'Geçersiz e-posta adresi';
+          } else if (error.toString().contains('user-disabled')) {
+            errorMessage = 'Bu hesap devre dışı bırakılmış';
+          } else if (error.toString().contains('too-many-requests')) {
+            errorMessage = 'Çok fazla başarısız deneme. Lütfen daha sonra tekrar deneyin';
+          } else if (error.toString().contains('network-request-failed')) {
+            errorMessage = 'İnternet bağlantısı yok. Lütfen bağlantınızı kontrol edin';
+          } else if (error.toString().contains('invalid-credential')) {
+            errorMessage = 'E-posta veya şifre hatalı';
+          }
+          
+          print('[LoginPage] Showing error message: $errorMessage');
+          
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(errorMessage),
+              backgroundColor: AppTheme.errorRed,
+            ),
+          );
+        },
+      );
     }
   }
 

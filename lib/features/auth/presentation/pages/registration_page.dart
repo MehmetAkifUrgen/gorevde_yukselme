@@ -37,9 +37,14 @@ class _RegistrationPageState extends ConsumerState<RegistrationPage> {
   }
 
   Future<void> _handleRegistration() async {
-    if (!_formKey.currentState!.validate()) return;
+    print('[RegistrationPage] _handleRegistration - Starting');
+    if (!_formKey.currentState!.validate()) {
+      print('[RegistrationPage] Form validation failed');
+      return;
+    }
     
     if (!_acceptTerms) {
+      print('[RegistrationPage] Terms not accepted');
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Kullanım koşullarını kabul etmelisiniz'),
@@ -49,29 +54,52 @@ class _RegistrationPageState extends ConsumerState<RegistrationPage> {
       return;
     }
 
+    print('[RegistrationPage] Starting registration process');
     setState(() {
       _isLoading = true;
     });
 
     try {
+      print('[RegistrationPage] Creating user with email and password');
+      
+      // Store email for navigation before async call
+      final email = _emailController.text.trim();
+      
+      // Check if widget is still mounted before async operation
+      if (!mounted) {
+        print('[RegistrationPage] Widget disposed before user creation');
+        return;
+      }
+      
+      // Directly create user without email check to avoid auth state conflicts
       await ref.read(authNotifierProvider.notifier).createUserWithEmailAndPassword(
-        email: _emailController.text.trim(),
+        email: email,
         password: _passwordController.text,
         displayName: _nameController.text.trim(),
       );
 
-      // Send email verification
-      await ref.read(authNotifierProvider.notifier).sendEmailVerification();
-
+      print('[RegistrationPage] User created successfully');
       if (mounted) {
         setState(() {
           _isLoading = false;
         });
         
-        // Navigate to email verification page
-        context.go('${AppRouter.emailVerification}?email=${Uri.encodeComponent(_emailController.text.trim())}');
+        // Wait a moment for auth state to stabilize
+        await Future.delayed(const Duration(milliseconds: 500));
+        
+        if (mounted) {
+          // Navigate to email verification page
+          final emailVerificationUrl = '${AppRouter.emailVerification}?email=${Uri.encodeComponent(email)}';
+          print('[RegistrationPage] Navigating to email verification: $emailVerificationUrl');
+          
+          // Use pushReplacement instead of go to avoid back navigation issues
+          context.pushReplacement(emailVerificationUrl);
+        }
+      } else {
+        print('[RegistrationPage] Widget disposed after user creation, cannot navigate');
       }
     } catch (e) {
+      print('[RegistrationPage] Error in registration: $e');
       if (mounted) {
         setState(() {
           _isLoading = false;
@@ -80,7 +108,11 @@ class _RegistrationPageState extends ConsumerState<RegistrationPage> {
         String errorMessage = 'Kayıt sırasında bir hata oluştu';
         
         if (e.toString().contains('email-already-in-use')) {
-          errorMessage = 'Bu e-posta adresi zaten kullanımda';
+          errorMessage = 'Bu e-posta adresi zaten kullanımda. Giriş yapmayı deneyin veya şifre sıfırlama kullanın.';
+          
+          // Show dialog for existing email
+          _showEmailAlreadyInUseDialog();
+          return;
         } else if (e.toString().contains('weak-password')) {
           errorMessage = 'Şifre çok zayıf';
         } else if (e.toString().contains('invalid-email')) {
@@ -136,6 +168,8 @@ class _RegistrationPageState extends ConsumerState<RegistrationPage> {
       }
     }
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -365,6 +399,8 @@ class _RegistrationPageState extends ConsumerState<RegistrationPage> {
                             side: const BorderSide(color: AppTheme.mediumGrey),
                           ),
                         ),
+                        
+
                       ],
                     ),
                   ),
@@ -404,6 +440,73 @@ class _RegistrationPageState extends ConsumerState<RegistrationPage> {
           ),
         ),
       ),
+    );
+  }
+
+
+
+  void _showEmailAlreadyInUseDialog() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Row(
+            children: [
+              Icon(
+                Icons.warning_amber_rounded,
+                color: AppTheme.accentGold,
+                size: 28,
+              ),
+              const SizedBox(width: 8),
+              const Text('E-posta Zaten Kayıtlı'),
+            ],
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Bu e-posta adresi (${_emailController.text.trim()}) zaten sistemde kayıtlı.',
+                style: const TextStyle(fontSize: 16),
+              ),
+              const SizedBox(height: 16),
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: AppTheme.lightGrey.withOpacity(0.3),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: const Text(
+                  'Yeni kayıt oluşturmak yerine mevcut hesabınızla giriş yapabilirsiniz.',
+                  style: TextStyle(fontSize: 14),
+                ),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                // Clear the email field to prevent confusion
+                _emailController.clear();
+              },
+              child: const Text('Farklı E-posta Kullan'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                // Navigate to login with the email pre-filled
+                context.go('${AppRouter.login}?email=${Uri.encodeComponent(_emailController.text.trim())}');
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppTheme.primaryNavyBlue,
+              ),
+              child: const Text('Giriş Yap'),
+            ),
+          ],
+        );
+      },
     );
   }
 }

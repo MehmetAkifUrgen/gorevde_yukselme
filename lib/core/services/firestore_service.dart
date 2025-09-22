@@ -280,4 +280,61 @@ class FirestoreService {
       },
     );
   }
+
+  // Delete all user data from Firestore
+  Future<void> deleteAllUserData({required String userId}) async {
+    try {
+      final batch = _firestore.batch();
+
+      // Delete user profile
+      batch.delete(_firestore.collection('users').doc(userId));
+
+      // Delete user answers
+      final answersQuery = await _firestore
+          .collection('user_answers')
+          .where('userId', isEqualTo: userId)
+          .get();
+      
+      for (final doc in answersQuery.docs) {
+        batch.delete(doc.reference);
+      }
+
+      // Delete user support requests
+      final supportQuery = await _firestore
+          .collection('support_requests')
+          .where('userId', isEqualTo: userId)
+          .get();
+      
+      for (final doc in supportQuery.docs) {
+        batch.delete(doc.reference);
+      }
+
+      // Delete user performance data
+      final performanceQuery = await _firestore
+          .collection('user_performance')
+          .where('userId', isEqualTo: userId)
+          .get();
+      
+      for (final doc in performanceQuery.docs) {
+        batch.delete(doc.reference);
+      }
+
+      // Delete user subscription data
+      batch.delete(_firestore.collection('subscriptions').doc(userId));
+
+      // Delete user performance summary (if exists)
+      batch.delete(_firestore.collection('performance').doc(userId));
+
+      // Commit all deletions
+      await batch.commit();
+    } catch (e) {
+      await _crashlytics?.recordError(
+        e,
+        null,
+        fatal: false,
+        information: ['Failed to delete all user data for userId: $userId'],
+      );
+      rethrow;
+    }
+  }
 }

@@ -24,33 +24,113 @@ class _EmailVerificationPageState extends ConsumerState<EmailVerificationPage> {
   @override
   void initState() {
     super.initState();
-    // Send initial verification email
+    // Send initial verification email after checking user status
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _sendVerificationEmail();
+      print('[EmailVerificationPage] initState - Starting email verification process');
+      print('[EmailVerificationPage] Email: ${widget.email}');
+      _waitForUserAndSendVerification();
     });
   }
 
+  Future<void> _waitForUserAndSendVerification() async {
+    print('[EmailVerificationPage] Waiting for user authentication...');
+    
+    // Wait for user to be authenticated (max 10 seconds)
+    int attempts = 0;
+    const maxAttempts = 20; // 10 seconds with 500ms intervals
+    
+    while (attempts < maxAttempts) {
+      final authState = ref.read(authStateProvider);
+      final isAuthenticated = authState.when(
+        data: (user) => user != null,
+        loading: () => false,
+        error: (_, __) => false,
+      );
+      
+      if (isAuthenticated) {
+        print('[EmailVerificationPage] User authenticated, sending verification email');
+        await _sendVerificationEmail();
+        return;
+      }
+      
+      attempts++;
+      print('[EmailVerificationPage] Waiting for authentication... attempt $attempts/$maxAttempts');
+      await Future.delayed(const Duration(milliseconds: 500));
+    }
+    
+    // If user is still not authenticated after waiting, try to send verification anyway
+    print('[EmailVerificationPage] User not authenticated after waiting, trying to send verification anyway');
+    try {
+      await _sendVerificationEmail();
+    } catch (e) {
+      print('[EmailVerificationPage] Failed to send verification email: $e');
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('🔄 Doğrulama e-postası gönderilemedi. Lütfen tekrar giriş yapın.'),
+            backgroundColor: Colors.orange,
+            duration: Duration(seconds: 3),
+          ),
+        );
+        
+        Future.delayed(const Duration(seconds: 3), () {
+          if (mounted) {
+            context.go('/login?email=${Uri.encodeComponent(widget.email)}');
+          }
+        });
+      }
+    }
+  }
+
   Future<void> _sendVerificationEmail() async {
+    print('[EmailVerificationPage] _sendVerificationEmail - Starting');
     setState(() {
       _isResending = true;
     });
 
     try {
+      print('[EmailVerificationPage] Calling authNotifierProvider.sendEmailVerification');
       await ref.read(authNotifierProvider.notifier).sendEmailVerification();
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Doğrulama e-postası gönderildi'),
+            content: Text('✅ Doğrulama e-postası gönderildi! E-postanızı kontrol edin (spam klasörü dahil).'),
             backgroundColor: Colors.green,
+            duration: Duration(seconds: 4),
           ),
         );
       }
     } catch (e) {
+      print('[EmailVerificationPage] Error in _sendVerificationEmail: $e');
       if (mounted) {
+        String errorMessage = '❌ E-posta gönderilirken hata oluştu';
+        
+        if (e.toString().contains('too-many-requests')) {
+          errorMessage = '⏰ Çok fazla istek gönderildi. Lütfen birkaç dakika bekleyip tekrar deneyin.';
+        } else if (e.toString().contains('user-not-found') || e.toString().contains('No user is currently signed in')) {
+          errorMessage = '🔄 Oturum kaybedildi. Lütfen tekrar giriş yapın.';
+          // Navigate back to login after showing error
+          Future.delayed(const Duration(seconds: 3), () {
+            if (mounted) {
+              context.go('/login?email=${Uri.encodeComponent(widget.email)}');
+            }
+          });
+        } else if (e.toString().contains('email-already-verified')) {
+          errorMessage = '✅ E-posta zaten doğrulanmış! Ana sayfaya yönlendiriliyorsunuz.';
+          Future.delayed(const Duration(seconds: 2), () {
+            if (mounted) {
+              context.go('/home');
+            }
+          });
+        } else if (e.toString().contains('network-request-failed')) {
+          errorMessage = '🌐 İnternet bağlantınızı kontrol edin ve tekrar deneyin.';
+        }
+        
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Hata: ${e.toString()}'),
+            content: Text(errorMessage),
             backgroundColor: Colors.red,
+            duration: const Duration(seconds: 5),
           ),
         );
       }
@@ -64,29 +144,69 @@ class _EmailVerificationPageState extends ConsumerState<EmailVerificationPage> {
   }
 
   Future<void> _checkVerificationStatus() async {
+    print('[EmailVerificationPage] _checkVerificationStatus - Starting');
     setState(() {
       _isLoading = true;
     });
 
     try {
+      print('[EmailVerificationPage] Reloading user...');
       await ref.read(authNotifierProvider.notifier).reloadUser();
-      final isVerified = ref.read(authNotifierProvider.notifier).isEmailVerified;
+      
+      // AuthStateProvider'ı manuel olarak invalidate et
+      print('[EmailVerificationPage] Invalidating authStateProvider...');
+      ref.invalidate(authStateProvider);
+      
+      // Firebase auth state'inin güncellenmesi için bekleme
+      await Future.delayed(const Duration(milliseconds: 1000));
+      
+      // Check verification status from both sources
+      final isVerifiedFromNotifier = ref.read(authNotifierProvider.notifier).isEmailVerified;
+      final authState = ref.read(authStateProvider);
+      final isVerifiedFromState = authState.when(
+        data: (user) => user?.emailVerified ?? false,
+        loading: () => false,
+        error: (_, __) => false,
+      );
+      
+      print('[EmailVerificationPage] Email verification status - Notifier: $isVerifiedFromNotifier, State: $isVerifiedFromState');
+      
+      // Email verified if either source confirms it (more lenient approach)
+      final isVerified = isVerifiedFromNotifier || isVerifiedFromState;
       
       if (isVerified) {
-        if (mounted) {
-          context.go(AppRouter.home);
-        }
-      } else {
+        print('[EmailVerificationPage] Email verified, showing success message');
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('E-posta henüz doğrulanmamış. Lütfen e-postanızı kontrol edin.'),
+              content: Text('✅ E-posta başarıyla doğrulandı! Ana sayfaya yönlendiriliyorsunuz...'),
+              backgroundColor: Colors.green,
+              duration: Duration(seconds: 2),
+            ),
+          );
+          
+          // Router'ın güncellenmesi için ekstra bekleme
+          await Future.delayed(const Duration(milliseconds: 2000));
+          
+          if (mounted) {
+            print('[EmailVerificationPage] Navigating to home after verification');
+            // Use go instead of pushReplacement to trigger router redirect logic
+            context.go('/home');
+          }
+        }
+      } else {
+        print('[EmailVerificationPage] Email not verified yet');
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('📧 E-posta henüz doğrulanmamış. Lütfen e-postanızdaki bağlantıya tıklayın.'),
               backgroundColor: Colors.orange,
             ),
           );
         }
       }
     } catch (e) {
+      print('[EmailVerificationPage] Error in _checkVerificationStatus: $e');
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -263,7 +383,7 @@ class _EmailVerificationPageState extends ConsumerState<EmailVerificationPage> {
                             ),
                             const SizedBox(height: 8),
                             Text(
-                              '• Spam/Junk klasörünüzü kontrol edin\n• E-posta adresinizin doğru olduğundan emin olun\n• Birkaç dakika bekleyip tekrar deneyin',
+                              '• Spam/Junk/Gereksiz klasörünüzü kontrol edin\n• E-posta adresinizin doğru olduğundan emin olun\n• Birkaç dakika bekleyip tekrar deneyin\n• İnternet bağlantınızı kontrol edin\n• E-posta sağlayıcınızın güvenlik ayarlarını kontrol edin\n• Gmail kullanıyorsanız "Sosyal" veya "Promosyon" sekmelerini kontrol edin',
                               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                                 color: AppTheme.darkGrey,
                               ),
