@@ -12,6 +12,8 @@ class ExamQuestionCard extends StatelessWidget {
   final bool showAnswerFeedback;
   final double fontSize;
   final VoidCallback? onShowSolution;
+  final VoidCallback? onStarToggle;
+  final bool? isStarredOverride;
 
   const ExamQuestionCard({
     super.key,
@@ -23,6 +25,8 @@ class ExamQuestionCard extends StatelessWidget {
     this.showAnswerFeedback = false,
     this.fontSize = 16.0,
     this.onShowSolution,
+    this.onStarToggle,
+    this.isStarredOverride,
   });
 
   Color _getOptionColor(int index) {
@@ -106,7 +110,7 @@ class ExamQuestionCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Question difficulty and category
+            // Question difficulty, category and star
             Row(
               children: [
                 Container(
@@ -134,6 +138,18 @@ class ExamQuestionCard extends StatelessWidget {
                     ),
                   ),
                 ),
+                if (!isReviewMode) ...[
+                  IconButton(
+                    icon: Icon(
+                      (isStarredOverride ?? question.isStarred) ? Icons.star : Icons.star_border,
+                      color: (isStarredOverride ?? question.isStarred)
+                          ? AppTheme.accentGold
+                          : AppTheme.darkGrey,
+                    ),
+                    onPressed: onStarToggle,
+                    tooltip: 'Favori',
+                  ),
+                ],
               ],
             ),
             

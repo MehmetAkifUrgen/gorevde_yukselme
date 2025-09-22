@@ -357,12 +357,24 @@ class _QuestionPoolPageState extends ConsumerState<QuestionPoolPage> {
   }
 
   void _toggleQuestionStar(Question question) {
+    // Optimistic UI update
     ref.read(questionsProvider.notifier).toggleQuestionStar(question.id);
-    
+
+    // Persist to Firestore/local
+    final firebaseUser = ref.read(currentFirebaseUserProvider);
+    final userId = firebaseUser?.uid ?? '';
+    final favoritesService = ref.read(favoritesServiceProvider);
+    final newIsStarred = !question.isStarred;
+    favoritesService.setStarStatus(
+      userId: userId,
+      questionId: question.id,
+      isStarred: newIsStarred,
+    );
+
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
-          question.isStarred ? 'Favorilerden çıkarıldı' : 'Favorilere eklendi',
+          newIsStarred ? 'Favorilere eklendi' : 'Favorilerden çıkarıldı',
         ),
         duration: const Duration(seconds: 2),
       ),

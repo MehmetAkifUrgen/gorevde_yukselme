@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../services/auth_service.dart';
 import '../services/firestore_service.dart';
+import '../services/favorites_service.dart';
 import '../services/google_signin_service.dart';
 import '../services/session_service.dart';
 import '../models/user_model.dart';
@@ -36,6 +37,12 @@ final authServiceProvider = Provider<AuthService>((ref) {
 // Firestore Service Provider
 final firestoreServiceProvider = Provider<FirestoreService>((ref) {
   return FirestoreService();
+});
+
+// Favorites Service Provider
+final favoritesServiceProvider = Provider<FavoritesService>((ref) {
+  final sharedPreferences = ref.watch(sharedPreferencesProvider);
+  return FavoritesService(sharedPreferences: sharedPreferences);
 });
 
 // Google Sign-In Service Provider

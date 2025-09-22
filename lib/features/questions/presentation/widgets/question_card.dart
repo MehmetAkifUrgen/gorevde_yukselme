@@ -24,6 +24,15 @@ class _QuestionCardState extends State<QuestionCard> {
   int? selectedAnswer;
   bool showExplanation = false;
 
+  (String subject, String profession) _extractSubjectAndProfession() {
+    // ID format: category_profession_subject_questionNo
+    final parts = widget.question.id.split('_');
+    if (parts.length < 4) return ('', '');
+    final subject = parts[parts.length - 2];
+    final profession = parts[parts.length - 3];
+    return (subject, profession);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -54,20 +63,42 @@ class _QuestionCardState extends State<QuestionCard> {
                   ),
                 ),
                 const SizedBox(width: 8),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  decoration: BoxDecoration(
-                    color: AppTheme.primaryNavyBlue.withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Text(
-                    widget.question.category.displayName,
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: AppTheme.primaryNavyBlue,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
+                ...() {
+                  final (subject, profession) = _extractSubjectAndProfession();
+                  return [
+                    if (subject.isNotEmpty)
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: AppTheme.primaryNavyBlue.withValues(alpha: 0.1),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Text(
+                          subject,
+                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: AppTheme.primaryNavyBlue,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    if (profession.isNotEmpty) const SizedBox(width: 8),
+                    if (profession.isNotEmpty)
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: AppTheme.mediumGrey.withValues(alpha: 0.15),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Text(
+                          profession,
+                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: AppTheme.darkGrey,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                  ];
+                }(),
                 const Spacer(),
                 IconButton(
                   icon: Icon(

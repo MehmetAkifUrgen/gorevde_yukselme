@@ -3,6 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/models/question_model.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/providers/app_providers.dart';
+import '../../../../core/providers/auth_providers.dart';
+import '../../../../core/services/favorites_service.dart';
+import '../../../../core/repositories/questions_repository.dart';
+import '../../../../core/services/questions_api_service.dart';
 import '../widgets/question_card.dart';
 import '../widgets/font_size_slider.dart';
 
@@ -27,9 +31,56 @@ class _StarredQuestionsPageState extends ConsumerState<StarredQuestionsPage> {
   }
 
   void _loadStarredQuestions() {
-    // TODO: Load starred questions from repository
-    setState(() {
-      starredQuestions = [];
+    final firebaseUser = ref.read(currentFirebaseUserProvider);
+    final userId = firebaseUser?.uid ?? '';
+    final favoritesService = ref.read(favoritesServiceProvider);
+    List<Question> allQuestions = ref.read(questionsProvider);
+    // ignore: avoid_print
+    print('[StarredPage] Loading starred for userId=$userId, allQuestions=${allQuestions.length}');
+    Future<List<Question>> ensureQuestionsLoaded() async {
+      if (allQuestions.isNotEmpty) return allQuestions;
+      // Fallback: fetch questions via repository (uses cache if available)
+      try {
+        final prefs = ref.read(sharedPreferencesProvider);
+        final repo = QuestionsRepositoryImpl(
+          apiService: QuestionsApiService(),
+          prefs: prefs,
+        );
+        final fetched = await repo.getAllQuestions();
+        // Put into provider for reuse
+        ref.read(questionsProvider.notifier).setQuestions(fetched);
+        allQuestions = fetched;
+        // ignore: avoid_print
+        print('[StarredPage] Loaded questions via repository: ${fetched.length}');
+        return fetched;
+      } catch (e) {
+        // ignore: avoid_print
+        print('[StarredPage] Failed to load questions: $e');
+        return allQuestions;
+      }
+    }
+
+    favoritesService.getLocalStarredIds(userId).then((ids) async {
+      // ignore: avoid_print
+      print('[StarredPage] Local ids loaded: ${ids.length}');
+      final questions = await ensureQuestionsLoaded();
+      final byId = questions.where((q) => ids.contains(q.id)).toList();
+      if (mounted) {
+        setState(() {
+          starredQuestions = byId;
+        });
+      }
+      // Try remote sync and refresh if differs
+      favoritesService.syncFromRemote(userId).then((remoteIds) async {
+        // ignore: avoid_print
+        print('[StarredPage] Remote ids loaded: ${remoteIds.length}');
+        if (!mounted) return;
+        final questions2 = await ensureQuestionsLoaded();
+        final remoteList = questions2.where((q) => remoteIds.contains(q.id)).toList();
+        setState(() {
+          starredQuestions = remoteList;
+        });
+      });
     });
   }
 
@@ -176,13 +227,25 @@ class _StarredQuestionsPageState extends ConsumerState<StarredQuestionsPage> {
   }
 
   void _onStarToggle() {
-    // Handle star toggle
+    if (filteredQuestions.isEmpty) return;
+    final q = filteredQuestions[currentQuestionIndex];
+    // Optimistic: update provider and local list
+    ref.read(questionsProvider.notifier).toggleQuestionStar(q.id);
+    final firebaseUser = ref.read(currentFirebaseUserProvider);
+    final userId = firebaseUser?.uid ?? '';
+    final favoritesService = ref.read(favoritesServiceProvider);
+    final newIsStarred = !q.isStarred;
+    favoritesService.setStarStatus(userId: userId, questionId: q.id, isStarred: newIsStarred);
     setState(() {
-      // Remove from starred questions
-      if (filteredQuestions.isNotEmpty) {
-        starredQuestions.remove(filteredQuestions[currentQuestionIndex]);
+      if (!newIsStarred) {
+        starredQuestions.removeWhere((e) => e.id == q.id);
         if (currentQuestionIndex >= filteredQuestions.length && currentQuestionIndex > 0) {
           currentQuestionIndex--;
+        }
+      } else {
+        // ensure present
+        if (!starredQuestions.any((e) => e.id == q.id)) {
+          starredQuestions.add(q.copyWith(isStarred: true));
         }
       }
     });
@@ -211,13 +274,13 @@ class _StarredQuestionsPageState extends ConsumerState<StarredQuestionsPage> {
     
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Starred Questions'),
+        title: const Text('Favori Sorular'),
         backgroundColor: AppTheme.lightTheme.primaryColor,
         actions: [
           IconButton(
             icon: const Icon(Icons.text_fields),
             onPressed: () => _showFontSizeDialog(context),
-            tooltip: 'Font Size',
+            tooltip: 'Yazı Boyutu',
           ),
           IconButton(
             icon: const Icon(Icons.filter_list),
@@ -226,7 +289,7 @@ class _StarredQuestionsPageState extends ConsumerState<StarredQuestionsPage> {
           IconButton(
             icon: Icon(isPracticeMode ? Icons.quiz : Icons.list),
             onPressed: _togglePracticeMode,
-            tooltip: isPracticeMode ? 'List Mode' : 'Practice Mode',
+            tooltip: isPracticeMode ? 'Liste Modu' : 'Alıştırma Modu',
           ),
         ],
       ),
@@ -250,14 +313,14 @@ class _StarredQuestionsPageState extends ConsumerState<StarredQuestionsPage> {
           ),
           const SizedBox(height: 16),
           Text(
-            'No starred questions',
+            'Favori soru yok',
             style: Theme.of(context).textTheme.headlineSmall?.copyWith(
               color: Colors.grey[600],
             ),
           ),
           const SizedBox(height: 8),
           Text(
-            'Star questions while studying to save them here',
+            'Çalışırken yıldızladığınız sorular burada görünecek',
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
               color: Colors.grey[500],
             ),
@@ -279,7 +342,7 @@ class _StarredQuestionsPageState extends ConsumerState<StarredQuestionsPage> {
           child: Row(
             children: [
               Text(
-                'Question ${currentQuestionIndex + 1} of ${questions.length}',
+                'Soru ${currentQuestionIndex + 1} / ${questions.length}',
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               const Spacer(),

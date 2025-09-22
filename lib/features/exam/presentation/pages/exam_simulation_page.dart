@@ -16,6 +16,8 @@ import '../widgets/exam_question_card.dart';
 import '../widgets/exam_results_modal.dart';
 import '../widgets/solution_popup.dart';
 import 'package:gorevde_yukselme/features/questions/presentation/widgets/font_size_slider.dart';
+import '../../../../core/providers/auth_providers.dart';
+import '../../../../core/services/favorites_service.dart';
 
 class ExamSimulationPage extends ConsumerStatefulWidget {
   // Exam mode (fullExam, miniExam, practiceMode) - fallback to miniExam if not provided
@@ -49,6 +51,7 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
   int? _selectedAnswerIndex;
   bool _showResults = false;
   bool _showAnswerFeedback = false;
+  final Set<String> _starredIds = <String>{};
 
   @override
   void initState() {
@@ -164,6 +167,28 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
       ref.read(currentExamProvider.notifier).startExam(exam);
       _remainingSeconds = mode.defaultDuration * 60;
       _startTimer();
+      // Load starred IDs for current user to reflect star state
+      final firebaseUser = ref.read(currentFirebaseUserProvider);
+      final userId = firebaseUser?.uid ?? '';
+      final favoritesService = ref.read(favoritesServiceProvider);
+      final ids = await favoritesService.getLocalStarredIds(userId);
+      if (mounted) {
+        setState(() {
+          _starredIds
+            ..clear()
+            ..addAll(ids);
+        });
+        // Background sync from remote
+        favoritesService.syncFromRemote(userId).then((remoteIds) {
+          if (mounted && remoteIds.isNotEmpty) {
+            setState(() {
+              _starredIds
+                ..clear()
+                ..addAll(remoteIds);
+            });
+          }
+        });
+      }
     } catch (e) {
       _showErrorDialog('Sorular yüklenirken hata oluştu.');
     }
@@ -483,6 +508,29 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
                 showAnswerFeedback: _showAnswerFeedback,
                 fontSize: fontSize,
                 onShowSolution: _showSolution,
+                isStarredOverride: _starredIds.contains(currentQuestion.id),
+                onStarToggle: () {
+                  // Optimistic toggle in questions state if available
+                  ref.read(questionsProvider.notifier).toggleQuestionStar(currentQuestion.id);
+
+                  // Persist via FavoritesService
+                  final firebaseUser = ref.read(currentFirebaseUserProvider);
+                  final userId = firebaseUser?.uid ?? '';
+                  final favoritesService = ref.read(favoritesServiceProvider);
+                  final newIsStarred = !_starredIds.contains(currentQuestion.id);
+                  favoritesService.setStarStatus(
+                    userId: userId,
+                    questionId: currentQuestion.id,
+                    isStarred: newIsStarred,
+                  );
+                  setState(() {
+                    if (newIsStarred) {
+                      _starredIds.add(currentQuestion.id);
+                    } else {
+                      _starredIds.remove(currentQuestion.id);
+                    }
+                  });
+                },
               ),
             ),
           ),
