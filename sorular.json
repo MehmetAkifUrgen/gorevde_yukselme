@@ -8784,7 +8784,495 @@
                         "ozet": "İlgili mevzuata göre yanlış/istisna olan ifade Daire veya mahkemelere verilen dava dilekçesi üzerine ödenmesi gereken harç ve masraflar zabıt kâtibi tarafından hesap edilerek tahsil edilir. olduğundan seçilir."
                     }
                 ]
-            }
+            },
+            "İcra Müdür ve Müdür Yardımcıları":{
+                "2024 İcra Müdür ve Müdür Yardımcısı Çıkmış Sorular 1": [
+                  {
+                    "soru_no": 1,
+                    "soru": "Klasik özellik kazanan her sanatta idealize edilmiş bazı örnek eserler mevcuttur… Bu parçada asıl anlatılmak istenen aşağıdakilerden hangisidir?",
+                    "secenekler": {
+                      "A": "Edebiyat, müzik ve mimarideki bütün klasik eserler, ancak dönemi içinde örnek eser olma özelliğini taşır.",
+                      "B": "Farklı dönemlere ait her klasik eserin herkesçe beğenilip kabul görmüş orijinal nitelikleri vardır.",
+                      "C": "Çağdaş sanatçılar, klasik sanatçıları aşabildikleri ölçüde ait oldukları toplumların sanatlarına hizmette bulunabilirler.",
+                      "D": "Klasik sanat dallarında başarılı eserler vermenin yolu, klasik eserlerle kendi döneminin sanat anlayışını birleştirmekten geçer.",
+                      "E": "Sanat dallarında klasik eser vermek isteyenlerin, birtakım kurallara bağlı kalarak bu kurallar çerçevesinde hareket etmeleri gerekir."
+                    },
+                    "dogru_cevap": "Sanat dallarında klasik eser vermek isteyenlerin, birtakım kurallara bağlı kalarak bu kurallar çerçevesinde hareket etmeleri gerekir.",
+                    "ozet": "Metin, klasik eser üretmenin kurallara bağlılık gerektirdiğini vurgular."
+                  },
+                  {
+                    "soru_no": 3,
+                    "soru": "İpli kuklaların yapımı ve oynatımı üzerine numaralanmış cümlelerden hangisi düşüncenin akışını bozmaktadır?",
+                    "secenekler": {
+                      "A": "I",
+                      "B": "II",
+                      "C": "III",
+                      "D": "IV",
+                      "E": "V"
+                    },
+                    "dogru_cevap": "III",
+                    "ozet": "Metin ipli kuklalardan söz eder; III. cümle el kuklasına geçerek konu bütünlüğünü bozar."
+                  },
+                  {
+                    "soru_no": 6,
+                    "soru": "“...baba evinden ayrılıp köprüleri atmışlardı.” cümlesindeki altı çizili sözle anlatılmak istenen hangisidir?",
+                    "secenekler": {
+                      "A": "Geri dönme imkânı kalmayacak biçimde davranmak",
+                      "B": "Geçmişle olan bağlarından uzaklaşmak",
+                      "C": "Ailesine olan sevgi ve saygısını yitirmek",
+                      "D": "Kendini yaşadığı çevreden soyutlamak",
+                      "E": "Kendine yardımcı olmak isteyenlerden uzak durmak"
+                    },
+                    "dogru_cevap": "Geri dönme imkânı kalmayacak biçimde davranmak",
+                    "ozet": "“Köprüleri atmak” dönüş yolunu kapatacak kesin karar anlamındadır."
+                  },
+                  {
+                    "soru_no": 9,
+                    "soru": "Aşağıdaki cümlelerin hangisinde yazım yanlışı yapılmıştır?",
+                    "secenekler": {
+                      "A": "Bir oldubittiye getirip konuyu kapatma derdinde olduğunu herkes anlamıştı.",
+                      "B": "Yurt dışındaki Doğu bilimleri tahsilini yarıda bırakıp Türkiye’ye döndü.",
+                      "C": "Sabah başlayacak yağışın akşamüstüne kadar devam etmesi bekleniyor.",
+                      "D": "Adamın geç saatlere kadar uykusuz kaldığı gözaltındaki morluktan belliydi.",
+                      "E": "İlkbaharda gerçekleştireceği seyahat için şimdiden THY’den bilet rezervasyonunu yaptırdı."
+                    },
+                    "dogru_cevap": "Adamın geç saatlere kadar uykusuz kaldığı gözaltındaki morluktan belliydi.",
+                    "ozet": "D’de “göz altı” ayrı yazılmalıydı; birleşik yazım yanlıştır."
+                  },
+                  {
+                    "soru_no": 12,
+                    "soru": "⟮2/3 − (1−2/3)/2⟯ ÷ (2/3) işleminin sonucu aşağıdakilerden hangisidir?",
+                    "secenekler": {
+                      "A": "−1/2",
+                      "B": "−1/4",
+                      "C": "0",
+                      "D": "1/2",
+                      "E": "3/4"
+                    },
+                    "dogru_cevap": "3/4",
+                    "ozet": "1−2/3=1/3, (1/3)/2=1/6, 2/3−1/6=1/2, (1/2)÷(2/3)=3/4."
+                  },
+                  {
+                    "soru_no": 15,
+                    "soru": "2^x + 2^{x+3} + 2^{x+5} = 41/4 denklemini sağlayan x değeri kaçtır?",
+                    "secenekler": {
+                      "A": "-6",
+                      "B": "-5",
+                      "C": "-4",
+                      "D": "-3",
+                      "E": "-2"
+                    },
+                    "dogru_cevap": "-2",
+                    "ozet": "2^x(1+2^3+2^5)=2^x·41=41/4 ⇒ 2^x=1/4=2^{-2}; dolayısıyla x=-2."
+                  },
+                  {
+                    "soru_no": 16,
+                    "soru": "x ve y rasyonel sayılar için √(5x+2y)+√(x+y+7)=0. Buna göre y−x işleminin sonucu aşağıdakilerden hangisidir?",
+                    "secenekler": {
+                      "A": "−49/3",
+                      "B": "−7",
+                      "C": "−3",
+                      "D": "11/3",
+                      "E": "7"
+                    },
+                    "dogru_cevap": "−49/3",
+                    "ozet": "Köklerin toplamı 0 ise her iki kökün içi 0’dır; 5x+2y=0 ve x+y+7=0 çözümünden y−x=−49/3."
+                  },
+                  {
+                    "soru_no": 19,
+                    "soru": "Küp biçimindeki A, B ve C kolilerinde a+c=b ve a+b=2,5c olduğuna göre, üç kolinin yükseklikleri toplamı kaç cm olabilir?",
+                    "secenekler": {
+                      "A": "44",
+                      "B": "49",
+                      "C": "54",
+                      "D": "56",
+                      "E": "60"
+                    },
+                    "dogru_cevap": "56",
+                    "ozet": "Denklemlerden a:c=3:4 ve b=7k; toplam 14k → seçeneklerde yalnız 56 uygundur."
+                  },
+                  {
+                    "soru_no": 21,
+                    "soru": "Aşağıdakilerin hangisinde cumhuriyet rejiminin inkılapçı karakteri vurgulanmıştır?",
+                    "secenekler": {
+                      "A": "Gücünü halktan alır ve halk iradesine dayanır.",
+                      "B": "Her alanda değişimi, gelişimi ve ilerlemeyi amaçlar.",
+                      "C": "Egemenlik, bir kişi ya da sınıfa değil milletin tamamına aittir.",
+                      "D": "Halk, siyasi tercihini özgürce hayata geçirir ve demokrasi tam anlamıyla gerçekleşir.",
+                      "E": "Kişiler ekonomik durumlarına, cinsiyetlerine, ırklarına ve inançlarına göre ayrıştırılmaz."
+                    },
+                    "dogru_cevap": "Her alanda değişimi, gelişimi ve ilerlemeyi amaçlar.",
+                    "ozet": "“İnkılapçı” kavramı değişim ve ilerlemeyi öne çıkarır; bunu doğrudan söyleyen B’dir."
+                  },
+                  {
+                    "soru_no": 24,
+                    "soru": "Atatürk’ün “...dilini de yabancı dillerin boyunduruğundan kurtarmalıdır.” sözü aşağıdaki ilkelerden hangisi ile ilgilidir?",
+                    "secenekler": {
+                      "A": "Halkçılık",
+                      "B": "Laiklik",
+                      "C": "Devletçilik",
+                      "D": "Cumhuriyetçilik",
+                      "E": "Milliyetçilik"
+                    },
+                    "dogru_cevap": "Milliyetçilik",
+                    "ozet": "Ulusal dil ve bağımsızlık vurgusu milliyetçilik ilkesine karşılık gelir."
+                  },
+                  {
+                    "soru_no": 25,
+                    "soru": "İtilaf Devletleri’nin, İstanbul’u resmen işgal etmelerine ve Osmanlı Mebusan Meclisi’nin dağıtılmasına neden olan gelişme aşağıdakilerden hangisidir?",
+                    "secenekler": {
+                      "A": "Gümrü Antlaşması’nın imzalanması",
+                      "B": "Tekâlif-i Milliye’nin yayımlanması",
+                      "C": "Misak-ı Millî’nin kabul edilmesi",
+                      "D": "Amasya Görüşmeleri’nin yapılması",
+                      "E": "Teşkilat-ı Esasiye Kanunu’nun ilan edilmesi"
+                    },
+                    "dogru_cevap": "Misak-ı Millî’nin kabul edilmesi",
+                    "ozet": "28 Ocak 1920’de kabul edilen Misak-ı Millî kararları, 16 Mart 1920’de İstanbul’un resmen işgaline gerekçe yapılmıştır."
+                  },
+                  {
+                    "soru_no": 26,
+                    "soru": "Kül Tigin ve Bilge Kağan yazıtlarında kullanılan ve Batı’da “eski Türk runik yazısı” olarak bilinen alfabe aşağıdakilerden hangisidir?",
+                    "secenekler": {
+                      "A": "Brahmi alfabesi",
+                      "B": "Soğd alfabesi",
+                      "C": "Latin alfabesi",
+                      "D": "Köktürk alfabesi",
+                      "E": "Mançu alfabesi"
+                    },
+                    "dogru_cevap": "Köktürk alfabesi",
+                    "ozet": "Orhun Yazıtlarında kullanılan alfabe Köktürk (Göktürk) alfabesidir."
+                  },
+                  {
+                    "soru_no": 27,
+                    "soru": "XIII. yüzyılda, yardımlaşma üzerine kurulan esnaf ve sanatkâr örgütlenmesi; İslam inancı ile Türk örf ve âdetlerinin sentezi sonucu oluşan bu teşkilat, sosyal, siyasî ve askerî faaliyetleriyle de etkili olmuştur. Bu metinde bahsedilen teşkilatın adı aşağıdakilerden hangisidir?",
+                    "secenekler": {
+                      "A": "Divan-ı Hümâyun",
+                      "B": "Tımarlı Sipahi",
+                      "C": "Kapıkulu",
+                      "D": "Derbent",
+                      "E": "Ahilik"
+                    },
+                    "dogru_cevap": "Ahilik",
+                    "ozet": "Metindeki özellikler esnaf-sanatkâr dayanışma örgütü olan Ahiliği tanımlar."
+                  },
+                  {
+                    "soru_no": 28,
+                    "soru": "Osmanlı yönetiminde din, hukuk ve eğitim işleriyle uğraşan görevlilerin yer aldığı “ilmiyye” sınıfında aşağıdakilerden hangisi bulunur?",
+                    "secenekler": {
+                      "A": "Şeyhülislâm",
+                      "B": "Yeniçeri ağası",
+                      "C": "Defterdar",
+                      "D": "Kaptan-ı Derya",
+                      "E": "Nişancı"
+                    },
+                    "dogru_cevap": "Şeyhülislâm",
+                    "ozet": "İlmiyye din/şer’î işlerden sorumludur; Şeyhülislâm bu sınıftadır."
+                  },
+                  {
+                    "soru_no": 32,
+                    "soru": "1982 Anayasası’na göre aşağıdakilerden hangisi “Kişinin Hakları ve Ödevleri” başlığı altında sayılmıştır?",
+                    "secenekler": {
+                      "A": "Süreli ve süresiz yayın hakkı",
+                      "B": "Kamu hizmetlerine girme hakkı",
+                      "C": "Çalışma şartları ve dinlenme hakkı",
+                      "D": "Ailenin korunması ve çocuk hakları",
+                      "E": "Seçme, seçilme ve siyasi faaliyette bulunma hakları"
+                    },
+                    "dogru_cevap": "Süreli ve süresiz yayın hakkı",
+                    "ozet": "Basın özgürlüğü kişi hak ve ödevleri arasında yer alır."
+                  },
+                  {
+                    "soru_no": 35,
+                    "soru": "Aşağıdakilerden hangisi TBMM’nin görev ve yetkileri arasında sayılmamıştır?",
+                    "secenekler": {
+                      "A": "Kanun koymak, değiştirmek ve kaldırmak",
+                      "B": "Para basılmasına ve savaş ilanına karar vermek",
+                      "C": "Milletlerarası andlaşmaların onaylanmasını uygun bulmak",
+                      "D": "Bütçe ve kesinhesap kanun tekliflerini görüşmek ve kabul etmek",
+                      "E": "Anayasa değişikliklerine ilişkin kanunları gerekli gördüğü takdirde halkoyuna sunmak"
+                    },
+                    "dogru_cevap": "Anayasa değişikliklerine ilişkin kanunları gerekli gördüğü takdirde halkoyuna sunmak",
+                    "ozet": "Halkoyuna sunma yetkisi bu şekilde TBMM’ye ait değildir."
+                  },
+                  {
+                    "soru_no": 36,
+                    "soru": "6102 sayılı Türk Ticaret Kanunu’na göre, “ticari örf ve âdet” ile ilgili numaralanmış hükümler doğru (D) - yanlış (Y) olarak değerlendirildiğinde sıralama aşağıdakilerden hangisidir?\nI. Kanunda aksine bir hüküm yoksa, ticari örf ve âdet olarak kabul edildiği belirlenmedikçe teamül mahkemece esas alınamaz; ancak irade açıklamalarının yorumunda teamül de dikkate alınır.\nII. Bir bölge veya ticaret dalına özgü ticari örf ve âdet, genel örf ve âdetlere göre üstündür; ilgililer aynı bölgede değillerse ifa yerindeki örf ve âdet uygulanır.\nIII. Ticari örf ve âdet, tacirler tarafından bilindiği veya bilinmesi gerektiği takdirde uygulanır.",
+                    "secenekler": {
+                      "A": "I:D, II:Y, III:D",
+                      "B": "I:D, II:D, III:D",
+                      "C": "I:Y, II:Y, III:D",
+                      "D": "I:Y, II:D, III:Y",
+                      "E": "I:D, II:Y, III:Y"
+                    },
+                    "dogru_cevap": "I:D, II:D, III:D",
+                    "ozet": "Hükümlerin üçü de TTK’daki ilkelere uygundur; dolayısıyla sıralama I:D, II:D, III:D’dir."
+                  },
+                  {
+                    "soru_no": 38,
+                    "soru": "TTK’ya göre, aşağıdakilerden hangisi geçerli birleşmeler arasında sayılmamıştır?",
+                    "secenekler": {
+                      "A": "Sermaye şirketlerinin kooperatiflerle birleşmesi",
+                      "B": "Kooperatiflerin devralan şirket olmaları şartıyla, şahıs şirketleriyle birleşmesi",
+                      "C": "Şahıs şirketlerinin devrolunan şirket olmaları şartıyla, sermaye şirketleriyle birleşmesi",
+                      "D": "Kooperatiflerin devralan şirket olmaları şartıyla, kollektif ve komandit şirketlerle birleşmesi",
+                      "E": "Şahıs şirketlerinin devrolunan şirket olmaları şartıyla, kooperatiflerle birleşmesi"
+                    },
+                    "dogru_cevap": "Kooperatiflerin devralan şirket olmaları şartıyla, kollektif ve komandit şirketlerle birleşmesi",
+                    "ozet": "Kooperatif–kollektif/komandit birleşmesi geçerli birleşme türleri arasında yer almaz."
+                  },
+                  {
+                    "soru_no": 41,
+                    "soru": "TTK’ya göre bono/emre yazılı senedin zorunlu unsurları arasında hangisi yoktur?",
+                    "secenekler": {
+                      "A": "Lehtarın adı (kime ödenecek)",
+                      "B": "Düzenlenme tarihi ve yeri",
+                      "C": "Gerektiğinde bildirim adresi",
+                      "D": "Düzenleyenin imzası",
+                      "E": "Vade"
+                    },
+                    "dogru_cevap": "Gerektiğinde bildirim adresi",
+                    "ozet": "Bildirim adresi zorunlu unsur değildir."
+                  },
+                  {
+                    "soru_no": 44,
+                    "soru": "İİK’ya göre aşağıdaki hâllerden hangisini yapan hileli müflis sayılır ve cezalandırılır?",
+                    "secenekler": {
+                      "A": "Ziyanları için makul sebepler gösteremezse",
+                      "B": "Muvazaalı satışlar, muameleler veya bağışlamalar yaparsa",
+                      "C": "Mevcudu ile alacağını çok fazla meblağ için senetler imzalarsa",
+                      "D": "Kumar/borsa işlemlerinde külliyetli para sarf ederse",
+                      "E": "Borcunun mevcudundan fazla olduğunu bilmediği kimselerden önemli miktarda veresiye mal/borç para alırsa"
+                    },
+                    "dogru_cevap": "Muvazaalı satışlar, muameleler veya bağışlamalar yaparsa",
+                    "ozet": "Mal kaçırmaya yönelik muvazaalı işlemler hileli iflas kapsamındadır."
+                  }
+                ],
+                "2024 İcra Müdür ve Müdür Yardımcısı Çıkmış Sorular 2": [
+                  {
+                    "soru_no": 47,
+                    "soru": "İİK’ya göre, iflas idaresi ve iflas dairesinin vazifeleri ile ilgili hangisi yanlıştır?",
+                    "secenekler": {
+                      "A": "İflas idaresi üç kişiden oluşur.",
+                      "B": "İflas idaresine Hazine ve Maliye Bakanlığınca belirlenen ve her yıl yenilenen tarifeye göre ücret ödenir.",
+                      "C": "İflas idaresi kararlarını çoğunlukla alır.",
+                      "D": "İflas idaresi toplantıları, idare memurlarının görevleri için gerekli çağrı üzerine yapılır.",
+                      "E": "İflas idare memurları, iflas dairesi tarafından oluşturulan listeden seçilir."
+                    },
+                    "dogru_cevap": "İflas idaresine Hazine ve Maliye Bakanlığınca belirlenen ve her yıl yenilenen tarifeye göre ücret ödenir.",
+                    "ozet": "Ücretlendirme mevzuatta bu şekilde düzenlenmemiştir; ifade yanlıştır."
+                  },
+                  {
+                    "soru_no": 49,
+                    "soru": "7155 sayılı Kanun’a göre; ödeme emrinin tebliğinden itibaren en geç kaç gün içinde icra dairesine itiraz edilebilir?",
+                    "secenekler": {
+                      "A": "Üç",
+                      "B": "Beş",
+                      "C": "Yedi",
+                      "D": "On",
+                      "E": "On beş"
+                    },
+                    "dogru_cevap": "Yedi",
+                    "ozet": "Ödeme emrine itiraz süresi 7 gündür."
+                  },
+                  {
+                    "soru_no": 50,
+                    "soru": "7155 sayılı Abonelik Sözleşmesinden Kaynaklanan Para Alacaklarına İlişkin Takibin Başlatılması Usulü Hakkında Kanun’a göre, takip talebinde yer alan hususlardan hangisi sayılmıştır?",
+                    "secenekler": {
+                      "A": "Yetkiye, borcun tamamına veya bir kısmına ya da alacağın takibat icrası hakkına dair bir itirazı varsa bunun da aynı yazı içinde beyan edilmesi gerektiği",
+                      "B": "Alacaklının veya avukatının münhasıran Merkezi Takip Sistemi ile ilişkilendirilmiş hesaplarının bildirilmesi",
+                      "C": "Borç ödenmez veya itiraz olunmazsa yetkili icra dairesi aracılığıyla cebri icra devam edeceği",
+                      "D": "İtirazların, herhangi bir icra dairesi aracılığıyla ve/veya güvenli elektronik imza kullanılarak Merkezi Takip Sistemi üzerinden yapılabileceği",
+                      "E": "Sadece yetkiye itiraz hâlinde yeniden ödeme emri tebliğ edilmesinin alacaklının talebi üzerine, yetki itirazında gösterilen veya merciince yetkili görülen icra dairesinden haciz işlemlerinin başlatılacağı"
+                    },
+                    "dogru_cevap": "Alacaklının veya avukatının münhasıran Merkezi Takip Sistemi ile ilişkilendirilmiş hesaplarının bildirilmesi",
+                    "ozet": "MTŞ (MTS) kapsamında takip talebinde, alacaklı/vekilinin MTS ile ilişkilendirilmiş hesap bilgilerinin bildirilmesi gerekir."
+                  },
+                  {
+                    "soru_no": 52,
+                    "soru": "İcra ve İflas Kanunu Yönetmeliği’nde, takip talepleri ile ihtiyati haciz/tedbir isteklerinin tutulduğu kayıt hangisidir?",
+                    "secenekler": {
+                      "A": "Talimat kaydı",
+                      "B": "Kasa kaydı",
+                      "C": "Muhabere kaydı",
+                      "D": "Zimmet kaydı",
+                      "E": "Esas kaydı"
+                    },
+                    "dogru_cevap": "Esas kaydı",
+                    "ozet": "Takip dosyalarının ana defteri esas kaydıdır."
+                  },
+                  {
+                    "soru_no": 56,
+                    "soru": "492 sayılı Harçlar Kanunu’na göre, aşağıdakilerden hangisi yargı harçlarından istisna işlemler arasında değildir?",
+                    "secenekler": {
+                      "A": "Vasi tayini ve azli ile hâkimin reddine ilişkin kararlar",
+                      "B": "İcra ve iflas dairelerinin kusuru nedeniyle yanlış işlemlerin ıslah/iptali",
+                      "C": "Muayyen bedelli kâğıtlarla ilgili nispi harca tabi işlemler",
+                      "D": "Tetkik mercilerinin cezaya müteferri kararları ve temyizi",
+                      "E": "Savcılarca açılan davalar ve kanun yolu başvuruları"
+                    },
+                    "dogru_cevap": "Muayyen bedelli kâğıtlarla ilgili nispi harca tabi işlemler",
+                    "ozet": "Nispi harca tabi işlemler istisna kapsamında değildir."
+                  },
+                  {
+                    "soru_no": 59,
+                    "soru": "Harçlar Kanunu’na göre “ödeme ile ilgili genel hükümler”den hangisi yanlıştır?",
+                    "secenekler": {
+                      "A": "Aksine hüküm yoksa harçları işlemi yapan daireler tahsil eder.",
+                      "B": "Adalet Bakanlığı gerekli gördüğünde harçların, doğduğu dosyaya icra müdürlerince tahsilini sağlayabilir.",
+                      "C": "Gerekli harç alınmadan işlem yapan memurlar harcın ödenmesinden müteselsilen sorumludur.",
+                      "D": "Aksine hüküm yoksa harç tamamen ödenmeden harca tabi işlem yapılmaz.",
+                      "E": "Mükellefin adı, soyadı ve ikametgâhı açıkça gösterilir."
+                    },
+                    "dogru_cevap": "Adalet Bakanlığı gerekli gördüğünde harçların, doğduğu dosyaya icra müdürlerince tahsilini sağlayabilir.",
+                    "ozet": "Kanunda böyle bir tahsil yetkisi düzenlenmemiştir; ifade yanlıştır."
+                  },
+                  {
+                    "soru_no": 60,
+                    "soru": "Makbuz karşılığında ödenen damga vergisi; Maliye Bakanlığınca belirlenen mükellefler, kurum ve kuruluşlar tarafından bir ay içinde düzenlenen kâğıtların vergisi, ertesi ayın ... günü akşamına kadar vergi dairesine bir beyannamede bildirilir ve ... günü akşamına kadar ödenir. 488 sayılı Damga Vergisi Kanunu’na göre boşluklara hangi sıra getirilmelidir?",
+                    "secenekler": {
+                      "A": "onuncu – on beşinci",
+                      "B": "on beşinci – yirminci",
+                      "C": "on altıncı – yirmi altıncı",
+                      "D": "yirminci – yirmi altıncı",
+                      "E": "yirmi altıncı – otuzuncu"
+                    },
+                    "dogru_cevap": "yirminci – yirmi altıncı",
+                    "ozet": "Damga vergisinde beyan ertesi ayın 20’sine, ödeme 26’sına kadardır: “yirminci – yirmi altıncı”."
+                  },
+                  {
+                    "soru_no": 61,
+                    "soru": "Damga Vergisi Kanunu’nda ‘sorumluluk’ ile ilgili aşağıdakilerden hangisi yanlıştır?",
+                    "secenekler": {
+                      "A": "Vergi ve ceza, kâğıtları düzenleyenlerden alınır; mükelleflere rücu hakkı saklıdır.",
+                      "B": "Vergisi ödenmeyen/eksik ödenen kâğıtların vergisinden ibraz edenler de sorumludur.",
+                      "C": "Birden fazla kişi tarafından imzalanan kâğıtlarda vergi ve cezanın tamamından imza edenler müteselsilen sorumludur.",
+                      "D": "Resmî daireler/noterlerde düzenlenip kişilere verilen veya dairede bırakılan, vergisi hiç alınmayan ya da eksik alınan kâğıtların vergisi düzenleyenlere; cezası mükelleflere aittir.",
+                      "E": "Yurtdışındaki Türk elçilik/ konsolosluklarında düzenlenen ticari ve mütedavil kâğıtların vergisi ve cezası, mükelleflere rücu hakkı saklı olmak üzere hamiline aittir."
+                    },
+                    "dogru_cevap": "Resmî daireler/noterlerde düzenlenip kişilere verilen veya dairede bırakılan, vergisi hiç alınmayan ya da eksik alınan kâğıtların vergisi düzenleyenlere; cezası mükelleflere aittir.",
+                    "ozet": "Sorumluluk paylaşımı mevzuatta bu şekilde değildir; D hükme aykırıdır."
+                  },
+                  {
+                    "soru_no": 62,
+                    "soru": "3065 sayılı Katma Değer Vergisi Kanunu’na göre, aşağıdakilerden hangisi verginin konusunu teşkil eden işlemler arasında sayılmamıştır?",
+                    "secenekler": {
+                      "A": "Profesyonel sanatçıların gösterileri ve konserler ile profesyonel sporcuların katıldığı sportif faaliyetler, maçlar, yarışlar ve yarışmalar",
+                      "B": "Boru hattı ile ham petrol, gaz ve ürünlerinin taşınması",
+                      "C": "Her türlü şans ve talih oyunlarının tertiplenmesi ve oynanması",
+                      "D": "Ticari, sınaî, zirai faaliyet ve serbest meslek faaliyeti çerçevesinde yapılan teslim ve hizmetler",
+                      "E": "Karşılıklılık esasına bağlı olarak yabancı devletlerin diplomatik temsilciliklerine, konsolosluklarına ve bunların diplomatik haklara sahip mensuplarına yapılan teslim ve hizmetler"
+                    },
+                    "dogru_cevap": "Karşılıklılık esasına bağlı olarak yabancı devletlerin diplomatik temsilciliklerine, konsolosluklarına ve bunların diplomatik haklara sahip mensuplarına yapılan teslim ve hizmetler",
+                    "ozet": "Yabancı devlet temsilcilikleri ve mensuplarına yapılan teslim ve hizmetler KDV’nin konusuna girmez (istisna kapsamındadır)."
+                  },
+                  {
+                    "soru_no": 63,
+                    "soru": "KDV Kanunu’na göre aşağıdakilerden hangisi hesaplanan KDV’den indirilemez?",
+                    "secenekler": {
+                      "A": "Fatura ve benzeri vesikalarda gösterilen KDV",
+                      "B": "İthal olunan mal ve hizmetler dolayısıyla ödenen KDV",
+                      "C": "Sorumlu sıfatıyla beyan edilip ödenen KDV",
+                      "D": "Faaliyet kapsamında kullanılan binek otomobillerine ilişkin KDV",
+                      "E": "Götürü/özel usulden gerçek usule geçişte devreden KDV"
+                    },
+                    "dogru_cevap": "Faaliyet kapsamında kullanılan binek otomobillerine ilişkin KDV",
+                    "ozet": "KDVK md.30 gereği binek otomobil KDV’si indirilemez."
+                  },
+                  {
+                    "soru_no": 65,
+                    "soru": "TBK’ya göre ‘sözleşmenin kurulması’ ile ilgili hangisi yanlıştır?",
+                    "secenekler": {
+                      "A": "Tarafların karşılıklı ve uygun irade açıklamalarıyla kurulur.",
+                      "B": "Esaslı noktalarda anlaşma varsa ikincil noktalara sonra karar verilebilir.",
+                      "C": "İkincil noktalarda uyuşmazlık çıkarsa hâkim duruma göre karar verebilir.",
+                      "D": "Telefon/bilgisayar gibi doğrudan iletişimde yapılan öneri, hazır olanlar arasında sayılmaz.",
+                      "E": "Öneren bağlanmak istemediğini açıkça belirtmişse öneri bağlamaz."
+                    },
+                    "dogru_cevap": "Telefon/bilgisayar gibi doğrudan iletişimde yapılan öneri, hazır olanlar arasında sayılmaz.",
+                    "ozet": "Eşzamanlı iletişim ‘hazır olanlar’dır; D yanlış."
+                  },
+                  {
+                    "soru_no": 68,
+                    "soru": "TBK’da ‘haksız fiillerden doğan borç ilişkileri’ ile ilgili hangisi yanlıştır?",
+                    "secenekler": {
+                      "A": "Kusurlu ve hukuka aykırı fiil zararını tazmin yükümlülüğü doğurur.",
+                      "B": "Zarar gören zararını ve kusuru ispatlar.",
+                      "C": "Tazminatın tür ve kapsamını hâkim belirler, gerektiğinde güvenceye hükmedebilir.",
+                      "D": "Hesaplanan tazminat miktarı, hakkaniyet gereği otomatik olarak artırılır/azaltılır.",
+                      "E": "Kişilik hakkı zedelenen manevi tazminat isteyebilir."
+                    },
+                    "dogru_cevap": "Hesaplanan tazminat miktarı, hakkaniyet gereği otomatik olarak artırılır/azaltılır.",
+                    "ozet": "Hakkaniyet gözetilir; fakat otomatik artış/azalış şeklinde değildir."
+                  },
+                  {
+                    "soru_no": 71,
+                    "soru": "TBK’da ‘ödeme’ ile ilgili hangisi yanlıştır?",
+                    "secenekler": {
+                      "A": "Yabancı para borcu ödeme günündeki kur ile ülke parasıyla ödenebilir.",
+                      "B": "Borçlu gecikmede kısmi ödemeyi önce giderlere saydırabilir.",
+                      "C": "Birden çok borçta borçlu, ödediği borcu belirtebilir.",
+                      "D": "Açıklama yoksa ödeme muaccel borç için yapılmış sayılır.",
+                      "E": "Anapara için makbuz verilmişse faizlerin de ödendiği kabul edilir."
+                    },
+                    "dogru_cevap": "Anapara için makbuz verilmişse faizlerin de ödendiği kabul edilir.",
+                    "ozet": "Makbuzun anapara için verilmesi faiz borcunun ödendiği anlamına gelmez."
+                  },
+                  {
+                    "soru_no": 73,
+                    "soru": "HMK’da ‘ret usulü’ ile ilgili hangisi yanlıştır?",
+                    "secenekler": {
+                      "A": "Hâkimin reddi talebi geri alınabilir.",
+                      "B": "Hâkimin reddi, dilekçeyle talep edilir.",
+                      "C": "Hâkimin çekilmeye daveti, hâkimin reddi hükmündedir.",
+                      "D": "Ret dilekçesi, reddi istenen hâkimin mensup olduğu mahkemeye verilir.",
+                      "E": "Ret sebebi biliniyorsa talep en geç ilk duruşmada ileri sürülmelidir."
+                    },
+                    "dogru_cevap": "Hâkimin reddi talebi geri alınabilir.",
+                    "ozet": "Red talebinin geri alınmasına izin verilmez; A yanlıştır."
+                  },
+                  {
+                    "soru_no": 76,
+                    "soru": "Yönetmeliğe göre; harç ve para cezalarının tahsili için gereken müzekkereler hangi görevli tarafından yazılır?",
+                    "secenekler": {
+                      "A": "Hâkim",
+                      "B": "Yazı işleri müdürü",
+                      "C": "Cumhuriyet savcısı",
+                      "D": "İdarî işler müdürü",
+                      "E": "Bilgi işlem müdürü"
+                    },
+                    "dogru_cevap": "Yazı işleri müdürü",
+                    "ozet": "Tahsil müzekkereleri adliye yazı işleri tarafından düzenlenir."
+                  },
+                  {
+                    "soru_no": 79,
+                    "soru": "Tebligat Kanunu Yönetmeliğine göre, Türkiye’de kendilerine tebligat yapılamayacak elçi ve elçilik kâtibi gibi kişiler aşağıdakilerden hangisi tarafından belirlenir?",
+                    "secenekler": {
+                      "A": "İçişleri Bakanlığı",
+                      "B": "Adalet Bakanlığı",
+                      "C": "Dışişleri Bakanlığı",
+                      "D": "Cumhurbaşkanlığı",
+                      "E": "Millî Savunma Bakanlığı"
+                    },
+                    "dogru_cevap": "Dışişleri Bakanlığı",
+                    "ozet": "Diplomatik dokunulmazlık listesi Dışişleri Bakanlığınca belirlenir."
+                  },
+                  {
+                    "soru_no": 80,
+                    "soru": "Elektronik Tebligat Yönetmeliği’ne göre “kullanıma kapatma işlemleri” ile ilgili numaralanmış hükümler doğru (D) – yanlış (Y) olarak değerlendirildiğinde aşağıdaki sıralamalardan hangisi doğrudur?\nI. Elektronik tebligat adresinin kullanıma kapatıldığı an zaman damgasıyla kayıt altına alınır.\nII. PTT, adres kapatmaya ilişkin talepleri yalnızca mesai saatleri içinde alır.\nIII. PTT, kullanıma kapatılan elektronik tebligat adresine ilişkin işlem ve delil kayıtlarını mevzuatta öngörülen süreler boyunca güvenli şekilde muhafaza eder.",
+                    "secenekler": {
+                      "A": "I:D, II:D, III:Y",
+                      "B": "I:D, II:Y, III:D",
+                      "C": "I:Y, II:Y, III:D",
+                      "D": "I:D, II:D, III:D",
+                      "E": "I:D, II:Y, III:Y"
+                    },
+                    "dogru_cevap": "I:D, II:Y, III:D",
+                    "ozet": "Yönetmelik uyarınca I ve III doğrudur; II yanlıştır. Doğru sıralama I:D, II:Y, III:D’dir."
+                  }
+                ]
+              }
+              
         }
     },
     "Ünvan Değişikliği": {
