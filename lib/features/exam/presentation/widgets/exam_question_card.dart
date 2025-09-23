@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/models/question_model.dart';
-import '../../../../core/widgets/category_display_widget.dart';
 
 class ExamQuestionCard extends StatelessWidget {
   final Question question;
@@ -110,35 +109,22 @@ class ExamQuestionCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Question difficulty, category and star
+            // Question text with favorite icon
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  decoration: BoxDecoration(
-                    color: question.difficulty.color.withValues(alpha: 0.2),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Text(
-                    question.difficulty.displayName,
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
-                      color: question.difficulty.color,
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 8),
                 Expanded(
-                  child: CategoryDisplayText(
-                    category: question.category,
+                  child: Text(
+                    question.questionText,
                     style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.grey[600],
+                      fontSize: fontSize,
+                      fontWeight: FontWeight.w500,
+                      height: 1.5,
                     ),
                   ),
                 ),
                 if (!isReviewMode) ...[
+                  const SizedBox(width: 8),
                   IconButton(
                     icon: Icon(
                       (isStarredOverride ?? question.isStarred) ? Icons.star : Icons.star_border,
@@ -148,21 +134,14 @@ class ExamQuestionCard extends StatelessWidget {
                     ),
                     onPressed: onStarToggle,
                     tooltip: 'Favori',
+                    padding: EdgeInsets.zero,
+                    constraints: const BoxConstraints(
+                      minWidth: 32,
+                      minHeight: 32,
+                    ),
                   ),
                 ],
               ],
-            ),
-            
-            const SizedBox(height: 16),
-            
-            // Question text
-            Text(
-              question.questionText,
-              style: TextStyle(
-                fontSize: fontSize,
-                fontWeight: FontWeight.w500,
-                height: 1.5,
-              ),
             ),
             
             const SizedBox(height: 20),

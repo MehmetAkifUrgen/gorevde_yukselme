@@ -34,7 +34,7 @@ Navigation: Bottom navigation bar for primary sections, with a hamburger menu fo
 4.1 Login Page
 Purpose: Authenticate users via Google or email.UI Elements:
 
-Header: Banner displaying the application name (e.g., "ExamPrep") in bold H1 font, centered at the top.
+Header: Banner displaying the application name (e.g., "GYUD") in bold H1 font, centered at the top.
 Input Fields: Email and password fields with placeholder text, styled with a subtle border (2px, navy blue).
 Buttons:
 "Sign in with Google" button with Google logo (full-width, white background, black text).

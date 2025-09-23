@@ -453,7 +453,7 @@ class _RandomQuestionsPracticePageState extends ConsumerState<RandomQuestionsPra
           
           // Question Card
           Expanded(
-            child: Padding(
+            child: SingleChildScrollView(
               padding: const EdgeInsets.all(16),
               child: QuestionCard(
                 question: currentQuestion,

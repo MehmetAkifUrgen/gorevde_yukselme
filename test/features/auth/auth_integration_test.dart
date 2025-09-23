@@ -17,7 +17,7 @@ void main() {
       );
 
       // Verify login page elements
-      expect(find.text('ExamPrep'), findsOneWidget);
+      expect(find.text('GYUD'), findsOneWidget);
       expect(find.text('E-posta'), findsOneWidget);
       expect(find.text('Şifre'), findsOneWidget);
       expect(find.text('Giriş Yap'), findsAtLeastNWidgets(1));

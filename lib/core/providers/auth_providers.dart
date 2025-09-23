@@ -1,13 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../services/auth_service.dart';
 import '../services/firestore_service.dart';
 import '../services/favorites_service.dart';
 import '../services/google_signin_service.dart';
 import '../services/session_service.dart';
+import '../services/local_statistics_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../models/user_model.dart';
 import '../models/user_preferences.dart';
 import '../models/user_statistics.dart';
@@ -32,6 +33,12 @@ final authServiceProvider = Provider<AuthService>((ref) {
     crashlytics: FirebaseCrashlytics.instance,
     sessionService: sessionService,
   );
+});
+
+// Local Statistics Service Provider
+final localStatisticsServiceProvider = Provider<LocalStatisticsService>((ref) {
+  final prefs = ref.watch(sharedPreferencesProvider);
+  return LocalStatisticsService(prefs);
 });
 
 // Firestore Service Provider
@@ -70,8 +77,9 @@ final currentFirebaseUserProvider = Provider<firebase_auth.User?>((ref) {
 class AuthNotifier extends StateNotifier<AsyncValue<firebase_auth.User?>> {
   final AuthService _authService;
   final FirestoreService _firestoreService;
+  final LocalStatisticsService _localStats;
 
-  AuthNotifier(this._authService, this._firestoreService) 
+  AuthNotifier(this._authService, this._firestoreService, this._localStats) 
       : super(const AsyncValue.loading()) {
     _init();
   }
@@ -100,7 +108,9 @@ class AuthNotifier extends StateNotifier<AsyncValue<firebase_auth.User?>> {
       if (credential?.user != null) {
         // Oturumu kaydet
         await _authService.saveUserSession();
-        state = AsyncValue.data(credential!.user);
+        // Merge guest data to remote after login
+        await _localStats.mergeGuestToRemote(userId: credential!.user!.uid, firestore: _firestoreService);
+        state = AsyncValue.data(credential.user);
       }
     } catch (error, stackTrace) {
       state = AsyncValue.error(error, stackTrace);
@@ -211,6 +221,8 @@ class AuthNotifier extends StateNotifier<AsyncValue<firebase_auth.User?>> {
         
         // Oturumu kaydet
         await _authService.saveUserSession();
+        // Merge guest data to remote after Google login
+        await _localStats.mergeGuestToRemote(userId: credential.user!.uid, firestore: _firestoreService);
         state = AsyncValue.data(credential.user);
       } else {
         // Credential var ama user null - bu durumda da state'i null yap
@@ -227,7 +239,7 @@ class AuthNotifier extends StateNotifier<AsyncValue<firebase_auth.User?>> {
       final result = await _authService.isEmailRegisteredWithGoogle(email: email);
       print('[AuthNotifier] Google check result for $email: $result');
       return result;
-    } catch (error, stackTrace) {
+    } catch (error, _) {
       print('[AuthNotifier] Error checking Google registration: $error');
       return false;
     }
@@ -253,7 +265,7 @@ class AuthNotifier extends StateNotifier<AsyncValue<firebase_auth.User?>> {
       print('[AuthNotifier] Starting debug Google Sign-In test for: $email');
       await _authService.debugGoogleSignInForEmail(email: email);
       print('[AuthNotifier] Debug Google Sign-In test completed for: $email');
-    } catch (error, stackTrace) {
+    } catch (error, _) {
       print('[AuthNotifier] Error during debug Google Sign-In test: $error');
       throw error;
     }
@@ -353,7 +365,8 @@ class AuthNotifier extends StateNotifier<AsyncValue<firebase_auth.User?>> {
 final authNotifierProvider = StateNotifierProvider<AuthNotifier, AsyncValue<firebase_auth.User?>>((ref) {
   final authService = ref.watch(authServiceProvider);
   final firestoreService = ref.watch(firestoreServiceProvider);
-  return AuthNotifier(authService, firestoreService);
+  final localStats = ref.watch(localStatisticsServiceProvider);
+  return AuthNotifier(authService, firestoreService, localStats);
 });
 
 // User Profile Provider (from Firestore)

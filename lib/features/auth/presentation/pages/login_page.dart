@@ -172,7 +172,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   
                   // App Logo/Title
                   Text(
-                    'ExamPrep',
+                    'GYUD',
                     style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                       color: AppTheme.secondaryWhite,
                       fontSize: 32,
@@ -317,7 +317,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                           child: Text(
                             'Şifremi Unuttum?',
                             style: TextStyle(
-                              color: AppTheme.accentGold.withValues(alpha: 0.8),
+                              color: AppTheme.primaryNavyBlue,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -335,7 +335,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       Text(
                         'Hesabınız yok mu? ',
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: AppTheme.primaryNavyBlue,
+                          color: AppTheme.secondaryWhite,
                         ),
                       ),
                       TextButton(
@@ -345,7 +345,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         child: Text(
                           'Hesap Oluştur',
                           style: TextStyle(
-                            color: AppTheme.accentGold,
+                            color: AppTheme.secondaryWhite,
                             fontWeight: FontWeight.bold,
                           ),
                         ),

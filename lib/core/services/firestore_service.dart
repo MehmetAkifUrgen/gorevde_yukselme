@@ -281,6 +281,28 @@ class FirestoreService {
     );
   }
 
+  // Upsert performance summary document (aggregated counters)
+  Future<void> upsertPerformanceSummary({
+    required String userId,
+    required Map<String, dynamic> data,
+  }) async {
+    try {
+      await _firestore.collection('performance').doc(userId).set({
+        ...data,
+        'userId': userId,
+        'updatedAt': FieldValue.serverTimestamp(),
+      }, SetOptions(merge: true));
+    } catch (e) {
+      await _crashlytics?.recordError(
+        e,
+        null,
+        fatal: false,
+        information: ['Failed to upsert performance summary'],
+      );
+      rethrow;
+    }
+  }
+
   // Delete all user data from Firestore
   Future<void> deleteAllUserData({required String userId}) async {
     try {

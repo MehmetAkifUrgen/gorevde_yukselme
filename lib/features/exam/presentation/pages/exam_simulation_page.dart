@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -17,7 +16,6 @@ import '../widgets/exam_results_modal.dart';
 import '../widgets/solution_popup.dart';
 import 'package:gorevde_yukselme/features/questions/presentation/widgets/font_size_slider.dart';
 import '../../../../core/providers/auth_providers.dart';
-import '../../../../core/services/favorites_service.dart';
 
 class ExamSimulationPage extends ConsumerStatefulWidget {
   // Exam mode (fullExam, miniExam, practiceMode) - fallback to miniExam if not provided
@@ -238,6 +236,12 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
     if (exam == null || _selectedAnswerIndex == null) return;
 
     final Question currentQuestion = exam.questions[exam.currentQuestionIndex];
+    final bool isCorrect = _selectedAnswerIndex == currentQuestion.correctAnswerIndex;
+    // Update local statistics (guest or user) immediately
+    final firebaseUser = ref.read(currentFirebaseUserProvider);
+    final userId = firebaseUser?.uid ?? '';
+    final localStats = ref.read(localStatisticsServiceProvider);
+    localStats.incrementQuestion(userId: userId, isCorrect: isCorrect);
     ref.read(currentExamProvider.notifier).answerQuestion(
       currentQuestion.id,
       _selectedAnswerIndex!,
@@ -290,6 +294,19 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
   void _completeExam() {
     _timer?.cancel();
     ref.read(currentExamProvider.notifier).completeExam();
+    // Record study time locally
+    final firebaseUser = ref.read(currentFirebaseUserProvider);
+    final userId = firebaseUser?.uid ?? '';
+    final localStats = ref.read(localStatisticsServiceProvider);
+    // Convert seconds to minutes (rounded)
+    final int totalSeconds = ref.read(currentExamProvider)?.durationInMinutes == null
+        ? 0
+        : (ref.read(currentExamProvider)!.durationInMinutes * 60);
+    final int elapsed = totalSeconds > 0 ? (totalSeconds - _remainingSeconds) : 0;
+    final int minutes = (elapsed / 60).round();
+    if (minutes > 0) {
+      localStats.addStudyTimeMinutes(userId: userId, minutes: minutes);
+    }
     setState(() {
       _showResults = true;
     });

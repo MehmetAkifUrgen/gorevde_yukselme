@@ -193,7 +193,7 @@ class _RegistrationPageState extends ConsumerState<RegistrationPage> {
                   
                   // App Logo/Title
                   Text(
-                    'ExamPrep',
+                    'GYUD',
                     style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                       color: AppTheme.secondaryWhite,
                       fontSize: 32,

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import '../theme/app_theme.dart';
-import '../router/app_router.dart';
 import '../../features/home/presentation/pages/home_page.dart';
 import '../../features/questions/presentation/pages/question_pool_page.dart';
 import '../../features/questions/presentation/pages/starred_questions_page.dart';
 import '../../features/performance/presentation/pages/performance_analysis_page.dart';
 import '../../features/profile/presentation/pages/profile_settings_page.dart';
+import '../../features/auth/presentation/pages/login_page.dart';
+import '../providers/auth_providers.dart';
 
 class MainNavigation extends ConsumerStatefulWidget {
   final int initialIndex;
@@ -25,15 +25,17 @@ class _MainNavigationState extends ConsumerState<MainNavigation> {
   late int _selectedIndex;
   late PageController _pageController;
 
-  final List<Widget> _pages = [
-    const HomePage(),
-    const QuestionPoolPage(),
-    const StarredQuestionsPage(),
-    const PerformanceAnalysisPage(),
-    const ProfileSettingsPage(),
-  ];
+  List<Widget> _buildPages(bool isAuthenticated) {
+    return [
+      const HomePage(),
+      const QuestionPoolPage(),
+      const StarredQuestionsPage(),
+      const PerformanceAnalysisPage(),
+      isAuthenticated ? const ProfileSettingsPage() : const LoginPage(),
+    ];
+  }
 
-  final List<BottomNavigationBarItem> _navigationItems = const [
+  List<BottomNavigationBarItem> _buildNavItems(bool isAuthenticated) => [
     BottomNavigationBarItem(
       icon: Icon(Icons.home_outlined),
       activeIcon: Icon(Icons.home),
@@ -55,9 +57,9 @@ class _MainNavigationState extends ConsumerState<MainNavigation> {
       label: 'Performans',
     ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.person_outline),
-      activeIcon: Icon(Icons.person),
-      label: 'Profil',
+      icon: const Icon(Icons.person_outline),
+      activeIcon: const Icon(Icons.person),
+      label: isAuthenticated ? 'Profil' : 'Giriş Yap',
     ),
   ];
 
@@ -89,6 +91,9 @@ class _MainNavigationState extends ConsumerState<MainNavigation> {
 
   @override
   Widget build(BuildContext context) {
+    final isAuthenticated = ref.watch(isAuthenticatedProvider);
+    final pages = _buildPages(isAuthenticated);
+    final navItems = _buildNavItems(isAuthenticated);
     return Scaffold(
       body: PageView(
         controller: _pageController,
@@ -97,7 +102,7 @@ class _MainNavigationState extends ConsumerState<MainNavigation> {
             _selectedIndex = index;
           });
         },
-        children: _pages,
+        children: pages,
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
@@ -115,7 +120,7 @@ class _MainNavigationState extends ConsumerState<MainNavigation> {
           fontWeight: FontWeight.w400,
         ),
         elevation: 8,
-        items: _navigationItems,
+        items: navItems,
       ),
     );
   }

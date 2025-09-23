@@ -3,9 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/providers/app_providers.dart';
-import '../../../../core/models/user_model.dart';
 import '../widgets/motivational_banner.dart';
-import '../widgets/ad_banner.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
@@ -25,7 +23,7 @@ class _HomePageState extends ConsumerState<HomePage> {
       backgroundColor: AppTheme.lightGrey,
       appBar: AppBar(
         title: Text(
-          'ExamPrep',
+          'GYUD',
           style: Theme.of(context).appBarTheme.titleTextStyle,
         ),
         backgroundColor: AppTheme.primaryNavyBlue,
@@ -126,9 +124,7 @@ class _HomePageState extends ConsumerState<HomePage> {
             
             const SizedBox(height: 24),
             
-            // Ad Banner for non-premium users
-            if (user?.subscriptionStatus != SubscriptionStatus.premium)
-              const AdBanner(),
+            // Reklam kaldırıldı
             
             const SizedBox(height: 24),
           ],

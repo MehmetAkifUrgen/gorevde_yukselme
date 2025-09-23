@@ -4,7 +4,6 @@ import '../../../../core/models/question_model.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/providers/app_providers.dart';
 import '../../../../core/providers/auth_providers.dart';
-import '../../../../core/services/favorites_service.dart';
 import '../../../../core/repositories/questions_repository.dart';
 import '../../../../core/services/questions_api_service.dart';
 import '../widgets/question_card.dart';
@@ -19,7 +18,6 @@ class StarredQuestionsPage extends ConsumerStatefulWidget {
 
 class _StarredQuestionsPageState extends ConsumerState<StarredQuestionsPage> {
   QuestionCategory? selectedCategory;
-  QuestionDifficulty? selectedDifficulty;
   bool isPracticeMode = false;
   List<Question> starredQuestions = [];
   int currentQuestionIndex = 0;
@@ -87,8 +85,7 @@ class _StarredQuestionsPageState extends ConsumerState<StarredQuestionsPage> {
   List<Question> get filteredQuestions {
     return starredQuestions.where((question) {
       bool categoryMatch = selectedCategory == null || question.category == selectedCategory;
-      bool difficultyMatch = selectedDifficulty == null || question.difficulty == selectedDifficulty;
-      return categoryMatch && difficultyMatch;
+      return categoryMatch;
     }).toList();
   }
 
@@ -111,14 +108,14 @@ class _StarredQuestionsPageState extends ConsumerState<StarredQuestionsPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Filter Questions',
+            'Soruları Filtrele',
             style: Theme.of(context).textTheme.headlineSmall,
           ),
           const SizedBox(height: 20),
           
           // Category Filter
           Text(
-            'Category',
+            'Kategori',
             style: Theme.of(context).textTheme.titleMedium,
           ),
           const SizedBox(height: 8),
@@ -126,7 +123,7 @@ class _StarredQuestionsPageState extends ConsumerState<StarredQuestionsPage> {
             spacing: 8,
             children: [
               FilterChip(
-                label: const Text('All'),
+                label: const Text('Tümü'),
                 selected: selectedCategory == null,
                 onSelected: (selected) {
                   setState(() {
@@ -148,38 +145,6 @@ class _StarredQuestionsPageState extends ConsumerState<StarredQuestionsPage> {
           
           const SizedBox(height: 20),
           
-          // Difficulty Filter
-          Text(
-            'Difficulty',
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
-          const SizedBox(height: 8),
-          Wrap(
-            spacing: 8,
-            children: [
-              FilterChip(
-                label: const Text('All'),
-                selected: selectedDifficulty == null,
-                onSelected: (selected) {
-                  setState(() {
-                    selectedDifficulty = selected ? null : selectedDifficulty;
-                  });
-                },
-              ),
-              ...QuestionDifficulty.values.map((difficulty) => FilterChip(
-                label: Text(difficulty.displayName),
-                selected: selectedDifficulty == difficulty,
-                onSelected: (selected) {
-                  setState(() {
-                    selectedDifficulty = selected ? difficulty : null;
-                  });
-                },
-              )),
-            ],
-          ),
-          
-          const SizedBox(height: 20),
-          
           // Apply Button
           SizedBox(
             width: double.infinity,
@@ -188,7 +153,7 @@ class _StarredQuestionsPageState extends ConsumerState<StarredQuestionsPage> {
                 Navigator.pop(context);
                 setState(() {});
               },
-              child: const Text('Apply Filters'),
+              child: const Text('Filtreleri Uygula'),
             ),
           ),
         ],
@@ -255,12 +220,12 @@ class _StarredQuestionsPageState extends ConsumerState<StarredQuestionsPage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Font Size'),
+        title: const Text('Yazı Boyutu'),
         content: const FontSizeSlider(),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('OK'),
+            child: const Text('Tamam'),
           ),
         ],
       ),
@@ -365,7 +330,7 @@ class _StarredQuestionsPageState extends ConsumerState<StarredQuestionsPage> {
         
         // Question card
         Expanded(
-          child: Padding(
+          child: SingleChildScrollView(
             padding: const EdgeInsets.all(16),
             child: QuestionCard(
               question: currentQuestion,
@@ -384,14 +349,14 @@ class _StarredQuestionsPageState extends ConsumerState<StarredQuestionsPage> {
               Expanded(
                 child: ElevatedButton(
                   onPressed: currentQuestionIndex > 0 ? _previousQuestion : null,
-                  child: const Text('Previous'),
+                  child: const Text('Önceki'),
                 ),
               ),
               const SizedBox(width: 16),
               Expanded(
                 child: ElevatedButton(
                   onPressed: currentQuestionIndex < questions.length - 1 ? _nextQuestion : null,
-                  child: const Text('Next'),
+                  child: const Text('Sonraki'),
                 ),
               ),
             ],

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/theme/app_theme.dart';
-import '../../../../core/models/exam_model.dart';
 import '../../../../core/models/question_model.dart';
 import '../../../../core/models/performance_model.dart';
 import '../../../../core/models/user_statistics.dart';
@@ -42,6 +41,9 @@ class _PerformanceAnalysisPageState extends ConsumerState<PerformanceAnalysisPag
         backgroundColor: AppTheme.lightTheme.primaryColor,
         bottom: TabBar(
           controller: _tabController,
+          labelColor: Colors.white,
+          unselectedLabelColor: Colors.white70,
+          indicatorColor: Colors.white,
           tabs: const [
             Tab(text: 'Genel Bakış', icon: Icon(Icons.dashboard)),
             Tab(text: 'Kategoriler', icon: Icon(Icons.category)),
@@ -130,7 +132,6 @@ class _PerformanceAnalysisPageState extends ConsumerState<PerformanceAnalysisPag
   }
 
   Widget _buildPerformanceSummary() {
-    final performanceData = ref.watch(performanceProvider);
     final currentUser = ref.watch(currentUserProfileProvider);
     
     return Column(
@@ -290,72 +291,82 @@ class _PerformanceAnalysisPageState extends ConsumerState<PerformanceAnalysisPag
     return currentUser.when(
       data: (user) {
         if (user == null) {
-          return const Center(child: Text('No data available'));
-        }
-        
-        // Generate last 7 days performance data based on user statistics
-        final stats = user.statistics;
-        final baseAccuracy = stats.accuracy;
-        final data = _generateWeeklyPerformanceData(baseAccuracy);
-        final maxValue = data.isNotEmpty ? data.reduce((a, b) => a > b ? a : b) : 100;
-        
-        if (data.isEmpty) {
-          return const Center(child: Text('No performance data available'));
-        }
-        
-        return Row(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: data.asMap().entries.map((entry) {
-            final index = entry.key;
-            final value = entry.value;
-            final height = maxValue > 0 ? (value / maxValue) * 150 : 0.0;
-            
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Text(
-                  '${value.toStringAsFixed(0)}%',
-                  style: Theme.of(context).textTheme.bodySmall,
+          return const Center(
+            child: Padding(
+              padding: EdgeInsets.all(32.0),
+              child: Text(
+                'Performans verilerini görmek için giriş yapın',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.grey,
                 ),
-                const SizedBox(height: 4),
-                Container(
-                  width: 30,
-                  height: height,
-                  decoration: BoxDecoration(
-                    color: AppTheme.lightTheme.primaryColor,
-                    borderRadius: BorderRadius.circular(4),
+              ),
+            ),
+          );
+        }
+        
+        final stats = user.statistics;
+        
+        if (stats.totalQuestionsAnswered == 0) {
+          return const Center(
+            child: Padding(
+              padding: EdgeInsets.all(32.0),
+              child: Text(
+                'Henüz performans verisi bulunmuyor.\nSorular çözmeye başladığınızda burada görünecek.',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.grey,
+                ),
+              ),
+            ),
+          );
+        }
+        
+        // Show current accuracy as a simple indicator
+        return Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Genel Performans',
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 16),
+              Container(
+                width: 120,
+                height: 120,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: AppTheme.lightTheme.primaryColor.withValues(alpha: 0.1),
+                ),
+                child: Center(
+                  child: Text(
+                    '${stats.accuracy.toStringAsFixed(1)}%',
+                    style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: AppTheme.lightTheme.primaryColor,
+                    ),
                   ),
                 ),
-                const SizedBox(height: 8),
-                Text(
-                  'Day ${index + 1}',
-                  style: Theme.of(context).textTheme.bodySmall,
+              ),
+              const SizedBox(height: 16),
+              Text(
+                '${stats.totalQuestionsAnswered} soru çözüldü',
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: Colors.grey[600],
                 ),
-              ],
-            );
-          }).toList(),
+              ),
+            ],
+          ),
         );
       },
       loading: () => const Center(child: CircularProgressIndicator()),
-      error: (error, stack) => Center(child: Text('Error loading chart data')),
+      error: (error, stack) => Center(child: Text('Hata: $error')),
     );
-  }
-  
-  List<double> _generateWeeklyPerformanceData(double baseAccuracy) {
-    // Generate realistic performance data for the last 7 days
-    // This is a simplified approach - in a real app, you'd fetch actual daily data
-    final random = DateTime.now().millisecondsSinceEpoch % 100;
-    final data = <double>[];
-    
-    for (int i = 0; i < 7; i++) {
-      // Add some variation around the base accuracy
-      final variation = (random + i * 13) % 21 - 10; // -10 to +10 variation
-      final dayAccuracy = (baseAccuracy + variation).clamp(0.0, 100.0);
-      data.add(dayAccuracy);
-    }
-    
-    return data;
   }
 
   Widget _buildQuickStats() {
@@ -445,6 +456,8 @@ class _PerformanceAnalysisPageState extends ConsumerState<PerformanceAnalysisPag
   }
 
   Widget _buildRecommendations() {
+    final currentUser = ref.watch(currentUserProfileProvider);
+    
     return Card(
       elevation: 2,
       child: Padding(
@@ -459,23 +472,69 @@ class _PerformanceAnalysisPageState extends ConsumerState<PerformanceAnalysisPag
               ),
             ),
             const SizedBox(height: 16),
-            _buildRecommendationItem(
-              Icons.trending_up,
-              'Anayasa Hukuku\'na Odaklan',
-              'Bu kategorideki performansınız ortalamanın altında. Temel kavramları gözden geçirmeyi düşünün.',
-              Colors.orange,
-            ),
-            _buildRecommendationItem(
-              Icons.timer,
-              'Hızını Artır',
-              'Soru başına 2.3 dakika harcıyorsunuz. Bunu 2 dakikanın altına indirmeye çalışın.',
-              Colors.blue,
-            ),
-            _buildRecommendationItem(
-              Icons.repeat,
-              'Hataları Gözden Geçir',
-              'İnceleme için işaretlenmiş 23 sorunuz var. Bunları tekrar gözden geçirmek puanınızı artırabilir.',
-              Colors.green,
+            currentUser.when(
+              data: (user) {
+                if (user == null) {
+                  return const Center(
+                    child: Padding(
+                      padding: EdgeInsets.all(16.0),
+                      child: Text(
+                        'Önerileri görmek için giriş yapın',
+                        style: TextStyle(color: Colors.grey),
+                      ),
+                    ),
+                  );
+                }
+                
+                final stats = user.statistics;
+                final recommendations = <Widget>[];
+                
+                // Accuracy-based recommendation
+                if (stats.accuracy < 70) {
+                  recommendations.add(_buildRecommendationItem(
+                    Icons.trending_up,
+                    'Doğruluk Oranınızı Artırın',
+                    'Genel doğruluk oranınız %${stats.accuracy.toStringAsFixed(1)}. Temel konuları tekrar gözden geçirmeyi düşünün.',
+                    Colors.orange,
+                  ));
+                }
+                
+                // Speed-based recommendation
+                final avgTimePerQuestion = stats.totalQuestionsAnswered > 0 
+                    ? stats.totalStudyTimeMinutes / stats.totalQuestionsAnswered
+                    : 0.0;
+                if (avgTimePerQuestion > 2.0) {
+                  recommendations.add(_buildRecommendationItem(
+                    Icons.timer,
+                    'Hızınızı Artırın',
+                    'Soru başına ${avgTimePerQuestion.toStringAsFixed(1)} dakika harcıyorsunuz. Bunu 2 dakikanın altına indirmeye çalışın.',
+                    Colors.blue,
+                  ));
+                }
+                
+                // Streak-based recommendation
+                if (stats.currentStreak < 3) {
+                  recommendations.add(_buildRecommendationItem(
+                    Icons.local_fire_department,
+                    'Düzenli Çalışın',
+                    'Çalışma seriniz ${stats.currentStreak} gün. Her gün düzenli çalışmaya odaklanın.',
+                    Colors.red,
+                  ));
+                }
+                
+                if (recommendations.isEmpty) {
+                  recommendations.add(_buildRecommendationItem(
+                    Icons.emoji_events,
+                    'Harika Gidiyorsunuz!',
+                    'Performansınız çok iyi. Bu şekilde devam edin.',
+                    Colors.green,
+                  ));
+                }
+                
+                return Column(children: recommendations);
+              },
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error: (error, stack) => Center(child: Text('Hata: $error')),
             ),
           ],
         ),
@@ -542,36 +601,28 @@ class _PerformanceAnalysisPageState extends ConsumerState<PerformanceAnalysisPag
             ...performanceData.categoryPerformance.entries.map((entry) => 
               _buildCategoryCard(entry.key, entry.value))
           else
-            ...QuestionCategory.values.map((category) => _buildCategoryCard(category, null)),
+            const Center(
+              child: Padding(
+                padding: EdgeInsets.all(32.0),
+                child: Text(
+                  'Henüz kategori performans verisi bulunmuyor.\nSorular çözmeye başladığınızda burada görünecek.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.grey,
+                  ),
+                ),
+              ),
+            ),
         ],
       ),
     );
   }
 
-  Widget _buildCategoryCard(QuestionCategory category, CategoryPerformance? categoryPerformance) {
-    final int score;
-    final int questionsAnswered;
-    final String performanceText;
-    
-    if (categoryPerformance != null) {
-      // Use real data
-      score = categoryPerformance.accuracy.round();
-      questionsAnswered = categoryPerformance.questionsAnswered;
-      performanceText = categoryPerformance.performanceLevel;
-    } else {
-      // Fallback to mock data when no real data is available
-      final scores = {
-        QuestionCategory.electricalElectronics: 65,
-        QuestionCategory.construction: 89,
-        QuestionCategory.computerTechnology: 72,
-        QuestionCategory.machineTechnology: 78,
-        QuestionCategory.generalRegulations: 81,
-        QuestionCategory.programmingLanguages: 69,
-      };
-      score = scores[category] ?? 75;
-      questionsAnswered = (score * 1.2).round();
-      performanceText = _getPerformanceText(score);
-    }
+  Widget _buildCategoryCard(QuestionCategory category, CategoryPerformance categoryPerformance) {
+    final int score = categoryPerformance.accuracy.round();
+    final int questionsAnswered = categoryPerformance.questionsAnswered;
+    final String performanceText = categoryPerformance.performanceLevel;
     
     final color = score >= 80 ? Colors.green : score >= 70 ? Colors.orange : Colors.red;
     
@@ -633,12 +684,6 @@ class _PerformanceAnalysisPageState extends ConsumerState<PerformanceAnalysisPag
     );
   }
 
-  String _getPerformanceText(int score) {
-    if (score >= 80) return 'Mükemmel';
-    if (score >= 70) return 'İyi';
-    if (score >= 60) return 'Ortalama';
-    return 'Geliştirilmeli';
-  }
 
   Widget _buildProgressTab() {
     return SingleChildScrollView(
@@ -797,27 +842,24 @@ class _PerformanceAnalysisPageState extends ConsumerState<PerformanceAnalysisPag
   }
 
   Widget _buildWeeklyChart(UserStatistics stats) {
+    if (stats.totalQuestionsAnswered == 0) {
+      return const Center(
+        child: Padding(
+          padding: EdgeInsets.all(32.0),
+          child: Text(
+            'Henüz haftalık aktivite verisi bulunmuyor.\nSorular çözmeye başladığınızda burada görünecek.',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.grey,
+            ),
+          ),
+        ),
+      );
+    }
+    
     final days = ['Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt', 'Paz'];
-    
-    // Generate realistic weekly activity based on user statistics
-    final totalQuestions = stats.totalQuestionsAnswered;
-    final averageDaily = totalQuestions > 0 ? (totalQuestions / 30).round() : 5; // Rough daily average
-    
-    final activities = List.generate(7, (index) {
-      // Simulate weekly pattern with some variation
-      final baseActivity = averageDaily;
-      final variation = (index * 3) % 7; // Create some variation
-      final todayIndex = DateTime.now().weekday - 1;
-      
-      // Make today's activity based on current streak
-      if (index == todayIndex) {
-        return stats.currentStreak > 0 ? stats.currentStreak : baseActivity;
-      }
-      
-      return (baseActivity + variation).clamp(0, baseActivity * 2);
-    });
-    
-    final maxActivity = activities.isNotEmpty ? activities.reduce((a, b) => a > b ? a : b) : 1;
+    final todayIndex = DateTime.now().weekday - 1;
     
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -825,9 +867,11 @@ class _PerformanceAnalysisPageState extends ConsumerState<PerformanceAnalysisPag
       children: days.asMap().entries.map((entry) {
         final index = entry.key;
         final day = entry.value;
-        final activity = activities[index];
-        final height = maxActivity > 0 ? (activity / maxActivity) * 100 : 20.0;
-        final isToday = index == DateTime.now().weekday - 1;
+        final isToday = index == todayIndex;
+        
+        // Show current streak for today, 0 for other days (since we don't have real daily data)
+        final activity = isToday && stats.currentStreak > 0 ? stats.currentStreak : 0;
+        final height = activity > 0 ? 60.0 : 20.0;
         
         return Column(
           children: [
@@ -838,11 +882,11 @@ class _PerformanceAnalysisPageState extends ConsumerState<PerformanceAnalysisPag
             const SizedBox(height: 4),
             Container(
               width: 24,
-              height: height.clamp(10.0, 100.0),
+              height: height,
               decoration: BoxDecoration(
                 color: isToday 
                     ? AppTheme.lightTheme.primaryColor 
-                    : AppTheme.lightTheme.primaryColor.withValues(alpha: 0.5),
+                    : AppTheme.lightTheme.primaryColor.withValues(alpha: 0.3),
                 borderRadius: BorderRadius.circular(4),
               ),
             ),

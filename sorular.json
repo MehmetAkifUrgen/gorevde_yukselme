@@ -2,7 +2,7 @@
     "Görevde Yükselme": {
         "Adalet Bakanlığı": {
             "İdare Memuru": {
-                "2017 Çıkmış Sorular": [
+                "2017 İdare Memuru Çıkmış Sorular 1": [
                     {
                         "soru_no": 1,
                         "soru": "T.C. Anayasası’na göre yürütme yetkisi ve görevini yerine getiren merciler aşağıdakilerin hangisinde doğru olarak verilmiştir?",
@@ -242,7 +242,9 @@
                         },
                         "dogru_cevap": "( ? ) ( : ) ( , ) ( … )",
                         "ozet": "Verilen sayısal/koşullu bilgiler altında doğru sonuç ( ? ) ( : ) ( , ) ( … )’dir."
-                    },
+                    }
+                ],
+                "2017 İdare Memuru Çıkmış Sorular 2": [
                     {
                         "soru_no": 21,
                         "soru": "Kamu yönetimi etiğine ilişkin ilke ve değerleri uygulamanın sonuçlarıyla ilgili aşağıdakilerden hangisi yanlıştır?",
@@ -482,7 +484,9 @@
                         },
                         "dogru_cevap": "Teşhis ve tedavi yollarına",
                         "ozet": "Verilen sayısal/koşullu bilgiler altında doğru sonuç Teşhis ve tedavi yollarına’dir."
-                    },
+                    }
+                ],
+                "2017 İdare Memuru Çıkmış Sorular 3": [
                     {
                         "soru_no": 41,
                         "soru": "Şiir yazmak başka bir şeydir. Şiir yazmaya talip kişi, yokluğu ve yoksulluğu da isteyendir. Çünkü onun varı yoğu artık şiiri olacaktır. Yeri gelecek bir şiir üzerine belki günlerce çalışıp bir deri bir kemik kalacaktır. Bu durum yıllarca sürebilir, sonrasında ortaya bir şey koyamadan şiirin ve yılların içinde kaybolup gidebilir. Eskilerin uzun ve zahmetli bir yolculuğu anlatmak için kullandıkları “Demir çarık, demir asa!” sözü tam da şiir için yola çıkmayı anlatmaktadır. Bu parçadan çıkarılabilecek en kapsamlı yargı aşağıdakilerden hangisidir?",
@@ -722,7 +726,9 @@
                         },
                         "dogru_cevap": "Üç",
                         "ozet": "İlgili düzenlemeye göre Üç doğru ifadedir."
-                    },
+                    }
+                ],
+                "2017 İdare Memuru Çıkmış Sorular 4": [
                     {
                         "soru_no": 61,
                         "soru": "5018 sayılı Kamu Mali Yönetimi ve Kontrol Kanunu’na göre bütçeyle ödenek tahsis edilen her bir harcama biriminin en üst yöneticisi aşağıdakilerden hangisidir?",
@@ -962,7 +968,9 @@
                         },
                         "dogru_cevap": "Beş adet gömlek İDARE MEMURU A 13",
                         "ozet": "Mevzuata göre Beş adet gömlek İDARE MEMURU A 13 geçerli değildir; bu nedenle doğru seçenek budur."
-                    },
+                    }
+                ],
+                "2017 İdare Memuru Çıkmış Sorular 5": [
                     {
                         "soru_no": 81,
                         "soru": "Ceza İnfaz Kurumlarında Bulundurulabilecek Eşya ve Maddeler Hakkında Yönetmelik’e göre süreli veya süresiz yayınlar ile kitaplarla ilgili aşağıdakilerden hangisi yanlıştır?",
@@ -1206,7 +1214,7 @@
                 ]
             },
             "İdari İşler Müdürü": {
-                "2017 Çıkmış Sorular": [
+                "2017 İdare İşler Müdürü Çıkmış Sorular 1": [
                     {
                         "soru_no": 1,
                         "soru": "T.C. Anayasasi’na gore diizeltme ve cevap yayimlanmazsa, yayimlanmasinin gerekip gerekmedigine hakim tarafindan ilgilinin muracaat tarihinden itibaren en geg kag gun icerisinde karar verilir?",
@@ -1466,7 +1474,9 @@
                         },
                         "dogru_cevap": "İl sınırları içerisinde yerinden yönetim kuruluşları ile hiyerarşi yetkisi çerçevesinde alakadar olmakla mükelleftirler.",
                         "ozet": "Valilerin görev ve yetkileri ile ilgili aşağıdakilerden hangisi yanlıştır kapsamında İl sınırları içerisinde yerinden yönetim kuruluşları ile hiyerarşi yetkisi çerçevesinde alakadar olmakla mükelleftirler. istenen niteliği taşımadığı için doğru yanıttır."
-                    },
+                    }
+                ],
+                "2017 İdare İşler Müdürü Çıkmış Sorular 2": [
                     {
                         "soru_no": 21,
                         "soru": "Aşağıdakilerden hangisi Türk Medeni Kanunu ile getirilen yeniliklerden birisi değildir?",
@@ -1726,7 +1736,9 @@
                         },
                         "dogru_cevap": "Danışma birimleri",
                         "ozet": "Verilen sayısal/koşullu bilgiler altında doğru sonuç Danışma birimleri’dir."
-                    },
+                    }
+                ],
+                "2017 İdare İşler Müdürü Çıkmış Sorular 3": [
                     {
                         "soru_no": 41,
                         "soru": "I. Muhataba gönderilmek üzere fiziksel ortamda hazırlanan belgeler, paraflı nüshası hazırlayan idarede kalacak şekilde en az iki nüsha düzenlenir. II. Elektronik ortamda hazırlanan belgelerde yalnızca “Times New Roman” yazı tipi kullanılır. III. Metin içinde yer alan alıntılar tırnak içinde ve eğik (italik) olarak yazılabilir. IV. Belge ekleri aynı form, format veya ebatlarda hazırlanmalıdır. Resmî Yazışmalarda Uygulanacak Usul ve Esaslar Hakkında Yönetmelik’e göre “belge özellikleri” ile ilgili yukarıdakilerden hangileri doğrudur?",
@@ -1986,7 +1998,9 @@
                         },
                         "dogru_cevap": "Harcama yetkisinin devredilmesi, yetkiyi devredenin idari sorumluluğunu ortadan kaldırır.",
                         "ozet": "Mevzuata göre Harcama yetkisinin devredilmesi, yetkiyi devredenin idari sorumluluğunu ortadan kaldırır. geçerli değildir; bu yüzden doğru seçenek budur."
-                    },
+                    }
+                ],
+                "2017 İdare İşler Müdürü Çıkmış Sorular 4": [
                     {
                         "soru_no": 61,
                         "soru": "I. Mali yıl içinde kullanılabilecek özel ödenek miktarı, tahsil edilen özel gelir tutarını geçemez. II. Özel gelirler karşılığında idarelere tahsis edilen özel ödenek miktarları, ilgili idarelerin bütçelerinde gösterilir. III. Özel gelirlerin ödenek kaydına, gelecek yıla devrine, iptaline ilişkin yetki ve işlemler merkezi yönetim bütçe kanununda gösterilir. IV. Özel gelirlere ilişkin olarak ilgili kanunlarında belirtilen fiyatlandırılabilir mal ve hizmetlerin tarifeleri ile uygulamaya yönelik usul ve esaslar, Hazine Müsteşarlığının görüşü alınarak Maliye Bakanlığınca belirlenir. 5018 sayılı Kamu Mali Yönetimi ve Kontrol Kanunu’na göre “özel gelirler” ile ilgili yukarıdakilerden hangileri doğrudur?",
@@ -2246,7 +2260,9 @@
                         },
                         "dogru_cevap": "UYAP üzerindeki iş listelerinin teraküm oluşturacak şekilde incelenmesi",
                         "ozet": "124/1 sayılı Adalet Bakanlığı Bilgi İşlem Dairesi Başkanlığının UYAP kapsamında UYAP üzerindeki iş listelerinin teraküm oluşturacak şekilde incelenmesi istenen niteliği taşımadığı için doğru yanıttır."
-                    },
+                    }
+                ],
+                "2017 İdare İşler Müdürü Çıkmış Sorular 5": [
                     {
                         "soru_no": 81,
                         "soru": "I. Türkiye Büyük Millet Meclisi Başkanı II. Cumhuriyet Başsavcı Vekili III. Hava Kuvvetleri Komutanı IV. Genelkurmay Başkanı T.C. Anayasası’na göre yukarıdakilerden hangileri görevleriyle ilgili suçlardan dolayı Yüce Divanda yargılanırlar?",
@@ -2510,7 +2526,7 @@
                 ]
             },
             "İkinci Müdür": {
-                "2017 Çıkmış Sorular": [
+                "2017 İkinci Müdür Çıkmış Sorular 1": [
                     {
                         "soru_no": 1,
                         "soru": "I. Hiçbir kişiye, aileye, zümreye veya sınıfa imtiyaz tanınamaz.\nII. Herkes, dil, ırk, renk, cinsiyet, siyasi düşünce, felsefi inanç, din, mezhep ve benzeri sebeplerle ayrım gözetilmeksizin kanun önünde eşittir.\nIII. Çocuklar, yaşlılar, özürlüler, harp ve vazife şehitlerinin dul ve yetimleri ile malul ve gaziler için alınacak tedbirler eşitlik ilkesine aykırı sayılmaz.\nIV. Kadınlar ve erkekler eşit haklara sahiptir. Devlet, bu eşitliğin yaşama geçmesini sağlamakla yükümlüdür. Bu maksatla alınacak tedbirler eşitlik ilkesine aykırı olarak yorumlanamaz.\n\nT.C. Anayasası’na göre kanun önünde eşitlik ilkesi ile ilgili yukarıdaki ifadelerden hangileri doğrudur?",
@@ -2750,7 +2766,9 @@
                         },
                         "dogru_cevap": "( . ) ( ; ) ( : ) ( , )",
                         "ozet": "Verilen nicel/koşullu bilgilere göre doğru sonuç ( . ) ( ; ) ( : ) ( , )’dir."
-                    },
+                    }
+                ],
+                "2017 İkinci Müdür Çıkmış Sorular 2": [
                     {
                         "soru_no": 21,
                         "soru": "Kamu yönetimi etiği ilke ve değerlerinin sonuçları ile ilgili aşağıdakilerden hangisi yanlıştır?",
@@ -2990,7 +3008,9 @@
                         },
                         "dogru_cevap": "Milletlerin kültür hazinesinin bir parçası olduğuna",
                         "ozet": "Verilen nicel/koşullu bilgilere göre doğru sonuç Milletlerin kültür hazinesinin bir parçası olduğuna’dir."
-                    },
+                    }
+                ],
+                "2017 İkinci Müdür Çıkmış Sorular 3": [
                     {
                         "soru_no": 41,
                         "soru": "Karagöz oyunu asırlardır devam eden bir gelenek. Ancak bu oyunun tekniği salt Osmanlıya ait değil. Cava’dan Mısır’a, Çin’den Japonya’ya, Hindistan’dan Suriye’ye bu oyunun temel tekniği hep aynı. Bu nedenle bu oyun için “insanlık kültürünün ortak malı” demek yanlış olmaz. Karagöz oyunu ne kadar kültürel etkileşim varsa o kadar çeşitli bir içeriğe sahip. Toramanlı Karagöz, Çift Karagöz, Soytarı Karagöz gibi tiplemeler bu oyunların tek kişi ya da ekole ait olmadığını, kültürel ve toplumsal çeşitliliği yansıttığını gösteriyor. Aynı günümüz sineması gibi… Bu parçada Karagöz oyunu ile ilgili asıl anlatılmak istenen aşağıdakilerden hangisidir?",
@@ -3230,7 +3250,9 @@
                         },
                         "dogru_cevap": "Taahhüdün tamamlanan ve müstakil kullanıma elverişli bölümleri için kısmi kabul yapılamaz.",
                         "ozet": "Mevzuata göre Taahhüdün tamamlanan ve müstakil kullanıma elverişli bölümleri için kısmi kabul yapılamaz. geçerli olmadığından doğru seçenektir."
-                    },
+                    }
+                ],
+                "2017 İkinci Müdür Çıkmış Sorular 4": [
                     {
                         "soru_no": 61,
                         "soru": "5018 sayılı Kamu Mali Yönetimi ve Kontrol Kanunu’na göre Yükseköğretim Kurulu ile üniversiteler ve yüksek teknoloji enstitülerinde, harcama yetkilileri aşağıdakilerden hangisi ile belirlenir?",
@@ -3470,7 +3492,9 @@
                         },
                         "dogru_cevap": "Dört adet tişört",
                         "ozet": "Mevzuata göre Dört adet tişört geçerli olmadığından doğru seçenektir."
-                    },
+                    }
+                ],
+                "2017 İkinci Müdür Çıkmış Sorular 5": [
                     {
                         "soru_no": 81,
                         "soru": "Ceza İnfaz Kurumlarında Bulundurulabilecek Eşya ve Maddeler Hakkında Yönetmelik’e göre oda ve eklentilerinde aşağıdaki elektrikli eşyalardan hangisi bulundurulmaz?",
@@ -3714,17 +3738,17 @@
                 ]
             },
             "İnfaz Koruma Baş Memurluğu": {
-                "2017 Çıkmış Sorular": [
+                "2017 İnfaz ve Koruma Başmemurluğu Çıkmış Sorular 1": [
                     {
                         "soru_no": 1,
-                        "soru": "T.C. Anayasasi’na gére asagidakilerden hangisi sikiyOnetim ilanini gerektirecek durumlardan biri degildir?",
+                        "soru": "T.C. Anayasasi’na gére asagidakilerden hangisi sıkı yönetim ilanini gerektirecek durumlardan biri degildir?",
                         "secenekler": {
-                            "A": "Savas hali",
+                            "A": "Savaş hali",
                             "B": "Ayaklanma olmas!",
-                            "C": "Agir ekonomik bunalim halleri",
-                            "D": "Savas! gerektirecek bir durumun bas géstermesi . T.C. Anayasasi’na gore Anayasa Mahkemesi uyelerinden kag Turkiye Buyuk Millet Meclisi tarafindan segilir? A) Ug B) Yedi C) On D) On dért |. Higbir kisiye, aileye, zimreye veya sinifa imtiyaz taninamaz. ll. Herkes, dil, irk, renk, cinsiyet, siyasi dUsiince, felsefi inang, din, mezhep ve benzeri sebeplerle ayrim gézetilmeksizin kanun Onunde esittir. Ill. Gocuklar, yaslilar, 6zUrluler, harp ve vazife sehitlerinin dul ve yetimleri ile malul ve gaziler igin alinacak tedbirler esitlik ilkesine aykir1 sayilmaz. IV. Kadinlar ve erkekler egit haklara sahiptir. Devlet, bu esitligin yasama gecmesini saglamakla ytkumludur. Bu maksatla alinacak tedbirler esitlik ilkesine aykir! olarak yorumlanamaz. T.C. Anayasasi’na gore kanun Gninde esitlik ilkesi ile ilgili yukaridaki ifadelerden hangileri dogrudur? A) | ve Il B) Ill ve IV C) Il, Ill ve IV D) I, I, Ill ve IV . T.C. Anayasasi’na gore haberlesme hirriyeti agagidaki sebeplerden hangisine bagli olarak engellenemez? A) Baskalarinin hak ve é6zgtrluklerinin korunmasi B) Ekonomik istikrarin korunmasi C) Sug islenmesinin 6nlenmesi D) Mill? giivenlik"
+                            "C": "Ağır ekonomik bunalım halleri",
+                            "D": "Savaş gerektirecek bir durumun baş göstermesi. T.C. Anayasası’na göre Anayasa Mahkemesi uyelerinden kag Turkiye Buyuk Millet Meclisi tarafindan segilir? A) Ug B) Yedi C) On D) On dért |. Higbir kisiye, aileye, zimreye veya sinifa imtiyaz taninamaz. ll. Herkes, dil, irk, renk, cinsiyet, siyasi dUsiince, felsefi inang, din, mezhep ve benzeri sebeplerle ayrim gézetilmeksizin kanun Onunde esittir. Ill. Gocuklar, yaslilar, 6zUrluler, harp ve vazife sehitlerinin dul ve yetimleri ile malul ve gaziler igin alinacak tedbirler esitlik ilkesine aykir1 sayilmaz. IV. Kadinlar ve erkekler egit haklara sahiptir. Devlet, bu esitligin yasama gecmesini saglamakla ytkumludur. Bu maksatla alinacak tedbirler esitlik ilkesine aykir! olarak yorumlanamaz. T.C. Anayasasi’na gore kanun Gninde esitlik ilkesi ile ilgili yukaridaki ifadelerden hangileri dogrudur? A) | ve Il B) Ill ve IV C) Il, Ill ve IV D) I, I, Ill ve IV . T.C. Anayasasi’na gore haberlesme hirriyeti agagidaki sebeplerden hangisine bagli olarak engellenemez? A) Baskalarinin hak ve é6zgtrluklerinin korunmasi B) Ekonomik istikrarin korunmasi C) Sug islenmesinin 6nlenmesi D) Mill? giivenlik"
                         },
-                        "dogru_cevap": "Agir ekonomik bunalim halleri",
+                        "dogru_cevap": "Ağır ekonomik bunalım halleri",
                         "ozet": "İlgili mevzuata göre Agir ekonomik bunalim halleri ifadesi doğrudur."
                     },
                     {
@@ -3954,7 +3978,9 @@
                         },
                         "dogru_cevap": "Özne - Belirtili nesne - Dolaylı tümleç - Yüklem",
                         "ozet": "Soruya göre aranan ölçüte en iyi uyan ifade Özne - Belirtili nesne - Dolaylı tümleç - Yüklem olduğundan doğru yanıttır."
-                    },
+                    }
+                ],
+                "2017 İnfaz ve Koruma Başmemurluğu Çıkmış Sorular 2": [
                     {
                         "soru_no": 21,
                         "soru": "İl Sağlık Müdürü İhsan Bey, tıpta uzmanlık sınavına hazırlanan ve hastaların yoğun olduğu bir sağlık ocağında görev yaptığı için sınava hazırlanacak zaman bulamayan yeğenini, hasta yoğunluğunun olmadığı bir yerde görevlendirmiştir. Verilen örnek olayda İl Sağlık Müdürü İhsan Bey, aşağıdaki etik dışı davranışlardan hangisini yapmıştır?",
@@ -4194,7 +4220,9 @@
                         },
                         "dogru_cevap": "aklınızdan geçenleri okuduğunu İNFAZ VE KORUMA BAŞMEMURLUĞU B 7",
                         "ozet": "Soruya göre aranan ölçüte en iyi uyan ifade aklınızdan geçenleri okuduğunu İNFAZ VE KORUMA BAŞMEMURLUĞU B 7 olduğundan doğru yanıttır."
-                    },
+                    }
+                ],
+                "2017 İnfaz ve Koruma Başmemurluğu Çıkmış Sorular 3": [
                     {
                         "soru_no": 41,
                         "soru": "Sözcüklere yeni anlamlar yükleme, onları mülkiyet altına alma ve eğip bükme hakkı büyük şairlere aittir. Aşağıdakilerden hangisi bu cümleye anlamca en yakındır?",
@@ -4434,7 +4462,9 @@
                         },
                         "dogru_cevap": "Erteleme isteminin kabulü, güvence gösterilmesine veya diğer bir şarta bağlanamaz.",
                         "ozet": "5275 sayılı Ceza ve Güvenlik Tedbirlerinin İnfazı Hakkında bağlamında Erteleme isteminin kabulü, güvence gösterilmesine veya diğer bir şarta bağlanamaz. ifadesi, istenen nitelikte OLMADIĞI için doğru seçenektir."
-                    },
+                    }
+                ],
+                "2017 İnfaz ve Koruma Başmemurluğu Çıkmış Sorular 4": [
                     {
                         "soru_no": 61,
                         "soru": "5275 sayılı Ceza ve Güvenlik Tedbirlerinin İnfazı Hakkında Kanun’a göre aşağıdakilerden hangisi kınama cezasını gerektiren eylemlerden biridir?",
@@ -4674,7 +4704,9 @@
                         },
                         "dogru_cevap": "Hükümlü ve tutuklulara, gerekli şartları taşısalar bile aynı anda sadece bir ödül verilebilir.",
                         "ozet": "Hükümlü ve Tutukluların Ödüllendirilmesi Hakkında Yönetmelik’in uygulanması ile bağlamında Hükümlü ve tutuklulara, gerekli şartları taşısalar bile aynı anda sadece bir ödül verilebilir. ifadesi, istenen nitelikte OLMADIĞI için doğru seçenektir."
-                    },
+                    }
+                ],
+                "2017 İnfaz ve Koruma Başmemurluğu Çıkmış Sorular 5": [
                     {
                         "soru_no": 81,
                         "soru": "Hükümlü ve Tutukluların Ödüllendirilmesi Hakkında Yönetmelik’e göre ödül türleri ve uygulanma esaslarıyla ilgili olarak hükümlü ve tutuklulara aşağıdaki ödül türlerinden hangisi verilemez?",
@@ -4918,7 +4950,7 @@
                 ]
             },
             "Şef": {
-                "2017 Çıkmış Sorular": [
+                "2017 Şef Çıkmış Sorular 1": [
                     {
                         "soru_no": 1,
                         "soru": "T.C. Anayasası’na göre yürütme yetkisi ve görevini yerine getirecek merciler aşağıdakilerin hangisinde doğru olarak verilmiştir?",
@@ -5158,7 +5190,9 @@
                         },
                         "dogru_cevap": "( ? ) ( : ) ( , ) ( … )",
                         "ozet": "Soru kökünü en doğru karşılayan ifade ( ? ) ( : ) ( , ) ( … ) olduğundan doğrudur."
-                    },
+                    }
+                ],
+                "2017 Şef Çıkmış Sorular 2": [
                     {
                         "soru_no": 21,
                         "soru": "Kamu yönetimi etiğine ilişkin ilke ve değerleri uygulamanın sonuçlarıyla ilgili aşağıdakilerden hangisi yanlıştır?",
@@ -5398,7 +5432,9 @@
                         },
                         "dogru_cevap": "Teşhis ve tedavi yollarına",
                         "ozet": "Süre/sayı koşullarını doğru veren seçenek Teşhis ve tedavi yollarına’tir."
-                    },
+                    }
+                ],
+                "2017 Şef Çıkmış Sorular 3": [
                     {
                         "soru_no": 41,
                         "soru": "Şiir yazmak başka bir şeydir. Şiir yazmaya talip kişi, yokluğu ve yoksulluğu da isteyendir. Çünkü onun varı yoğu artık şiiri olacaktır. Yeri gelecek bir şiir üzerine belki günlerce çalışıp bir deri bir kemik kalacaktır. Bu durum yıllarca sürebilir, sonrasında ortaya bir şey koyamadan şiirin ve yılların içinde kaybolup gidebilir. Eskilerin uzun ve zahmetli bir yolculuğu anlatmak için kullandıkları “Demir çarık, demir asa!” sözü tam da şiir için yola çıkmayı anlatmaktadır. Bu parçadan çıkarılabilecek en kapsamlı yargı aşağıdakilerden hangisidir?",
@@ -5638,7 +5674,9 @@
                         },
                         "dogru_cevap": "Bir",
                         "ozet": "İlgili mevzuat hükmünü doğru yansıtan seçenek Bir’tir."
-                    },
+                    }
+                ],
+                "2017 Şef Çıkmış Sorular 4": [
                     {
                         "soru_no": 61,
                         "soru": "5402 sayılı Denetimli Serbestlik Hizmetleri Kanunu’na göre aşağıdakilerden hangisi Denetimli Serbestlik Hizmetleri Danışma Kurulunun görevlerinden değildir?",
@@ -5878,7 +5916,9 @@
                         },
                         "dogru_cevap": "30",
                         "ozet": "İlgili mevzuat hükmünü doğru yansıtan seçenek 30’tir."
-                    },
+                    }
+                ],
+                "2017 Şef Çıkmış Sorular 5": [
                     {
                         "soru_no": 81,
                         "soru": "657 sayılı Devlet Memurları Kanunu’na göre kademe ilerlemesiyle ilgili aşağıdaki hükümlerden hangisi yanlıştır?",
@@ -6122,7 +6162,7 @@
                 ]
             },
             "Yazı İşleri Müdürü": {
-                "2017 Çıkmış Sorular": [
+                "2017 Yazı İşleri Müdürü Çıkmış Sorular 1": [
                     {
                         "soru_no": 1,
                         "soru": "I. Egemenlik, kayıtsız şartsız Türkiye Büyük Millet Meclisinindir. II. Türk Milleti, egemenliğini, Anayasa’nın koyduğu esaslara göre, milletin eliyle kullanır. III. Egemenliğin kullanılması, hiçbir surette hiçbir kişiye, zümreye veya sınıfa bırakılamaz. IV. Hiçbir kimse veya organ kaynağını Anayasa’dan almayan bir Devlet yetkisi kullanamaz. T.C. Anayasası’na göre egemenlik ile ilgili yukarıdaki hükümlerden hangileri doğrudur?",
@@ -6382,7 +6422,9 @@
                         },
                         "dogru_cevap": "on - yedi",
                         "ozet": "İlgili mevzuat/düzenleme gereği doğru ifade on - yedi’tir."
-                    },
+                    }
+                ],
+                "2017 Yazı İşleri Müdürü Çıkmış Sorular 2": [
                     {
                         "soru_no": 21,
                         "soru": "“Düşmek” sözcüğü aşağıdakilerin hangisinde “Bu konunun üzerine çok düştün.” cümlesindeki anlamıyla kullanılmıştır?",
@@ -6642,7 +6684,9 @@
                         },
                         "dogru_cevap": "II - IV - III - I",
                         "ozet": "Numaralı hükümler karşılaştırıldığında doğru kombinasyon II - IV - III - I olur."
-                    },
+                    }
+                ],
+                "2017 Yazı İşleri Müdürü Çıkmış Sorular 3": [
                     {
                         "soru_no": 41,
                         "soru": "2992 sayılı Adalet Bakanlığının Teşkilat ve Görevleri Hakkında Kanun Hükmünde Kararnamenin Değiştirilerek Kabulü Hakkında Kanun’a göre Adli Sicil ve İstatistik Genel Müdürlüğü Bakanlığın görev ve yetkisine giren konularla ilgili istatistik bilgilerin; I. Belirlenmesi II. Toplanması III. Sınıflandırılması IV. Değerlendirilmesi ile ilgili hizmetlerden hangilerini yürütmekle görevlidir?",
@@ -6902,7 +6946,9 @@
                         },
                         "dogru_cevap": "İlgi ile metin başlangıcı arasında iki satır, ilgi yoksa belgenin muhatabı ile metin başlangıcı arasında üç satır boşluk bulunur.",
                         "ozet": "Mevzuata göre doğru olmayan ifade İlgi ile metin başlangıcı arasında iki satır, ilgi yoksa belgenin muhatabı ile metin başlangıcı arasında üç satır boşluk bulunur. olduğundan işaretlenir."
-                    },
+                    }
+                ],
+                "2017 Yazı İşleri Müdürü Çıkmış Sorular 4": [
                     {
                         "soru_no": 61,
                         "soru": "7201 sayılı Tebligat Kanunu’na göre “elektronik tebligat” ile ilgili aşağıdakilerden hangisi yanlıştır?",
@@ -7162,7 +7208,9 @@
                         },
                         "dogru_cevap": "I ve II",
                         "ozet": "İlgili mevzuat/düzenleme gereği doğru ifade I ve II’tir."
-                    },
+                    }
+                ],
+                "2017 Yazı İşleri Müdürü Çıkmış Sorular 5": [
                     {
                         "soru_no": 81,
                         "soru": "Karar ve ilam harçlarının - - - - peşin, geri kalanı kararın tebliğinden itibaren - - - - ay içinde ödenir. 492 sayılı Harçlar Kanunu’na göre yukarıdaki hükümde boş bırakılan yerlere sırasıyla hangisi getirilmelidir?",
@@ -7426,7 +7474,7 @@
                 ]
             },
             "Zabıt Katibi": {
-                "2017 Çıkmış Sorular": [
+                "2017 Zabıt Katibi Çıkmış Sorular 1": [
                     {
                         "soru_no": 1,
                         "soru": "I. Egemenlik, kayıtsız şartsız Türkiye Büyük Millet Meclisinindir. II. Türk Milleti, egemenliğini, Anayasa’nın koyduğu esaslara göre, milletin eliyle kullanır. III. Egemenliğin kullanılması, hiçbir surette hiçbir kişiye, zümreye veya sınıfa bırakılamaz. IV. Hiçbir kimse veya organ kaynağını Anayasa’dan almayan bir Devlet yetkisi kullanamaz. T.C. Anayasası’na göre egemenlik ile ilgili yukarıdaki hükümlerden hangileri doğrudur?",
@@ -7686,7 +7734,9 @@
                         },
                         "dogru_cevap": "on - yedi",
                         "ozet": "Mevzuat hükmünü doğru yansıtan seçenek on - yedi’tir."
-                    },
+                    }
+                ],
+                "2017 Zabıt Katibi Çıkmış Sorular 2": [
                     {
                         "soru_no": 21,
                         "soru": "Aşağıdaki cümlelerin hangisinde altı çizili sözcük mecaz anlamıyla kullanılmamıştır?",
@@ -7946,7 +7996,9 @@
                         },
                         "dogru_cevap": "II - IV - III - I",
                         "ozet": "Numaralı maddeler birlikte yorumlandığında doğru seçenek II - IV - III - I olur."
-                    },
+                    }
+                ],
+                "2017 Zabıt Katibi Çıkmış Sorular 3": [
                     {
                         "soru_no": 41,
                         "soru": "I. Bağlı kuruluşlar II. Anahizmet birimleri III. Yardımcı birimler IV. Danışma ve denetim birimleri 2992 sayılı Adalet Bakanlığının Teşkilat ve Görevleri Hakkında Kanun Hükmünde Kararnamenin Değiştirilerek Kabulü Hakkında Kanun’a göre Bakanlık merkez teşkilatı yukarıdakilerin hangilerinden meydana gelir?",
@@ -8206,7 +8258,9 @@
                         },
                         "dogru_cevap": "Yönetmelik",
                         "ozet": "Mevzuat hükmünü doğru yansıtan seçenek Yönetmelik’tir."
-                    },
+                    }
+                ],
+                "2017 Zabıt Katibi Çıkmış Sorular 4": [
                     {
                         "soru_no": 61,
                         "soru": "I. Elektronik imzalı belgenin elle atılan imzalı belgeyle çelişmesi hâlinde elle atılan imzalı belge geçerli kabul edilir. II. Kanunlarda gösterilen istisnalar hariç olmak üzere, dosyalar güvenli elektronik imza kullanılarak UYAP’tan incelenebilir ve her türlü ceza muhakemesi işlemi yapılabilir. III. Güvenli elektronik imza ile imzalanan belge ve kararlarda, mühürleme işlemi ile kanunlarda birden fazla nüshanın düzenlenmesini öngören hükümler uygulanmaz. IV. Elektronik ortamdan fiziki örnek çıkartılması gereken hâllerde tutanak veya belgenin aslının aynı olduğu belirtilerek hâkim, Cumhuriyet savcısı veya görevlendirilen yetkili kişi tarafından imzalanır ve mühürlenir. 5271 sayılı Ceza Muhakemesi Kanunu’na göre “elektronik işlemler” ile ilgili yukarıdakilerden hangileri doğrudur?",
@@ -8466,7 +8520,9 @@
                         },
                         "dogru_cevap": "derhâl - beş",
                         "ozet": "Sayı/süre/koşul bilgisini doğru veren seçenek derhâl - beş’tir."
-                    },
+                    }
+                ],
+                "2017 Zabıt Katibi Çıkmış Sorular 5": [
                     {
                         "soru_no": 81,
                         "soru": "4721 sayılı Türk Medeni Kanunu’nun “başlangıç hükümleri” ile ilgili aşağıdakilerden hangisi yanlıştır?",
@@ -8734,7 +8790,7 @@
     "Ünvan Değişikliği": {
         "Adalet Bakanlığı": {
             "İdare Memuru": {
-                "2017 Çıkmış Sorular": [
+                "2017 İdare Memuru Çıkmış Sorular 1": [
                     {
                         "soru_no": 1,
                         "soru": "T.C. Anayasası’na göre yürütme yetkisi ve görevini yerine getirecek merciler aşağıdakilerin hangisinde doğru olarak verilmiştir?",
@@ -8974,7 +9030,9 @@
                         },
                         "dogru_cevap": "( ? ) ( : ) ( , ) ( … )",
                         "ozet": "Soru kökünü en doğru karşılayan ifade ( ? ) ( : ) ( , ) ( … )’tir."
-                    },
+                    }
+                ],
+                "2017 İdare Memuru Çıkmış Sorular 2": [
                     {
                         "soru_no": 21,
                         "soru": "Kamu yönetimi etiğine ilişkin ilke ve değerleri uygulamanın sonuçlarıyla ilgili aşağıdakilerden hangisi yanlıştır?",
@@ -9214,7 +9272,9 @@
                         },
                         "dogru_cevap": "Teşhis ve tedavi yollarına",
                         "ozet": "Sayı, süre ya da oran bilgisini doğru veren seçenek Teşhis ve tedavi yollarına’tir."
-                    },
+                    }
+                ],
+                "2017 İdare Memuru Çıkmış Sorular 3": [
                     {
                         "soru_no": 41,
                         "soru": "Şiir yazmak başka bir şeydir. Şiir yazmaya talip kişi, yokluğu ve yoksulluğu da isteyendir. Çünkü onun varı yoğu artık şiiri olacaktır. Yeri gelecek bir şiir üzerine belki günlerce çalışıp bir deri bir kemik kalacaktır. Bu durum yıllarca sürebilir, sonrasında ortaya bir şey koyamadan şiirin ve yılların içinde kaybolup gidebilir. Eskilerin uzun ve zahmetli bir yolculuğu anlatmak için kullandıkları “Demir çarık, demir asa!” sözü tam da şiir için yola çıkmayı anlatmaktadır. Bu parçadan çıkarılabilecek en kapsamlı yargı aşağıdakilerden hangisidir?",
@@ -9454,7 +9514,9 @@
                         },
                         "dogru_cevap": "Üç",
                         "ozet": "Soru dayandığı mevzuatı doğru yansıtan seçenek Üç’tir."
-                    },
+                    }
+                ],
+                "2017 İdare Memuru Çıkmış Sorular 4": [
                     {
                         "soru_no": 61,
                         "soru": "5018 sayılı Kamu Mali Yönetimi ve Kontrol Kanunu’na göre bütçeyle ödenek tahsis edilen her bir harcama biriminin en üst yöneticisi aşağıdakilerden hangisidir?",
@@ -9694,7 +9756,9 @@
                         },
                         "dogru_cevap": "Beş adet gömlek İDARE MEMURU A 13",
                         "ozet": "Mevzuata göre istisna/yanlış olan ifade Beş adet gömlek İDARE MEMURU A 13 olduğu için seçilir."
-                    },
+                    }
+                ],
+                "2017 İdare Memuru Çıkmış Sorular 5": [
                     {
                         "soru_no": 81,
                         "soru": "Ceza İnfaz Kurumlarında Bulundurulabilecek Eşya ve Maddeler Hakkında Yönetmelik’e göre süreli veya süresiz yayınlar ile kitaplarla ilgili aşağıdakilerden hangisi yanlıştır?",
@@ -9938,7 +10002,7 @@
                 ]
             },
             "Şef": {
-                "2017 Çıkmış Sorular": [
+                "2017 Şef Çıkmış Sorular 1": [
                     {
                         "soru_no": 1,
                         "soru": "T.C. Anayasası’na göre yürütme yetkisi ve görevini yerine getirecek merciler aşağıdakilerin hangisinde doğru olarak verilmiştir?",
@@ -10178,7 +10242,9 @@
                         },
                         "dogru_cevap": "( ? ) ( : ) ( , ) ( … )",
                         "ozet": "Soru kökünü en doğru karşılayan ifade ( ? ) ( : ) ( , ) ( … )’tir."
-                    },
+                    }
+                ],
+                "2017 Şef Çıkmış Sorular 2": [
                     {
                         "soru_no": 21,
                         "soru": "Kamu yönetimi etiğine ilişkin ilke ve değerleri uygulamanın sonuçlarıyla ilgili aşağıdakilerden hangisi yanlıştır?",
@@ -10418,7 +10484,9 @@
                         },
                         "dogru_cevap": "Teşhis ve tedavi yollarına",
                         "ozet": "Sayı, süre veya oran bilgisini doğru veren seçenek Teşhis ve tedavi yollarına’tir."
-                    },
+                    }
+                ],
+                "2017 Şef Çıkmış Sorular 3": [
                     {
                         "soru_no": 41,
                         "soru": "Şiir yazmak başka bir şeydir. Şiir yazmaya talip kişi, yokluğu ve yoksulluğu da isteyendir. Çünkü onun varı yoğu artık şiiri olacaktır. Yeri gelecek bir şiir üzerine belki günlerce çalışıp bir deri bir kemik kalacaktır. Bu durum yıllarca sürebilir, sonrasında ortaya bir şey koyamadan şiirin ve yılların içinde kaybolup gidebilir. Eskilerin uzun ve zahmetli bir yolculuğu anlatmak için kullandıkları “Demir çarık, demir asa!” sözü tam da şiir için yola çıkmayı anlatmaktadır. Bu parçadan çıkarılabilecek en kapsamlı yargı aşağıdakilerden hangisidir?",
@@ -10658,7 +10726,9 @@
                         },
                         "dogru_cevap": "Bir",
                         "ozet": "Soru dayandığı mevzuatı doğru yansıtan seçenek Bir’tir."
-                    },
+                    }
+                ],
+                "2017 Şef Çıkmış Sorular 4": [
                     {
                         "soru_no": 61,
                         "soru": "5402 sayılı Denetimli Serbestlik Hizmetleri Kanunu’na göre aşağıdakilerden hangisi Denetimli Serbestlik Hizmetleri Danışma Kurulunun görevlerinden değildir?",
@@ -10898,7 +10968,9 @@
                         },
                         "dogru_cevap": "30",
                         "ozet": "Soru dayandığı mevzuatı doğru yansıtan seçenek 30’tir."
-                    },
+                    }
+                ],
+                "2017 Şef Çıkmış Sorular 5": [
                     {
                         "soru_no": 81,
                         "soru": "657 sayılı Devlet Memurları Kanunu’na göre kademe ilerlemesiyle ilgili aşağıdaki hükümlerden hangisi yanlıştır?",
@@ -11142,7 +11214,7 @@
                 ]
             },
             "Sayman": {
-                "2017 Çıkmış Sorular": [
+                "2017 Sayman Çıkmış Sorular 1": [
                     {
                         "soru_no": 1,
                         "soru": "T.C. Anayasası’na göre yürütme yetkisi ve görevini yerine getirecek merciler aşağıdakilerin hangisinde doğru olarak verilmiştir?",
@@ -11382,7 +11454,9 @@
                         },
                         "dogru_cevap": "( ? ) ( : ) ( , ) ( … )",
                         "ozet": "Soru kökünü en iyi karşılayan muhasebe kaydı ( ? ) ( : ) ( , ) ( … )’tir."
-                    },
+                    }
+                ],
+                "2017 Sayman Çıkmış Sorular 2": [
                     {
                         "soru_no": 21,
                         "soru": "Kamu yönetimi etiğine ilişkin ilke ve değerleri uygulamanın sonuçlarıyla ilgili aşağıdakilerden hangisi yanlıştır?",
@@ -11622,7 +11696,9 @@
                         },
                         "dogru_cevap": "Teşhis ve tedavi yollarına",
                         "ozet": "Soru kökünü en iyi karşılayan muhasebe kaydı Teşhis ve tedavi yollarına’tir."
-                    },
+                    }
+                ],
+                "2017 Sayman Çıkmış Sorular 3": [
                     {
                         "soru_no": 41,
                         "soru": "Şiir yazmak başka bir şeydir. Şiir yazmaya talip kişi, yokluğu ve yoksulluğu da isteyendir. Çünkü onun varı yoğu artık şiiri olacaktır. Yeri gelecek bir şiir üzerine belki günlerce çalışıp bir deri bir kemik kalacaktır. Bu durum yıllarca sürebilir, sonrasında ortaya bir şey koyamadan şiirin ve yılların içinde kaybolup gidebilir. Eskilerin uzun ve zahmetli bir yolculuğu anlatmak için kullandıkları “Demir çarık, demir asa!” sözü tam da şiir için yola çıkmayı anlatmaktadır. Bu parçadan çıkarılabilecek en kapsamlı yargı aşağıdakilerden hangisidir?",
@@ -11862,7 +11938,9 @@
                         },
                         "dogru_cevap": "İnfaz ve koruma başmemuru SAYMAN A 9",
                         "ozet": "Olumsuz soru kökünde aykırı ifade İnfaz ve koruma başmemuru SAYMAN A 9 olduğundan doğrudur."
-                    },
+                    }
+                ],
+                "2017 Sayman Çıkmış Sorular 4": [
                     {
                         "soru_no": 61,
                         "soru": "Aşağıdakilerden hangisi Merkezi Yönetim Muhasebe Yönetmeliği’nin uygulanmasında kullanılacak defterlerden biri değildir?",
@@ -12102,7 +12180,9 @@
                         },
                         "dogru_cevap": "İPTAL (Soru iptal edilmiştir.)",
                         "ozet": "Soru iptal edildiği için doğru seçenek yoktur."
-                    },
+                    }
+                ],
+                "2017 Sayman Çıkmış Sorular 5": [
                     {
                         "soru_no": 81,
                         "soru": "Aşağıdakilerden hangisi stok maliyetlerine dâhil edilir?",
@@ -12346,7 +12426,7 @@
                 ]
             },
             "İkinci Müdür": {
-                "2017 Çıkmış Sorular": [
+                "2017 İkinci Müdür Çıkmış Sorular 1": [
                     {
                         "soru_no": 1,
                         "soru": "I. Hiçbir kişiye, aileye, zümreye veya sınıfa imtiyaz tanınamaz. II. Herkes, dil, ırk, renk, cinsiyet, siyasi düşünce, felsefi inanç, din, mezhep ve benzeri sebeplerle ayrım gözetilmeksizin kanun önünde eşittir. III. Çocuklar, yaşlılar, özürlüler, harp ve vazife şehitlerinin dul ve yetimleri ile malul ve gaziler için alınacak tedbirler eşitlik ilkesine aykırı sayılmaz. IV. Kadınlar ve erkekler eşit haklara sahiptir. Devlet, bu eşitliğin yaşama geçmesini sağlamakla yü - kümlüdür. Bu maksatla alınacak tedbirler eşitlik ilkesine aykırı olarak yorumlanamaz. T.C. Anayasası’na göre kanun önünde eşitlik ilkesi ile ilgili yukarıdaki ifadelerden hangileri doğrudur?",
@@ -12586,7 +12666,9 @@
                         },
                         "dogru_cevap": "( . ) ( ; ) ( : ) ( , )",
                         "ozet": "Doğru seçenek, verilen ifadelerden uygun kombinasyon: ( . ) ( ; ) ( : ) ( , )."
-                    },
+                    }
+                ],
+                "2017 İkinci Müdür Çıkmış Sorular 2": [
                     {
                         "soru_no": 21,
                         "soru": "Kamu yönetimi etiği ilke ve değerlerinin sonuçları ile ilgili aşağıdakilerden hangisi yanlıştır?",
@@ -12826,7 +12908,9 @@
                         },
                         "dogru_cevap": "Milletlerin kültür hazinesinin bir parçası oldu - ğuna",
                         "ozet": "Yanlış olan ifade: Milletlerin kültür hazinesinin bir parçası oldu - ğuna."
-                    },
+                    }
+                ],
+                "2017 İkinci Müdür Çıkmış Sorular 3": [
                     {
                         "soru_no": 41,
                         "soru": "Karagöz oyunu asırlardır devam eden bir gele - nek. Ancak bu oyunun tekniği salt Osmanlıya ait değil. Cava’dan Mısır’a, Çin’den Japonya’ya, Hindistan’dan Suriye’ye bu oyunun temel tekniği hep aynı. Bu nedenle bu oyun için “insanlık kül - türünün ortak malı” demek yanlış olmaz. Karagöz oyunu ne kadar kültürel etkileşim varsa o kadar çeşitli bir içeriğe sahip. Toramanlı Karagöz, Çift Karagöz, Soytarı Karagöz gibi tiplemeler bu oyun - ların tek kişi ya da ekole ait olmadığını, kültürel ve toplumsal çeşitliliği yansıttığını gösteriyor. Aynı günümüz sineması gibi… Bu parçada Karagöz oyunu ile ilgili asıl anlatıl - mak istenen aşağıdakilerden hangisidir?",
@@ -13066,7 +13150,9 @@
                         },
                         "dogru_cevap": "Taahhüdün tamamlanan ve müstakil kullanıma elverişli bölümleri için kısmi kabul yapılamaz.",
                         "ozet": "Yanlış olan ifade: Taahhüdün tamamlanan ve müstakil kullanıma elverişli bölümleri için kısmi kabul yapılamaz.."
-                    },
+                    }
+                ],
+                "2017 İkinci Müdür Çıkmış Sorular 4": [
                     {
                         "soru_no": 61,
                         "soru": "5018 sayılı Kamu Mali Yönetimi ve Kontrol Kanunu’na göre Yükseköğretim Kurulu ile üniversiteler ve yüksek teknoloji enstitülerinde, harcama yetkilileri aşağıdakilerden hangisi ile belirlenir?",
@@ -13306,7 +13392,9 @@
                         },
                         "dogru_cevap": "Dört adet tişört",
                         "ozet": "Yanlış olan ifade: Dört adet tişört."
-                    },
+                    }
+                ],
+                "2017 İkinci Müdür Çıkmış Sorular 5": [
                     {
                         "soru_no": 81,
                         "soru": "Ceza İnfaz Kurumlarında Bulundurulabilecek Eşya ve Maddeler Hakkında Yönetmelik’e göre oda ve eklentilerinde aşağıdaki elektrikli eşya-lardan hangisi bulundurulmaz ?",
@@ -13550,7 +13638,7 @@
                 ]
             },
             "İnfaz Koruma Baş Memurluğu": {
-                "2017 Çıkmış Sorular": [
+                "2017 İnfaz ve Koruma Başmemurluğu Çıkmış Sorular 1": [
                     {
                         "soru_no": 1,
                         "soru": "I. Hiçbir kişiye, aileye, zümreye veya sınıfa imtiyaz tanınamaz. II. Herkes, dil, ırk, renk, cinsiyet, siyasi düşünce, felsefi inanç, din, mezhep ve benzeri sebeplerle ayrım gözetilmeksizin kanun önünde eşittir. III. Çocuklar, yaşlılar, özürlüler, harp ve vazife şehitlerinin dul ve yetimleri ile malul ve gaziler için alınacak tedbirler eşitlik ilkesine aykırı sayılmaz. IV. Kadınlar ve erkekler eşit haklara sahiptir. Devlet, bu eşitliğin yaşama geçmesini sağlamakla yükümlüdür. Bu maksatla alınacak tedbirler eşitlik ilkesine aykırı olarak yorumlanamaz. T.C. Anayasası’na göre kanun önünde eşitlik ilkesi ile ilgili yukarıdaki ifadelerden hangileri doğrudur?",
@@ -13790,7 +13878,9 @@
                         },
                         "dogru_cevap": "( . ) ( ; ) ( : ) ( , )",
                         "ozet": "Numaralı ifadeler birlikte değerlendirildiğinde doğru kombinasyon ( . ) ( ; ) ( : ) ( , ) olur."
-                    },
+                    }
+                ],
+                "2017 İnfaz ve Koruma Başmemurluğu Çıkmış Sorular 2": [
                     {
                         "soru_no": 21,
                         "soru": "Kamu yönetimi etiği ilke ve değerlerinin sonuçları ile ilgili aşağıdakilerden hangisi yanlıştır?",
@@ -14030,7 +14120,9 @@
                         },
                         "dogru_cevap": "Milletlerin kültür hazinesinin bir parçası olduğuna",
                         "ozet": "Kültür-sanat bağlamında doğru çıkarım Milletlerin kültür hazinesinin bir parçası olduğuna’tir."
-                    },
+                    }
+                ],
+                "2017 İnfaz ve Koruma Başmemurluğu Çıkmış Sorular 3": [
                     {
                         "soru_no": 41,
                         "soru": "Karagöz oyunu asırlardır devam eden bir gelenek. Ancak bu oyunun tekniği salt Osmanlıya ait değil. Cava’dan Mısır’a, Çin’den Japonya’ya, Hindistan’dan Suriye’ye bu oyunun temel tekniği hep aynı. Bu nedenle bu oyun için “insanlık kültürünün ortak malı” demek yanlış olmaz. Karagöz oyunu ne kadar kültürel etkileşim varsa o kadar çeşitli bir içeriğe sahip. Toramanlı Karagöz, Çift Karagöz, Soytarı Karagöz gibi tiplemeler bu oyunların tek kişi ya da ekole ait olmadığını, kültürel ve toplumsal çeşitliliği yansıttığını gösteriyor. Aynı günümüz sineması gibi… Bu parçada Karagöz oyunu ile ilgili asıl anlatılmak istenen aşağıdakilerden hangisidir?",
@@ -14270,7 +14362,9 @@
                         },
                         "dogru_cevap": "İşsizliği önlemek",
                         "ozet": "Mevzuata göre istisna/yanlış olan ifade İşsizliği önlemek’tir."
-                    },
+                    }
+                ],
+                "2017 İnfaz ve Koruma Başmemurluğu Çıkmış Sorular 4": [
                     {
                         "soru_no": 61,
                         "soru": "5018 sayılı Kamu Mali Yönetimi ve Kontrol Kanunu’na göre Yükseköğretim Kurulu ile üniversiteler ve yüksek teknoloji enstitülerinde, harcama yetkilileri aşağıdakilerden hangisi ile belirlenir?",
@@ -14510,7 +14604,9 @@
                         },
                         "dogru_cevap": "0.60 mm kalınlığında üç adet metal yemek tabağı İNFAZ VE KORUMA BAŞMEMURLUĞU A 13",
                         "ozet": "Mevzuata göre istisna/yanlış olan ifade 0.60 mm kalınlığında üç adet metal yemek tabağı İNFAZ VE KORUMA BAŞMEMURLUĞU A 13’tir."
-                    },
+                    }
+                ],
+                "2017 İnfaz ve Koruma Başmemurluğu Çıkmış Sorular 5": [
                     {
                         "soru_no": 81,
                         "soru": "I. Yemek yapılabilecek herhangi bir yerin olmaması durumunda, hükümlülerin kaldıkları koğuş, oda ve eklentilerinde, idare tarafından verilen ve yemek yapmada kullanılacak her türlü gıda maddesi ve malzemesinin yeteri kadar bulundurulmasına izin verilir. II. Yemek yapmada kullanılan tüp gibi yanıcı ve parlayıcı madde veya malzemeler, yemek pişirildikten sonra, oda veya koğuşun içinde, idarenin kontrolünde bir bölüme alınır. III. Kurumun fiziki imkânları müsait olduğu takdirde, aradaki bağlantının standartlara uygun ve güvenlik bakımından sakınca oluşturmayacak şekilde, tüpün; koğuş veya oda dışında, ocağın ise; koğuş veya odada bulundurulmasına izin verilebilir. Ceza İnfaz Kurumlarında Bulundurulabilecek Eşya ve Maddeler Hakkında Yönetmelik’e göre mutfak teşkilatı olmayan ceza infaz kurumlarındaki gıda maddeleri ve kullanılacak malzemelerle ilgili olarak yukarıdakilerden hangileri doğrudur?",
@@ -14754,7 +14850,7 @@
                 ]
             },
             "Sosyolog": {
-                "2017 Çıkmış Sorular": [
+                "2017 Sosyolog Çıkmış Sorular 1": [
                     {
                         "soru_no": 1,
                         "soru": "I. Gizlilik II. Tarafsızlık III. İnsan onuruna saygı ve dürüstlük 5402 sayılı Denetimli Serbestlik Hizmetleri Kanunu’na göre denetimli serbestlik ve yardım ile koruma hizmetlerinde yukarıdaki hangi temel ilkeler dikkate alınır?",
@@ -14994,7 +15090,9 @@
                         },
                         "dogru_cevap": "Denetim bürosu",
                         "ozet": "İlgili mevzuatın doğru hükmünü yansıtan seçenek Denetim bürosu’tir."
-                    },
+                    }
+                ],
+                "2017 Sosyolog Çıkmış Sorular 2": [
                     {
                         "soru_no": 21,
                         "soru": "• Sosyal araştırma raporu hazırlamak • Koruma kurulları çalışmaları kapsamında ev ve iş yeri ziyaretlerine gitmek • Yükümlülerle bireysel görüşmeler yapmak ve grup çalışmalarını yürütmek Denetimli Serbestlik Hizmetleri Yönetmeliği’ne göre yukarıda verilenler hangisinin görevleri arasında yer alır?",
@@ -15234,7 +15332,9 @@
                         },
                         "dogru_cevap": "Tarihi",
                         "ozet": "Olumsuz köke göre aykırı ifade Tarihi olduğundan seçilmiştir."
-                    },
+                    }
+                ],
+                "2017 Sosyolog Çıkmış Sorular 3": [
                     {
                         "soru_no": 41,
                         "soru": "Toplumların coğrafi ve ekonomik koşulları ile tarihsel gözlem üzerinde duran ve devlet ile toplumu birbirinden ayırarak, sosyolojinin bir bilim olarak ortaya çıkmasında önemli bir yeri olan Müslüman düşünür aşağıdakilerden hangisidir?",
@@ -15474,7 +15574,9 @@
                         },
                         "dogru_cevap": "Chicago Okulu",
                         "ozet": "Sosyoloji kuram/kuramcı eşleştirmesine göre doğru isim/kavram Chicago Okulu’tir."
-                    },
+                    }
+                ],
+                "2017 Sosyolog Çıkmış Sorular 4": [
                     {
                         "soru_no": 61,
                         "soru": "Aşağıdaki kuramcılardan hangisi kent sosyolojisinin oluşmasında etkili olmuştur?",
@@ -15718,7 +15820,7 @@
                 ]
             },
             "Öğretmen": {
-                "2017 Çıkmış Sorular": [
+                "2017 Öğretmen Çıkmış Sorular 1": [
                     {
                         "soru_no": 1,
                         "soru": "I. Hükümlülerin eğitim öğretimi ile manevi kalkınmalarını sağlar. II. Kütüphanecinin bulunmadığı hâllerde onun görevlerini yerine getirir. III. Her yılın eğitim öğretim döneminin başlangıcında eğitim ve öğretim, kurs gibi görev alanına giren konularda bir yıllık plan hazırlar. Ceza İnfaz Kurumlarının Yönetimi ile Ceza ve Güvenlik Tedbirlerinin İnfazı Hakkında Tüzük’e göre yukarıdakilerden hangileri öğretmenin görevlerindendir?",
@@ -15958,7 +16060,9 @@
                         },
                         "dogru_cevap": "Mayıs ve Aralık",
                         "ozet": "Mevzuatın doğru hükmünü yansıtan seçenek Mayıs ve Aralık’tir."
-                    },
+                    }
+                ],
+                "2017 Öğretmen Çıkmış Sorular 2": [
                     {
                         "soru_no": 21,
                         "soru": "I. Psikolog II. Denetimli serbestlik şefi III. Eğitimden sorumlu ikinci müdür 46/1 sayılı Genç ve Yetişkin Hükümlü ve Tutuklu Eğitim ve İyileştirme İşlemleri ve Diğer Hükümler Konulu Genelge’ye göre eğitim kurulunun belirlediği esaslar çerçevesinde, sosyal ve kültürel faaliyetleri, kurum öğretmeni ve sosyal hizmet uzmanından herhangi birinin olmaması durumunda yukarıdakilerden hangileri tarafından yürütülür?",
@@ -16198,7 +16302,9 @@
                         },
                         "dogru_cevap": "Taba",
                         "ozet": "Program/öğretim ilkelerine en uygun yaklaşım Taba’tir."
-                    },
+                    }
+                ],
+                "2017 Öğretmen Çıkmış Sorular 3": [
                     {
                         "soru_no": 41,
                         "soru": "I. Problemin hissedilmesi ve belirlenmesi II. Problemle ilgili bilgilerin toplanması III. Problemin çözülmesi ve sonuca varılması IV. Problemin tanımlanması ve sınırlandırılması V. Problemin çözümüyle ilgili hipotezler ileri sürülmesi Verilenlere göre problem çözme yönteminin aşamalarının doğru sıralaması aşağıdakilerden hangisidir?",
@@ -16438,7 +16544,9 @@
                         },
                         "dogru_cevap": "Gölgeli",
                         "ozet": "Gelişim kuram ve dönemlerine göre doğru karşılık Gölgeli’tir."
-                    },
+                    }
+                ],
+                "2017 Öğretmen Çıkmış Sorular 4": [
                     {
                         "soru_no": 61,
                         "soru": "Kazandırılmak istenilen davranıştan sonra olumlu uyarıcı verilerek yapılan koşullanma aşağıdakilerden hangisidir?",
@@ -16682,7 +16790,7 @@
                 ]
             },
             "Gıda Mühendisi": {
-                "2017 Çıkmış Sorular": [
+                "2017 Gıda Mühendisi Çıkmış Sorular 1": [
                     {
                         "soru_no": 1,
                         "soru": "Karışmayan iki sıvının birbiri içinde dağılmasıyla elde edilen heterojen sistemlere ne ad verilir?",
@@ -16922,7 +17030,9 @@
                         },
                         "dogru_cevap": "Karoten",
                         "ozet": "Süt teknolojisi işlemleri açısından doğru yöntem/terim Karoten’tir."
-                    },
+                    }
+                ],
+                "2017 Gıda Mühendisi Çıkmış Sorular 2": [
                     {
                         "soru_no": 21,
                         "soru": "Tekniğine uygun olarak kesilmiş kasaplık hayvanların kanı akıtılarak yüzüldükten sonra iç organları boşaltılıp baş ve ayaklarından ayrılarak soğutulduktan sonra elde edilen gövdesine ne ad verilir?",
@@ -17162,7 +17272,9 @@
                         },
                         "dogru_cevap": "Süt ürünleri",
                         "ozet": "Et teknolojisi uygulamasına uygun doğru terim Süt ürünleri’tir."
-                    },
+                    }
+                ],
+                "2017 Gıda Mühendisi Çıkmış Sorular 3": [
                     {
                         "soru_no": 41,
                         "soru": "Aşağıdakilerden hangisi sütte yağ testinde kullanılan aletlerden biri değildir?",
@@ -17286,7 +17398,7 @@
                 ]
             },
             "Makine Mühendisi": {
-                "2017 Çıkmış Sorular": [
+                "2017 Makine Mühendisi Çıkmış Sorular 1": [
                     {
                         "soru_no": 1,
                         "soru": "Bir borudan birim zamanda geçen akışkan kütlesine ne denir?",
@@ -17526,7 +17638,9 @@
                         },
                         "dogru_cevap": "Muylu",
                         "ozet": "Milin yatakla temas eden bölümü muyludur."
-                    },
+                    }
+                ],
+                "2017 Makine Mühendisi Çıkmış Sorular 2": [
                     {
                         "soru_no": 21,
                         "soru": "Teknik resimde daire ve yay çizimi için kullanılan gereç aşağıdakilerden hangisidir?",
@@ -17766,7 +17880,9 @@
                         },
                         "dogru_cevap": "Akterizasyon aşınması",
                         "ozet": "‘Akterizasyon’ diye bir aşınma türü yoktur; uydurma bir ifadedir."
-                    },
+                    }
+                ],
+                "2017 Makine Mühendisi Çıkmış Sorular 3": [
                     {
                         "soru_no": 41,
                         "soru": "Şekilde verilen yatak aşağıdakilerden hangisidir?",
@@ -17890,7 +18006,7 @@
                 ]
             },
             "Orman Endüstri Mühendisi": {
-                "2017 Çıkmış Sorular": [
+                "2017 Orman Endüstri Mühendisi Çıkmış Sorular 1": [
                     {
                         "soru_no": 1,
                         "soru": "Aşağıdaki komutlardan hangisi modify menüsünde yer almaz?",
@@ -18130,7 +18246,9 @@
                         },
                         "dogru_cevap": "Ahşap malzemenin etrafındaki havanın kurumasıyla su kaybetme durumudur.",
                         "ozet": "Kurutma/nem dengesine ilişkin doğru ifade Ahşap malzemenin etrafındaki havanın kurumasıyla su kaybetme durumudur.’tir."
-                    },
+                    }
+                ],
+                "2017 Orman Endüstri Mühendisi Çıkmış Sorular 2": [
                     {
                         "soru_no": 21,
                         "soru": "Perdahlama işleminin sırası aşağıdakilerin hangisinde doğru verilmiştir?",
@@ -18370,7 +18488,9 @@
                         },
                         "dogru_cevap": "210 cm x 280 cm ve 183 cm x 366 cm",
                         "ozet": "Mobilya üretimi/CNC ve ağaç işleme süreçlerine uygun doğru ifade 210 cm x 280 cm ve 183 cm x 366 cm’tir."
-                    },
+                    }
+                ],
+                "2017 Orman Endüstri Mühendisi Çıkmış Sorular 3": [
                     {
                         "soru_no": 41,
                         "soru": "Aşağıdakilerden hangisi metot etüdünün sistematiği içinde yer almaz?",
@@ -18494,7 +18614,7 @@
                 ]
             },
             "Çevre Mühendisi": {
-                "2017 Çıkmış Sorular": [
+                "2017 Çevre Mühendisi Çıkmış Sorular 1": [
                     {
                         "soru_no": 1,
                         "soru": "I. Doğa bir bütün olarak işlev görür. II. Doğada var olan her şey bir gün yok olur. III. Doğadaki her şeyin bir sınırı vardır. Yukarıdakilerden hangileri doğada canlıların arasındaki ilişkileri açıklayan ekolojinin temel kurallarındandır?",
@@ -18734,7 +18854,9 @@
                         },
                         "dogru_cevap": "Psychoda sineği",
                         "ozet": "Atıksu/içmesuyu arıtma prensiplerine göre doğru seçenek Psychoda sineği’tir."
-                    },
+                    }
+                ],
+                "2017 Çevre Mühendisi Çıkmış Sorular 2": [
                     {
                         "soru_no": 21,
                         "soru": "Aktif çamur sürecinde karşılaşılan en yaygın sorun aşağıdakilerden hangisidir?",
@@ -18974,7 +19096,9 @@
                         },
                         "dogru_cevap": "Pnömatik ayırma",
                         "ozet": "Katı atık yönetimi süreçlerine göre doğru yaklaşım Pnömatik ayırma’tir."
-                    },
+                    }
+                ],
+                "2017 Çevre Mühendisi Çıkmış Sorular 3": [
                     {
                         "soru_no": 41,
                         "soru": "Antropojenik nedenlerle atmosferde en yoğun kirlenen tabaka aşağıdakilerden hangisidir?",
@@ -19098,7 +19222,7 @@
                 ]
             },
             "Elektrik Elektronik Mühendisi": {
-                "2017 Çıkmış Sorular": [
+                "2017 Elektrik Elektronik Mühendisi Çıkmış Sorular 1": [
                     {
                         "soru_no": 1,
                         "soru": "Aşağıdakilerden hangisi “Endüksiyon elektromotor kuvvetinin meydana getirdiği akım, kendisini meydana getiren akım değişimine karşı koyar.” tanımının karşılığıdır?",
@@ -19338,7 +19462,9 @@
                         },
                         "dogru_cevap": "Parafudr",
                         "ozet": "Devre analizi (Ohm/Kirchhoff/reaktans) açısından doğru sonuç Parafudr’tir."
-                    },
+                    }
+                ],
+                "2017 Elektrik Elektronik Mühendisi Çıkmış Sorular 2": [
                     {
                         "soru_no": 21,
                         "soru": "Aşağıdaki direklerden hangisi iletim hatlarının ana hattan ayrıldığı yerlerde kullanılır?",
@@ -19578,7 +19704,9 @@
                         },
                         "dogru_cevap": "5000",
                         "ozet": "Devre analizi (Ohm/Kirchhoff/reaktans) açısından doğru sonuç 5000’tir."
-                    },
+                    }
+                ],
+                "2017 Elektrik Elektronik Mühendisi Çıkmış Sorular 3": [
                     {
                         "soru_no": 41,
                         "soru": "Şekilde verilen blok şemasının transfer fonksiyonu aşağıdakilerden hangisidir?",
@@ -19702,7 +19830,7 @@
                 ]
             },
             "Tekstil Mühendisi": {
-                "2017 Çıkmış Sorular": [
+                "2017 Tekstil Mühendisi Çıkmış Sorular 1": [
                     {
                         "soru_no": 1,
                         "soru": "I. Pamuk % 100’e yakın selüloz içerdiği için selüloza ait bütün özellikleri taşır. II. Derişik ve kuvvetli asitlerle sıcakta ve soğukta bozunur. III. Seyreltik bazlar çok az etki eder ama derişik bazlarla özel etkiler görülür. IV. Sıçrayarak ve cızırtılı bir şekilde yanar ve yanık kağıt kokusu çıkarır. Doğal bitkisel bir lif olan pamuk lifi için yukarıdakilerden hangileri doğrudur?",
@@ -19942,7 +20070,9 @@
                         },
                         "dogru_cevap": "Örme",
                         "ozet": "İplik numara/çekim ve tekstürizasyon ilkelerine göre doğru seçenek Örme’tir."
-                    },
+                    }
+                ],
+                "2017 Tekstil Mühendisi Çıkmış Sorular 2": [
                     {
                         "soru_no": 21,
                         "soru": "Aşağıdakilerden hangisi çözgü sistemli örme makinelerinden biri değildir?",
@@ -20182,7 +20312,9 @@
                         },
                         "dogru_cevap": "Aplikasyon",
                         "ozet": "Boyama/apre ve haslık testlerine göre doğru yöntem/tanım Aplikasyon’tir."
-                    },
+                    }
+                ],
+                "2017 Tekstil Mühendisi Çıkmış Sorular 3": [
                     {
                         "soru_no": 41,
                         "soru": "Kumaş yüzeyini tüylendiren, yüzeyde kabartılmış lif uçlarının çıkmasını sağlayarak yüzeyin kadifemsi bir doku almasını sağlayan mekanik bitim işlemi aşağıdakilerden hangisidir?",
@@ -20306,7 +20438,7 @@
                 ]
             },
             "Bilgisayar Teknisyeni": {
-                "2017 Çıkmış Sorular": [
+                "2017 Bilgisayar Teknisyeni Çıkmış Sorular 1": [
                     {
                         "soru_no": 1,
                         "soru": "Microsoft Word 2013 programında metni italik hale getirmek için aşağıdaki kısayol tuşların- dan hangisi kullanılır?",
@@ -20546,7 +20678,9 @@
                         },
                         "dogru_cevap": "printf(\t)",
                         "ozet": "C dili sözdizimine göre doğru seçenek printf(\t)’tir."
-                    },
+                    }
+                ],
+                "2017 Bilgisayar Teknisyeni Çıkmış Sorular 2": [
                     {
                         "soru_no": 21,
                         "soru": "VB programlama dilinde mesaj kutusu oluş- turmak için aşağıdaki kodlardan hangisi kullanılır?",
@@ -20786,7 +20920,9 @@
                         },
                         "dogru_cevap": "CREATE\tTABLE",
                         "ozet": "SQL komutlarının işlemlerine göre doğru seçenek CREATE\tTABLE’tir."
-                    },
+                    }
+                ],
+                "2017 Bilgisayar Teknisyeni Çıkmış Sorular 3": [
                     {
                         "soru_no": 41,
                         "soru": "Belirlenen bir ölçüte göre tablo içerisindeki kayıtları seçmek için aşağıdaki SQL komutla- rından hangisi kullanılır?",
@@ -20910,7 +21046,7 @@
                 ]
             },
             "Mobilya Teknisyeni": {
-                "2017 Çıkmış Sorular": [
+                "2017 Mobilya Teknisyeni Çıkmış Sorular 1": [
                     {
                         "soru_no": 1,
                         "soru": "Teknik resimde cisimler üç ana boyut ile ele alınır. Aşağıdakilerden hangisi bu boyutlardan biri değildir?",
@@ -21150,7 +21286,9 @@
                         },
                         "dogru_cevap": "Düz mil",
                         "ozet": "Makine ve ekipman bilgisinde doğru kullanım/tanım Düz mil’tir."
-                    },
+                    }
+                ],
+                "2017 Mobilya Teknisyeni Çıkmış Sorular 2": [
                     {
                         "soru_no": 21,
                         "soru": "Yatay freze makinesinde mil ve bıçak grubunun yukarı - aşağı hareketi makinenin hangi kısmı ile yapılır?",
@@ -21390,7 +21528,9 @@
                         },
                         "dogru_cevap": "Tutkalın açık zamanı",
                         "ozet": "Yüzey/kenar işlemleri ve malzeme tekniği bakımından doğru ifade Tutkalın açık zamanı’tir."
-                    },
+                    }
+                ],
+                "2017 Mobilya Teknisyeni Çıkmış Sorular 3": [
                     {
                         "soru_no": 41,
                         "soru": "Herhangi bir dolap üst ve yan tablalarını birleştirmek için, her bir tabla kenarına açılacak kavela deliği sayısı proje aşamasında belirlenmelidir. Bu açıklamadan yola çıkarak, iki kavela arasındaki mesafe en çok kaç cm olmalıdır?",
@@ -21514,7 +21654,7 @@
                 ]
             },
             "İnşaat Teknisyeni": {
-                "2017 Çıkmış Sorular": [
+                "2017 İnşaat Teknisyeni Çıkmış Sorular 1": [
                     {
                         "soru_no": 1,
                         "soru": "Statik hesap ve taşıyıcı sistem projesini aşağıdakilerden hangisi hazırlar?",
@@ -21754,7 +21894,9 @@
                         },
                         "dogru_cevap": "Çakıl",
                         "ozet": "Taş işçiliği ve alet/işlem bilgisine göre doğru seçenek Çakıl’tir."
-                    },
+                    }
+                ],
+                "2017 İnşaat Teknisyeni Çıkmış Sorular 2": [
                     {
                         "soru_no": 21,
                         "soru": "Agregalarda numune alma ve muayene metotları hangi standarda verilmiştir?",
@@ -21994,7 +22136,9 @@
                         },
                         "dogru_cevap": "Dürtü",
                         "ozet": "Soru kökünü en iyi karşılayan ifade Dürtü’tir."
-                    },
+                    }
+                ],
+                "2017 İnşaat Teknisyeni Çıkmış Sorular 3": [
                     {
                         "soru_no": 41,
                         "soru": "PVC kaplama mekânlarda - - - - ve - - - - açıdan bir sıcaklık sağlaması dışında yapı elemanı olan duvarı da korumaktadır. Verilen ifadede boş bırakılan yerlere sırayla aşağıdakilerden hangisi gelmelidir?",
@@ -22118,7 +22262,7 @@
                 ]
             },
             "Gıda Teknisyeni": {
-                "2017 Çıkmış Sorular": [
+                "2017 Gıda Teknisyeni Çıkmış Sorular 1": [
                     {
                         "soru_no": 1,
                         "soru": "Gıda üretim teknolojisinde mikroorganizmaların zararlı etkilerini engellemeyi ve yararlı etkilerinden faydalanarak gıda üretiminde kullanmayı amaçlayan bilim dalı aşağıdakilerden hangisidir?",
@@ -22358,7 +22502,9 @@
                         },
                         "dogru_cevap": "Klorlu bileşikler",
                         "ozet": "Gıda güvenliği ve hijyen ilkelerine göre doğru cevap Klorlu bileşikler’tir."
-                    },
+                    }
+                ],
+                "2017 Gıda Teknisyeni Çıkmış Sorular 2": [
                     {
                         "soru_no": 21,
                         "soru": "İnsan sağlığını bozan veya devamlı etki altında tutan etmenleri ortadan kaldırmak veya azaltmak için yapılan temizlik işlemleri aşağıdakilerden hangisidir?",
@@ -22598,7 +22744,9 @@
                         },
                         "dogru_cevap": "İncik",
                         "ozet": "Olumsuz köke göre yanlış/uygun olmayan ifade İncik’tir."
-                    },
+                    }
+                ],
+                "2017 Gıda Teknisyeni Çıkmış Sorular 3": [
                     {
                         "soru_no": 41,
                         "soru": "Aşağıdakilerden hangisi etin bileşiminde en fazla yüzdeye sahiptir?",
@@ -22722,7 +22870,7 @@
                 ]
             },
             "Elektrik Teknisyeni": {
-                "2017 Çıkmış Sorular": [
+                "2017 Elektrik Teknisyeni Çıkmış Sorular 1": [
                     {
                         "soru_no": 1,
                         "soru": "(FB) heksadesimal sayısının binary karşılığı aşağıdakilerden hangisidir?",
@@ -22962,7 +23110,9 @@
                         },
                         "dogru_cevap": "Ana pano",
                         "ozet": "Pano/kompanzasyon uygulamalarına göre doğru seçenek Ana pano’tir."
-                    },
+                    }
+                ],
+                "2017 Elektrik Teknisyeni Çıkmış Sorular 2": [
                     {
                         "soru_no": 21,
                         "soru": "Üç faz ile çalışan motorlarda fazlardan birisi kesildiğinde çok kısa sürede devreyi açan ve motoru koruyan röle aşağıdakilerden hangisidir?",
@@ -23202,7 +23352,9 @@
                         },
                         "dogru_cevap": "Decimal rakamların ikilik sayı sistemine kodlanması sonucu oluşan koddur.",
                         "ozet": "Sayı sistemleri/kodlama bilgisince doğru sonuç Decimal rakamların ikilik sayı sistemine kodlanması sonucu oluşan koddur.’tir."
-                    },
+                    }
+                ],
+                "2017 Elektrik Teknisyeni Çıkmış Sorular 3": [
                     {
                         "soru_no": 41,
                         "soru": "(1011)2 ve (1010)2 sayılarının toplamı onluk sayı sistemine göre aşağıdakilerden hangisidir?",
@@ -23326,7 +23478,7 @@
                 ]
             },
             "Ziraat Teknisyeni": {
-                "2017 Çıkmış Sorular": [
+                "2017 Ziraat Teknisyeni Çıkmış Sorular 1": [
                     {
                         "soru_no": 1,
                         "soru": "Aşağıdakilerden hangisi açık alanda yapılan yetiştiricilik sınıflandırmasında yer almaz?",
@@ -23566,7 +23718,9 @@
                         },
                         "dogru_cevap": "Gençlik kısırlığı",
                         "ozet": "Tohum/ekim bilgisine göre doğru seçenek Gençlik kısırlığı’tir."
-                    },
+                    }
+                ],
+                "2017 Ziraat Teknisyeni Çıkmış Sorular 2": [
                     {
                         "soru_no": 21,
                         "soru": "Aşağıdakilerden hangisi kompost yapımında kullanılmaz?",
@@ -23806,7 +23960,9 @@
                         },
                         "dogru_cevap": "Antraknoz",
                         "ozet": "Sebzecilik/bitki koruma bilgisince doğru seçenek Antraknoz’tir."
-                    },
+                    }
+                ],
+                "2017 Ziraat Teknisyeni Çıkmış Sorular 3": [
                     {
                         "soru_no": 41,
                         "soru": "Aşağıdakilerden hangisi ülkemizde dane iriliğine ve rengine göre gruplandırılmış mercimek değildir?",
@@ -23930,7 +24086,7 @@
                 ]
             },
             "Makine Teknisyeni": {
-                "2017 Çıkmış Sorular": [
+                "2017 Makine Teknisyeni Çıkmış Sorular 1": [
                     {
                         "soru_no": 1,
                         "soru": "Aşağıda verilen resim kalemlerinden hangisi diğerlerine göre daha serttir?",
@@ -24170,7 +24326,9 @@
                         },
                         "dogru_cevap": "Termoplastikler",
                         "ozet": "Kalem sertlik derecelerine göre doğru seçenek Termoplastikler’tir."
-                    },
+                    }
+                ],
+                "2017 Makine Teknisyeni Çıkmış Sorular 2": [
                     {
                         "soru_no": 21,
                         "soru": "Aşağıdakilerden hangisi iş parçalarını torna tezgâhına bağlamaya ve desteklemeye yarayan kısımlardan değildir?",
@@ -24410,7 +24568,9 @@
                         },
                         "dogru_cevap": "Üstüpü",
                         "ozet": "Kalıp yüzey parlatma malzemelerine göre Üstüpü kullanılamaz/kullanılır."
-                    },
+                    }
+                ],
+                "2017 Makine Teknisyeni Çıkmış Sorular 3": [
                     {
                         "soru_no": 41,
                         "soru": "Aşağıdakilerden hangisi pimlerin kullanım amaçlarından biri değildir?",
@@ -24534,7 +24694,7 @@
                 ]
             },
             "Sağlık Memuru": {
-                "2017 Çıkmış Sorular": [
+                "2017 Sağlık Memuru Çıkmış Sorular 1": [
                     {
                         "soru_no": 1,
                         "soru": "Ceza İnfaz Kurumlarının Yönetimi ile Ceza ve Güvenlik Tedbirlerinin İnfazı Hakkında Tüzük’e göre aşağıdakilerden hangisi sağlık memurunun görevlerindendir?",
@@ -24774,7 +24934,9 @@
                         },
                         "dogru_cevap": "Siyanozis",
                         "ozet": "Anatomi/fizyoloji bilgisini doğru yansıtan seçenek Siyanozis’tir."
-                    },
+                    }
+                ],
+                "2017 Sağlık Memuru Çıkmış Sorular 2": [
                     {
                         "soru_no": 21,
                         "soru": "Midenin duodenumla birleştiği en alt kısmıdır. Etrafındaki düz kastan yapılmış sfinkter sayesinde, sinirsel uyarılarla kasılma ve gevşeme hareketleri yaparak besinlerin kontrollü olarak duodenuma geçmesini sağlar. Duodenumdaki besinlerin de tekrar mideye geçmesini önler. Yukarıdaki açıklama midenin bölümlerinden hangisine aittir?",
@@ -25014,7 +25176,9 @@
                         },
                         "dogru_cevap": "Burkulan bölgenin hareket ettirilmesi",
                         "ozet": "İlk yardım protokollerine uygun doğru uygulama Burkulan bölgenin hareket ettirilmesi’tir."
-                    },
+                    }
+                ],
+                "2017 Sağlık Memuru Çıkmış Sorular 3": [
                     {
                         "soru_no": 41,
                         "soru": "Aşağıdakilerden hangisi kalp krizinin belirtilerinden biri değildir?",
@@ -25254,7 +25418,9 @@
                         },
                         "dogru_cevap": "Saçların kalınlaşması, seyrekleşmesi ve kuruması",
                         "ozet": "Soru kökünü en iyi karşılayan ifade Saçların kalınlaşması, seyrekleşmesi ve kuruması’tir."
-                    },
+                    }
+                ],
+                "2017 Sağlık Memuru Çıkmış Sorular 4": [
                     {
                         "soru_no": 61,
                         "soru": "Gut artriti ile ilgili verilenlerden hangisi yanlıştır?",
