@@ -7,7 +7,6 @@ import '../../../../core/providers/app_providers.dart';
 import '../../../../core/providers/auth_providers.dart';
 import '../../../../core/router/app_router.dart';
 import '../../../../core/services/premium_features_service.dart';
-import '../../../ads/presentation/widgets/ad_unlock_button.dart';
 import '../widgets/question_card.dart';
 import '../widgets/category_filter_chip.dart';
 import '../widgets/font_size_slider.dart';
@@ -260,10 +259,7 @@ class _QuestionPoolPageState extends ConsumerState<QuestionPoolPage> {
               color: AppTheme.darkGrey,
             ),
           ),
-          if (canUnlockViaAds) ...[
-             const SizedBox(height: 12),
-             const AdUnlockButton(isCompact: true),
-           ],
+
         ],
       ),
     );

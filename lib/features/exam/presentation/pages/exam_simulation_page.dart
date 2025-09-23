@@ -8,6 +8,7 @@ import '../../../../core/models/question_model.dart';
 import '../../../../core/models/user_model.dart';
 import '../../../../core/providers/app_providers.dart';
 import '../../../../core/providers/questions_providers.dart';
+import '../../../../core/providers/ad_providers.dart';
 import '../../../../core/widgets/standard_app_bar.dart';
 import '../widgets/exam_timer_widget.dart';
 import '../widgets/exam_progress_bar.dart';
@@ -56,7 +57,22 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _initializeExam();
+      _initializeAdMob();
     });
+  }
+
+  Future<void> _initializeAdMob() async {
+    try {
+      print('[ExamSimulationPage] Attempting to initialize AdMob...');
+      final adMobService = ref.read(adMobServiceProvider);
+      
+      print('[ExamSimulationPage] Loading interstitial ad...');
+      await adMobService.loadInterstitialAd();
+      print('[ExamSimulationPage] Interstitial ad loaded');
+    } catch (e) {
+      print('[ExamSimulationPage] AdMob initialization failed: $e');
+      print('[ExamSimulationPage] Error type: ${e.runtimeType}');
+    }
   }
 
   @override
@@ -231,6 +247,10 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
       );
 
       ref.read(currentExamProvider.notifier).startExam(exam);
+      
+      // Reset wrong answer counter for new exam
+      ref.read(wrongAnswerCounterProvider.notifier).reset();
+      
       _remainingSeconds = mode.defaultDuration * 60;
       _startTimer();
       // Load starred IDs for current user to reflect star state
@@ -305,6 +325,15 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
 
     final Question currentQuestion = exam.questions[exam.currentQuestionIndex];
     final bool isCorrect = _selectedAnswerIndex == currentQuestion.correctAnswerIndex;
+    
+    // Handle wrong answer counter for ads
+    if (!isCorrect) {
+      ref.read(wrongAnswerCounterProvider.notifier).increment();
+      final wrongCount = ref.read(wrongAnswerCounterProvider);
+      print('[ExamSimulationPage] Wrong answer count: $wrongCount');
+      print('[ExamSimulationPage] Should show ad: ${wrongCount > 0 && wrongCount % 3 == 0}');
+    }
+    
     // Update local statistics (guest or user) immediately
     final firebaseUser = ref.read(currentFirebaseUserProvider);
     final userId = firebaseUser?.uid ?? '';
@@ -326,9 +355,44 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
           _showAnswerFeedback = false;
           _selectedAnswerIndex = null;
         });
-        _nextQuestion();
+        
+        // Check if we should show an ad before moving to next question
+        _checkAndShowAd();
       }
     });
+  }
+
+  Future<void> _checkAndShowAd() async {
+    try {
+      final wrongCount = ref.read(wrongAnswerCounterProvider);
+      final isPremium = ref.read(isPremiumUserProvider);
+      
+      print('[ExamSimulationPage] Checking ad conditions...');
+      print('[ExamSimulationPage] Wrong count: $wrongCount');
+      print('[ExamSimulationPage] Is premium: $isPremium');
+      print('[ExamSimulationPage] Should show: ${wrongCount > 0 && wrongCount % 3 == 0 && !isPremium}');
+      
+      if (wrongCount > 0 && wrongCount % 3 == 0 && !isPremium) {
+        print('[ExamSimulationPage] Attempting to show ad...');
+        final adDisplayNotifier = ref.read(adDisplayProvider.notifier);
+        final shouldShowAd = await adDisplayNotifier.showAdIfNeeded();
+        
+        if (shouldShowAd) {
+          print('[ExamSimulationPage] Ad shown successfully');
+          // Reset counter after showing ad
+          ref.read(wrongAnswerCounterProvider.notifier).reset();
+        } else {
+          print('[ExamSimulationPage] Ad not shown');
+        }
+      } else {
+        print('[ExamSimulationPage] Ad conditions not met, skipping');
+      }
+    } catch (e) {
+      print('[ExamSimulationPage] Error in _checkAndShowAd: $e');
+    }
+    
+    // Move to next question regardless of ad result
+    _nextQuestion();
   }
 
   void _nextQuestion() {

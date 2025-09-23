@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:gorevde_yukselme/core/services/session_service.dart';
+import 'package:gorevde_yukselme/core/services/admob_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'core/theme/app_theme.dart';
@@ -19,6 +20,16 @@ void main() async {
   
   // Initialize Firebase Crashlytics
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+  
+  // Initialize AdMob after Firebase
+  try {
+    print('[Main] Starting AdMob initialization...');
+    await AdMobService.instance.initialize();
+    print('[Main] AdMob initialized successfully');
+  } catch (e) {
+    print('[Main] AdMob initialization failed: $e');
+    // Don't crash the app if AdMob fails
+  }
   
   // Initialize SharedPreferences
   final sharedPreferences = await SharedPreferences.getInstance();

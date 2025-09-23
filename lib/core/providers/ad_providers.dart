@@ -1,174 +1,126 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../services/ad_service.dart';
+import '../services/admob_service.dart';
+import '../providers/subscription_providers.dart';
 
-/// Provider for the AdService singleton instance
-final adServiceProvider = Provider<AdService>((ref) {
-  return AdService();
+// AdMob Service Provider
+final adMobServiceProvider = Provider<AdMobService>((ref) {
+  return AdMobService.instance;
 });
 
-/// Provider for the number of ads watched today
-final adsWatchedTodayProvider = StreamProvider<int>((ref) {
-  final adService = ref.watch(adServiceProvider);
-  return adService.adsWatchedStream;
-});
+// Wrong Answer Counter Provider
+class WrongAnswerCounterNotifier extends StateNotifier<int> {
+  WrongAnswerCounterNotifier() : super(0);
 
-/// Provider for the number of unlocked questions today
-final unlockedQuestionsTodayProvider = StreamProvider<int>((ref) {
-  final adService = ref.watch(adServiceProvider);
-  return adService.unlockedQuestionsStream;
-});
+  void increment() {
+    state++;
+  }
 
-/// Provider for the current ad watching state
-final adWatchingStateProvider = StateNotifierProvider<AdWatchingStateNotifier, AdWatchingState>((ref) {
-  final adService = ref.watch(adServiceProvider);
-  return AdWatchingStateNotifier(adService);
-});
+  void reset() {
+    state = 0;
+  }
 
-/// Provider for checking if user can unlock more questions
-final canUnlockMoreQuestionsProvider = Provider<bool>((ref) {
-  final adService = ref.watch(adServiceProvider);
-  return adService.canUnlockMoreQuestions();
-});
-
-/// Provider for getting ads needed for next unlock
-final adsNeededForUnlockProvider = Provider<int>((ref) {
-  final adService = ref.watch(adServiceProvider);
-  return adService.getAdsNeededForNextUnlock();
-});
-
-/// Provider for getting ad progress message
-final adProgressMessageProvider = Provider<String>((ref) {
-  final adService = ref.watch(adServiceProvider);
-  return adService.getAdProgressMessage();
-});
-
-/// Provider for checking if user has unlocked questions
-final hasUnlockedQuestionsProvider = Provider<bool>((ref) {
-  final adService = ref.watch(adServiceProvider);
-  return adService.hasUnlockedQuestions();
-});
-
-/// Provider for getting total available questions (base + unlocked)
-final totalAvailableQuestionsProvider = Provider.family<int, int>((ref, baseLimit) {
-  final adService = ref.watch(adServiceProvider);
-  return adService.getTotalAvailableQuestions(baseLimit);
-});
-
-/// State for ad watching process
-enum AdWatchingStatus {
-  idle,
-  loading,
-  watching,
-  completed,
-  error,
+  bool get shouldShowAd => state > 0 && state % 3 == 0;
 }
 
-class AdWatchingState {
-  final AdWatchingStatus status;
-  final String? errorMessage;
-  final bool questionsUnlocked;
-  final int adsWatched;
-  final int unlockedQuestions;
+final wrongAnswerCounterProvider = StateNotifierProvider<WrongAnswerCounterNotifier, int>((ref) {
+  return WrongAnswerCounterNotifier();
+});
 
-  const AdWatchingState({
-    required this.status,
-    this.errorMessage,
-    required this.questionsUnlocked,
-    required this.adsWatched,
-    required this.unlockedQuestions,
-  });
+// Ad Display Provider
+class AdDisplayNotifier extends StateNotifier<bool> {
+  final Ref _ref;
+  
+  AdDisplayNotifier(this._ref) : super(false);
 
-  AdWatchingState copyWith({
-    AdWatchingStatus? status,
-    String? errorMessage,
-    bool? questionsUnlocked,
-    int? adsWatched,
-    int? unlockedQuestions,
-  }) {
-    return AdWatchingState(
-      status: status ?? this.status,
-      errorMessage: errorMessage,
-      questionsUnlocked: questionsUnlocked ?? this.questionsUnlocked,
-      adsWatched: adsWatched ?? this.adsWatched,
-      unlockedQuestions: unlockedQuestions ?? this.unlockedQuestions,
-    );
-  }
-}
-
-/// State notifier for managing ad watching process
-class AdWatchingStateNotifier extends StateNotifier<AdWatchingState> {
-  final AdService _adService;
-
-  AdWatchingStateNotifier(this._adService) 
-      : super(AdWatchingState(
-          status: AdWatchingStatus.idle,
-          questionsUnlocked: false,
-          adsWatched: _adService.adsWatchedToday,
-          unlockedQuestions: _adService.unlockedQuestionsToday,
-        )) {
-    _initializeListeners();
-  }
-
-  void _initializeListeners() {
-    // Listen to ad service streams
-    _adService.adsWatchedStream.listen((adsWatched) {
-      state = state.copyWith(adsWatched: adsWatched);
-    });
-
-    _adService.unlockedQuestionsStream.listen((unlockedQuestions) {
-      state = state.copyWith(unlockedQuestions: unlockedQuestions);
-    });
-  }
-
-  /// Watch an ad and handle the result
-  Future<void> watchAd() async {
-    if (state.status == AdWatchingStatus.watching) {
-      return; // Already watching an ad
+  /// Show ad if conditions are met (every 3rd wrong answer and user is not premium)
+  Future<bool> showAdIfNeeded() async {
+    final wrongAnswerCount = _ref.read(wrongAnswerCounterProvider);
+    final isPremium = _ref.read(isPremiumUserProvider);
+    
+    print('[AdDisplayNotifier] Wrong answer count: $wrongAnswerCount');
+    print('[AdDisplayNotifier] Is premium: $isPremium');
+    
+    // Don't show ads to premium users
+    if (isPremium) {
+      print('[AdDisplayNotifier] User is premium, skipping ad');
+      return false;
     }
+    
+    // Show ad every 3rd wrong answer
+    if (wrongAnswerCount > 0 && wrongAnswerCount % 3 == 0) {
+      print('[AdDisplayNotifier] Showing ad for wrong answer #$wrongAnswerCount');
+      return await _showInterstitialAd();
+    }
+    
+    return false;
+  }
 
+  /// Show interstitial ad
+  Future<bool> _showInterstitialAd() async {
     try {
-      state = state.copyWith(
-        status: AdWatchingStatus.watching,
-        errorMessage: null,
-        questionsUnlocked: false,
-      );
-
-      final questionsUnlocked = await _adService.watchAd();
-
-      state = state.copyWith(
-        status: AdWatchingStatus.completed,
-        questionsUnlocked: questionsUnlocked,
-        adsWatched: _adService.adsWatchedToday,
-        unlockedQuestions: _adService.unlockedQuestionsToday,
-      );
-
-      // Reset to idle after a short delay
-      await Future.delayed(const Duration(seconds: 2));
-      if (mounted) {
-        state = state.copyWith(status: AdWatchingStatus.idle);
+      final adMobService = _ref.read(adMobServiceProvider);
+      
+      // Try to load ad if not already loaded
+      if (!adMobService.isInterstitialAdLoaded) {
+        print('[AdDisplayNotifier] Loading interstitial ad...');
+        await adMobService.loadInterstitialAd();
+        // Wait a bit for ad to load
+        await Future.delayed(const Duration(milliseconds: 1500));
       }
-    } catch (error) {
-      if (mounted) {
-        state = state.copyWith(
-          status: AdWatchingStatus.error,
-          errorMessage: error.toString(),
-        );
+      
+      // Show ad if loaded
+      if (adMobService.isInterstitialAdLoaded) {
+        print('[AdDisplayNotifier] Showing interstitial ad...');
+        state = true; // Set loading state
+        final success = await adMobService.showInterstitialAd();
+        state = false; // Clear loading state
+        print('[AdDisplayNotifier] Ad show result: $success');
+        return success;
+      } else {
+        print('[AdDisplayNotifier] Ad not loaded, skipping');
+        return false;
       }
+    } catch (e) {
+      print('[AdDisplayNotifier] Error showing ad: $e');
+      state = false;
+      return false;
     }
   }
 
-  /// Reset the state to idle
-  void resetState() {
-    state = state.copyWith(
-      status: AdWatchingStatus.idle,
-      errorMessage: null,
-      questionsUnlocked: false,
-    );
-  }
-
-  /// Consume an unlocked question
-  Future<void> consumeUnlockedQuestion() async {
-    await _adService.consumeUnlockedQuestion();
-    state = state.copyWith(unlockedQuestions: _adService.unlockedQuestionsToday);
+  /// Force show ad (for testing purposes)
+  Future<bool> forceShowAd() async {
+    final isPremium = _ref.read(isPremiumUserProvider);
+    
+    if (isPremium) {
+      print('[AdDisplayNotifier] User is premium, cannot force show ad');
+      return false;
+    }
+    
+    return await _showInterstitialAd();
   }
 }
+
+final adDisplayProvider = StateNotifierProvider<AdDisplayNotifier, bool>((ref) {
+  return AdDisplayNotifier(ref);
+});
+
+// Ad Status Provider (for UI feedback)
+final adStatusProvider = Provider<String>((ref) {
+  final wrongAnswerCount = ref.watch(wrongAnswerCounterProvider);
+  final isPremium = ref.watch(isPremiumUserProvider);
+  final isLoading = ref.watch(adDisplayProvider);
+  
+  if (isPremium) {
+    return 'Premium kullanıcı - Reklam yok';
+  }
+  
+  if (isLoading) {
+    return 'Reklam yükleniyor...';
+  }
+  
+  if (wrongAnswerCount > 0 && wrongAnswerCount % 3 == 0) {
+    return 'Reklam gösterilecek';
+  }
+  
+  return 'Reklam bekleniyor (${3 - (wrongAnswerCount % 3)} yanlış kaldı)';
+});

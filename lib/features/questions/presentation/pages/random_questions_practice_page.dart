@@ -6,7 +6,6 @@ import '../../../../core/theme/app_theme.dart';
 import '../../../../core/models/question_model.dart';
 import '../../../../core/providers/app_providers.dart';
 import '../../../../core/services/premium_features_service.dart';
-import '../../../ads/presentation/widgets/ad_unlock_button.dart';
 import '../widgets/question_card.dart';
 
 class RandomQuestionsPracticePage extends ConsumerStatefulWidget {
@@ -344,10 +343,7 @@ class _RandomQuestionsPracticePageState extends ConsumerState<RandomQuestionsPra
               color: remainingQuestions > 0 ? Colors.blue : Colors.orange,
             ),
           ),
-          if (canUnlockViaAds && remainingQuestions <= 2) ...[
-            const SizedBox(width: 8),
-            const AdUnlockButton(isCompact: true),
-          ],
+          
         ],
       ),
     );
