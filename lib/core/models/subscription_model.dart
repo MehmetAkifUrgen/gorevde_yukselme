@@ -7,6 +7,7 @@ part 'subscription_model.g.dart';
 enum StoreType {
   googlePlay,
   appStore,
+  premiumCode,
   unknown,
 }
 
@@ -117,6 +118,8 @@ class ProductIds {
         return [googlePlayMonthly, googlePlayYearly];
       case StoreType.appStore:
         return [appStoreMonthly, appStoreYearly];
+      case StoreType.premiumCode:
+        return []; // Premium codes don't have product IDs
       case StoreType.unknown:
         return [];
     }

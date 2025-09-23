@@ -6,6 +6,7 @@ import 'package:in_app_purchase_android/in_app_purchase_android.dart';
 import 'package:in_app_purchase_storekit/in_app_purchase_storekit.dart';
 import 'package:in_app_purchase/in_app_purchase.dart' as iap show PurchaseStatus;
 import '../models/subscription_model.dart';
+import 'premium_code_service.dart';
 
 /// Service for handling platform-specific in-app purchases
 class SubscriptionService {
@@ -33,6 +34,9 @@ class SubscriptionService {
   SubscriptionModel? _currentSubscription;
   List<ProductModel> _availableProducts = [];
   bool _isInitialized = false;
+  
+  // Premium code service
+  final PremiumCodeService _premiumCodeService = PremiumCodeService();
 
   /// Initialize the subscription service
   Future<bool> initialize() async {
@@ -42,13 +46,11 @@ class SubscriptionService {
       // Platform-specific initialization
       if (Platform.isAndroid) {
         // Enable pending purchases for Android
-        InAppPurchaseAndroidPlatformAddition androidAddition = 
-            _inAppPurchase.getPlatformAddition<InAppPurchaseAndroidPlatformAddition>();
+        _inAppPurchase.getPlatformAddition<InAppPurchaseAndroidPlatformAddition>();
         debugPrint('Android billing initialized');
       } else if (Platform.isIOS) {
         // iOS-specific initialization
-        InAppPurchaseStoreKitPlatformAddition iosAddition = 
-            _inAppPurchase.getPlatformAddition<InAppPurchaseStoreKitPlatformAddition>();
+        _inAppPurchase.getPlatformAddition<InAppPurchaseStoreKitPlatformAddition>();
         debugPrint('iOS StoreKit initialized');
       }
 
@@ -152,7 +154,7 @@ class SubscriptionService {
   /// Purchase a subscription
   Future<void> purchaseSubscription(String productId) async {
     try {
-      final product = _availableProducts.firstWhere(
+      _availableProducts.firstWhere(
         (p) => p.id == productId,
         orElse: () => throw Exception('Product not found: $productId'),
       );
@@ -320,6 +322,15 @@ class SubscriptionService {
   Future<void> restorePurchases() async {
     try {
       await _inAppPurchase.restorePurchases();
+      
+      // Also check for premium code subscriptions
+      final premiumCodeSubscription = await _premiumCodeService.getPremiumCodeSubscription();
+      if (premiumCodeSubscription != null) {
+        _currentSubscription = premiumCodeSubscription;
+        _subscriptionController.add(premiumCodeSubscription);
+        debugPrint('Premium code subscription restored');
+      }
+      
       debugPrint('Restore purchases completed');
     } catch (e) {
       debugPrint('Error restoring purchases: $e');

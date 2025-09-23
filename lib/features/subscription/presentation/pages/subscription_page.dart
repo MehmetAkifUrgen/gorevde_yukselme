@@ -11,6 +11,7 @@ import '../widgets/purchase_loading_dialog.dart';
 import '../widgets/generic_loading_dialog.dart';
 import '../widgets/subscription_plan_card.dart';
 import '../widgets/premium_features_list.dart';
+import '../widgets/premium_code_dialog.dart';
 
 class SubscriptionPage extends ConsumerStatefulWidget {
   const SubscriptionPage({super.key});
@@ -286,6 +287,11 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
                 
                 // Restore Purchases Button
                 _buildRestorePurchasesButton(),
+                
+                const SizedBox(height: 16),
+                
+                // Premium Code Button
+                _buildPremiumCodeButton(),
                 
                 const SizedBox(height: 24),
                 
@@ -637,6 +643,31 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
        },
      );
    }
+
+  Widget _buildPremiumCodeButton() {
+    return Container(
+      width: double.infinity,
+      margin: const EdgeInsets.symmetric(horizontal: 8),
+      child: OutlinedButton.icon(
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (context) => const PremiumCodeDialog(),
+          );
+        },
+        icon: const Icon(Icons.card_giftcard),
+        label: const Text('Premium Kod Kullan'),
+        style: OutlinedButton.styleFrom(
+          padding: const EdgeInsets.symmetric(vertical: 12),
+          side: BorderSide(color: AppTheme.accentGold),
+          foregroundColor: AppTheme.accentGold,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+        ),
+      ),
+    );
+  }
 
   Widget _buildTermsAndPrivacy() {
     return Column(

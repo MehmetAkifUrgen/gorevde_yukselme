@@ -28,6 +28,9 @@ class AppRouter {
   static const String performanceAnalysis = '/performance-analysis';
   static const String profile = '/profile';
   static const String subscription = '/subscription';
+  static const String profileEdit = '/profile/edit';
+  static const String privacy = '/privacy';
+  static const String help = '/help';
 
   static GoRouter createRouter(WidgetRef ref) {
     final authState = ref.watch(authStateProvider);
@@ -153,6 +156,18 @@ class AppRouter {
               subject: subject,
             );
           },
+        ),
+        GoRoute(
+          path: profileEdit,
+          builder: (context, state) => const _PlaceholderPage(title: 'Profil Düzenle'),
+        ),
+        GoRoute(
+          path: privacy,
+          builder: (context, state) => const _PlaceholderPage(title: 'Gizlilik Ayarları'),
+        ),
+        GoRoute(
+          path: help,
+          builder: (context, state) => const _PlaceholderPage(title: 'Yardım Merkezi'),
         ),
       ],
     );

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/models/user_model.dart';
-import '../../../../core/models/user_preferences.dart';
 import '../../../../core/models/user_statistics.dart';
 import '../../../../core/providers/auth_providers.dart';
 import '../../../subscription/presentation/widgets/ad_banner_widget.dart';
@@ -425,11 +425,11 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
   }
 
   void _editProfile() {
-    // TODO: Navigate to edit profile page
+    context.push('/profile/edit');
   }
 
   void _upgradeToPremium() {
-    // TODO: Navigate to subscription page
+    context.push('/subscription');
   }
 
   void _changePassword() {
@@ -440,7 +440,7 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
   }
 
   void _privacySettings() {
-    // TODO: Navigate to privacy settings page
+    context.push('/privacy');
   }
 
   void _deleteAccount() {
@@ -451,7 +451,7 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
   }
 
   void _helpCenter() {
-    // TODO: Navigate to help center
+    context.push('/help');
   }
 
   void _contactSupport() {
@@ -465,7 +465,12 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
   }
 
   void _rateApp() {
-    // TODO: Open app store rating
+    // App Store rating - will be implemented when app is published
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Uygulama henüz yayınlanmadı. Yayınlandıktan sonra değerlendirebilirsiniz.'),
+      ),
+    );
   }
 
   void _signOut() async {

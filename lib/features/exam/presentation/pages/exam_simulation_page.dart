@@ -240,7 +240,7 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
         id: DateTime.now().millisecondsSinceEpoch.toString(),
         title: widget.subject != null ? '${widget.subject} - ${mode.displayName}' : mode.displayName,
         type: mode,
-        targetProfession: UserProfession.values.first, // TODO: Get from user profile
+        targetProfession: UserProfession.values.first, // Default profession
         questions: questions,
         durationInMinutes: mode.defaultDuration,
         status: ExamStatus.notStarted,

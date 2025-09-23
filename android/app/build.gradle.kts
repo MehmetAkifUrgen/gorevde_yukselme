@@ -60,3 +60,12 @@ android {
 flutter {
     source = "../.."
 }
+
+dependencies {
+    // Google Play Billing
+    implementation("com.android.billingclient:billing:6.0.1")
+    
+    // Google Play Services
+    implementation("com.google.android.gms:play-services-base:18.2.0")
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
+}

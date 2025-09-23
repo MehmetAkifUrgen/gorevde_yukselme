@@ -32,10 +32,9 @@ class _HomePageState extends ConsumerState<HomePage> {
           IconButton(
             icon: const Icon(Icons.notifications_outlined),
             onPressed: () {
-              // TODO: Show notifications
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
-                  content: Text('Bildirimler yakında eklenecek'),
+                  content: Text('Bildirimler özelliği gelecek sürümde eklenecek'),
                 ),
               );
             },
