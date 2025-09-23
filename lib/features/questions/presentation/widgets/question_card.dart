@@ -25,6 +25,18 @@ class _QuestionCardState extends State<QuestionCard> {
   bool showExplanation = false;
 
   @override
+  void didUpdateWidget(QuestionCard oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // Reset state when question changes
+    if (oldWidget.question.id != widget.question.id) {
+      setState(() {
+        selectedAnswer = null;
+        showExplanation = false;
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Card(
       elevation: 4,
