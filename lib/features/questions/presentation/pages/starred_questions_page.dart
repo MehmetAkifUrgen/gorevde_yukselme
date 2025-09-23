@@ -43,9 +43,6 @@ class _StarredQuestionsPageState extends ConsumerState<StarredQuestionsPage> {
     final favoritesService = ref.read(favoritesServiceProvider);
     List<Question> allQuestions = ref.read(questionsProvider);
     
-    // ignore: avoid_print
-    print('[StarredPage] Loading starred for userId=$userId, allQuestions=${allQuestions.length}');
-    
     // If we have cached questions, load favorites immediately
     if (allQuestions.isNotEmpty) {
       await _loadFavoritesFromCache(allQuestions, favoritesService, userId);
@@ -58,12 +55,8 @@ class _StarredQuestionsPageState extends ConsumerState<StarredQuestionsPage> {
   Future<void> _loadFavoritesFromCache(List<Question> allQuestions, FavoritesService favoritesService, String userId) async {
     try {
       final localIds = await favoritesService.getLocalStarredIds(userId);
-      // ignore: avoid_print
-      print('[StarredPage] Local ids loaded from cache: ${localIds.length}');
       
       final localList = allQuestions.where((q) => localIds.contains(q.id)).toList();
-      // ignore: avoid_print
-      print('[StarredPage] Found ${localList.length} questions from cache');
       
       if (mounted) {
         setState(() {
@@ -75,8 +68,6 @@ class _StarredQuestionsPageState extends ConsumerState<StarredQuestionsPage> {
       // Sync with remote in background
       _syncWithRemoteInBackground(favoritesService, userId, allQuestions);
     } catch (e) {
-      // ignore: avoid_print
-      print('[StarredPage] Error loading from cache: $e');
       if (mounted) {
         setState(() {
           isLoading = false;
@@ -98,13 +89,8 @@ class _StarredQuestionsPageState extends ConsumerState<StarredQuestionsPage> {
       // Put into provider for reuse
       ref.read(questionsProvider.notifier).setQuestions(fetched);
       
-      // ignore: avoid_print
-      print('[StarredPage] Loaded questions via API: ${fetched.length}');
-      
       await _loadFavoritesFromCache(fetched, favoritesService, userId);
     } catch (e) {
-      // ignore: avoid_print
-      print('[StarredPage] Failed to load questions: $e');
       if (mounted) {
         setState(() {
           isLoading = false;
@@ -116,12 +102,8 @@ class _StarredQuestionsPageState extends ConsumerState<StarredQuestionsPage> {
   void _syncWithRemoteInBackground(FavoritesService favoritesService, String userId, List<Question> allQuestions) async {
     try {
       final syncedIds = await favoritesService.syncFromRemote(userId);
-      // ignore: avoid_print
-      print('[StarredPage] Synced ids loaded in background: ${syncedIds.length}');
       
       final syncedList = allQuestions.where((q) => syncedIds.contains(q.id)).toList();
-      // ignore: avoid_print
-      print('[StarredPage] Found ${syncedList.length} questions after sync');
       
       if (mounted && syncedList.length != starredQuestions.length) {
         setState(() {
@@ -129,8 +111,7 @@ class _StarredQuestionsPageState extends ConsumerState<StarredQuestionsPage> {
         });
       }
     } catch (e) {
-      // ignore: avoid_print
-      print('[StarredPage] Background sync failed: $e');
+      // Background sync failed, but local data is still available
     }
   }
 
@@ -146,8 +127,6 @@ class _StarredQuestionsPageState extends ConsumerState<StarredQuestionsPage> {
       }
       return false;
     }).toList();
-    // ignore: avoid_print
-    print('[StarredPage] filteredQuestions: ${filtered.length} (from ${starredQuestions.length} starred)');
     return filtered;
   }
 

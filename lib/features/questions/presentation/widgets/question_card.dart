@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/models/question_model.dart';
+import '../../../../core/widgets/question_report_dialog.dart';
 
 class QuestionCard extends StatefulWidget {
   final Question question;
@@ -48,7 +49,7 @@ class _QuestionCardState extends State<QuestionCard> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Question Text with Favorite Icon
+            // Question Text with Favorite Icon and Report Button
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -63,17 +64,36 @@ class _QuestionCardState extends State<QuestionCard> {
                   ),
                 ),
                 const SizedBox(width: 8),
-                IconButton(
-                  icon: Icon(
-                    widget.question.isStarred ? Icons.star : Icons.star_border,
-                    color: widget.question.isStarred ? AppTheme.accentGold : AppTheme.darkGrey,
-                  ),
-                  onPressed: widget.onStarToggle,
-                  padding: EdgeInsets.zero,
-                  constraints: const BoxConstraints(
-                    minWidth: 32,
-                    minHeight: 32,
-                  ),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButton(
+                      icon: const Icon(
+                        Icons.report_problem_outlined,
+                        color: Colors.orange,
+                        size: 20,
+                      ),
+                      onPressed: () => _showReportDialog(context),
+                      padding: EdgeInsets.zero,
+                      constraints: const BoxConstraints(
+                        minWidth: 32,
+                        minHeight: 32,
+                      ),
+                      tooltip: 'Soruyu Bildir',
+                    ),
+                    IconButton(
+                      icon: Icon(
+                        widget.question.isStarred ? Icons.star : Icons.star_border,
+                        color: widget.question.isStarred ? AppTheme.accentGold : AppTheme.darkGrey,
+                      ),
+                      onPressed: widget.onStarToggle,
+                      padding: EdgeInsets.zero,
+                      constraints: const BoxConstraints(
+                        minWidth: 32,
+                        minHeight: 32,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -226,6 +246,16 @@ class _QuestionCardState extends State<QuestionCard> {
             ],
           ],
         ),
+      ),
+    );
+  }
+
+  void _showReportDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => QuestionReportDialog(
+        questionId: widget.question.id,
+        questionText: widget.question.questionText,
       ),
     );
   }

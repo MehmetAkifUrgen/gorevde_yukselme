@@ -27,8 +27,6 @@ class QuestionsApiService {
 
       if (response.statusCode == 200) {
         final Map<String, dynamic> jsonData = json.decode(response.body);
-        print('DEBUG: API Response keys: ${jsonData.keys.toList()}');
-        print('DEBUG: API Response structure sample: ${jsonData.entries.take(1).map((e) => '${e.key}: ${e.value.runtimeType}').join(', ')}');
         
         // Store raw JSON data for subject extraction
         _rawJsonData = jsonData;
@@ -98,14 +96,12 @@ class QuestionsApiService {
     // We need to handle this by accessing raw JSON data for 4-level filtering
     
     if (_rawJsonData == null) {
-      print('ERROR: _rawJsonData is null in _processCategory');
       return;
     }
     
     try {
       final categoryRawData = _rawJsonData![categoryName] as Map<String, dynamic>?;
       if (categoryRawData == null) {
-        print('ERROR: Category "$categoryName" not found in raw JSON');
         return;
       }
       
@@ -157,14 +153,14 @@ class QuestionsApiService {
                 );
                 questions.add(question);
               } catch (e) {
-                print('ERROR: Failed to parse question: $e');
+                // Skip invalid questions
               }
             }
           }
         }
       }
     } catch (e) {
-      print('ERROR: Failed to process category "$categoryName": $e');
+      // Skip category processing on error
     }
   }
 
@@ -232,28 +228,16 @@ class QuestionsApiService {
     String categoryName,
     String professionName,
   ) {
-    print('getAvailableSubjects - categoryName: $categoryName');
-    print('getAvailableSubjects - professionName: $professionName');
-    print('getAvailableSubjects - available categories: ${apiResponse.categories.keys.toList()}');
-    
     final categoryData = apiResponse.categories[categoryName];
-    print('getAvailableSubjects - categoryData found: ${categoryData != null}');
     
     if (categoryData != null) {
-      print('getAvailableSubjects - available professions in category: ${categoryData.keys.toList()}');
-      
       final professionData = categoryData[professionName];
       if (professionData != null) {
-        print('getAvailableSubjects - profession "$professionName" found');
         final subjects = professionData.keys.toList();
-        print('getAvailableSubjects - subjects found: $subjects');
         return subjects;
-      } else {
-        print('getAvailableSubjects - profession "$professionName" not found in category');
       }
     }
     
-    print('getAvailableSubjects - returning empty list');
     return [];
   }
 
@@ -262,13 +246,7 @@ class QuestionsApiService {
     required String ministryName,
     required String professionName,
   }) {
-    print('getAvailableSubjectsForMinistryAndProfession called with:');
-    print('  categoryName: $categoryName');
-    print('  ministryName: $ministryName');
-    print('  professionName: $professionName');
-    
     if (_rawJsonData == null) {
-      print('ERROR: _rawJsonData is null');
       return [];
     }
     
@@ -276,29 +254,24 @@ class QuestionsApiService {
       // Access raw JSON data directly to get subjects
       final categoryData = _rawJsonData![categoryName] as Map<String, dynamic>?;
       if (categoryData == null) {
-        print('ERROR: Category "$categoryName" not found in raw JSON');
         return [];
       }
       
       final ministryData = categoryData[ministryName] as Map<String, dynamic>?;
       if (ministryData == null) {
-        print('ERROR: Ministry "$ministryName" not found in category "$categoryName"');
         return [];
       }
       
       final professionData = ministryData[professionName] as Map<String, dynamic>?;
       if (professionData == null) {
-        print('ERROR: Profession "$professionName" not found in ministry "$ministryName"');
         return [];
       }
       
       // professionData keys are subject names (e.g., "2017 Çıkmış Sorular")
       final subjects = professionData.keys.toList();
-      print('Found ${subjects.length} subjects: $subjects');
       
       return subjects;
     } catch (e) {
-      print('ERROR: Failed to parse subjects from raw JSON: $e');
       return [];
     }
   }

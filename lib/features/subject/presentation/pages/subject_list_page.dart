@@ -26,15 +26,47 @@ class SubjectListPage extends ConsumerWidget {
     try {
       decodedCategory = Uri.decodeComponent(category);
     } catch (e) {
-      decodedCategory = category;
-      print('Subject List - Category URI decode error: $e');
+      try {
+        String fixedCategory = category
+            .replaceAll('%C4%B1', 'ı')
+            .replaceAll('%C3%BC', 'ü')
+            .replaceAll('%C3%B6', 'ö')
+            .replaceAll('%C3%A7', 'ç')
+            .replaceAll('%C4%9F', 'ğ')
+            .replaceAll('%C5%9F', 'ş')
+            .replaceAll('%C3%96', 'Ö')
+            .replaceAll('%C3%9C', 'Ü')
+            .replaceAll('%C3%87', 'Ç')
+            .replaceAll('%C4%B0', 'İ')
+            .replaceAll('%C4%9E', 'Ğ')
+            .replaceAll('%C5%9E', 'Ş');
+        decodedCategory = Uri.decodeComponent(fixedCategory);
+      } catch (e2) {
+        decodedCategory = category;
+      }
     }
     
     try {
       decodedProfession = Uri.decodeComponent(profession);
     } catch (e) {
-      decodedProfession = profession;
-      print('Subject List - Profession URI decode error: $e');
+      try {
+        String fixedProfession = profession
+            .replaceAll('%C4%B1', 'ı')
+            .replaceAll('%C3%BC', 'ü')
+            .replaceAll('%C3%B6', 'ö')
+            .replaceAll('%C3%A7', 'ç')
+            .replaceAll('%C4%9F', 'ğ')
+            .replaceAll('%C5%9F', 'ş')
+            .replaceAll('%C3%96', 'Ö')
+            .replaceAll('%C3%9C', 'Ü')
+            .replaceAll('%C3%87', 'Ç')
+            .replaceAll('%C4%B0', 'İ')
+            .replaceAll('%C4%9E', 'Ğ')
+            .replaceAll('%C5%9E', 'Ş');
+        decodedProfession = Uri.decodeComponent(fixedProfession);
+      } catch (e2) {
+        decodedProfession = profession;
+      }
     }
     
     // URL decode examType with error handling
@@ -42,17 +74,25 @@ class SubjectListPage extends ConsumerWidget {
     try {
       decodedExamType = Uri.decodeComponent(examType);
     } catch (e) {
-      decodedExamType = examType;
-      print('Subject List - ExamType URI decode error: $e');
+      try {
+        String fixedExamType = examType
+            .replaceAll('%C4%B1', 'ı')
+            .replaceAll('%C3%BC', 'ü')
+            .replaceAll('%C3%B6', 'ö')
+            .replaceAll('%C3%A7', 'ç')
+            .replaceAll('%C4%9F', 'ğ')
+            .replaceAll('%C5%9F', 'ş')
+            .replaceAll('%C3%96', 'Ö')
+            .replaceAll('%C3%9C', 'Ü')
+            .replaceAll('%C3%87', 'Ç')
+            .replaceAll('%C4%B0', 'İ')
+            .replaceAll('%C4%9E', 'Ğ')
+            .replaceAll('%C5%9E', 'Ş');
+        decodedExamType = Uri.decodeComponent(fixedExamType);
+      } catch (e2) {
+        decodedExamType = examType;
+      }
     }
-    
-    // Debug logging
-    print('SubjectListPage - examType (original): $examType');
-    print('SubjectListPage - examType (decoded): $decodedExamType');
-    print('SubjectListPage - category (original): $category');
-    print('SubjectListPage - category (decoded): $decodedCategory');
-    print('SubjectListPage - profession (original): $profession');
-    print('SubjectListPage - profession (decoded): $decodedProfession');
     
     // Use examType as category, category as ministry, and profession for subjects
     final subjectsAsync = ref.watch(
@@ -62,12 +102,6 @@ class SubjectListPage extends ConsumerWidget {
         profession: decodedProfession
       ))
     );
-    
-    // Debug the API response
-    subjectsAsync.whenData((subjects) {
-      print('SubjectListPage - subjects received: $subjects');
-      print('SubjectListPage - subjects count: ${subjects.length}');
-    });
     
     return Scaffold(
       backgroundColor: AppTheme.lightGrey,

@@ -4,6 +4,7 @@ import '../models/question_model.dart';
 import '../models/exam_model.dart';
 import '../models/subscription_model.dart';
 import '../services/subscription_service.dart';
+import '../services/question_report_service.dart';
 import '../models/performance_model.dart';
 
 // User State Provider
@@ -342,4 +343,9 @@ final canAnswerMoreQuestionsProvider = Provider<bool>((ref) {
   final limit = ref.watch(dailyQuestionLimitProvider);
   final answered = ref.watch(questionsAnsweredTodayProvider);
   return answered < limit;
+});
+
+// Question Report Service Provider
+final questionReportServiceProvider = Provider<QuestionReportService>((ref) {
+  return QuestionReportService();
 });

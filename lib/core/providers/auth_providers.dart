@@ -122,22 +122,17 @@ class AuthNotifier extends StateNotifier<AsyncValue<firebase_auth.User?>> {
     required String password,
     required String displayName,
   }) async {
-    print('[AuthNotifier] createUserWithEmailAndPassword - Starting for email: $email');
     state = const AsyncValue.loading();
     try {
-      print('[AuthNotifier] Calling AuthService.createUserWithEmailAndPassword');
       final credential = await _authService.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
       
-      print('[AuthNotifier] User credential received: ${credential?.user?.email}');
       if (credential?.user != null) {
-        print('[AuthNotifier] Updating user profile with displayName: $displayName');
         // Update display name
         await _authService.updateUserProfile(displayName: displayName);
         
-        print('[AuthNotifier] Creating user profile in Firestore');
         // Create user profile in Firestore
         await _firestoreService.createUserProfile(
           userId: credential!.user!.uid,
@@ -156,26 +151,17 @@ class AuthNotifier extends StateNotifier<AsyncValue<firebase_auth.User?>> {
           },
         );
         
-        print('[AuthNotifier] Firestore profile created successfully');
         // Send email verification immediately after user creation
         try {
-          print('[AuthNotifier] Sending email verification');
           await _authService.sendEmailVerification(user: credential.user);
-          print('[AuthNotifier] Email verification sent successfully after user creation');
         } catch (verificationError) {
-          print('[AuthNotifier] Failed to send email verification: $verificationError');
           // Don't fail the entire registration process if email verification fails
           // User can resend verification later
         }
         
-        print('[AuthNotifier] Setting state with user: ${credential.user?.email}');
         state = AsyncValue.data(credential.user);
-        print('[AuthNotifier] createUserWithEmailAndPassword completed successfully');
-      } else {
-        print('[AuthNotifier] No user credential received');
       }
     } catch (error, stackTrace) {
-      print('[AuthNotifier] Error in createUserWithEmailAndPassword: $error');
       state = AsyncValue.error(error, stackTrace);
       rethrow;
     }

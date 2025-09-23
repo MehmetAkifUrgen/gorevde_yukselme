@@ -51,6 +51,12 @@ service cloud.firestore {
       allow read: if request.auth != null && request.auth.uid == userId;
     }
     
+    // Question reports collection - anyone can create reports (including guests)
+    match /question_reports/{document} {
+      allow create: if true; // Allow anyone to create reports
+      allow read: if request.auth != null && request.auth.uid == resource.data.userId;
+    }
+    
     // Default deny all other access
     match /{document=**} {
       allow read, write: if false;

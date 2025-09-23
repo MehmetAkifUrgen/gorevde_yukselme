@@ -79,29 +79,97 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
         try {
           decodedRouteExamType = Uri.decodeComponent(widget.routeExamType ?? '');
         } catch (e) {
-          decodedRouteExamType = widget.routeExamType ?? '';
-          print('Exam - routeExamType URI decode error: $e');
+          try {
+            String fixedRouteExamType = (widget.routeExamType ?? '')
+                .replaceAll('%C4%B1', 'ı')
+                .replaceAll('%C3%BC', 'ü')
+                .replaceAll('%C3%B6', 'ö')
+                .replaceAll('%C3%A7', 'ç')
+                .replaceAll('%C4%9F', 'ğ')
+                .replaceAll('%C5%9F', 'ş')
+                .replaceAll('%C3%96', 'Ö')
+                .replaceAll('%C3%9C', 'Ü')
+                .replaceAll('%C3%87', 'Ç')
+                .replaceAll('%C4%B0', 'İ')
+                .replaceAll('%C4%9E', 'Ğ')
+                .replaceAll('%C5%9E', 'Ş');
+            decodedRouteExamType = Uri.decodeComponent(fixedRouteExamType);
+          } catch (e2) {
+            decodedRouteExamType = widget.routeExamType ?? '';
+            print('Exam - routeExamType URI decode error: $e');
+          }
         }
         
         try {
           decodedCategory = Uri.decodeComponent(widget.category!);
         } catch (e) {
-          decodedCategory = widget.category!;
-          print('Exam - Category URI decode error: $e');
+          try {
+            String fixedCategory = widget.category!
+                .replaceAll('%C4%B1', 'ı')
+                .replaceAll('%C3%BC', 'ü')
+                .replaceAll('%C3%B6', 'ö')
+                .replaceAll('%C3%A7', 'ç')
+                .replaceAll('%C4%9F', 'ğ')
+                .replaceAll('%C5%9F', 'ş')
+                .replaceAll('%C3%96', 'Ö')
+                .replaceAll('%C3%9C', 'Ü')
+                .replaceAll('%C3%87', 'Ç')
+                .replaceAll('%C4%B0', 'İ')
+                .replaceAll('%C4%9E', 'Ğ')
+                .replaceAll('%C5%9E', 'Ş');
+            decodedCategory = Uri.decodeComponent(fixedCategory);
+          } catch (e2) {
+            decodedCategory = widget.category!;
+            print('Exam - Category URI decode error: $e');
+          }
         }
         
         try {
           decodedProfession = Uri.decodeComponent(widget.profession!);
         } catch (e) {
-          decodedProfession = widget.profession!;
-          print('Exam - Profession URI decode error: $e');
+          try {
+            String fixedProfession = widget.profession!
+                .replaceAll('%C4%B1', 'ı')
+                .replaceAll('%C3%BC', 'ü')
+                .replaceAll('%C3%B6', 'ö')
+                .replaceAll('%C3%A7', 'ç')
+                .replaceAll('%C4%9F', 'ğ')
+                .replaceAll('%C5%9F', 'ş')
+                .replaceAll('%C3%96', 'Ö')
+                .replaceAll('%C3%9C', 'Ü')
+                .replaceAll('%C3%87', 'Ç')
+                .replaceAll('%C4%B0', 'İ')
+                .replaceAll('%C4%9E', 'Ğ')
+                .replaceAll('%C5%9E', 'Ş');
+            decodedProfession = Uri.decodeComponent(fixedProfession);
+          } catch (e2) {
+            decodedProfession = widget.profession!;
+            print('Exam - Profession URI decode error: $e');
+          }
         }
         
         try {
           decodedSubject = Uri.decodeComponent(widget.subject!);
         } catch (e) {
-          decodedSubject = widget.subject!;
-          print('Exam - Subject URI decode error: $e');
+          try {
+            String fixedSubject = widget.subject!
+                .replaceAll('%C4%B1', 'ı')
+                .replaceAll('%C3%BC', 'ü')
+                .replaceAll('%C3%B6', 'ö')
+                .replaceAll('%C3%A7', 'ç')
+                .replaceAll('%C4%9F', 'ğ')
+                .replaceAll('%C5%9F', 'ş')
+                .replaceAll('%C3%96', 'Ö')
+                .replaceAll('%C3%9C', 'Ü')
+                .replaceAll('%C3%87', 'Ç')
+                .replaceAll('%C4%B0', 'İ')
+                .replaceAll('%C4%9E', 'Ğ')
+                .replaceAll('%C5%9E', 'Ş');
+            decodedSubject = Uri.decodeComponent(fixedSubject);
+          } catch (e2) {
+            decodedSubject = widget.subject!;
+            print('Exam - Subject URI decode error: $e');
+          }
         }
         
         print('Exam - Original routeExamType: ${widget.routeExamType}');
@@ -413,8 +481,25 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
       try {
         decodedCategory = Uri.decodeComponent(widget.category!);
       } catch (e) {
-        decodedCategory = widget.category!;
-        print('Exam Display - Category URI decode error: $e');
+        try {
+          String fixedCategory = widget.category!
+              .replaceAll('%C4%B1', 'ı')
+              .replaceAll('%C3%BC', 'ü')
+              .replaceAll('%C3%B6', 'ö')
+              .replaceAll('%C3%A7', 'ç')
+              .replaceAll('%C4%9F', 'ğ')
+              .replaceAll('%C5%9F', 'ş')
+              .replaceAll('%C3%96', 'Ö')
+              .replaceAll('%C3%9C', 'Ü')
+              .replaceAll('%C3%87', 'Ç')
+              .replaceAll('%C4%B0', 'İ')
+              .replaceAll('%C4%9E', 'Ğ')
+              .replaceAll('%C5%9E', 'Ş');
+          decodedCategory = Uri.decodeComponent(fixedCategory);
+        } catch (e2) {
+          decodedCategory = widget.category!;
+          print('Exam Display - Category URI decode error: $e');
+        }
       }
     }
     
@@ -422,8 +507,25 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
       try {
         decodedProfession = Uri.decodeComponent(widget.profession!);
       } catch (e) {
-        decodedProfession = widget.profession!;
-        print('Exam Display - Profession URI decode error: $e');
+        try {
+          String fixedProfession = widget.profession!
+              .replaceAll('%C4%B1', 'ı')
+              .replaceAll('%C3%BC', 'ü')
+              .replaceAll('%C3%B6', 'ö')
+              .replaceAll('%C3%A7', 'ç')
+              .replaceAll('%C4%9F', 'ğ')
+              .replaceAll('%C5%9F', 'ş')
+              .replaceAll('%C3%96', 'Ö')
+              .replaceAll('%C3%9C', 'Ü')
+              .replaceAll('%C3%87', 'Ç')
+              .replaceAll('%C4%B0', 'İ')
+              .replaceAll('%C4%9E', 'Ğ')
+              .replaceAll('%C5%9E', 'Ş');
+          decodedProfession = Uri.decodeComponent(fixedProfession);
+        } catch (e2) {
+          decodedProfession = widget.profession!;
+          print('Exam Display - Profession URI decode error: $e');
+        }
       }
     }
     
@@ -431,8 +533,25 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
       try {
         decodedSubject = Uri.decodeComponent(widget.subject!);
       } catch (e) {
-        decodedSubject = widget.subject!;
-        print('Exam Display - Subject URI decode error: $e');
+        try {
+          String fixedSubject = widget.subject!
+              .replaceAll('%C4%B1', 'ı')
+              .replaceAll('%C3%BC', 'ü')
+              .replaceAll('%C3%B6', 'ö')
+              .replaceAll('%C3%A7', 'ç')
+              .replaceAll('%C4%9F', 'ğ')
+              .replaceAll('%C5%9F', 'ş')
+              .replaceAll('%C3%96', 'Ö')
+              .replaceAll('%C3%9C', 'Ü')
+              .replaceAll('%C3%87', 'Ç')
+              .replaceAll('%C4%B0', 'İ')
+              .replaceAll('%C4%9E', 'Ğ')
+              .replaceAll('%C5%9E', 'Ş');
+          decodedSubject = Uri.decodeComponent(fixedSubject);
+        } catch (e2) {
+          decodedSubject = widget.subject!;
+          print('Exam Display - Subject URI decode error: $e');
+        }
       }
     }
 

@@ -15,9 +15,6 @@ class FavoritesService {
   String _prefsKey(String userId) => 'starred_question_ids_${userId.isEmpty ? 'guest' : userId}';
 
   Future<Set<String>> getLocalStarredIds(String userId) async {
-    // Debug
-    // ignore: avoid_print
-    print('[FavoritesService] getLocalStarredIds userId=$userId');
     final key = _prefsKey(userId);
     final raw = _prefs.getString(key);
     if (raw == null || raw.isEmpty) return <String>{};
@@ -31,8 +28,6 @@ class FavoritesService {
           // Save fixed IDs
           await setLocalStarredIds(userId, fixedSet);
         }
-        // ignore: avoid_print
-        print('[FavoritesService] Local starred count=${fixedSet.length}');
         return fixedSet;
       }
       return <String>{};
@@ -58,19 +53,17 @@ class FavoritesService {
           
           // Fix subject format
           final newSubject = oldSubject.replaceAll('2017 Çıkmış Sorular', '2017 $profession Çıkmış Sorular 1');
-          final newId = '${category}_${profession}_${newSubject}_${questionNo}';
-          fixedIds.add(newId);
-          // ignore: avoid_print
-          print('[FavoritesService] Fixed ID: $id -> $newId');
-        } else {
-          fixedIds.add(id);
+              final newId = '${category}_${profession}_${newSubject}_${questionNo}';
+              fixedIds.add(newId);
+            } else {
+              fixedIds.add(id);
+            }
+          } else {
+            fixedIds.add(id);
+          }
         }
-      } else {
-        fixedIds.add(id);
+        return fixedIds;
       }
-    }
-    return fixedIds;
-  }
 
   Future<void> setLocalStarredIds(String userId, Set<String> ids) async {
     final key = _prefsKey(userId);
@@ -80,16 +73,12 @@ class FavoritesService {
   Future<Set<String>> getRemoteStarredIds(String userId) async {
     if (userId.isEmpty) return <String>{};
     try {
-      // ignore: avoid_print
-      print('[FavoritesService] getRemoteStarredIds userId=$userId');
       final snap = await _firestore.collection('users').doc(userId).get();
       final data = snap.data();
       if (data == null) return <String>{};
       final list = data['starredQuestionIds'];
       if (list is List) {
         final set = list.cast<String>().toSet();
-        // ignore: avoid_print
-        print('[FavoritesService] Remote starred count=${set.length}');
         return set;
       }
       return <String>{};
@@ -102,9 +91,6 @@ class FavoritesService {
     final remote = await getRemoteStarredIds(userId);
     final local = await getLocalStarredIds(userId);
     
-    // ignore: avoid_print
-    print('[FavoritesService] syncFromRemote received ${remote.length} ids, local has ${local.length} ids');
-    
     if (userId.isEmpty) {
       // Guest user - just return local data
       return local;
@@ -113,25 +99,19 @@ class FavoritesService {
     if (remote.isEmpty && local.isNotEmpty) {
       // No remote data but local data exists - upload local to remote
       try {
-        // ignore: avoid_print
-        print('[FavoritesService] Uploading ${local.length} local favorites to remote');
         await _firestore.collection('users').doc(userId).set({
           'starredQuestionIds': local.toList(),
           'updatedAt': FieldValue.serverTimestamp(),
         }, SetOptions(merge: true));
         return local;
       } catch (e) {
-        // ignore: avoid_print
-        print('[FavoritesService] Failed to upload local favorites: $e');
         return local;
-      }
+      } 
     } else if (remote.isNotEmpty) {
       // Remote data exists - merge with local and update both
       final merged = {...remote, ...local};
       if (merged.length != remote.length) {
         try {
-          // ignore: avoid_print
-          print('[FavoritesService] Merging ${local.length} local with ${remote.length} remote favorites');
           await _firestore.collection('users').doc(userId).update({
             'starredQuestionIds': merged.toList(),
             'updatedAt': FieldValue.serverTimestamp(),
@@ -139,8 +119,6 @@ class FavoritesService {
           await setLocalStarredIds(userId, merged);
           return merged;
         } catch (e) {
-          // ignore: avoid_print
-          print('[FavoritesService] Failed to merge favorites: $e');
           await setLocalStarredIds(userId, remote);
           return remote;
         }
@@ -171,8 +149,6 @@ class FavoritesService {
     // Best-effort remote update
     if (userId.isEmpty) return;
     try {
-      // ignore: avoid_print
-      print('[FavoritesService] setStarStatus userId=$userId qId=$questionId isStarred=$isStarred');
       final docRef = _firestore.collection('users').doc(userId);
       if (isStarred) {
         await docRef.update({

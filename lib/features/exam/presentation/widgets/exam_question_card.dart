@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/models/question_model.dart';
+import '../../../../core/widgets/question_report_dialog.dart';
 
 class ExamQuestionCard extends StatelessWidget {
   final Question question;
@@ -109,7 +110,7 @@ class ExamQuestionCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Question text with favorite icon
+            // Question text with favorite icon and report button
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -125,20 +126,39 @@ class ExamQuestionCard extends StatelessWidget {
                 ),
                 if (!isReviewMode) ...[
                   const SizedBox(width: 8),
-                  IconButton(
-                    icon: Icon(
-                      (isStarredOverride ?? question.isStarred) ? Icons.star : Icons.star_border,
-                      color: (isStarredOverride ?? question.isStarred)
-                          ? AppTheme.accentGold
-                          : AppTheme.darkGrey,
-                    ),
-                    onPressed: onStarToggle,
-                    tooltip: 'Favori',
-                    padding: EdgeInsets.zero,
-                    constraints: const BoxConstraints(
-                      minWidth: 32,
-                      minHeight: 32,
-                    ),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                        icon: const Icon(
+                          Icons.report_problem_outlined,
+                          color: Colors.orange,
+                          size: 20,
+                        ),
+                        onPressed: () => _showReportDialog(context),
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints(
+                          minWidth: 32,
+                          minHeight: 32,
+                        ),
+                        tooltip: 'Soruyu Bildir',
+                      ),
+                      IconButton(
+                        icon: Icon(
+                          (isStarredOverride ?? question.isStarred) ? Icons.star : Icons.star_border,
+                          color: (isStarredOverride ?? question.isStarred)
+                              ? AppTheme.accentGold
+                              : AppTheme.darkGrey,
+                        ),
+                        onPressed: onStarToggle,
+                        tooltip: 'Favori',
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints(
+                          minWidth: 32,
+                          minHeight: 32,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ],
@@ -303,6 +323,16 @@ class ExamQuestionCard extends StatelessWidget {
             ],
           ],
         ),
+      ),
+    );
+  }
+
+  void _showReportDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => QuestionReportDialog(
+        questionId: question.id,
+        questionText: question.questionText,
       ),
     );
   }

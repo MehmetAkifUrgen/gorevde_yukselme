@@ -24,15 +24,49 @@ class ProfessionListPage extends ConsumerWidget {
     try {
       decodedExamType = Uri.decodeComponent(examType);
     } catch (e) {
-      decodedExamType = examType;
-      print('Profession List - ExamType URI decode error: $e');
+      try {
+        String fixedExamType = examType
+            .replaceAll('%C4%B1', 'ı')
+            .replaceAll('%C3%BC', 'ü')
+            .replaceAll('%C3%B6', 'ö')
+            .replaceAll('%C3%A7', 'ç')
+            .replaceAll('%C4%9F', 'ğ')
+            .replaceAll('%C5%9F', 'ş')
+            .replaceAll('%C3%96', 'Ö')
+            .replaceAll('%C3%9C', 'Ü')
+            .replaceAll('%C3%87', 'Ç')
+            .replaceAll('%C4%B0', 'İ')
+            .replaceAll('%C4%9E', 'Ğ')
+            .replaceAll('%C5%9E', 'Ş');
+        decodedExamType = Uri.decodeComponent(fixedExamType);
+      } catch (e2) {
+        decodedExamType = examType;
+        print('Profession List - ExamType URI decode error: $e');
+      }
     }
     
     try {
       decodedCategory = Uri.decodeComponent(category);
     } catch (e) {
-      decodedCategory = category;
-      print('Profession List - Category URI decode error: $e');
+      try {
+        String fixedCategory = category
+            .replaceAll('%C4%B1', 'ı')
+            .replaceAll('%C3%BC', 'ü')
+            .replaceAll('%C3%B6', 'ö')
+            .replaceAll('%C3%A7', 'ç')
+            .replaceAll('%C4%9F', 'ğ')
+            .replaceAll('%C5%9F', 'ş')
+            .replaceAll('%C3%96', 'Ö')
+            .replaceAll('%C3%9C', 'Ü')
+            .replaceAll('%C3%87', 'Ç')
+            .replaceAll('%C4%B0', 'İ')
+            .replaceAll('%C4%9E', 'Ğ')
+            .replaceAll('%C5%9E', 'Ş');
+        decodedCategory = Uri.decodeComponent(fixedCategory);
+      } catch (e2) {
+        decodedCategory = category;
+        print('Profession List - Category URI decode error: $e');
+      }
     }
     
     // API'den meslekleri al - examType (ana kategori) ve category (bakanlık) kullanarak

@@ -18,11 +18,33 @@ class MinistryListPage extends ConsumerWidget {
     // URL decode the examType parameter with error handling
     String decodedExamType;
     try {
+      // First try to decode, if it fails, use the original
       decodedExamType = Uri.decodeComponent(examType);
     } catch (e) {
-      // If decoding fails, use the original examType
-      decodedExamType = examType;
-      print('Ministry List - URI decode error: $e');
+      // If decoding fails, try to handle common encoding issues
+      try {
+        // Replace common problematic characters
+        String fixedExamType = examType
+            .replaceAll('%C4%B1', 'ı')
+            .replaceAll('%C3%BC', 'ü')
+            .replaceAll('%C3%B6', 'ö')
+            .replaceAll('%C3%A7', 'ç')
+            .replaceAll('%C4%9F', 'ğ')
+            .replaceAll('%C5%9F', 'ş')
+            .replaceAll('%C3%BC', 'ü')
+            .replaceAll('%C3%96', 'Ö')
+            .replaceAll('%C3%9C', 'Ü')
+            .replaceAll('%C3%87', 'Ç')
+            .replaceAll('%C4%B0', 'İ')
+            .replaceAll('%C4%9E', 'Ğ')
+            .replaceAll('%C5%9E', 'Ş');
+        
+        decodedExamType = Uri.decodeComponent(fixedExamType);
+      } catch (e2) {
+        // If all else fails, use the original examType
+        decodedExamType = examType;
+        print('Ministry List - URI decode error: $e');
+      }
     }
     print('Ministry List - Original examType: $examType');
     print('Ministry List - Decoded examType: $decodedExamType');

@@ -16,11 +16,34 @@ class _PerformanceAnalysisPageState extends ConsumerState<PerformanceAnalysisPag
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   String selectedPeriod = 'Son 7 Gün';
+  
+  // Guest statistics data
+  Map<String, dynamic>? _guestStats;
+  bool _isLoadingGuestStats = true;
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 1, vsync: this);
+    _loadGuestStatistics();
+  }
+
+  Future<void> _loadGuestStatistics() async {
+    try {
+      final stats = await ref.read(localStatisticsServiceProvider).getStats('');
+      if (mounted) {
+        setState(() {
+          _guestStats = stats;
+          _isLoadingGuestStats = false;
+        });
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          _isLoadingGuestStats = false;
+        });
+      }
+    }
   }
 
   @override
@@ -194,120 +217,115 @@ class _PerformanceAnalysisPageState extends ConsumerState<PerformanceAnalysisPag
   }
 
   Widget _buildGuestStatistics() {
-    return FutureBuilder<Map<String, dynamic>>(
-      future: ref.read(localStatisticsServiceProvider).getStats(''),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        }
-        
-        if (snapshot.hasError) {
-          return Center(child: Text('Hata: ${snapshot.error}'));
-        }
-        
-        final stats = snapshot.data ?? {};
-        final totalQuestions = stats['totalQuestions'] ?? 0;
-        final correctAnswers = stats['correct'] ?? 0;
-        final incorrectAnswers = stats['incorrect'] ?? 0;
-        final studyTimeMinutes = stats['studyTimeMinutes'] ?? 0;
-        
-        if (totalQuestions == 0) {
-          return const Center(
-            child: Padding(
-              padding: EdgeInsets.all(32.0),
-              child: Text(
-                'Henüz performans verisi bulunmuyor.\nSorular çözmeye başladığınızda burada görünecek.',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.grey,
-                ),
-              ),
+    if (_isLoadingGuestStats) {
+      return const Center(child: CircularProgressIndicator());
+    }
+    
+    if (_guestStats == null) {
+      return const Center(child: Text('Hata: İstatistikler yüklenemedi'));
+    }
+    
+    final stats = _guestStats!;
+    final totalQuestions = stats['totalQuestions'] ?? 0;
+    final correctAnswers = stats['correct'] ?? 0;
+    final incorrectAnswers = stats['incorrect'] ?? 0;
+    final studyTimeMinutes = stats['studyTimeMinutes'] ?? 0;
+    
+    if (totalQuestions == 0) {
+      return const Center(
+        child: Padding(
+          padding: EdgeInsets.all(32.0),
+          child: Text(
+            'Henüz performans verisi bulunmuyor.\nSorular çözmeye başladığınızda burada görünecek.',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.grey,
             ),
-          );
-        }
-        
-        final accuracy = totalQuestions > 0 ? (correctAnswers / totalQuestions * 100) : 0.0;
-        final avgTimePerQuestion = totalQuestions > 0 
-            ? (studyTimeMinutes / totalQuestions).toStringAsFixed(1)
-            : '0.0';
-        
-        return Column(
+          ),
+        ),
+      );
+    }
+    
+    final accuracy = totalQuestions > 0 ? (correctAnswers / totalQuestions * 100) : 0.0;
+    final avgTimePerQuestion = totalQuestions > 0 
+        ? (studyTimeMinutes / totalQuestions).toStringAsFixed(1)
+        : '0.0';
+    
+    return Column(
+      children: [
+        Row(
           children: [
-            Row(
-              children: [
-                Expanded(
-                  child: _buildSummaryCard(
-                    'Genel Puan',
-                    '${accuracy.toStringAsFixed(1)}%',
-                    Icons.grade,
-                    Colors.blue,
-                    'Doğruluk oranı',
-                  ),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: _buildSummaryCard(
-                    'Çözülen Sorular',
-                    totalQuestions.toString(),
-                    Icons.quiz,
-                    Colors.green,
-                    '$correctAnswers doğru',
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 12),
-            Row(
-              children: [
-                Expanded(
-                  child: _buildSummaryCard(
-                    'Yanlış Cevaplar',
-                    incorrectAnswers.toString(),
-                    Icons.close,
-                    Colors.red,
-                    'Hatalar',
-                  ),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: _buildSummaryCard(
-                    'Ort. Süre',
-                    '$avgTimePerQuestion dk',
-                    Icons.timer,
-                    Colors.purple,
-                    'Soru başına',
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 16),
-            Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: Colors.orange.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: Colors.orange.withOpacity(0.3)),
+            Expanded(
+              child: _buildSummaryCard(
+                'Genel Puan',
+                '${accuracy.toStringAsFixed(1)}%',
+                Icons.grade,
+                Colors.blue,
+                'Doğruluk oranı',
               ),
-              child: Row(
-                children: [
-                  Icon(Icons.info_outline, color: Colors.orange, size: 20),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: Text(
-                      'Bu veriler sadece bu cihazda saklanır. Giriş yaparak tüm cihazlarınızda senkronize edebilirsiniz.',
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.orange[700],
-                      ),
-                    ),
-                  ),
-                ],
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: _buildSummaryCard(
+                'Çözülen Sorular',
+                totalQuestions.toString(),
+                Icons.quiz,
+                Colors.green,
+                '$correctAnswers doğru',
               ),
             ),
           ],
-        );
-      },
+        ),
+        const SizedBox(height: 12),
+        Row(
+          children: [
+            Expanded(
+              child: _buildSummaryCard(
+                'Yanlış Cevaplar',
+                incorrectAnswers.toString(),
+                Icons.close,
+                Colors.red,
+                'Hatalar',
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: _buildSummaryCard(
+                'Ort. Süre',
+                '$avgTimePerQuestion dk',
+                Icons.timer,
+                Colors.purple,
+                'Soru başına',
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 16),
+        Container(
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            color: Colors.orange.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: Colors.orange.withOpacity(0.3)),
+          ),
+          child: Row(
+            children: [
+              Icon(Icons.info_outline, color: Colors.orange, size: 20),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Text(
+                  'Bu veriler sadece bu cihazda saklanır. Giriş yaparak tüm cihazlarınızda senkronize edebilirsiniz.',
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.orange[700],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 
@@ -407,39 +425,34 @@ class _PerformanceAnalysisPageState extends ConsumerState<PerformanceAnalysisPag
   }
 
   Widget _buildGuestQuickStats() {
-    return FutureBuilder<Map<String, dynamic>>(
-      future: ref.read(localStatisticsServiceProvider).getStats(''),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        }
-        
-        if (snapshot.hasError) {
-          return Center(child: Text('Hata: ${snapshot.error}'));
-        }
-        
-        final stats = snapshot.data ?? {};
-        final totalQuestions = stats['totalQuestions'] ?? 0;
-        final correctAnswers = stats['correct'] ?? 0;
-        final incorrectAnswers = stats['incorrect'] ?? 0;
-        final studyTimeMinutes = stats['studyTimeMinutes'] ?? 0;
-        
-        if (totalQuestions == 0) {
-          return const Center(child: Text('Henüz istatistik bulunmuyor'));
-        }
-        
-        final accuracy = totalQuestions > 0 ? (correctAnswers / totalQuestions * 100) : 0.0;
-        final studyTimeHours = (studyTimeMinutes / 60).toStringAsFixed(1);
-        
-        return Column(
-          children: [
-            _buildStatRow('Doğru Cevaplar', correctAnswers.toString(), '${accuracy.toStringAsFixed(1)}%'),
-            _buildStatRow('Yanlış Cevaplar', incorrectAnswers.toString(), '${(100 - accuracy).toStringAsFixed(1)}%'),
-            _buildStatRow('Toplam Sorular', totalQuestions.toString(), 'Cevaplanmış'),
-            _buildStatRow('Toplam Çalışma Süresi', '$studyTimeHours saat', 'Tüm zamanlar'),
-          ],
-        );
-      },
+    if (_isLoadingGuestStats) {
+      return const Center(child: CircularProgressIndicator());
+    }
+    
+    if (_guestStats == null) {
+      return const Center(child: Text('Hata: İstatistikler yüklenemedi'));
+    }
+    
+    final stats = _guestStats!;
+    final totalQuestions = stats['totalQuestions'] ?? 0;
+    final correctAnswers = stats['correct'] ?? 0;
+    final incorrectAnswers = stats['incorrect'] ?? 0;
+    final studyTimeMinutes = stats['studyTimeMinutes'] ?? 0;
+    
+    if (totalQuestions == 0) {
+      return const Center(child: Text('Henüz istatistik bulunmuyor'));
+    }
+    
+    final accuracy = totalQuestions > 0 ? (correctAnswers / totalQuestions * 100) : 0.0;
+    final studyTimeHours = (studyTimeMinutes / 60).toStringAsFixed(1);
+    
+    return Column(
+      children: [
+        _buildStatRow('Doğru Cevaplar', correctAnswers.toString(), '${accuracy.toStringAsFixed(1)}%'),
+        _buildStatRow('Yanlış Cevaplar', incorrectAnswers.toString(), '${(100 - accuracy).toStringAsFixed(1)}%'),
+        _buildStatRow('Toplam Sorular', totalQuestions.toString(), 'Cevaplanmış'),
+        _buildStatRow('Toplam Çalışma Süresi', '$studyTimeHours saat', 'Tüm zamanlar'),
+      ],
     );
   }
 
