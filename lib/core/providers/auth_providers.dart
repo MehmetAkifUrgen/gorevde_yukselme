@@ -8,15 +8,11 @@ import '../services/favorites_service.dart';
 import '../services/google_signin_service.dart';
 import '../services/session_service.dart';
 import '../services/local_statistics_service.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../models/user_model.dart';
 import '../models/user_preferences.dart';
 import '../models/user_statistics.dart';
+import 'app_providers.dart';
 
-// SharedPreferences Provider
-final sharedPreferencesProvider = Provider<SharedPreferences>((ref) {
-  throw UnimplementedError('SharedPreferences should be overridden in main.dart');
-});
 
 // Session Service Provider
 final sessionServiceProvider = Provider<SessionService>((ref) {

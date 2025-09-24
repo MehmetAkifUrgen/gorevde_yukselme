@@ -28,18 +28,6 @@ class _HomePageState extends ConsumerState<HomePage> {
         ),
         backgroundColor: AppTheme.primaryNavyBlue,
         elevation: 0,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.notifications_outlined),
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Bildirimler özelliği gelecek sürümde eklenecek'),
-                ),
-              );
-            },
-          ),
-        ],
       ),
       body: SingleChildScrollView(
         child: Column(

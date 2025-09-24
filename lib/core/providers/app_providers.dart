@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../models/user_model.dart';
 import '../models/question_model.dart';
 import '../models/exam_model.dart';
@@ -349,3 +350,71 @@ final canAnswerMoreQuestionsProvider = Provider<bool>((ref) {
 final questionReportServiceProvider = Provider<QuestionReportService>((ref) {
   return QuestionReportService();
 });
+
+// SharedPreferences Provider
+final sharedPreferencesProvider = Provider<SharedPreferences>((ref) {
+  throw UnimplementedError('SharedPreferences must be initialized in main.dart');
+});
+
+// Selected Exam Provider
+final selectedExamProvider = StateNotifierProvider<SelectedExamNotifier, String?>((ref) {
+  return SelectedExamNotifier(ref.read(sharedPreferencesProvider));
+});
+
+class SelectedExamNotifier extends StateNotifier<String?> {
+  final SharedPreferences _prefs;
+  
+  SelectedExamNotifier(this._prefs) : super(_prefs.getString('selected_exam'));
+  
+  void setExam(String exam) {
+    state = exam;
+    _prefs.setString('selected_exam', exam);
+  }
+  
+  void clearExam() {
+    state = null;
+    _prefs.remove('selected_exam');
+  }
+}
+
+// Selected Ministry Provider
+final selectedMinistryProvider = StateNotifierProvider<SelectedMinistryNotifier, String?>((ref) {
+  return SelectedMinistryNotifier(ref.read(sharedPreferencesProvider));
+});
+
+class SelectedMinistryNotifier extends StateNotifier<String?> {
+  final SharedPreferences _prefs;
+  
+  SelectedMinistryNotifier(this._prefs) : super(_prefs.getString('selected_ministry'));
+  
+  void setMinistry(String ministry) {
+    state = ministry;
+    _prefs.setString('selected_ministry', ministry);
+  }
+  
+  void clearMinistry() {
+    state = null;
+    _prefs.remove('selected_ministry');
+  }
+}
+
+// Selected Profession Provider
+final selectedProfessionProvider = StateNotifierProvider<SelectedProfessionNotifier, String?>((ref) {
+  return SelectedProfessionNotifier(ref.read(sharedPreferencesProvider));
+});
+
+class SelectedProfessionNotifier extends StateNotifier<String?> {
+  final SharedPreferences _prefs;
+  
+  SelectedProfessionNotifier(this._prefs) : super(_prefs.getString('selected_profession'));
+  
+  void setProfession(String profession) {
+    state = profession;
+    _prefs.setString('selected_profession', profession);
+  }
+  
+  void clearProfession() {
+    state = null;
+    _prefs.remove('selected_profession');
+  }
+}
