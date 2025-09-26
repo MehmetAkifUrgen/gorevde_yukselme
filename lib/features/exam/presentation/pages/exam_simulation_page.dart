@@ -317,6 +317,9 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
     setState(() {
       _selectedAnswerIndex = answerIndex;
     });
+    
+    // Automatically submit answer after selection
+    _submitAnswer();
   }
 
   void _submitAnswer() {
@@ -667,7 +670,6 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
     }
 
     final Question currentQuestion = exam.questions[exam.currentQuestionIndex];
-    final bool isAnswered = exam.userAnswers.containsKey(currentQuestion.id);
     final int? userAnswer = exam.userAnswers[currentQuestion.id];
 
     return Scaffold(
@@ -764,9 +766,7 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
                   flex: 2,
                   child: ElevatedButton(
                     onPressed: () {
-                      if (!isAnswered && _selectedAnswerIndex != null) {
-                        _submitAnswer();
-                      } else if (exam.currentQuestionIndex < exam.questions.length - 1) {
+                      if (exam.currentQuestionIndex < exam.questions.length - 1) {
                         _nextQuestion();
                       } else {
                         _completeExam();
@@ -778,11 +778,9 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
                       padding: const EdgeInsets.symmetric(vertical: 12),
                     ),
                     child: Text(
-                      !isAnswered && _selectedAnswerIndex != null
-                          ? 'Cevapla'
-                          : exam.currentQuestionIndex < exam.questions.length - 1
-                              ? 'Sonraki'
-                              : 'Bitir',
+                      exam.currentQuestionIndex < exam.questions.length - 1
+                          ? 'Sonraki'
+                          : 'Bitir',
                     ),
                   ),
                 ),

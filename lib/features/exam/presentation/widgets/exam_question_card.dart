@@ -206,58 +206,6 @@ class ExamQuestionCard extends StatelessWidget {
               );
             }),
             
-            // Boş Bırak seçeneği
-            if (!isReviewMode && !showAnswerFeedback) ...[
-              const SizedBox(height: 8),
-              Container(
-                margin: const EdgeInsets.only(bottom: 12),
-                child: InkWell(
-                  onTap: () => onAnswerSelected(-1), // -1 boş bırakma için
-                  borderRadius: BorderRadius.circular(8),
-                  child: Container(
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: selectedAnswerIndex == -1 
-                          ? Colors.orange[100] 
-                          : Colors.grey[50],
-                      border: Border.all(
-                        color: selectedAnswerIndex == -1 
-                            ? Colors.orange[400]! 
-                            : Colors.grey[300]!,
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Row(
-                      children: [
-                        Icon(
-                          selectedAnswerIndex == -1 
-                              ? Icons.radio_button_checked 
-                              : Icons.radio_button_unchecked,
-                          color: selectedAnswerIndex == -1 
-                              ? Colors.orange[600] 
-                              : Colors.grey[500],
-                        ),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: Text(
-                            'Boş Bırak',
-                            style: TextStyle(
-                              fontSize: fontSize * 0.9,
-                              height: 1.4,
-                              fontStyle: FontStyle.italic,
-                              color: selectedAnswerIndex == -1 
-                                  ? Colors.orange[700] 
-                                  : Colors.grey[600],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ],
             
             // Show Solution Button (only shown when answer feedback is active and callback is provided)
             if (showAnswerFeedback && onShowSolution != null) ...[
