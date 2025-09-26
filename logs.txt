@@ -1,465 +1,426 @@
-al questions for subject: İnşaat Teknisyeni
-I/flutter (10108): DEBUG: Processing subject: Gıda Teknisyeni in profession: Adalet Bakanlığı
-I/flutter (10108): DEBUG: Subject data type: _Map<String, dynamic>
-I/flutter (10108): DEBUG: Processing year: 2017 Gıda Teknisyeni Çıkmış Sorular 1 for subject: Gıda Teknisyeni
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Gıda Teknisyeni Çıkmış Sorular 1
-I/flutter (10108): DEBUG: Processing year: 2017 Gıda Teknisyeni Çıkmış Sorular 2 for subject: Gıda Teknisyeni
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Gıda Teknisyeni Çıkmış Sorular 2
-I/flutter (10108): DEBUG: Processing year: 2017 Gıda Teknisyeni Çıkmış Sorular 3 for subject: Gıda Teknisyeni
-I/flutter (10108): DEBUG: Added 10 questions from year: 2017 Gıda Teknisyeni Çıkmış Sorular 3
-I/flutter (10108): DEBUG: Successfully processed 50 total questions for subject: Gıda Teknisyeni
-I/flutter (10108): DEBUG: Processing subject: Elektrik Teknisyeni in profession: Adalet Bakanlığı
-I/flutter (10108): DEBUG: Subject data type: _Map<String, dynamic>
-I/flutter (10108): DEBUG: Processing year: 2017 Elektrik Teknisyeni Çıkmış Sorular 1 for subject: Elektrik Teknisyeni
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Elektrik Teknisyeni Çıkmış Sorular 1
-I/flutter (10108): DEBUG: Processing year: 2017 Elektrik Teknisyeni Çıkmış Sorular 2 for subject: Elektrik Teknisyeni
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Elektrik Teknisyeni Çıkmış Sorular 2
-I/flutter (10108): DEBUG: Processing year: 2017 Elektrik Teknisyeni Çıkmış Sorular 3 for subject: Elektrik Teknisyeni
-I/flutter (10108): DEBUG: Added 10 questions from year: 2017 Elektrik Teknisyeni Çıkmış Sorular 3
-I/flutter (10108): DEBUG: Successfully processed 50 total questions for subject: Elektrik Teknisyeni
-I/flutter (10108): DEBUG: Processing subject: Ziraat Teknisyeni in profession: Adalet Bakanlığı
-I/flutter (10108): DEBUG: Subject data type: _Map<String, dynamic>
-I/flutter (10108): DEBUG: Processing year: 2017 Ziraat Teknisyeni Çıkmış Sorular 1 for subject: Ziraat Teknisyeni
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Ziraat Teknisyeni Çıkmış Sorular 1
-I/flutter (10108): DEBUG: Processing year: 2017 Ziraat Teknisyeni Çıkmış Sorular 2 for subject: Ziraat Teknisyeni
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Ziraat Teknisyeni Çıkmış Sorular 2
-I/flutter (10108): DEBUG: Processing year: 2017 Ziraat Teknisyeni Çıkmış Sorular 3 for subject: Ziraat Teknisyeni
-I/flutter (10108): DEBUG: Added 10 questions from year: 2017 Ziraat Teknisyeni Çıkmış Sorular 3
-I/flutter (10108): DEBUG: Successfully processed 50 total questions for subject: Ziraat Teknisyeni
-I/flutter (10108): DEBUG: Processing subject: Makine Teknisyeni in profession: Adalet Bakanlığı
-I/flutter (10108): DEBUG: Subject data type: _Map<String, dynamic>
-I/flutter (10108): DEBUG: Processing year: 2017 Makine Teknisyeni Çıkmış Sorular 1 for subject: Makine Teknisyeni
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Makine Teknisyeni Çıkmış Sorular 1
-I/flutter (10108): DEBUG: Processing year: 2017 Makine Teknisyeni Çıkmış Sorular 2 for subject: Makine Teknisyeni
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Makine Teknisyeni Çıkmış Sorular 2
-I/flutter (10108): DEBUG: Processing year: 2017 Makine Teknisyeni Çıkmış Sorular 3 for subject: Makine Teknisyeni
-I/flutter (10108): DEBUG: Added 10 questions from year: 2017 Makine Teknisyeni Çıkmış Sorular 3
-I/flutter (10108): DEBUG: Successfully processed 50 total questions for subject: Makine Teknisyeni
-I/flutter (10108): DEBUG: Processing subject: Sağlık Memuru in profession: Adalet Bakanlığı
-I/flutter (10108): DEBUG: Subject data type: _Map<String, dynamic>
-I/flutter (10108): DEBUG: Processing year: 2017 Sağlık Memuru Çıkmış Sorular 1 for subject: Sağlık Memuru
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Sağlık Memuru Çıkmış Sorular 1
-I/flutter (10108): DEBUG: Processing year: 2017 Sağlık Memuru Çıkmış Sorular 2 for subject: Sağlık Memuru
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Sağlık Memuru Çıkmış Sorular 2
-I/flutter (10108): DEBUG: Processing year: 2017 Sağlık Memuru Çıkmış Sorular 3 for subject: Sağlık Memuru
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Sağlık Memuru Çıkmış Sorular 3
-I/flutter (10108): DEBUG: Processing year: 2017 Sağlık Memuru Çıkmış Sorular 4 for subject: Sağlık Memuru
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Sağlık Memuru Çıkmış Sorular 4
-I/flutter (10108): DEBUG: Successfully processed 80 total questions for subject: Sağlık Memuru
-I/flutter (10108): DEBUG: ApiQuestionsResponse.fromJson completed with 2 categories
-I/flutter (10108): DEBUG: ApiQuestionsResponse.fromJson called with json keys: [Görevde Yükselme, Ünvan Değişikliği]
-I/flutter (10108): DEBUG: Processing category: Görevde Yükselme
-I/flutter (10108): DEBUG: Category data type: _Map<String, dynamic>
-I/flutter (10108): DEBUG: Processing profession: Adalet Bakanlığı in category: Görevde Yükselme
-I/flutter (10108): DEBUG: Profession data type: _Map<String, dynamic>
-I/flutter (10108): DEBUG: Processing subject: İdare Memuru in profession: Adalet Bakanlığı
-I/flutter (10108): DEBUG: Subject data type: _Map<String, dynamic>
-I/flutter (10108): DEBUG: Processing year: 2017 İdare Memuru Çıkmış Sorular 1 for subject: İdare Memuru
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 İdare Memuru Çıkmış Sorular 1
-I/flutter (10108): DEBUG: Processing year: 2017 İdare Memuru Çıkmış Sorular 2 for subject: İdare Memuru
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 İdare Memuru Çıkmış Sorular 2
-I/flutter (10108): DEBUG: Processing year: 2017 İdare Memuru Çıkmış Sorular 3 for subject: İdare Memuru
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 İdare Memuru Çıkmış Sorular 3
-I/flutter (10108): DEBUG: Processing year: 2017 İdare Memuru Çıkmış Sorular 4 for subject: İdare Memuru
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 İdare Memuru Çıkmış Sorular 4
-I/flutter (10108): DEBUG: Processing year: 2017 İdare Memuru Çıkmış Sorular 5 for subject: İdare Memuru
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 İdare Memuru Çıkmış Sorular 5
-I/flutter (10108): DEBUG: Processing year: 2019 İdare Memuru Çıkmış Sorular 1 for subject: İdare Memuru
-I/flutter (10108): DEBUG: Added 20 questions from year: 2019 İdare Memuru Çıkmış Sorular 1
-I/flutter (10108): DEBUG: Processing year: 2019 İdare Memuru Çıkmış Sorular 2 for subject: İdare Memuru
-I/flutter (10108): DEBUG: Added 20 questions from year: 2019 İdare Memuru Çıkmış Sorular 2
-I/flutter (10108): DEBUG: Processing year: 2019 İdare Memuru Çıkmış Sorular 3 for subject: İdare Memuru
-I/flutter (10108): DEBUG: Added 20 questions from year: 2019 İdare Memuru Çıkmış Sorular 3
-I/flutter (10108): DEBUG: Processing year: 2019 İdare Memuru Çıkmış Sorular 4 for subject: İdare Memuru
-I/flutter (10108): DEBUG: Added 20 questions from year: 2019 İdare Memuru Çıkmış Sorular 4
-I/flutter (10108): DEBUG: Processing year: 2019 İdare Memuru Çıkmış Sorular 5 for subject: İdare Memuru
-I/flutter (10108): DEBUG: Added 20 questions from year: 2019 İdare Memuru Çıkmış Sorular 5
-I/flutter (10108): DEBUG: Successfully processed 200 total questions for subject: İdare Memuru
-I/flutter (10108): DEBUG: Processing subject: İdari İşler Müdürü in profession: Adalet Bakanlığı
-I/flutter (10108): DEBUG: Subject data type: _Map<String, dynamic>
-I/flutter (10108): DEBUG: Processing year: 2013 İdare İşler Müdürü Çıkmış Sorular 1 for subject: İdari İşler Müdürü
-I/flutter (10108): DEBUG: Added 20 questions from year: 2013 İdare İşler Müdürü Çıkmış Sorular 1
-I/flutter (10108): DEBUG: Processing year: 2013 İdare İşler Müdürü Çıkmış Sorular 2 for subject: İdari İşler Müdürü
-I/flutter (10108): DEBUG: Added 20 questions from year: 2013 İdare İşler Müdürü Çıkmış Sorular 2
-I/flutter (10108): DEBUG: Processing year: 2013 İdare İşler Müdürü Çıkmış Sorular 3 for subject: İdari İşler Müdürü
-I/flutter (10108): DEBUG: Added 20 questions from year: 2013 İdare İşler Müdürü Çıkmış Sorular 3
-I/flutter (10108): DEBUG: Processing year: 2013 İdare İşler Müdürü Çıkmış Sorular 4 for subject: İdari İşler Müdürü
-I/flutter (10108): DEBUG: Added 20 questions from year: 2013 İdare İşler Müdürü Çıkmış Sorular 4
-I/flutter (10108): DEBUG: Processing year: 2017 İdare İşler Müdürü Çıkmış Sorular 1 for subject: İdari İşler Müdürü
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 İdare İşler Müdürü Çıkmış Sorular 1
-I/flutter (10108): DEBUG: Processing year: 2017 İdare İşler Müdürü Çıkmış Sorular 2 for subject: İdari İşler Müdürü
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 İdare İşler Müdürü Çıkmış Sorular 2
-I/flutter (10108): DEBUG: Processing year: 2017 İdare İşler Müdürü Çıkmış Sorular 3 for subject: İdari İşler Müdürü
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 İdare İşler Müdürü Çıkmış Sorular 3
-I/flutter (10108): DEBUG: Processing year: 2017 İdare İşler Müdürü Çıkmış Sorular 4 for subject: İdari İşler Müdürü
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 İdare İşler Müdürü Çıkmış Sorular 4
-I/flutter (10108): DEBUG: Processing year: 2017 İdare İşler Müdürü Çıkmış Sorular 5 for subject: İdari İşler Müdürü
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 İdare İşler Müdürü Çıkmış Sorular 5
-I/flutter (10108): DEBUG: Successfully processed 180 total questions for subject: İdari İşler Müdürü
-I/flutter (10108): DEBUG: Processing subject: İkinci Müdür in profession: Adalet Bakanlığı
-I/flutter (10108): DEBUG: Subject data type: _Map<String, dynamic>
-I/flutter (10108): DEBUG: Processing year: 2017 İkinci Müdür Çıkmış Sorular 1 for subject: İkinci Müdür
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 İkinci Müdür Çıkmış Sorular 1
-I/flutter (10108): DEBUG: Processing year: 2017 İkinci Müdür Çıkmış Sorular 2 for subject: İkinci Müdür
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 İkinci Müdür Çıkmış Sorular 2
-I/flutter (10108): DEBUG: Processing year: 2017 İkinci Müdür Çıkmış Sorular 3 for subject: İkinci Müdür
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 İkinci Müdür Çıkmış Sorular 3
-I/flutter (10108): DEBUG: Processing year: 2017 İkinci Müdür Çıkmış Sorular 4 for subject: İkinci Müdür
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 İkinci Müdür Çıkmış Sorular 4
-I/flutter (10108): DEBUG: Processing year: 2017 İkinci Müdür Çıkmış Sorular 5 for subject: İkinci Müdür
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 İkinci Müdür Çıkmış Sorular 5
-I/flutter (10108): DEBUG: Processing year: 2019 İkinci Müdür Çıkmış Sorular 1 for subject: İkinci Müdür
-I/flutter (10108): DEBUG: Added 20 questions from year: 2019 İkinci Müdür Çıkmış Sorular 1
-I/flutter (10108): DEBUG: Processing year: 2019 İkinci Müdür Çıkmış Sorular 2 for subject: İkinci Müdür
-I/flutter (10108): DEBUG: Added 20 questions from year: 2019 İkinci Müdür Çıkmış Sorular 2
-I/flutter (10108): DEBUG: Processing year: 2019 İkinci Müdür Çıkmış Sorular 3 for subject: İkinci Müdür
-I/flutter (10108): DEBUG: Added 20 questions from year: 2019 İkinci Müdür Çıkmış Sorular 3
-I/flutter (10108): DEBUG: Processing year: 2019 İkinci Müdür Çıkmış Sorular 4 for subject: İkinci Müdür
-I/flutter (10108): DEBUG: Added 20 questions from year: 2019 İkinci Müdür Çıkmış Sorular 4
-I/flutter (10108): DEBUG: Processing year: 2019 İkinci Müdür Çıkmış Sorular 5 for subject: İkinci Müdür
-I/flutter (10108): DEBUG: Added 20 questions from year: 2019 İkinci Müdür Çıkmış Sorular 5
-I/flutter (10108): DEBUG: Successfully processed 200 total questions for subject: İkinci Müdür
-I/flutter (10108): DEBUG: Processing subject: İnfaz Koruma Baş Memurluğu in profession: Adalet Bakanlığı
-I/flutter (10108): DEBUG: Subject data type: _Map<String, dynamic>
-I/flutter (10108): DEBUG: Processing year: 2017 İnfaz ve Koruma Başmemurluğu Çıkmış Sorular 1 for subject: İnfaz Koruma Baş Memurluğu
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 İnfaz ve Koruma Başmemurluğu Çıkmış Sorular 1
-I/flutter (10108): DEBUG: Processing year: 2017 İnfaz ve Koruma Başmemurluğu Çıkmış Sorular 2 for subject: İnfaz Koruma Baş Memurluğu
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 İnfaz ve Koruma Başmemurluğu Çıkmış Sorular 2
-I/flutter (10108): DEBUG: Processing year: 2017 İnfaz ve Koruma Başmemurluğu Çıkmış Sorular 3 for subject: İnfaz Koruma Baş Memurluğu
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 İnfaz ve Koruma Başmemurluğu Çıkmış Sorular 3
-I/flutter (10108): DEBUG: Processing year: 2017 İnfaz ve Koruma Başmemurluğu Çıkmış Sorular 4 for subject: İnfaz Koruma Baş Memurluğu
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 İnfaz ve Koruma Başmemurluğu Çıkmış Sorular 4
-I/flutter (10108): DEBUG: Processing year: 2017 İnfaz ve Koruma Başmemurluğu Çıkmış Sorular 5 for subject: İnfaz Koruma Baş Memurluğu
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 İnfaz ve Koruma Başmemurluğu Çıkmış Sorular 5
-I/flutter (10108): DEBUG: Processing year: 2019 İnfaz ve Koruma Başmemurluğu Çıkmış Sorular 1 for subject: İnfaz Koruma Baş Memurluğu
-I/flutter (10108): DEBUG: Added 20 questions from year: 2019 İnfaz ve Koruma Başmemurluğu Çıkmış Sorular 1
-I/flutter (10108): DEBUG: Processing year: 2019 İnfaz ve Koruma Başmemurluğu Çıkmış Sorular 2 for subject: İnfaz Koruma Baş Memurluğu
-I/flutter (10108): DEBUG: Added 19 questions from year: 2019 İnfaz ve Koruma Başmemurluğu Çıkmış Sorular 2
-I/flutter (10108): DEBUG: Processing year: 2019 İnfaz ve Koruma Başmemurluğu Çıkmış Sorular 3 for subject: İnfaz Koruma Baş Memurluğu
-I/flutter (10108): DEBUG: Added 20 questions from year: 2019 İnfaz ve Koruma Başmemurluğu Çıkmış Sorular 3
-I/flutter (10108): DEBUG: Processing year: 2019 İnfaz ve Koruma Başmemurluğu Çıkmış Sorular 4 for subject: İnfaz Koruma Baş Memurluğu
-I/flutter (10108): DEBUG: Added 20 questions from year: 2019 İnfaz ve Koruma Başmemurluğu Çıkmış Sorular 4
-I/flutter (10108): DEBUG: Processing year: 2019 İnfaz ve Koruma Başmemurluğu Çıkmış Sorular 5 for subject: İnfaz Koruma Baş Memurluğu
-I/flutter (10108): DEBUG: Added 20 questions from year: 2019 İnfaz ve Koruma Başmemurluğu Çıkmış Sorular 5
-I/flutter (10108): DEBUG: Successfully processed 199 total questions for subject: İnfaz Koruma Baş Memurluğu
-I/flutter (10108): DEBUG: Processing subject: Şef in profession: Adalet Bakanlığı
-I/flutter (10108): DEBUG: Subject data type: _Map<String, dynamic>
-I/flutter (10108): DEBUG: Processing year: 2017 Şef Çıkmış Sorular 1 for subject: Şef
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Şef Çıkmış Sorular 1
-I/flutter (10108): DEBUG: Processing year: 2017 Şef Çıkmış Sorular 2 for subject: Şef
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Şef Çıkmış Sorular 2
-I/flutter (10108): DEBUG: Processing year: 2017 Şef Çıkmış Sorular 3 for subject: Şef
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Şef Çıkmış Sorular 3
-I/flutter (10108): DEBUG: Processing year: 2017 Şef Çıkmış Sorular 4 for subject: Şef
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Şef Çıkmış Sorular 4
-I/flutter (10108): DEBUG: Processing year: 2017 Şef Çıkmış Sorular 5 for subject: Şef
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Şef Çıkmış Sorular 5
-I/flutter (10108): DEBUG: Successfully processed 100 total questions for subject: Şef
-I/flutter (10108): DEBUG: Processing subject: Yazı İşleri Müdürü in profession: Adalet Bakanlığı
-I/flutter (10108): DEBUG: Subject data type: _Map<String, dynamic>
-I/flutter (10108): DEBUG: Processing year: 2013 Yazı İşleri Müdürü Çıkmış Sorular 1 for subject: Yazı İşleri Müdürü
-I/flutter (10108): DEBUG: Added 20 questions from year: 2013 Yazı İşleri Müdürü Çıkmış Sorular 1
-I/flutter (10108): DEBUG: Processing year: 2013 Yazı İşleri Müdürü Çıkmış Sorular 2 for subject: Yazı İşleri Müdürü
-I/flutter (10108): DEBUG: Added 20 questions from year: 2013 Yazı İşleri Müdürü Çıkmış Sorular 2
-I/flutter (10108): DEBUG: Processing year: 2013 Yazı İşleri Müdürü Çıkmış Sorular 3 for subject: Yazı İşleri Müdürü
-I/flutter (10108): DEBUG: Added 20 questions from year: 2013 Yazı İşleri Müdürü Çıkmış Sorular 3
-I/flutter (10108): DEBUG: Processing year: 2013 Yazı İşleri Müdürü Çıkmış Sorular 4 for subject: Yazı İşleri Müdürü
-I/flutter (10108): DEBUG: Added 20 questions from year: 2013 Yazı İşleri Müdürü Çıkmış Sorular 4
-I/flutter (10108): DEBUG: Processing year: 2017 Yazı İşleri Müdürü Çıkmış Sorular 1 for subject: Yazı İşleri Müdürü
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Yazı İşleri Müdürü Çıkmış Sorular 1
-I/flutter (10108): DEBUG: Processing year: 2017 Yazı İşleri Müdürü Çıkmış Sorular 2 for subject: Yazı İşleri Müdürü
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Yazı İşleri Müdürü Çıkmış Sorular 2
-I/flutter (10108): DEBUG: Processing year: 2017 Yazı İşleri Müdürü Çıkmış Sorular 3 for subject: Yazı İşleri Müdürü
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Yazı İşleri Müdürü Çıkmış Sorular 3
-I/flutter (10108): DEBUG: Processing year: 2017 Yazı İşleri Müdürü Çıkmış Sorular 4 for subject: Yazı İşleri Müdürü
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Yazı İşleri Müdürü Çıkmış Sorular 4
-I/flutter (10108): DEBUG: Processing year: 2017 Yazı İşleri Müdürü Çıkmış Sorular 5 for subject: Yazı İşleri Müdürü
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Yazı İşleri Müdürü Çıkmış Sorular 5
-I/flutter (10108): DEBUG: Successfully processed 180 total questions for subject: Yazı İşleri Müdürü
-I/flutter (10108): DEBUG: Processing subject: Zabıt Katibi in profession: Adalet Bakanlığı
-I/flutter (10108): DEBUG: Subject data type: _Map<String, dynamic>
-I/flutter (10108): DEBUG: Processing year: 2017 Zabıt Katibi Çıkmış Sorular 1 for subject: Zabıt Katibi
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Zabıt Katibi Çıkmış Sorular 1
-I/flutter (10108): DEBUG: Processing year: 2017 Zabıt Katibi Çıkmış Sorular 2 for subject: Zabıt Katibi
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Zabıt Katibi Çıkmış Sorular 2
-I/flutter (10108): DEBUG: Processing year: 2017 Zabıt Katibi Çıkmış Sorular 3 for subject: Zabıt Katibi
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Zabıt Katibi Çıkmış Sorular 3
-I/flutter (10108): DEBUG: Processing year: 2017 Zabıt Katibi Çıkmış Sorular 4 for subject: Zabıt Katibi
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Zabıt Katibi Çıkmış Sorular 4
-I/flutter (10108): DEBUG: Processing year: 2017 Zabıt Katibi Çıkmış Sorular 5 for subject: Zabıt Katibi
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Zabıt Katibi Çıkmış Sorular 5
-I/flutter (10108): DEBUG: Successfully processed 100 total questions for subject: Zabıt Katibi
-I/flutter (10108): DEBUG: Processing subject: İcra Müdür ve Müdür Yardımcıları in profession: Adalet Bakanlığı
-I/flutter (10108): DEBUG: Subject data type: _Map<String, dynamic>
-I/flutter (10108): DEBUG: Processing year: 2024 İcra Müdür ve Müdür Yardımcısı Çıkmış Sorular 1 for subject: İcra Müdür ve Müdür Yardımcıları
-I/flutter (10108): DEBUG: Added 20 questions from year: 2024 İcra Müdür ve Müdür Yardımcısı Çıkmış Sorular 1
-I/flutter (10108): DEBUG: Processing year: 2024 İcra Müdür ve Müdür Yardımcısı Çıkmış Sorular 2 for subject: İcra Müdür ve Müdür Yardımcıları
-I/flutter (10108): DEBUG: Added 17 questions from year: 2024 İcra Müdür ve Müdür Yardımcısı Çıkmış Sorular 2
-I/flutter (10108): DEBUG: Successfully processed 37 total questions for subject: İcra Müdür ve Müdür Yardımcıları
-I/flutter (10108): DEBUG: Processing subject: Denetimli Serbestlik Müdür Yardımcılığı in profession: Adalet Bakanlığı
-I/flutter (10108): DEBUG: Subject data type: _Map<String, dynamic>
-I/flutter (10108): DEBUG: Processing year: 2019 Denetimli Serbestlik Müdür Yardımcısı Çıkmış Sorular 1 for subject: Denetimli Serbestlik Müdür Yardımcılığı
-I/flutter (10108): DEBUG: Added 20 questions from year: 2019 Denetimli Serbestlik Müdür Yardımcısı Çıkmış Sorular 1
-I/flutter (10108): DEBUG: Processing year: 2019 Denetimli Serbestlik Müdür Yardımcısı Çıkmış Sorular 2 for subject: Denetimli Serbestlik Müdür Yardımcılığı
-I/flutter (10108): DEBUG: Added 20 questions from year: 2019 Denetimli Serbestlik Müdür Yardımcısı Çıkmış Sorular 2
-I/flutter (10108): DEBUG: Processing year: 2019 Denetimli Serbestlik Müdür Yardımcısı Çıkmış Sorular 3 for subject: Denetimli Serbestlik Müdür Yardımcılığı
-I/flutter (10108): DEBUG: Added 20 questions from year: 2019 Denetimli Serbestlik Müdür Yardımcısı Çıkmış Sorular 3
-I/flutter (10108): DEBUG: Processing year: 2019 Denetimli Serbestlik Müdür Yardımcısı Çıkmış Sorular 4 for subject: Denetimli Serbestlik Müdür Yardımcılığı
-I/flutter (10108): DEBUG: Added 20 questions from year: 2019 Denetimli Serbestlik Müdür Yardımcısı Çıkmış Sorular 4
-I/flutter (10108): DEBUG: Processing year: 2019 Denetimli Serbestlik Müdür Yardımcısı Çıkmış Sorular 5 for subject: Denetimli Serbestlik Müdür Yardımcılığı
-I/flutter (10108): DEBUG: Added 20 questions from year: 2019 Denetimli Serbestlik Müdür Yardımcısı Çıkmış Sorular 5
-I/flutter (10108): DEBUG: Successfully processed 100 total questions for subject: Denetimli Serbestlik Müdür Yardımcılığı
-I/flutter (10108): DEBUG: Processing subject: Memur in profession: Adalet Bakanlığı
-I/flutter (10108): DEBUG: Subject data type: _Map<String, dynamic>
-I/flutter (10108): DEBUG: Processing year: 2019 Memur Çıkmış Sorular 1 for subject: Memur
-I/flutter (10108): DEBUG: Added 20 questions from year: 2019 Memur Çıkmış Sorular 1
-I/flutter (10108): DEBUG: Processing year: 2019 Memur Çıkmış Sorular 2 for subject: Memur
-I/flutter (10108): DEBUG: Added 20 questions from year: 2019 Memur Çıkmış Sorular 2
-I/flutter (10108): DEBUG: Processing year: 2019 Memur Çıkmış Sorular 3 for subject: Memur
-I/flutter (10108): DEBUG: Added 20 questions from year: 2019 Memur Çıkmış Sorular 3
-I/flutter (10108): DEBUG: Processing year: 2019 Memur Çıkmış Sorular 4 for subject: Memur
-I/flutter (10108): DEBUG: Added 20 questions from year: 2019 Memur Çıkmış Sorular 4
-I/flutter (10108): DEBUG: Processing year: 2019 Memur Çıkmış Sorular 5 for subject: Memur
-I/flutter (10108): DEBUG: Added 20 questions from year: 2019 Memur Çıkmış Sorular 5
-I/flutter (10108): DEBUG: Successfully processed 100 total questions for subject: Memur
-I/flutter (10108): DEBUG: Processing subject: Sayman in profession: Adalet Bakanlığı
-I/flutter (10108): DEBUG: Subject data type: _Map<String, dynamic>
-I/flutter (10108): DEBUG: Processing year: 2019 Sayman Çıkmış Sorular 1 for subject: Sayman
-I/flutter (10108): DEBUG: Added 20 questions from year: 2019 Sayman Çıkmış Sorular 1
-I/flutter (10108): DEBUG: Processing year: 2019 Sayman Çıkmış Sorular 2 for subject: Sayman
-I/flutter (10108): DEBUG: Added 20 questions from year: 2019 Sayman Çıkmış Sorular 2
-I/flutter (10108): DEBUG: Processing year: 2019 Sayman Çıkmış Sorular 3 for subject: Sayman
-I/flutter (10108): DEBUG: Added 20 questions from year: 2019 Sayman Çıkmış Sorular 3
-I/flutter (10108): DEBUG: Processing year: 2019 Sayman Çıkmış Sorular 4 for subject: Sayman
-I/flutter (10108): DEBUG: Added 20 questions from year: 2019 Sayman Çıkmış Sorular 4
-I/flutter (10108): DEBUG: Processing year: 2019 Sayman Çıkmış Sorular 5 for subject: Sayman
-I/flutter (10108): DEBUG: Added 20 questions from year: 2019 Sayman Çıkmış Sorular 5
-I/flutter (10108): DEBUG: Successfully processed 100 total questions for subject: Sayman
-I/flutter (10108): DEBUG: Processing category: Ünvan Değişikliği
-I/flutter (10108): DEBUG: Category data type: _Map<String, dynamic>
-I/flutter (10108): DEBUG: Processing profession: Adalet Bakanlığı in category: Ünvan Değişikliği
-I/flutter (10108): DEBUG: Profession data type: _Map<String, dynamic>
-I/flutter (10108): DEBUG: Processing subject: İdare Memuru in profession: Adalet Bakanlığı
-I/flutter (10108): DEBUG: Subject data type: _Map<String, dynamic>
-I/flutter (10108): DEBUG: Processing year: 2017 İdare Memuru Çıkmış Sorular 1 for subject: İdare Memuru
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 İdare Memuru Çıkmış Sorular 1
-I/flutter (10108): DEBUG: Processing year: 2017 İdare Memuru Çıkmış Sorular 2 for subject: İdare Memuru
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 İdare Memuru Çıkmış Sorular 2
-I/flutter (10108): DEBUG: Processing year: 2017 İdare Memuru Çıkmış Sorular 3 for subject: İdare Memuru
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 İdare Memuru Çıkmış Sorular 3
-I/flutter (10108): DEBUG: Processing year: 2017 İdare Memuru Çıkmış Sorular 4 for subject: İdare Memuru
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 İdare Memuru Çıkmış Sorular 4
-I/flutter (10108): DEBUG: Processing year: 2017 İdare Memuru Çıkmış Sorular 5 for subject: İdare Memuru
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 İdare Memuru Çıkmış Sorular 5
-I/flutter (10108): DEBUG: Successfully processed 100 total questions for subject: İdare Memuru
-I/flutter (10108): DEBUG: Processing subject: Şef in profession: Adalet Bakanlığı
-I/flutter (10108): DEBUG: Subject data type: _Map<String, dynamic>
-I/flutter (10108): DEBUG: Processing year: 2017 Şef Çıkmış Sorular 1 for subject: Şef
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Şef Çıkmış Sorular 1
-I/flutter (10108): DEBUG: Processing year: 2017 Şef Çıkmış Sorular 2 for subject: Şef
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Şef Çıkmış Sorular 2
-I/flutter (10108): DEBUG: Processing year: 2017 Şef Çıkmış Sorular 3 for subject: Şef
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Şef Çıkmış Sorular 3
-I/flutter (10108): DEBUG: Processing year: 2017 Şef Çıkmış Sorular 4 for subject: Şef
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Şef Çıkmış Sorular 4
-I/flutter (10108): DEBUG: Processing year: 2017 Şef Çıkmış Sorular 5 for subject: Şef
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Şef Çıkmış Sorular 5
-I/flutter (10108): DEBUG: Successfully processed 100 total questions for subject: Şef
-I/flutter (10108): DEBUG: Processing subject: Sayman in profession: Adalet Bakanlığı
-I/flutter (10108): DEBUG: Subject data type: _Map<String, dynamic>
-I/flutter (10108): DEBUG: Processing year: 2017 Sayman Çıkmış Sorular 1 for subject: Sayman
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Sayman Çıkmış Sorular 1
-I/flutter (10108): DEBUG: Processing year: 2017 Sayman Çıkmış Sorular 2 for subject: Sayman
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Sayman Çıkmış Sorular 2
-I/flutter (10108): DEBUG: Processing year: 2017 Sayman Çıkmış Sorular 3 for subject: Sayman
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Sayman Çıkmış Sorular 3
-I/flutter (10108): DEBUG: Processing year: 2017 Sayman Çıkmış Sorular 4 for subject: Sayman
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Sayman Çıkmış Sorular 4
-I/flutter (10108): DEBUG: Processing year: 2017 Sayman Çıkmış Sorular 5 for subject: Sayman
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Sayman Çıkmış Sorular 5
-I/flutter (10108): DEBUG: Successfully processed 100 total questions for subject: Sayman
-I/flutter (10108): DEBUG: Processing subject: İkinci Müdür in profession: Adalet Bakanlığı
-I/flutter (10108): DEBUG: Subject data type: _Map<String, dynamic>
-I/flutter (10108): DEBUG: Processing year: 2017 İkinci Müdür Çıkmış Sorular 1 for subject: İkinci Müdür
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 İkinci Müdür Çıkmış Sorular 1
-I/flutter (10108): DEBUG: Processing year: 2017 İkinci Müdür Çıkmış Sorular 2 for subject: İkinci Müdür
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 İkinci Müdür Çıkmış Sorular 2
-I/flutter (10108): DEBUG: Processing year: 2017 İkinci Müdür Çıkmış Sorular 3 for subject: İkinci Müdür
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 İkinci Müdür Çıkmış Sorular 3
-I/flutter (10108): DEBUG: Processing year: 2017 İkinci Müdür Çıkmış Sorular 4 for subject: İkinci Müdür
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 İkinci Müdür Çıkmış Sorular 4
-I/flutter (10108): DEBUG: Processing year: 2017 İkinci Müdür Çıkmış Sorular 5 for subject: İkinci Müdür
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 İkinci Müdür Çıkmış Sorular 5
-I/flutter (10108): DEBUG: Successfully processed 100 total questions for subject: İkinci Müdür
-I/flutter (10108): DEBUG: Processing subject: İnfaz Koruma Baş Memurluğu in profession: Adalet Bakanlığı
-I/flutter (10108): DEBUG: Subject data type: _Map<String, dynamic>
-I/flutter (10108): DEBUG: Processing year: 2017 İnfaz ve Koruma Başmemurluğu Çıkmış Sorular 1 for subject: İnfaz Koruma Baş Memurluğu
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 İnfaz ve Koruma Başmemurluğu Çıkmış Sorular 1
-I/flutter (10108): DEBUG: Processing year: 2017 İnfaz ve Koruma Başmemurluğu Çıkmış Sorular 2 for subject: İnfaz Koruma Baş Memurluğu
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 İnfaz ve Koruma Başmemurluğu Çıkmış Sorular 2
-I/flutter (10108): DEBUG: Processing year: 2017 İnfaz ve Koruma Başmemurluğu Çıkmış Sorular 3 for subject: İnfaz Koruma Baş Memurluğu
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 İnfaz ve Koruma Başmemurluğu Çıkmış Sorular 3
-I/flutter (10108): DEBUG: Processing year: 2017 İnfaz ve Koruma Başmemurluğu Çıkmış Sorular 4 for subject: İnfaz Koruma Baş Memurluğu
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 İnfaz ve Koruma Başmemurluğu Çıkmış Sorular 4
-I/flutter (10108): DEBUG: Processing year: 2017 İnfaz ve Koruma Başmemurluğu Çıkmış Sorular 5 for subject: İnfaz Koruma Baş Memurluğu
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 İnfaz ve Koruma Başmemurluğu Çıkmış Sorular 5
-I/flutter (10108): DEBUG: Successfully processed 100 total questions for subject: İnfaz Koruma Baş Memurluğu
-I/flutter (10108): DEBUG: Processing subject: Sosyolog in profession: Adalet Bakanlığı
-I/flutter (10108): DEBUG: Subject data type: _Map<String, dynamic>
-I/flutter (10108): DEBUG: Processing year: 2017 Sosyolog Çıkmış Sorular 1 for subject: Sosyolog
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Sosyolog Çıkmış Sorular 1
-I/flutter (10108): DEBUG: Processing year: 2017 Sosyolog Çıkmış Sorular 2 for subject: Sosyolog
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Sosyolog Çıkmış Sorular 2
-I/flutter (10108): DEBUG: Processing year: 2017 Sosyolog Çıkmış Sorular 3 for subject: Sosyolog
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Sosyolog Çıkmış Sorular 3
-I/flutter (10108): DEBUG: Processing year: 2017 Sosyolog Çıkmış Sorular 4 for subject: Sosyolog
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Sosyolog Çıkmış Sorular 4
-I/flutter (10108): DEBUG: Successfully processed 80 total questions for subject: Sosyolog
-I/flutter (10108): DEBUG: Processing subject: Öğretmen in profession: Adalet Bakanlığı
-I/flutter (10108): DEBUG: Subject data type: _Map<String, dynamic>
-I/flutter (10108): DEBUG: Processing year: 2017 Öğretmen Çıkmış Sorular 1 for subject: Öğretmen
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Öğretmen Çıkmış Sorular 1
-I/flutter (10108): DEBUG: Processing year: 2017 Öğretmen Çıkmış Sorular 2 for subject: Öğretmen
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Öğretmen Çıkmış Sorular 2
-I/flutter (10108): DEBUG: Processing year: 2017 Öğretmen Çıkmış Sorular 3 for subject: Öğretmen
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Öğretmen Çıkmış Sorular 3
-I/flutter (10108): DEBUG: Processing year: 2017 Öğretmen Çıkmış Sorular 4 for subject: Öğretmen
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Öğretmen Çıkmış Sorular 4
-I/flutter (10108): DEBUG: Processing year: 2019 Öğretmen Çıkmış Sorular 1 for subject: Öğretmen
-I/flutter (10108): DEBUG: Added 20 questions from year: 2019 Öğretmen Çıkmış Sorular 1
-I/flutter (10108): DEBUG: Processing year: 2019 Öğretmen Çıkmış Sorular 2 for subject: Öğretmen
-I/flutter (10108): DEBUG: Added 20 questions from year: 2019 Öğretmen Çıkmış Sorular 2
-I/flutter (10108): DEBUG: Processing year: 2019 Öğretmen Çıkmış Sorular 3 for subject: Öğretmen
-I/flutter (10108): DEBUG: Added 20 questions from year: 2019 Öğretmen Çıkmış Sorular 3
-I/flutter (10108): DEBUG: Processing year: 2019 Öğretmen Çıkmış Sorular 4 for subject: Öğretmen
-I/flutter (10108): DEBUG: Added 20 questions from year: 2019 Öğretmen Çıkmış Sorular 4
-I/flutter (10108): DEBUG: Successfully processed 160 total questions for subject: Öğretmen
-I/flutter (10108): DEBUG: Processing subject: Gıda Mühendisi in profession: Adalet Bakanlığı
-I/flutter (10108): DEBUG: Subject data type: _Map<String, dynamic>
-I/flutter (10108): DEBUG: Processing year: 2017 Gıda Mühendisi Çıkmış Sorular 1 for subject: Gıda Mühendisi
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Gıda Mühendisi Çıkmış Sorular 1
-I/flutter (10108): DEBUG: Processing year: 2017 Gıda Mühendisi Çıkmış Sorular 2 for subject: Gıda Mühendisi
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Gıda Mühendisi Çıkmış Sorular 2
-I/flutter (10108): DEBUG: Processing year: 2017 Gıda Mühendisi Çıkmış Sorular 3 for subject: Gıda Mühendisi
-I/flutter (10108): DEBUG: Added 10 questions from year: 2017 Gıda Mühendisi Çıkmış Sorular 3
-I/flutter (10108): DEBUG: Successfully processed 50 total questions for subject: Gıda Mühendisi
-I/flutter (10108): DEBUG: Processing subject: Makine Mühendisi in profession: Adalet Bakanlığı
-I/flutter (10108): DEBUG: Subject data type: _Map<String, dynamic>
-I/flutter (10108): DEBUG: Processing year: 2017 Makine Mühendisi Çıkmış Sorular 1 for subject: Makine Mühendisi
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Makine Mühendisi Çıkmış Sorular 1
-I/flutter (10108): DEBUG: Processing year: 2017 Makine Mühendisi Çıkmış Sorular 2 for subject: Makine Mühendisi
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Makine Mühendisi Çıkmış Sorular 2
-I/flutter (10108): DEBUG: Processing year: 2017 Makine Mühendisi Çıkmış Sorular 3 for subject: Makine Mühendisi
-I/flutter (10108): DEBUG: Added 10 questions from year: 2017 Makine Mühendisi Çıkmış Sorular 3
-I/flutter (10108): DEBUG: Successfully processed 50 total questions for subject: Makine Mühendisi
-I/flutter (10108): DEBUG: Processing subject: Orman Endüstri Mühendisi in profession: Adalet Bakanlığı
-I/flutter (10108): DEBUG: Subject data type: _Map<String, dynamic>
-I/flutter (10108): DEBUG: Processing year: 2017 Orman Endüstri Mühendisi Çıkmış Sorular 1 for subject: Orman Endüstri Mühendisi
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Orman Endüstri Mühendisi Çıkmış Sorular 1
-I/flutter (10108): DEBUG: Processing year: 2017 Orman Endüstri Mühendisi Çıkmış Sorular 2 for subject: Orman Endüstri Mühendisi
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Orman Endüstri Mühendisi Çıkmış Sorular 2
-I/flutter (10108): DEBUG: Processing year: 2017 Orman Endüstri Mühendisi Çıkmış Sorular 3 for subject: Orman Endüstri Mühendisi
-I/flutter (10108): DEBUG: Added 10 questions from year: 2017 Orman Endüstri Mühendisi Çıkmış Sorular 3
-I/flutter (10108): DEBUG: Successfully processed 50 total questions for subject: Orman Endüstri Mühendisi
-I/flutter (10108): DEBUG: Processing subject: Çevre Mühendisi in profession: Adalet Bakanlığı
-I/flutter (10108): DEBUG: Subject data type: _Map<String, dynamic>
-I/flutter (10108): DEBUG: Processing year: 2017 Çevre Mühendisi Çıkmış Sorular 1 for subject: Çevre Mühendisi
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Çevre Mühendisi Çıkmış Sorular 1
-I/flutter (10108): DEBUG: Processing year: 2017 Çevre Mühendisi Çıkmış Sorular 2 for subject: Çevre Mühendisi
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Çevre Mühendisi Çıkmış Sorular 2
-I/flutter (10108): DEBUG: Processing year: 2017 Çevre Mühendisi Çıkmış Sorular 3 for subject: Çevre Mühendisi
-I/flutter (10108): DEBUG: Added 10 questions from year: 2017 Çevre Mühendisi Çıkmış Sorular 3
-I/flutter (10108): DEBUG: Successfully processed 50 total questions for subject: Çevre Mühendisi
-I/flutter (10108): DEBUG: Processing subject: Elektrik Elektronik Mühendisi in profession: Adalet Bakanlığı
-I/flutter (10108): DEBUG: Subject data type: _Map<String, dynamic>
-I/flutter (10108): DEBUG: Processing year: 2017 Elektrik Elektronik Mühendisi Çıkmış Sorular 1 for subject: Elektrik Elektronik Mühendisi
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Elektrik Elektronik Mühendisi Çıkmış Sorular 1
-I/flutter (10108): DEBUG: Processing year: 2017 Elektrik Elektronik Mühendisi Çıkmış Sorular 2 for subject: Elektrik Elektronik Mühendisi
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Elektrik Elektronik Mühendisi Çıkmış Sorular 2
-I/flutter (10108): DEBUG: Processing year: 2017 Elektrik Elektronik Mühendisi Çıkmış Sorular 3 for subject: Elektrik Elektronik Mühendisi
-I/flutter (10108): DEBUG: Added 10 questions from year: 2017 Elektrik Elektronik Mühendisi Çıkmış Sorular 3
-I/flutter (10108): DEBUG: Successfully processed 50 total questions for subject: Elektrik Elektronik Mühendisi
-I/flutter (10108): DEBUG: Processing subject: Tekstil Mühendisi in profession: Adalet Bakanlığı
-I/flutter (10108): DEBUG: Subject data type: _Map<String, dynamic>
-I/flutter (10108): DEBUG: Processing year: 2017 Tekstil Mühendisi Çıkmış Sorular 1 for subject: Tekstil Mühendisi
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Tekstil Mühendisi Çıkmış Sorular 1
-I/flutter (10108): DEBUG: Processing year: 2017 Tekstil Mühendisi Çıkmış Sorular 2 for subject: Tekstil Mühendisi
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Tekstil Mühendisi Çıkmış Sorular 2
-I/flutter (10108): DEBUG: Processing year: 2017 Tekstil Mühendisi Çıkmış Sorular 3 for subject: Tekstil Mühendisi
-I/flutter (10108): DEBUG: Added 10 questions from year: 2017 Tekstil Mühendisi Çıkmış Sorular 3
-I/flutter (10108): DEBUG: Successfully processed 50 total questions for subject: Tekstil Mühendisi
-I/flutter (10108): DEBUG: Processing subject: Bilgisayar Teknisyeni in profession: Adalet Bakanlığı
-I/flutter (10108): DEBUG: Subject data type: _Map<String, dynamic>
-I/flutter (10108): DEBUG: Processing year: 2017 Bilgisayar Teknisyeni Çıkmış Sorular 1 for subject: Bilgisayar Teknisyeni
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Bilgisayar Teknisyeni Çıkmış Sorular 1
-I/flutter (10108): DEBUG: Processing year: 2017 Bilgisayar Teknisyeni Çıkmış Sorular 2 for subject: Bilgisayar Teknisyeni
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Bilgisayar Teknisyeni Çıkmış Sorular 2
-I/flutter (10108): DEBUG: Processing year: 2017 Bilgisayar Teknisyeni Çıkmış Sorular 3 for subject: Bilgisayar Teknisyeni
-I/flutter (10108): DEBUG: Added 10 questions from year: 2017 Bilgisayar Teknisyeni Çıkmış Sorular 3
-I/flutter (10108): DEBUG: Successfully processed 50 total questions for subject: Bilgisayar Teknisyeni
-I/flutter (10108): DEBUG: Processing subject: Mobilya Teknisyeni in profession: Adalet Bakanlığı
-I/flutter (10108): DEBUG: Subject data type: _Map<String, dynamic>
-I/flutter (10108): DEBUG: Processing year: 2017 Mobilya Teknisyeni Çıkmış Sorular 1 for subject: Mobilya Teknisyeni
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Mobilya Teknisyeni Çıkmış Sorular 1
-I/flutter (10108): DEBUG: Processing year: 2017 Mobilya Teknisyeni Çıkmış Sorular 2 for subject: Mobilya Teknisyeni
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Mobilya Teknisyeni Çıkmış Sorular 2
-I/flutter (10108): DEBUG: Processing year: 2017 Mobilya Teknisyeni Çıkmış Sorular 3 for subject: Mobilya Teknisyeni
-I/flutter (10108): DEBUG: Added 10 questions from year: 2017 Mobilya Teknisyeni Çıkmış Sorular 3
-I/flutter (10108): DEBUG: Successfully processed 50 total questions for subject: Mobilya Teknisyeni
-I/flutter (10108): DEBUG: Processing subject: İnşaat Teknisyeni in profession: Adalet Bakanlığı
-I/flutter (10108): DEBUG: Subject data type: _Map<String, dynamic>
-I/flutter (10108): DEBUG: Processing year: 2017 İnşaat Teknisyeni Çıkmış Sorular 1 for subject: İnşaat Teknisyeni
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 İnşaat Teknisyeni Çıkmış Sorular 1
-I/flutter (10108): DEBUG: Processing year: 2017 İnşaat Teknisyeni Çıkmış Sorular 2 for subject: İnşaat Teknisyeni
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 İnşaat Teknisyeni Çıkmış Sorular 2
-I/flutter (10108): DEBUG: Processing year: 2017 İnşaat Teknisyeni Çıkmış Sorular 3 for subject: İnşaat Teknisyeni
-I/flutter (10108): DEBUG: Added 10 questions from year: 2017 İnşaat Teknisyeni Çıkmış Sorular 3
-I/flutter (10108): DEBUG: Successfully processed 50 total questions for subject: İnşaat Teknisyeni
-I/flutter (10108): DEBUG: Processing subject: Gıda Teknisyeni in profession: Adalet Bakanlığı
-I/flutter (10108): DEBUG: Subject data type: _Map<String, dynamic>
-I/flutter (10108): DEBUG: Processing year: 2017 Gıda Teknisyeni Çıkmış Sorular 1 for subject: Gıda Teknisyeni
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Gıda Teknisyeni Çıkmış Sorular 1
-I/flutter (10108): DEBUG: Processing year: 2017 Gıda Teknisyeni Çıkmış Sorular 2 for subject: Gıda Teknisyeni
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Gıda Teknisyeni Çıkmış Sorular 2
-I/flutter (10108): DEBUG: Processing year: 2017 Gıda Teknisyeni Çıkmış Sorular 3 for subject: Gıda Teknisyeni
-I/flutter (10108): DEBUG: Added 10 questions from year: 2017 Gıda Teknisyeni Çıkmış Sorular 3
-I/flutter (10108): DEBUG: Successfully processed 50 total questions for subject: Gıda Teknisyeni
-I/flutter (10108): DEBUG: Processing subject: Elektrik Teknisyeni in profession: Adalet Bakanlığı
-I/flutter (10108): DEBUG: Subject data type: _Map<String, dynamic>
-I/flutter (10108): DEBUG: Processing year: 2017 Elektrik Teknisyeni Çıkmış Sorular 1 for subject: Elektrik Teknisyeni
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Elektrik Teknisyeni Çıkmış Sorular 1
-I/flutter (10108): DEBUG: Processing year: 2017 Elektrik Teknisyeni Çıkmış Sorular 2 for subject: Elektrik Teknisyeni
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Elektrik Teknisyeni Çıkmış Sorular 2
-I/flutter (10108): DEBUG: Processing year: 2017 Elektrik Teknisyeni Çıkmış Sorular 3 for subject: Elektrik Teknisyeni
-I/flutter (10108): DEBUG: Added 10 questions from year: 2017 Elektrik Teknisyeni Çıkmış Sorular 3
-I/flutter (10108): DEBUG: Successfully processed 50 total questions for subject: Elektrik Teknisyeni
-I/flutter (10108): DEBUG: Processing subject: Ziraat Teknisyeni in profession: Adalet Bakanlığı
-I/flutter (10108): DEBUG: Subject data type: _Map<String, dynamic>
-I/flutter (10108): DEBUG: Processing year: 2017 Ziraat Teknisyeni Çıkmış Sorular 1 for subject: Ziraat Teknisyeni
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Ziraat Teknisyeni Çıkmış Sorular 1
-I/flutter (10108): DEBUG: Processing year: 2017 Ziraat Teknisyeni Çıkmış Sorular 2 for subject: Ziraat Teknisyeni
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Ziraat Teknisyeni Çıkmış Sorular 2
-I/flutter (10108): DEBUG: Processing year: 2017 Ziraat Teknisyeni Çıkmış Sorular 3 for subject: Ziraat Teknisyeni
-I/flutter (10108): DEBUG: Added 10 questions from year: 2017 Ziraat Teknisyeni Çıkmış Sorular 3
-I/flutter (10108): DEBUG: Successfully processed 50 total questions for subject: Ziraat Teknisyeni
-I/flutter (10108): DEBUG: Processing subject: Makine Teknisyeni in profession: Adalet Bakanlığı
-I/flutter (10108): DEBUG: Subject data type: _Map<String, dynamic>
-I/flutter (10108): DEBUG: Processing year: 2017 Makine Teknisyeni Çıkmış Sorular 1 for subject: Makine Teknisyeni
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Makine Teknisyeni Çıkmış Sorular 1
-I/flutter (10108): DEBUG: Processing year: 2017 Makine Teknisyeni Çıkmış Sorular 2 for subject: Makine Teknisyeni
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Makine Teknisyeni Çıkmış Sorular 2
-I/flutter (10108): DEBUG: Processing year: 2017 Makine Teknisyeni Çıkmış Sorular 3 for subject: Makine Teknisyeni
-I/flutter (10108): DEBUG: Added 10 questions from year: 2017 Makine Teknisyeni Çıkmış Sorular 3
-I/flutter (10108): DEBUG: Successfully processed 50 total questions for subject: Makine Teknisyeni
-I/flutter (10108): DEBUG: Processing subject: Sağlık Memuru in profession: Adalet Bakanlığı
-I/flutter (10108): DEBUG: Subject data type: _Map<String, dynamic>
-I/flutter (10108): DEBUG: Processing year: 2017 Sağlık Memuru Çıkmış Sorular 1 for subject: Sağlık Memuru
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Sağlık Memuru Çıkmış Sorular 1
-I/flutter (10108): DEBUG: Processing year: 2017 Sağlık Memuru Çıkmış Sorular 2 for subject: Sağlık Memuru
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Sağlık Memuru Çıkmış Sorular 2
-I/flutter (10108): DEBUG: Processing year: 2017 Sağlık Memuru Çıkmış Sorular 3 for subject: Sağlık Memuru
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Sağlık Memuru Çıkmış Sorular 3
-I/flutter (10108): DEBUG: Processing year: 2017 Sağlık Memuru Çıkmış Sorular 4 for subject: Sağlık Memuru
-I/flutter (10108): DEBUG: Added 20 questions from year: 2017 Sağlık Memuru Çıkmış Sorular 4
-I/flutter (10108): DEBUG: Successfully processed 80 total questions for subject: Sağlık Memuru
-I/flutter (10108): DEBUG: ApiQuestionsResponse.fromJson completed with 2 categories
+Exception caught by widgets library ═══════════════════════════════════
+The following assertion was thrown building Builder:
+There should be exactly one item with [DropdownButtonFormField]'s value: Adalet Bakanlığı. 
+Either zero or 2 or more [DropdownMenuItem]s were detected with the same value
+'package:flutter/src/material/dropdown.dart':
+Failed assertion: line 1051 pos 10: 'items == null ||
+             items.isEmpty ||
+             value == null ||
+             items.where((DropdownMenuItem<T> item) {
+                   return item.value == value;
+                 }).length ==
+                 1'
+
+Either the assertion indicates an error in the framework itself, or we should provide substantially more information in this error message to help you determine and fix the underlying cause.
+In either case, please report this assertion by filing a bug on GitHub:
+  https://github.com/flutter/flutter/issues/new?template=02_bug.yml
+
+The relevant error-causing widget was:
+    DropdownButtonFormField<String> DropdownButtonFormField:file:///Users/a./flutterProjects/gorevde_yukselme/lib/features/questions/presentation/pages/question_pool_page.dart:94:19
+
+When the exception was thrown, this was the stack:
+#2      new DropdownButton._formField (package:flutter/src/material/dropdown.dart:1051:10)
+dropdown.dart:1051
+#3      new DropdownButtonFormField.<anonymous closure>.<anonymous closure> (package:flutter/src/material/dropdown.dart:1802:27)
+dropdown.dart:1802
+#4      Builder.build (package:flutter/src/widgets/basic.dart:7919:48)
+basic.dart:7919
+#5      StatelessElement.build (package:flutter/src/widgets/framework.dart:5781:49)
+framework.dart:5781
+#6      ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5715:15)
+framework.dart:5715
+#7      Element.rebuild (package:flutter/src/widgets/framework.dart:5427:7)
+framework.dart:5427
+#8      StatelessElement.update (package:flutter/src/widgets/framework.dart:5787:5)
+framework.dart:5787
+#9      Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#10     SingleChildRenderObjectElement.update (package:flutter/src/widgets/framework.dart:7015:14)
+framework.dart:7015
+#11     Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#12     ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5738:16)
+framework.dart:5738
+#13     Element.rebuild (package:flutter/src/widgets/framework.dart:5427:7)
+framework.dart:5427
+#14     ProxyElement.update (package:flutter/src/widgets/framework.dart:6041:5)
+framework.dart:6041
+#15     _InheritedNotifierElement.update (package:flutter/src/widgets/inherited_notifier.dart:108:11)
+inherited_notifier.dart:108
+#16     Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#17     ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5738:16)
+framework.dart:5738
+#18     StatefulElement.performRebuild (package:flutter/src/widgets/framework.dart:5874:11)
+framework.dart:5874
+#19     Element.rebuild (package:flutter/src/widgets/framework.dart:5427:7)
+framework.dart:5427
+#20     StatefulElement.update (package:flutter/src/widgets/framework.dart:5899:5)
+framework.dart:5899
+#21     Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#22     SingleChildRenderObjectElement.update (package:flutter/src/widgets/framework.dart:7015:14)
+framework.dart:7015
+#23     Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#24     ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5738:16)
+framework.dart:5738
+#25     StatefulElement.performRebuild (package:flutter/src/widgets/framework.dart:5874:11)
+framework.dart:5874
+#26     Element.rebuild (package:flutter/src/widgets/framework.dart:5427:7)
+framework.dart:5427
+#27     StatefulElement.update (package:flutter/src/widgets/framework.dart:5899:5)
+framework.dart:5899
+#28     Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#29     Element.updateChildren (package:flutter/src/widgets/framework.dart:4140:11)
+framework.dart:4140
+#30     MultiChildRenderObjectElement.update (package:flutter/src/widgets/framework.dart:7192:17)
+framework.dart:7192
+#31     Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#32     SingleChildRenderObjectElement.update (package:flutter/src/widgets/framework.dart:7015:14)
+framework.dart:7015
+#33     Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#34     SingleChildRenderObjectElement.update (package:flutter/src/widgets/framework.dart:7015:14)
+framework.dart:7015
+#35     Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#36     ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5738:16)
+framework.dart:5738
+#37     Element.rebuild (package:flutter/src/widgets/framework.dart:5427:7)
+framework.dart:5427
+#38     StatelessElement.update (package:flutter/src/widgets/framework.dart:5787:5)
+framework.dart:5787
+#39     Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#40     Element.updateChildren (package:flutter/src/widgets/framework.dart:4140:11)
+framework.dart:4140
+#41     MultiChildRenderObjectElement.update (package:flutter/src/widgets/framework.dart:7192:17)
+framework.dart:7192
+#42     Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#43     SingleChildRenderObjectElement.update (package:flutter/src/widgets/framework.dart:7015:14)
+framework.dart:7015
+#44     Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#45     SingleChildRenderObjectElement.update (package:flutter/src/widgets/framework.dart:7015:14)
+framework.dart:7015
+#46     Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#47     SingleChildRenderObjectElement.update (package:flutter/src/widgets/framework.dart:7015:14)
+framework.dart:7015
+#48     Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#49     SingleChildRenderObjectElement.update (package:flutter/src/widgets/framework.dart:7015:14)
+framework.dart:7015
+#50     Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#51     SingleChildRenderObjectElement.update (package:flutter/src/widgets/framework.dart:7015:14)
+framework.dart:7015
+#52     Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#53     ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5738:16)
+framework.dart:5738
+#54     StatefulElement.performRebuild (package:flutter/src/widgets/framework.dart:5874:11)
+framework.dart:5874
+#55     Element.rebuild (package:flutter/src/widgets/framework.dart:5427:7)
+framework.dart:5427
+#56     StatefulElement.update (package:flutter/src/widgets/framework.dart:5899:5)
+framework.dart:5899
+#57     Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#58     SingleChildRenderObjectElement.update (package:flutter/src/widgets/framework.dart:7015:14)
+framework.dart:7015
+#59     Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#60     ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5738:16)
+framework.dart:5738
+#61     Element.rebuild (package:flutter/src/widgets/framework.dart:5427:7)
+framework.dart:5427
+#62     ProxyElement.update (package:flutter/src/widgets/framework.dart:6041:5)
+framework.dart:6041
+#63     Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#64     SingleChildRenderObjectElement.update (package:flutter/src/widgets/framework.dart:7015:14)
+framework.dart:7015
+#65     Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#66     ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5738:16)
+framework.dart:5738
+#67     Element.rebuild (package:flutter/src/widgets/framework.dart:5427:7)
+framework.dart:5427
+#68     ProxyElement.update (package:flutter/src/widgets/framework.dart:6041:5)
+framework.dart:6041
+#69     Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#70     SingleChildRenderObjectElement.update (package:flutter/src/widgets/framework.dart:7015:14)
+framework.dart:7015
+#71     Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#72     SingleChildRenderObjectElement.update (package:flutter/src/widgets/framework.dart:7015:14)
+framework.dart:7015
+#73     Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#74     ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5738:16)
+framework.dart:5738
+#75     StatefulElement.performRebuild (package:flutter/src/widgets/framework.dart:5874:11)
+framework.dart:5874
+#76     Element.rebuild (package:flutter/src/widgets/framework.dart:5427:7)
+framework.dart:5427
+#77     StatefulElement.update (package:flutter/src/widgets/framework.dart:5899:5)
+framework.dart:5899
+#78     Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#79     ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5738:16)
+framework.dart:5738
+#80     Element.rebuild (package:flutter/src/widgets/framework.dart:5427:7)
+framework.dart:5427
+#81     ProxyElement.update (package:flutter/src/widgets/framework.dart:6041:5)
+framework.dart:6041
+#82     Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#83     ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5738:16)
+framework.dart:5738
+#84     StatefulElement.performRebuild (package:flutter/src/widgets/framework.dart:5874:11)
+framework.dart:5874
+#85     Element.rebuild (package:flutter/src/widgets/framework.dart:5427:7)
+framework.dart:5427
+#86     StatefulElement.update (package:flutter/src/widgets/framework.dart:5899:5)
+framework.dart:5899
+#87     Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#88     ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5738:16)
+framework.dart:5738
+#89     StatefulElement.performRebuild (package:flutter/src/widgets/framework.dart:5874:11)
+framework.dart:5874
+#90     Element.rebuild (package:flutter/src/widgets/framework.dart:5427:7)
+framework.dart:5427
+#91     StatefulElement.update (package:flutter/src/widgets/framework.dart:5899:5)
+framework.dart:5899
+#92     Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#93     ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5738:16)
+framework.dart:5738
+#94     Element.rebuild (package:flutter/src/widgets/framework.dart:5427:7)
+framework.dart:5427
+#95     ProxyElement.update (package:flutter/src/widgets/framework.dart:6041:5)
+framework.dart:6041
+#96     Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#97     ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5738:16)
+framework.dart:5738
+#98     Element.rebuild (package:flutter/src/widgets/framework.dart:5427:7)
+framework.dart:5427
+#99     StatelessElement.update (package:flutter/src/widgets/framework.dart:5787:5)
+framework.dart:5787
+#100    Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#101    SingleChildRenderObjectElement.update (package:flutter/src/widgets/framework.dart:7015:14)
+framework.dart:7015
+#102    Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#103    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5738:16)
+framework.dart:5738
+#104    Element.rebuild (package:flutter/src/widgets/framework.dart:5427:7)
+framework.dart:5427
+#105    StatelessElement.update (package:flutter/src/widgets/framework.dart:5787:5)
+framework.dart:5787
+#106    Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#107    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5738:16)
+framework.dart:5738
+#108    Element.rebuild (package:flutter/src/widgets/framework.dart:5427:7)
+framework.dart:5427
+#109    StatelessElement.update (package:flutter/src/widgets/framework.dart:5787:5)
+framework.dart:5787
+#110    Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#111    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5738:16)
+framework.dart:5738
+#112    Element.rebuild (package:flutter/src/widgets/framework.dart:5427:7)
+framework.dart:5427
+#113    ProxyElement.update (package:flutter/src/widgets/framework.dart:6041:5)
+framework.dart:6041
+#114    Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#115    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5738:16)
+framework.dart:5738
+#116    Element.rebuild (package:flutter/src/widgets/framework.dart:5427:7)
+framework.dart:5427
+#117    ProxyElement.update (package:flutter/src/widgets/framework.dart:6041:5)
+framework.dart:6041
+#118    Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#119    Element.updateChildren (package:flutter/src/widgets/framework.dart:4140:11)
+framework.dart:4140
+#120    MultiChildRenderObjectElement.update (package:flutter/src/widgets/framework.dart:7192:17)
+framework.dart:7192
+#121    Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#122    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5738:16)
+framework.dart:5738
+#123    Element.rebuild (package:flutter/src/widgets/framework.dart:5427:7)
+framework.dart:5427
+#124    ProxyElement.update (package:flutter/src/widgets/framework.dart:6041:5)
+framework.dart:6041
+#125    Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#126    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5738:16)
+framework.dart:5738
+#127    StatefulElement.performRebuild (package:flutter/src/widgets/framework.dart:5874:11)
+framework.dart:5874
+#128    Element.rebuild (package:flutter/src/widgets/framework.dart:5427:7)
+framework.dart:5427
+#129    StatefulElement.update (package:flutter/src/widgets/framework.dart:5899:5)
+framework.dart:5899
+#130    Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#131    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5738:16)
+framework.dart:5738
+#132    StatefulElement.performRebuild (package:flutter/src/widgets/framework.dart:5874:11)
+framework.dart:5874
+#133    Element.rebuild (package:flutter/src/widgets/framework.dart:5427:7)
+framework.dart:5427
+#134    StatefulElement.update (package:flutter/src/widgets/framework.dart:5899:5)
+framework.dart:5899
+#135    Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#136    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5738:16)
+framework.dart:5738
+#137    Element.rebuild (package:flutter/src/widgets/framework.dart:5427:7)
+framework.dart:5427
+#138    ProxyElement.update (package:flutter/src/widgets/framework.dart:6041:5)
+framework.dart:6041
+#139    Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#140    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5738:16)
+framework.dart:5738
+#141    StatefulElement.performRebuild (package:flutter/src/widgets/framework.dart:5874:11)
+framework.dart:5874
+#142    Element.rebuild (package:flutter/src/widgets/framework.dart:5427:7)
+framework.dart:5427
+#143    StatefulElement.update (package:flutter/src/widgets/framework.dart:5899:5)
+framework.dart:5899
+#144    Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#145    SingleChildRenderObjectElement.update (package:flutter/src/widgets/framework.dart:7015:14)
+framework.dart:7015
+#146    Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#147    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5738:16)
+framework.dart:5738
+#148    Element.rebuild (package:flutter/src/widgets/framework.dart:5427:7)
+framework.dart:5427
+#149    ProxyElement.update (package:flutter/src/widgets/framework.dart:6041:5)
+framework.dart:6041
+#150    Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#151    SingleChildRenderObjectElement.update (package:flutter/src/widgets/framework.dart:7015:14)
+framework.dart:7015
+#152    Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#153    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5738:16)
+framework.dart:5738
+#154    StatefulElement.performRebuild (package:flutter/src/widgets/framework.dart:5874:11)
+framework.dart:5874
+#155    Element.rebuild (package:flutter/src/widgets/framework.dart:5427:7)
+framework.dart:5427
+#156    StatefulElement.update (package:flutter/src/widgets/framework.dart:5899:5)
+framework.dart:5899
+#157    Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#158    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5738:16)
+framework.dart:5738
+#159    StatefulElement.performRebuild (package:flutter/src/widgets/framework.dart:5874:11)
+framework.dart:5874
+#160    Element.rebuild (package:flutter/src/widgets/framework.dart:5427:7)
+framework.dart:5427
+#161    StatefulElement.update (package:flutter/src/widgets/framework.dart:5899:5)
+framework.dart:5899
+#162    Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#163    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5738:16)
+framework.dart:5738
+#164    Element.rebuild (package:flutter/src/widgets/framework.dart:5427:7)
+framework.dart:5427
+#165    ProxyElement.update (package:flutter/src/widgets/framework.dart:6041:5)
+framework.dart:6041
+#166    Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#167    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5738:16)
+framework.dart:5738
+#168    Element.rebuild (package:flutter/src/widgets/framework.dart:5427:7)
+framework.dart:5427
+#169    ProxyElement.update (package:flutter/src/widgets/framework.dart:6041:5)
+framework.dart:6041
+#170    Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#171    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5738:16)
+framework.dart:5738
+#172    Element.rebuild (package:flutter/src/widgets/framework.dart:5427:7)
+framework.dart:5427
+#173    ProxyElement.update (package:flutter/src/widgets/framework.dart:6041:5)
+framework.dart:6041
+#174    Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#175    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5738:16)
+framework.dart:5738
+#176    StatefulElement.performRebuild (package:flutter/src/widgets/framework.dart:5874:11)
+framework.dart:5874
+#177    Element.rebuild (package:flutter/src/widgets/framework.dart:5427:7)
+framework.dart:5427
+#178    StatefulElement.update (package:flutter/src/widgets/framework.dart:5899:5)
+framework.dart:5899
+#179    Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#180    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5738:16)
+framework.dart:5738
+#181    Element.rebuild (package:flutter/src/widgets/framework.dart:5427:7)
+framework.dart:5427
+#182    ProxyElement.update (package:flutter/src/widgets/framework.dart:6041:5)
+framework.dart:6041
+#183    Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#184    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5738:16)
+framework.dart:5738
+#185    StatefulElement.performRebuild (package:flutter/src/widgets/framework.dart:5874:11)
+framework.dart:5874
+#186    Element.rebuild (package:flutter/src/widgets/framework.dart:5427:7)
+framework.dart:5427
+#187    StatefulElement.update (package:flutter/src/widgets/framework.dart:5899:5)
+framework.dart:5899
+#188    Element.updateChild (package:flutter/src/widgets/framework.dart:3982:15)
+framework.dart:3982
+#189    ComponentElement.performRebuild (package:flutter/src/widgets/framework.dart:5738:16)
+framework.dart:5738
+#190    StatefulElement.performRebuild (package:flutter/src/widgets/framework.dart:5874:11)
+framework.dart:5874
+#191    Element.rebuild (package:flutter/src/widgets/framework.dart:5427:7)
+framework.dart:5427
+#192    BuildScope._tryRebuild (package:flutter/src/widgets/framework.dart:2694:15)
+framework.dart:2694
+#193    BuildScope._flushDirtyElements (package:flutter/src/widgets/framework.dart:2752:11)
+framework.dart:2752
+#194    BuildOwner.buildScope (package:flutter/src/widgets/framework.dart:3056:18)
+framework.dart:3056
+#195    WidgetsBinding.drawFrame (package:flutter/src/widgets/binding.dart:1240:21)
+binding.dart:1240
+#196    RendererBinding._handlePersistentFrameCallback (package:flutter/src/rendering/binding.dart:495:5)
+binding.dart:495
+#197    SchedulerBinding._invokeFrameCallback (package:flutter/src/scheduler/binding.dart:1438:15)
+binding.dart:1438
+#198    SchedulerBinding.handleDrawFrame (package:flutter/src/scheduler/binding.dart:1351:9)
+binding.dart:1351
+#199    SchedulerBinding._handleDrawFrame (package:flutter/src/scheduler/binding.dart:1204:5)
+binding.dart:1204
+#200    _invoke (dart:ui/hooks.dart:331:13)
+hooks.dart:331
+#201    PlatformDispatcher._drawFrame (dart:ui/platform_dispatcher.dart:444:5)
+platform_dispatcher.dart:444
+#202    _drawFrame (dart:ui/hooks.dart:303:31)
+hooks.dart:303
+(elided 2 frames from class _AssertionError)
+
+════════════════════════════════════════════════════════════════════════════════

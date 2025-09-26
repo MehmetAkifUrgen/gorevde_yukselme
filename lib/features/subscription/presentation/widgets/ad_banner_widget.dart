@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/services/premium_features_service.dart';
 
@@ -44,7 +45,7 @@ class AdBannerWidget extends ConsumerWidget {
             child: InkWell(
               onTap: () {
                 // Navigate to subscription page
-                Navigator.of(context).pushNamed('/subscription');
+                context.push('/subscription');
               },
               borderRadius: BorderRadius.circular(8),
               child: Padding(
@@ -189,7 +190,7 @@ class InlineAdWidget extends ConsumerWidget {
               ),
               TextButton(
                 onPressed: () {
-                  Navigator.of(context).pushNamed('/subscription');
+                  context.push('/subscription');
                 },
                 style: TextButton.styleFrom(
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),

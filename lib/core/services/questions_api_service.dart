@@ -148,6 +148,7 @@ class QuestionsApiService {
                 final question = _convertApiQuestionToQuestion(
                   apiQuestion,
                   categoryName,
+                  ministryName,
                   professionName,
                   subjectName,
                 );
@@ -167,6 +168,7 @@ class QuestionsApiService {
   Question _convertApiQuestionToQuestion(
     ApiQuestion apiQuestion,
     String categoryName,
+    String ministryName,
     String professionName,
     String subjectName,
   ) {
@@ -176,8 +178,8 @@ class QuestionsApiService {
     // Find correct answer index
     final correctAnswerIndex = optionsList.indexOf(apiQuestion.dogruCevap);
     
-    // Generate unique ID
-    final id = '${categoryName}_${professionName}_${subjectName}_${apiQuestion.soruNo}';
+    // Generate unique ID: categoryName_ministryName_professionName_subjectName_questionNo
+    final id = '${categoryName}_${ministryName}_${professionName}_${subjectName}_${apiQuestion.soruNo}';
     
     // Map profession name to UserProfession enum
     final targetProfessions = _mapProfessionNameToEnum(professionName);

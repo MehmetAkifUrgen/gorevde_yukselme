@@ -29,8 +29,9 @@ class _QuestionPoolPageState extends ConsumerState<QuestionPoolPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(24.0),
-        child: Column(
-          children: [
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
             // Dropdown Section
             Container(
               padding: const EdgeInsets.all(16),
@@ -49,7 +50,7 @@ class _QuestionPoolPageState extends ConsumerState<QuestionPoolPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Sınav, Bakanlık ve Meslek Seçimi',
+                    'Sınav Türü, Bakanlık ve Meslek Seçimi',
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.w600,
                       color: AppTheme.primaryNavyBlue,
@@ -157,10 +158,9 @@ class _QuestionPoolPageState extends ConsumerState<QuestionPoolPage> {
             const SizedBox(height: 32),
             
             // Buttons Section
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
                   // Soruları Karıştır Butonu
                   SizedBox(
                     width: double.infinity,
@@ -208,24 +208,57 @@ class _QuestionPoolPageState extends ConsumerState<QuestionPoolPage> {
                   ),
                 ],
               ),
-            ),
           ],
         ),
-      ),
+      ),)
     );
   }
 
   List<String> _getAvailableExams(AsyncValue<List<Question>> questionsState) {
-    // Return static exams based on JSON structure
-    return ['Görevde Yükselme', 'Ünvan Değişikliği'];
+    return questionsState.when(
+      data: (questions) {
+        final examTypes = questions
+            .map((q) => q.id.split('_').isNotEmpty ? q.id.split('_')[0] : '')
+            .where((exam) => exam.isNotEmpty)
+            .toSet()
+            .toList();
+        return examTypes;
+      },
+      loading: () => [], // Boş liste
+      error: (_, __) => [], // Boş liste
+    );
   }
 
   List<String> _getAvailableMinistries(
     AsyncValue<List<Question>> questionsState,
     String? selectedExam,
   ) {
-    // Return static ministries based on JSON structure
-    return ['Adalet Bakanlığı'];
+    return questionsState.when(
+      data: (questions) {
+        List<Question> filteredQuestions = questions;
+        
+        // Eğer sınav türü seçiliyse, önce ona göre filtrele
+        if (selectedExam != null) {
+          filteredQuestions = filteredQuestions.where((question) {
+            final parts = question.id.split('_');
+            if (parts.isNotEmpty) {
+              return parts[0] == selectedExam;
+            }
+            return false;
+          }).toList();
+        }
+        
+        // Bakanlık = 2. kısım (parts[1])
+        final ministries = filteredQuestions
+            .map((q) => q.id.split('_').length >= 2 ? q.id.split('_')[1] : '')
+            .where((ministry) => ministry.isNotEmpty)
+            .toSet()
+            .toList();
+        return ministries;
+      },
+      loading: () => [], // Boş liste
+      error: (_, __) => [], // Boş liste
+    );
   }
 
   void _startMiniQuiz(BuildContext context) {
@@ -285,26 +318,11 @@ class _QuestionPoolPageState extends ConsumerState<QuestionPoolPage> {
     String? selectedExam,
     String? selectedMinistry,
   ) {
-    // Return professions based on selected exam
-    if (selectedExam == 'Görevde Yükselme') {
-      return ['İdare Memuru', 'İdari İşler Müdürü', 'İkinci Müdür', 'İnfaz Koruma Baş Memurluğu', 'Şef', 'Yazı İşleri Müdürü', 'Zabıt Katibi', 'İcra Müdür ve Müdür Yardımcıları'];
-    } else if (selectedExam == 'Ünvan Değişikliği') {
-      return ['İdare Memuru', 'Şef', 'Sayman', 'İkinci Müdür', 'İnfaz Koruma Baş Memurluğu', 'Sosyolog', 'Öğretmen', 'Gıda Mühendisi', 'Makine Mühendisi', 'Orman Endüstri Mühendisi', 'Çevre Mühendisi', 'Elektrik Elektronik Mühendisi', 'Tekstil Mühendisi', 'Bilgisayar Teknisyeni', 'Mobilya Teknisyeni', 'İnşaat Teknisyeni', 'Gıda Teknisyeni', 'Elektrik Teknisyeni', 'Ziraat Teknisyeni', 'Makine Teknisyeni', 'Sağlık Memuru'];
-    }
-    return ['İdare Memuru', 'Şef', 'İkinci Müdür'];
-  }
-
-  void _startShuffledQuestions(BuildContext context) {
-    final questionsState = ref.read(questions_providers.questionsStateProvider);
-    final selectedExam = ref.read(selectedExamProvider);
-    final selectedMinistry = ref.read(selectedMinistryProvider);
-    final selectedProfession = ref.read(selectedProfessionProvider);
-    
-    questionsState.when(
+    return questionsState.when(
       data: (questions) {
-        // Seçili filtrelerle soruları filtrele
         List<Question> filteredQuestions = questions;
         
+        // Eğer sınav türü seçiliyse, önce ona göre filtrele
         if (selectedExam != null) {
           filteredQuestions = filteredQuestions.where((question) {
             final parts = question.id.split('_');
@@ -315,6 +333,7 @@ class _QuestionPoolPageState extends ConsumerState<QuestionPoolPage> {
           }).toList();
         }
         
+        // Eğer bakanlık seçiliyse, ona göre de filtrele
         if (selectedMinistry != null) {
           filteredQuestions = filteredQuestions.where((question) {
             final parts = question.id.split('_');
@@ -325,7 +344,74 @@ class _QuestionPoolPageState extends ConsumerState<QuestionPoolPage> {
           }).toList();
         }
         
+        // Meslek = 3. kısım (parts[2])
+        final professions = filteredQuestions
+            .map((q) => q.id.split('_').length >= 3 ? q.id.split('_')[2] : '')
+            .where((profession) => profession.isNotEmpty)
+            .toSet()
+            .toList();
+        return professions;
+      },
+      loading: () => [], // Boş liste
+      error: (_, __) => [], // Boş liste
+    );
+  }
+
+  void _startShuffledQuestions(BuildContext context) {
+    final questionsState = ref.read(questions_providers.questionsStateProvider);
+    final selectedExam = ref.read(selectedExamProvider);
+    final selectedMinistry = ref.read(selectedMinistryProvider);
+    final selectedProfession = ref.read(selectedProfessionProvider);
+    
+    // En az bir filtre seçili olmalı
+    if (selectedExam == null && selectedMinistry == null && selectedProfession == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+               content: Text('Lütfen en az bir filtre seçin (Sınav Türü, Bakanlık veya Meslek)'),
+          duration: Duration(seconds: 3),
+        ),
+      );
+      return;
+    }
+    
+    questionsState.when(
+      data: (questions) {
+        print('[QuestionPoolPage] Total questions loaded: ${questions.length}');
+        
+        // Seçili filtrelerle soruları filtrele
+        List<Question> filteredQuestions = questions;
+        
+        if (selectedExam != null) {
+          print('[QuestionPoolPage] Filtering by exam: $selectedExam');
+          print('[QuestionPoolPage] Sample question IDs: ${questions.take(3).map((q) => q.id).toList()}');
+          filteredQuestions = filteredQuestions.where((question) {
+            final parts = question.id.split('_');
+            if (parts.isNotEmpty) {
+              final matches = parts[0] == selectedExam;
+              if (!matches) {
+                print('[QuestionPoolPage] Question ${question.id} does not match exam filter');
+              }
+              return matches;
+            }
+            return false;
+          }).toList();
+          print('[QuestionPoolPage] After exam filter: ${filteredQuestions.length} questions');
+        }
+        
+        if (selectedMinistry != null) {
+          print('[QuestionPoolPage] Filtering by ministry: $selectedMinistry');
+          filteredQuestions = filteredQuestions.where((question) {
+            final parts = question.id.split('_');
+            if (parts.length >= 2) {
+              return parts[1] == selectedMinistry;
+            }
+            return false;
+          }).toList();
+          print('[QuestionPoolPage] After ministry filter: ${filteredQuestions.length} questions');
+        }
+        
         if (selectedProfession != null) {
+          print('[QuestionPoolPage] Filtering by profession: $selectedProfession');
           filteredQuestions = filteredQuestions.where((question) {
             final parts = question.id.split('_');
             if (parts.length >= 3) {
@@ -333,6 +419,7 @@ class _QuestionPoolPageState extends ConsumerState<QuestionPoolPage> {
             }
             return false;
           }).toList();
+          print('[QuestionPoolPage] After profession filter: ${filteredQuestions.length} questions');
         }
         
         // Mini Quiz sorularını hariç tut
