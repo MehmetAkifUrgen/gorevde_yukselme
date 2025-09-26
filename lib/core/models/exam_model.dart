@@ -208,6 +208,14 @@ extension ExamTypeExtension on ExamType {
     }
   }
 
+  /// Calculate duration based on question count: question count + 3 minutes
+  int calculateDuration(int questionCount) {
+    if (this == ExamType.practiceMode) {
+      return 0; // No time limit for practice mode
+    }
+    return questionCount + 3; // question count + 3 minutes
+  }
+
   int get defaultQuestionCount {
     switch (this) {
       case ExamType.fullExam:

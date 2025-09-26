@@ -242,7 +242,7 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
         type: mode,
         targetProfession: UserProfession.values.first, // Default profession
         questions: questions,
-        durationInMinutes: mode.defaultDuration,
+        durationInMinutes: mode.calculateDuration(questions.length),
         status: ExamStatus.notStarted,
       );
 
@@ -251,7 +251,7 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
       // Reset wrong answer counter for new exam
       ref.read(wrongAnswerCounterProvider.notifier).reset();
       
-      _remainingSeconds = mode.defaultDuration * 60;
+      _remainingSeconds = mode.calculateDuration(questions.length) * 60;
       _startTimer();
       // Load starred IDs for current user to reflect star state
       final firebaseUser = ref.read(currentFirebaseUserProvider);
