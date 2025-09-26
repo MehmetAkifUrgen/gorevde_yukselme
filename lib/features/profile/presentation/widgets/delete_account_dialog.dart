@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../../../core/services/firestore_service.dart';
+import '../../../../core/utils/error_utils.dart';
 
 class DeleteAccountDialog extends StatefulWidget {
   const DeleteAccountDialog({super.key});
@@ -99,36 +99,10 @@ class _DeleteAccountDialogState extends State<DeleteAccountDialog> {
       _logError('Firebase Auth error code: ${e.code}');
       _logError('Firebase Auth error message: ${e.message}');
       
-      String errorMessage;
-      switch (e.code) {
-        case 'wrong-password':
-          errorMessage = 'Şifre yanlış';
-          _logError('Wrong password provided during re-authentication');
-          break;
-        case 'requires-recent-login':
-          errorMessage = 'Bu işlem için yeniden giriş yapmanız gerekiyor';
-          _logError('Recent login required for account deletion');
-          break;
-        case 'user-not-found':
-          errorMessage = 'Kullanıcı bulunamadı';
-          _logError('User not found during deletion process');
-          break;
-        case 'network-request-failed':
-          errorMessage = 'Ağ bağlantısı hatası. İnternet bağlantınızı kontrol edin.';
-          _logError('Network request failed during account deletion');
-          break;
-        case 'too-many-requests':
-          errorMessage = 'Çok fazla deneme yapıldı. Lütfen daha sonra tekrar deneyin.';
-          _logError('Too many requests made to Firebase Auth');
-          break;
-        default:
-          errorMessage = 'Hesap silme hatası: ${e.message}';
-          _logError('Unhandled Firebase Auth error: ${e.code}');
-      }
-      _showErrorSnackBar(errorMessage);
+      ErrorUtils.showFirebaseAuthError(context, e);
     } catch (e, stackTrace) {
       _logError('Unexpected error during account deletion', e, stackTrace);
-      _showErrorSnackBar('Beklenmeyen hata: ${e.toString()}');
+      ErrorUtils.showGeneralError(context, e);
     } finally {
       if (mounted) {
         setState(() {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/providers/auth_providers.dart';
+import '../../../core/utils/error_utils.dart';
 
 class GoogleSignInButton extends ConsumerWidget {
   const GoogleSignInButton({super.key});
@@ -23,9 +24,7 @@ class GoogleSignInButton extends ConsumerWidget {
                     await authNotifier.signOut();
                   } catch (e) {
                     if (context.mounted) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Çıkış yapılamadı: $e')),
-                      );
+                      ErrorUtils.showGeneralError(context, e);
                     }
                   }
                 },
@@ -46,9 +45,7 @@ class GoogleSignInButton extends ConsumerWidget {
               await authNotifier.signInWithGoogle();
             } catch (e) {
               if (context.mounted) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Google ile giriş yapılamadı: $e')),
-                );
+                ErrorUtils.showGeneralError(context, e);
               }
             }
           },

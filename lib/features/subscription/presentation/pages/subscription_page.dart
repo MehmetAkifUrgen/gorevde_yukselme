@@ -12,6 +12,7 @@ import '../widgets/generic_loading_dialog.dart';
 import '../widgets/subscription_plan_card.dart';
 import '../widgets/premium_features_list.dart';
 import '../widgets/premium_code_dialog.dart';
+import '../../../../core/utils/error_utils.dart';
 
 class SubscriptionPage extends ConsumerStatefulWidget {
   const SubscriptionPage({super.key});
@@ -223,17 +224,7 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
       
       // Show error
       if (mounted) {
-        String errorMessage = 'Satın alma işlemi başarısız oldu';
-        
-        if (e.toString().contains('network')) {
-          errorMessage = 'İnternet bağlantınızı kontrol edin';
-        } else if (e.toString().contains('store')) {
-          errorMessage = 'Mağaza bağlantısında sorun var';
-        } else if (e.toString().contains('payment')) {
-          errorMessage = 'Ödeme işlemi başarısız oldu';
-        }
-        
-        _showErrorDialog(errorMessage);
+        ErrorUtils.showSubscriptionError(context, e);
       }
     }
   }
@@ -594,40 +585,7 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
             Navigator.of(context).pop();
             
             // Show error message with better formatting
-            String errorMessage = 'Bilinmeyen bir hata oluştu';
-            
-            if (e.toString().contains('network')) {
-              errorMessage = 'İnternet bağlantınızı kontrol edin';
-            } else if (e.toString().contains('store')) {
-              errorMessage = 'Mağaza bağlantısında sorun var';
-            } else if (e.toString().contains('purchase')) {
-              errorMessage = 'Satın alma bilgileri alınamadı';
-            }
-            
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Row(
-                  children: [
-                    const Icon(Icons.error, color: Colors.white),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Text(errorMessage),
-                    ),
-                  ],
-                ),
-                backgroundColor: Colors.red,
-                behavior: SnackBarBehavior.floating,
-                duration: const Duration(seconds: 4),
-                action: SnackBarAction(
-                  label: 'Tekrar Dene',
-                  textColor: Colors.white,
-                  onPressed: () {
-                    // Retry the operation
-                    // This will call the same onPressed function again
-                  },
-                ),
-              ),
-            );
+            ErrorUtils.showSubscriptionError(context, e);
           }
         },
                icon: const Icon(Icons.restore),

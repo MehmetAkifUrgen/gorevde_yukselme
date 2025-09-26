@@ -279,6 +279,22 @@ class _RandomQuestionsPracticePageState extends ConsumerState<RandomQuestionsPra
     });
   }
 
+  void _shuffleQuestions() {
+    setState(() {
+      // Mevcut soruları karıştır
+      _practiceQuestions.shuffle();
+      // İlk soruya dön
+      _currentQuestionIndex = 0;
+    });
+    
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Sorular karıştırıldı!'),
+        duration: Duration(seconds: 2),
+      ),
+    );
+  }
+
   void _exitSession() {
     showDialog(
       context: context,
@@ -315,7 +331,6 @@ class _RandomQuestionsPracticePageState extends ConsumerState<RandomQuestionsPra
     }
 
     final remainingQuestions = _premiumService.getRemainingQuestions();
-    final canUnlockViaAds = _premiumService.canUnlockQuestionsViaAds();
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
@@ -377,6 +392,11 @@ class _RandomQuestionsPracticePageState extends ConsumerState<RandomQuestionsPra
           onPressed: _exitSession,
         ),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.shuffle),
+            onPressed: _shuffleQuestions,
+            tooltip: 'Soruları Karıştır',
+          ),
           Padding(
             padding: const EdgeInsets.only(right: 16),
             child: Center(

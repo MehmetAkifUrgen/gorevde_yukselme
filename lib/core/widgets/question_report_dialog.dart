@@ -6,6 +6,7 @@ import '../../../../core/providers/app_providers.dart';
 import '../../../../core/theme/app_theme.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import '../../../../core/utils/error_utils.dart';
 
 class QuestionReportDialog extends ConsumerStatefulWidget {
   final String questionId;
@@ -143,8 +144,8 @@ class _QuestionReportDialogState extends ConsumerState<QuestionReportDialog> {
       try {
         final deviceInfo = DeviceInfoPlugin();
         final androidInfo = await deviceInfo.androidInfo;
-        final version = androidInfo.version.release ?? 'Unknown';
-        final model = androidInfo.model ?? 'Unknown Model';
+        final version = androidInfo.version.release;
+        final model = androidInfo.model;
         deviceInfoString = 'Android $version - $model';
         print('[QuestionReportDialog] Device info: $deviceInfoString');
       } catch (e) {
@@ -193,12 +194,7 @@ class _QuestionReportDialogState extends ConsumerState<QuestionReportDialog> {
       print('[QuestionReportDialog] Error details: ${e.toString()}');
       
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Bildirim gönderilemedi: $e'),
-            backgroundColor: Colors.red,
-          ),
-        );
+        ErrorUtils.showFirestoreError(context, e);
       }
     } finally {
       if (mounted) {

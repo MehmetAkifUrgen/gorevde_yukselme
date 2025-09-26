@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gorevde_yukselme/core/providers/auth_providers.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/router/app_router.dart';
 import '../../../../core/utils/validation_utils.dart';
+import '../../../../core/utils/error_utils.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
   final String email;
@@ -79,32 +81,14 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         },
         error: (error, stackTrace) {
           print('[LoginPage] Login error: $error');
-          String errorMessage = 'Giriş sırasında bir hata oluştu';
           
-          if (error.toString().contains('user-not-found')) {
-            errorMessage = 'Bu e-posta adresi ile kayıtlı kullanıcı bulunamadı';
-          } else if (error.toString().contains('wrong-password')) {
-            errorMessage = 'Şifre yanlış';
-          } else if (error.toString().contains('invalid-email')) {
-            errorMessage = 'Geçersiz e-posta adresi';
-          } else if (error.toString().contains('user-disabled')) {
-            errorMessage = 'Bu hesap devre dışı bırakılmış';
-          } else if (error.toString().contains('too-many-requests')) {
-            errorMessage = 'Çok fazla başarısız deneme. Lütfen daha sonra tekrar deneyin';
-          } else if (error.toString().contains('network-request-failed')) {
-            errorMessage = 'İnternet bağlantısı yok. Lütfen bağlantınızı kontrol edin';
-          } else if (error.toString().contains('invalid-credential')) {
-            errorMessage = 'E-posta veya şifre hatalı';
+          // Firebase Auth hatası ise özel mesaj göster
+          if (error is FirebaseAuthException) {
+            ErrorUtils.showFirebaseAuthError(context, error);
+          } else {
+            // Genel hata mesajı göster
+            ErrorUtils.showGeneralError(context, error);
           }
-          
-          print('[LoginPage] Showing error message: $errorMessage');
-          
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(errorMessage),
-              backgroundColor: AppTheme.errorRed,
-            ),
-          );
         },
       );
     }
@@ -130,22 +114,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
           _isLoading = false;
         });
         
-        String errorMessage = 'Google ile giriş sırasında bir hata oluştu';
-        
-        if (e.toString().contains('network-request-failed')) {
-          errorMessage = 'İnternet bağlantısı yok. Lütfen bağlantınızı kontrol edin';
-        } else if (e.toString().contains('sign_in_canceled')) {
-          errorMessage = 'Google giriş işlemi iptal edildi';
-        } else if (e.toString().contains('sign_in_failed')) {
-          errorMessage = 'Google girişi başarısız oldu';
-        }
-        
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(errorMessage),
-            backgroundColor: AppTheme.errorRed,
-          ),
-        );
+        // Google Sign-In hatası için özel mesaj göster
+        ErrorUtils.showGeneralError(context, e);
       }
     }
   }

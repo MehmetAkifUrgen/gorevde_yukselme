@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import '../models/user_model.dart';
 import '../models/support_request.dart';
+import '../utils/error_utils.dart';
 
 class SupportDialog extends ConsumerStatefulWidget {
   final User userProfile;
@@ -104,27 +105,8 @@ class _SupportDialogState extends ConsumerState<SupportDialog> {
     } catch (e, stackTrace) {
       _logError('Failed to submit support request', e, stackTrace);
       
-      String errorMessage = 'Destek talebi gönderilirken bir hata oluştu.';
-      
-      if (e.toString().contains('permission-denied')) {
-        errorMessage = 'İzin hatası: Destek talebi göndermek için yetkiniz yok. Lütfen tekrar giriş yapmayı deneyin.';
-        _logError('Permission denied error detected');
-      } else if (e.toString().contains('network')) {
-        errorMessage = 'Ağ bağlantısı hatası. İnternet bağlantınızı kontrol edin.';
-        _logError('Network error detected');
-      } else if (e.toString().contains('unavailable')) {
-        errorMessage = 'Sunucu şu anda kullanılamıyor. Lütfen daha sonra tekrar deneyin.';
-        _logError('Service unavailable error detected');
-      }
-
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(errorMessage),
-            backgroundColor: Colors.red,
-            duration: const Duration(seconds: 5),
-          ),
-        );
+        ErrorUtils.showFirestoreError(context, e);
       }
     } finally {
       if (mounted) {

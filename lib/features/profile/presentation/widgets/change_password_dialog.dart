@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import '../../../../core/utils/error_utils.dart';
 
 class ChangePasswordDialog extends StatefulWidget {
   const ChangePasswordDialog({super.key});
@@ -63,23 +64,9 @@ class _ChangePasswordDialogState extends State<ChangePasswordDialog> {
         _showSuccessSnackBar('Şifreniz başarıyla değiştirildi');
       }
     } on FirebaseAuthException catch (e) {
-      String errorMessage;
-      switch (e.code) {
-        case 'wrong-password':
-          errorMessage = 'Mevcut şifre yanlış';
-          break;
-        case 'weak-password':
-          errorMessage = 'Yeni şifre çok zayıf';
-          break;
-        case 'requires-recent-login':
-          errorMessage = 'Bu işlem için yeniden giriş yapmanız gerekiyor';
-          break;
-        default:
-          errorMessage = 'Şifre değiştirme hatası: ${e.message}';
-      }
-      _showErrorSnackBar(errorMessage);
+      ErrorUtils.showFirebaseAuthError(context, e);
     } catch (e) {
-      _showErrorSnackBar('Beklenmeyen hata: ${e.toString()}');
+      ErrorUtils.showGeneralError(context, e);
     } finally {
       if (mounted) {
         setState(() {

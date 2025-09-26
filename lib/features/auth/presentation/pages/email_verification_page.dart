@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/router/app_router.dart';
 import '../../../../core/providers/auth_providers.dart';
+import '../../../../core/utils/error_utils.dart';
 
 class EmailVerificationPage extends ConsumerStatefulWidget {
   final String email;
@@ -103,36 +105,27 @@ class _EmailVerificationPageState extends ConsumerState<EmailVerificationPage> {
     } catch (e) {
       print('[EmailVerificationPage] Error in _sendVerificationEmail: $e');
       if (mounted) {
-        String errorMessage = '❌ E-posta gönderilirken hata oluştu';
-        
-        if (e.toString().contains('too-many-requests')) {
-          errorMessage = '⏰ Çok fazla istek gönderildi. Lütfen birkaç dakika bekleyip tekrar deneyin.';
-        } else if (e.toString().contains('user-not-found') || e.toString().contains('No user is currently signed in')) {
-          errorMessage = '🔄 Oturum kaybedildi. Lütfen tekrar giriş yapın.';
-          // Navigate back to login after showing error
-          Future.delayed(const Duration(seconds: 3), () {
-            if (mounted) {
-              context.go('/login?email=${Uri.encodeComponent(widget.email)}');
-            }
-          });
-        } else if (e.toString().contains('email-already-verified')) {
-          errorMessage = '✅ E-posta zaten doğrulanmış! Ana sayfaya yönlendiriliyorsunuz.';
-          Future.delayed(const Duration(seconds: 2), () {
-            if (mounted) {
-              context.go('/home');
-            }
-          });
-        } else if (e.toString().contains('network-request-failed')) {
-          errorMessage = '🌐 İnternet bağlantınızı kontrol edin ve tekrar deneyin.';
+        // Firebase Auth hatası ise özel mesaj göster
+        if (e is FirebaseAuthException) {
+          if (e.code == 'user-not-found' || e.code == 'no-user-signed-in') {
+            // Navigate back to login after showing error
+            Future.delayed(const Duration(seconds: 3), () {
+              if (mounted) {
+                context.go('/login?email=${Uri.encodeComponent(widget.email)}');
+              }
+            });
+          } else if (e.code == 'email-already-verified') {
+            Future.delayed(const Duration(seconds: 2), () {
+              if (mounted) {
+                context.go('/home');
+              }
+            });
+          }
+          ErrorUtils.showFirebaseAuthError(context, e);
+        } else {
+          // Genel hata mesajı göster
+          ErrorUtils.showGeneralError(context, e);
         }
-        
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(errorMessage),
-            backgroundColor: Colors.red,
-            duration: const Duration(seconds: 5),
-          ),
-        );
       }
     } finally {
       if (mounted) {
