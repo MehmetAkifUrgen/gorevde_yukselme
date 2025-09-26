@@ -14,19 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "933845628166-ashfctrtn2o0rq6ipsf10o44vqat5dv4.apps.googleusercontent.com",
+          "client_id": "933845628166-ql6claokfo10a0705r2965erojht57ql.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.gyudsoft.apps",
-            "certificate_hash": "9912b919bdd05c70aafec4bfd9d93ab4c1e8d1b2"
-          }
-        },
-        {
-          "client_id": "933845628166-l0lqq3c6smkmqmebavh99r7m46cfejnf.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.gyudsoft.apps",
-            "certificate_hash": "3b1c86d7911ad63a2f17cd5a575e24de96e32a1e"
+            "certificate_hash": "8da2c24be2380f22e27ca29035ff6fe9abb7045f"
           }
         },
         {

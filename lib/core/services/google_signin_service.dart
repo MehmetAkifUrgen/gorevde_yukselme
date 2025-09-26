@@ -9,6 +9,8 @@ class GoogleSignInService {
   
   GoogleSignInService._internal() {
     _googleSignIn = GoogleSignIn(
+      clientId: '933845628166-l0lqq3c6smkmqmebavh99r7m46cfejnf.apps.googleusercontent.com', // Release client ID
+      serverClientId: '933845628166-22vb551ktpt93jdu4pj1q2jh5m1562gf.apps.googleusercontent.com', // Web client ID
       scopes: [
         'email',
         'profile',
@@ -34,28 +36,48 @@ class GoogleSignInService {
   /// Sign in with Google
   Future<UserCredential?> signInWithGoogle() async {
     try {
+      print('[GoogleSignInService] Starting Google Sign-In process...');
+      print('[GoogleSignInService] Client ID: 933845628166-l0lqq3c6smkmqmebavh99r7m46cfejnf.apps.googleusercontent.com');
+      
       // Trigger the authentication flow
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
       
       if (googleUser == null) {
-        // User canceled the sign-in
+        print('[GoogleSignInService] User canceled the sign-in');
         return null;
       }
 
+      print('[GoogleSignInService] Google user obtained: ${googleUser.email}');
+      print('[GoogleSignInService] Google user ID: ${googleUser.id}');
+
       // Obtain the auth details from the request
       final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+      
+      print('[GoogleSignInService] Google auth obtained');
+      print('[GoogleSignInService] Access token: ${googleAuth.accessToken != null ? 'Present' : 'Missing'}');
+      print('[GoogleSignInService] ID token: ${googleAuth.idToken != null ? 'Present' : 'Missing'}');
 
       // Create a new credential
       final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
+      
+      print('[GoogleSignInService] Credential created, signing in with Firebase...');
 
       // Sign in to Firebase with the Google credential
       final UserCredential userCredential = await _firebaseAuth.signInWithCredential(credential);
       
+      print('[GoogleSignInService] Firebase sign-in successful');
+      print('[GoogleSignInService] Firebase user: ${userCredential.user?.email}');
+      print('[GoogleSignInService] Firebase user ID: ${userCredential.user?.uid}');
+      
       return userCredential;
     } catch (error, stackTrace) {
+      print('[GoogleSignInService] Exception occurred: $error');
+      print('[GoogleSignInService] Exception type: ${error.runtimeType}');
+      print('[GoogleSignInService] Stack trace: $stackTrace');
+      
       await _crashlytics?.recordError(
         error,
         stackTrace,
