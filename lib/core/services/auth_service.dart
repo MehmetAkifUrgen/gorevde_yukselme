@@ -362,8 +362,8 @@ class AuthService {
         final actionCodeSettings = ActionCodeSettings(
           url: 'https://gorevdeyukselme-3d32f.firebaseapp.com/__/auth/action',
           handleCodeInApp: false,
-          iOSBundleId: 'com.example.gorevdeYukselme',
-          androidPackageName: 'com.example.gorevde_yukselme',
+          iOSBundleId: 'com.gyudsoft.apps',
+          androidPackageName: 'com.gyudsoft.apps',
           androidInstallApp: false,
           androidMinimumVersion: '12',
         );
