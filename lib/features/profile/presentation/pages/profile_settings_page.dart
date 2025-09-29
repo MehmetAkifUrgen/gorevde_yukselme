@@ -27,12 +27,6 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
       appBar: AppBar(
         title: const Text('Profil ve Ayarlar'),
         backgroundColor: AppTheme.lightTheme.primaryColor,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.edit),
-            onPressed: _editProfile,
-          ),
-        ],
       ),
       body: currentUser.when(
         data: (user) {
@@ -424,9 +418,6 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
     return '${date.day}/${date.month}/${date.year}';
   }
 
-  void _editProfile() {
-    context.push('/profile/edit');
-  }
 
   void _upgradeToPremium() {
     context.push('/subscription');

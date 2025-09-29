@@ -26,16 +26,16 @@ Aşağıdaki ürün kimliklerini Google Play Console'da oluşturun:
 1. **Aylık Premium Abonelik**
    - Product ID: `premium_monthly`
    - Ürün Türü: Subscription (Abonelik)
-   - Fiyat: ₺29.99/ay
+   - Fiyat: Google Play Console'da belirlenir
    - Yenileme Süresi: 1 ay
    - Açıklama: "Aylık premium üyelik - Sınırsız soru çözme ve reklamsız deneyim"
 
 2. **Yıllık Premium Abonelik**
    - Product ID: `premium_yearly`
    - Ürün Türü: Subscription (Abonelik)
-   - Fiyat: ₺149.99/yıl
+   - Fiyat: Google Play Console'da belirlenir
    - Yenileme Süresi: 1 yıl
-   - Açıklama: "Yıllık premium üyelik - %60 indirimli, sınırsız soru çözme ve reklamsız deneyim"
+   - Açıklama: "Yıllık premium üyelik - Tasarruflu, sınırsız soru çözme ve reklamsız deneyim"
 
 ## 4. Abonelik Grupları (Subscription Groups)
 

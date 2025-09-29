@@ -31,7 +31,7 @@ Google Play Console'da şu adımları takip edin:
 - **Product ID**: `gorevde_yukselme_monthly`
 - **Name**: Aylık Premium Üyelik
 - **Description**: Sınırsız soru çözme, reklamsız deneyim ve premium özellikler
-- **Price**: ₺29.99
+- **Price**: Mağaza tarafından belirlenir (Google Play Console'da ayarlayın)
 - **Billing period**: 1 month
 - **Grace period**: 3 days
 - **Free trial**: 7 days (opsiyonel)
@@ -39,8 +39,8 @@ Google Play Console'da şu adımları takip edin:
 #### Yıllık Premium
 - **Product ID**: `gorevde_yukselme_yearly`
 - **Name**: Yıllık Premium Üyelik
-- **Description**: Tüm premium özellikler + %17 tasarruf
-- **Price**: ₺299.99
+- **Description**: Tüm premium özellikler + tasarruf
+- **Price**: Mağaza tarafından belirlenir (Google Play Console'da ayarlayın)
 - **Billing period**: 1 year
 - **Grace period**: 7 days
 - **Free trial**: 14 days (opsiyonel)
@@ -79,14 +79,14 @@ App Store Connect'te şu adımları takip edin:
 - **Product ID**: `com.gorevdeyukselme.monthly`
 - **Reference Name**: Monthly Premium
 - **Subscription Duration**: 1 Month
-- **Price**: ₺29.99
+- **Price**: Mağaza tarafından belirlenir (App Store Connect'te ayarlayın)
 - **Free Trial**: 7 days (opsiyonel)
 
 #### Yıllık Premium
 - **Product ID**: `com.gorevdeyukselme.yearly`
 - **Reference Name**: Yearly Premium
 - **Subscription Duration**: 1 Year
-- **Price**: ₺299.99
+- **Price**: Mağaza tarafından belirlenir (App Store Connect'te ayarlayın)
 - **Free Trial**: 14 days (opsiyonel)
 
 ### 2. iOS Info.plist Ayarları

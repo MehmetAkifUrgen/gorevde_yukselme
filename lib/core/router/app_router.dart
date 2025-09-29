@@ -34,15 +34,27 @@ class AppRouter {
 
   static GoRouter createRouter(WidgetRef ref) {
     final authState = ref.watch(authStateProvider);
-    final isAuthenticated = authState.asData?.value != null;
+    final user = authState.asData?.value;
+    final isAuthenticated = user != null;
+    final isEmailVerified = user?.emailVerified ?? false;
     
     return GoRouter(
       initialLocation: home,
       redirect: (context, state) {
+        // Eğer kullanıcı giriş yapmışsa ama email doğrulanmamışsa
+        if (isAuthenticated && !isEmailVerified) {
+          // Email verification sayfasında değilse, oraya yönlendir
+          if (state.uri.path != emailVerification) {
+            final email = user?.email ?? '';
+            return '$emailVerification?email=${Uri.encodeComponent(email)}';
+          }
+        }
+        
         // Opsiyonel giriş: Sadece giriş sayfasındayken ve kullanıcı zaten girişliyse ana sayfaya yönlendir
-        if (state.uri.path == login && isAuthenticated) {
+        if (state.uri.path == login && isAuthenticated && isEmailVerified) {
           return home;
         }
+        
         return null;
       },
       errorBuilder: (context, state) => Scaffold(

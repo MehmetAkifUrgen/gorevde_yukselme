@@ -28,7 +28,7 @@ Aşağıdaki ürün kimliklerini App Store Connect'te oluşturun:
    - Reference Name: "Premium Monthly Subscription"
    - Subscription Group: "Premium Membership"
    - Subscription Duration: 1 Month
-   - Price: ₺29.99 (Tier 7)
+   - Price: App Store Connect'te belirlenir
    - Localization (Turkish):
      - Display Name: "Aylık Premium Üyelik"
      - Description: "Sınırsız soru çözme, reklamsız deneyim ve premium özellikler"
@@ -38,10 +38,10 @@ Aşağıdaki ürün kimliklerini App Store Connect'te oluşturun:
    - Reference Name: "Premium Yearly Subscription"
    - Subscription Group: "Premium Membership"
    - Subscription Duration: 1 Year
-   - Price: ₺149.99 (Tier 25)
+   - Price: App Store Connect'te belirlenir
    - Localization (Turkish):
      - Display Name: "Yıllık Premium Üyelik"
-     - Description: "%60 indirimli yıllık premium üyelik - Sınırsız soru çözme ve reklamsız deneyim"
+     - Description: "Tasarruflu yıllık premium üyelik - Sınırsız soru çözme ve reklamsız deneyim"
 
 ## 4. Subscription Groups
 

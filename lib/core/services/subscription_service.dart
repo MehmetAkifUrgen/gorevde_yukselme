@@ -283,7 +283,7 @@ class SubscriptionService {
     }
   }
 
-  /// Get product price
+  /// Get product price (from store only)
   double _getProductPrice(String productId) {
     final product = _availableProducts.firstWhere(
       (p) => p.id == productId,

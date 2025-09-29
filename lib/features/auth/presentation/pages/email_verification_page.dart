@@ -115,11 +115,21 @@ class _EmailVerificationPageState extends ConsumerState<EmailVerificationPage> {
               }
             });
           } else if (e.code == 'email-already-verified') {
+            // Email already verified, show success message and navigate to home
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('✅ E-posta zaten doğrulanmış! Ana sayfaya yönlendiriliyorsunuz...'),
+                backgroundColor: Colors.green,
+                duration: Duration(seconds: 2),
+              ),
+            );
+            
             Future.delayed(const Duration(seconds: 2), () {
               if (mounted) {
                 context.go('/home');
               }
             });
+            return; // Don't show error message
           }
           ErrorUtils.showFirebaseAuthError(context, e);
         } else {
@@ -138,6 +148,13 @@ class _EmailVerificationPageState extends ConsumerState<EmailVerificationPage> {
 
   Future<void> _checkVerificationStatus() async {
     print('[EmailVerificationPage] _checkVerificationStatus - Starting');
+    
+    // Check if widget is still mounted
+    if (!mounted) {
+      print('[EmailVerificationPage] Widget disposed, skipping verification check');
+      return;
+    }
+    
     setState(() {
       _isLoading = true;
     });
@@ -146,12 +163,24 @@ class _EmailVerificationPageState extends ConsumerState<EmailVerificationPage> {
       print('[EmailVerificationPage] Reloading user...');
       await ref.read(authNotifierProvider.notifier).reloadUser();
       
+      // Check if widget is still mounted after async operation
+      if (!mounted) {
+        print('[EmailVerificationPage] Widget disposed after reload, skipping');
+        return;
+      }
+      
       // AuthStateProvider'ı manuel olarak invalidate et
       print('[EmailVerificationPage] Invalidating authStateProvider...');
       ref.invalidate(authStateProvider);
       
       // Firebase auth state'inin güncellenmesi için bekleme
       await Future.delayed(const Duration(milliseconds: 1000));
+      
+      // Check if widget is still mounted after delay
+      if (!mounted) {
+        print('[EmailVerificationPage] Widget disposed after delay, skipping');
+        return;
+      }
       
       // Check verification status from both sources
       final isVerifiedFromNotifier = ref.read(authNotifierProvider.notifier).isEmailVerified;
@@ -182,8 +211,8 @@ class _EmailVerificationPageState extends ConsumerState<EmailVerificationPage> {
           await Future.delayed(const Duration(milliseconds: 2000));
           
           if (mounted) {
-            print('[EmailVerificationPage] Navigating to home after verification');
-            // Use go instead of pushReplacement to trigger router redirect logic
+            print('[EmailVerificationPage] Email verified, router will handle navigation');
+            // Router redirect will handle navigation to home since email is now verified
             context.go('/home');
           }
         }

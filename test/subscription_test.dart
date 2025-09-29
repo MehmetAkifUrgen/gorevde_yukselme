@@ -20,9 +20,6 @@ void main() {
         'Sınırsız yer imi',
         'Sınırsız çalışma seti',
         'Gelişmiş istatistikler',
-        'Öncelikli destek',
-        'Özel temalar',
-        'Çevrimdışı erişim',
       ];
       
       expect(features.isNotEmpty, true);

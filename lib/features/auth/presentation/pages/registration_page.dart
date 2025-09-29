@@ -86,15 +86,13 @@ class _RegistrationPageState extends ConsumerState<RegistrationPage> {
         });
         
         // Wait a moment for auth state to stabilize
-        await Future.delayed(const Duration(milliseconds: 500));
+        await Future.delayed(const Duration(milliseconds: 1000));
         
         if (mounted) {
-          // Navigate to email verification page
-          final emailVerificationUrl = '${AppRouter.emailVerification}?email=${Uri.encodeComponent(email)}';
-          print('[RegistrationPage] Navigating to email verification: $emailVerificationUrl');
-          
-          // Use pushReplacement instead of go to avoid back navigation issues
-          context.pushReplacement(emailVerificationUrl);
+          // Router redirect will handle navigation to email verification
+          // Just navigate to home, router will redirect to email verification if needed
+          print('[RegistrationPage] User created, router will handle email verification redirect');
+          context.go(AppRouter.home);
         }
       } else {
         print('[RegistrationPage] Widget disposed after user creation, cannot navigate');

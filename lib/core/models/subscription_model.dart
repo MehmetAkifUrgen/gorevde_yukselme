@@ -170,7 +170,7 @@ class SubscriptionPlanInfo {
     },
     SubscriptionPlan.monthly: {
       'name': 'Aylık Premium',
-      'price': 29.99,
+      'price': 0.0, // Price will come from store
       'currency': 'TL',
       'features': [
         PremiumFeature.adFree,
@@ -182,7 +182,7 @@ class SubscriptionPlanInfo {
     },
     SubscriptionPlan.yearly: {
       'name': 'Yıllık Premium',
-      'price': 299.99,
+      'price': 0.0, // Price will come from store
       'currency': 'TL',
       'features': [
         PremiumFeature.adFree,
@@ -193,7 +193,7 @@ class SubscriptionPlanInfo {
         PremiumFeature.customStudyPlans,
         PremiumFeature.advancedFilters,
       ],
-      'savings': '17% tasarruf',
+      'savings': 'Tasarruf',
     },
   };
   

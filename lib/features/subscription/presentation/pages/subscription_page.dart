@@ -80,14 +80,6 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
     _slideController.forward();
     _pulseController.repeat(reverse: true);
     
-    // Listen to purchase results
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.listen<PurchaseResult?>(purchaseResultProvider, (previous, next) {
-        if (next != null) {
-          _handlePurchaseResult(next);
-        }
-      });
-    });
   }
 
   @override
@@ -235,6 +227,13 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
     final availableProducts = ref.watch(availableProductsProvider);
     final isPremium = ref.watch(isPremiumUserProvider);
 
+    // Listen to purchase results
+    ref.listen<PurchaseResult?>(purchaseResultProvider, (previous, next) {
+      if (next != null) {
+        _handlePurchaseResult(next);
+      }
+    });
+
     return Scaffold(
       backgroundColor: AppTheme.lightGrey,
       appBar: AppBar(
@@ -272,17 +271,9 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
                  const SizedBox(height: 32),
                  
                  // Subscription Plans
-                 _buildSubscriptionPlans(availableProducts),
-                
-                const SizedBox(height: 24),
-                
-                // Restore Purchases Button
-                _buildRestorePurchasesButton(),
-                
-                const SizedBox(height: 16),
-                
-                // Premium Code Button
-                _buildPremiumCodeButton(),
+                 Center(
+                   child: _buildSubscriptionPlans(availableProducts),
+                 ),
                 
                 const SizedBox(height: 24),
                 
@@ -504,128 +495,7 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
     );
   }
 
-  Widget _buildRestorePurchasesButton() {
-    return AnimatedBuilder(
-      animation: _pulseAnimation,
-      builder: (context, child) {
-        return Transform.scale(
-          scale: _pulseAnimation.value,
-          child: Container(
-            width: double.infinity,
-            margin: const EdgeInsets.symmetric(horizontal: 8),
-            child: OutlinedButton.icon(
-              onPressed: () async {
-          final currentContext = context;
-          // Show loading dialog
-          showDialog(
-            context: currentContext,
-            barrierDismissible: false,
-            builder: (context) => const GenericLoadingDialog(
-              title: 'Geri Yükleniyor',
-              message: 'Satın alımlar geri yükleniyor...',
-              subtitle: 'Bu işlem birkaç saniye sürebilir.\nLütfen bekleyin.',
-            ),
-          );
 
-          try {
-            // Restore purchases with timeout
-            await ref.read(subscriptionProvider.notifier).restorePurchases()
-                .timeout(
-                  const Duration(seconds: 30),
-                  onTimeout: () {
-                    throw TimeoutException('İşlem zaman aşımına uğradı', const Duration(seconds: 30));
-                  },
-                );
-            
-            // Close loading dialog
-            if (context.mounted) Navigator.of(context).pop();
-            
-            // Show success message
-            if (context.mounted) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: const Row(
-                    children: [
-                      Icon(Icons.check_circle, color: Colors.white),
-                      SizedBox(width: 8),
-                      Text('Satın alımlar başarıyla geri yüklendi'),
-                    ],
-                  ),
-                  backgroundColor: Colors.green,
-                  behavior: SnackBarBehavior.floating,
-                  duration: const Duration(seconds: 3),
-                ),
-              );
-            }
-          } on TimeoutException catch (_) {
-            // Close loading dialog
-            if (!context.mounted) return;
-            Navigator.of(context).pop();
-            
-            // Show timeout error
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: const Row(
-                  children: [
-                    Icon(Icons.error, color: Colors.white),
-                    SizedBox(width: 8),
-                    Expanded(
-                      child: Text('İşlem zaman aşımına uğradı. Lütfen tekrar deneyin.'),
-                    ),
-                  ],
-                ),
-                backgroundColor: Colors.orange,
-                behavior: SnackBarBehavior.floating,
-                duration: const Duration(seconds: 4),
-              ),
-            );
-          } catch (e) {
-            // Close loading dialog
-            if (!context.mounted) return;
-            Navigator.of(context).pop();
-            
-            // Show error message with better formatting
-            ErrorUtils.showSubscriptionError(context, e);
-          }
-        },
-               icon: const Icon(Icons.restore),
-               label: const Text('Satın Alımları Geri Yükle'),
-               style: OutlinedButton.styleFrom(
-                 padding: const EdgeInsets.symmetric(vertical: 12),
-                 side: BorderSide(color: Theme.of(context).primaryColor),
-                 foregroundColor: Theme.of(context).primaryColor,
-               ),
-             ),
-           ),
-         );
-       },
-     );
-   }
-
-  Widget _buildPremiumCodeButton() {
-    return Container(
-      width: double.infinity,
-      margin: const EdgeInsets.symmetric(horizontal: 8),
-      child: OutlinedButton.icon(
-        onPressed: () {
-          showDialog(
-            context: context,
-            builder: (context) => const PremiumCodeDialog(),
-          );
-        },
-        icon: const Icon(Icons.card_giftcard),
-        label: const Text('Premium Kod Kullan'),
-        style: OutlinedButton.styleFrom(
-          padding: const EdgeInsets.symmetric(vertical: 12),
-          side: BorderSide(color: AppTheme.accentGold),
-          foregroundColor: AppTheme.accentGold,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
-        ),
-      ),
-    );
-  }
 
   Widget _buildTermsAndPrivacy() {
     return Column(

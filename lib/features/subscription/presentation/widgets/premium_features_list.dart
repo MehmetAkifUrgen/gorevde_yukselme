@@ -22,21 +22,6 @@ class PremiumFeaturesList extends StatelessWidget {
         'title': 'Detaylı İstatistikler',
         'description': 'Gelişiminizi takip edin, güçlü ve zayıf yönlerinizi keşfedin',
       },
-      {
-        'icon': Icons.bookmark,
-        'title': 'Gelişmiş Favoriler',
-        'description': 'Soruları kategorilere ayırın ve özel koleksiyonlar oluşturun',
-      },
-      {
-        'icon': Icons.download,
-        'title': 'Çevrimdışı Erişim',
-        'description': 'İnternet olmadan da sorulara erişin ve çalışmaya devam edin',
-      },
-      {
-        'icon': Icons.support_agent,
-        'title': 'Öncelikli Destek',
-        'description': 'Sorularınız için 7/24 öncelikli müşteri desteği',
-      },
     ];
 
     return Container(
