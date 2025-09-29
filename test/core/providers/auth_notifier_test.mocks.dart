@@ -451,6 +451,21 @@ class MockFirestoreService extends _i1.Mock implements _i6.FirestoreService {
           as _i5.Future<void>);
 
   @override
+  _i5.Future<void> upsertPerformanceSummary({
+    required String? userId,
+    required Map<String, dynamic>? data,
+  }) =>
+      (super.noSuchMethod(
+            Invocation.method(#upsertPerformanceSummary, [], {
+              #userId: userId,
+              #data: data,
+            }),
+            returnValue: _i5.Future<void>.value(),
+            returnValueForMissingStub: _i5.Future<void>.value(),
+          )
+          as _i5.Future<void>);
+
+  @override
   _i5.Future<void> deleteAllUserData({required String? userId}) =>
       (super.noSuchMethod(
             Invocation.method(#deleteAllUserData, [], {#userId: userId}),

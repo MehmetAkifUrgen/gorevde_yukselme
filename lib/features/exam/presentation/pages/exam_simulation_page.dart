@@ -78,6 +78,25 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
   @override
   void dispose() {
     _timer?.cancel();
+    
+    // Save study time when exiting without completion (her zaman local storage kullan)
+    final exam = ref.read(currentExamProvider);
+    if (exam != null && exam.status == ExamStatus.inProgress) {
+      final firebaseUser = ref.read(currentFirebaseUserProvider);
+      final userId = firebaseUser?.uid ?? ''; // Guest için boş string
+      final localStats = ref.read(localStatisticsServiceProvider);
+      
+      // Calculate elapsed time
+      final int totalSeconds = exam.durationInMinutes * 60;
+      final int elapsed = totalSeconds > 0 ? (totalSeconds - _remainingSeconds) : 0;
+      final int minutes = (elapsed / 60).round();
+      
+      if (minutes > 0) {
+        localStats.addStudyTimeMinutes(userId: userId, minutes: minutes);
+        print('[ExamSimulationPage] Study time saved on dispose: $minutes minutes');
+      }
+    }
+    
     super.dispose();
   }
 
@@ -337,11 +356,22 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
       print('[ExamSimulationPage] Should show ad: ${wrongCount > 0 && wrongCount % 3 == 0}');
     }
     
-    // Update local statistics (guest or user) immediately
-    final firebaseUser = ref.read(currentFirebaseUserProvider);
-    final userId = firebaseUser?.uid ?? '';
-    final localStats = ref.read(localStatisticsServiceProvider);
-    localStats.incrementQuestion(userId: userId, isCorrect: isCorrect);
+        // Update local statistics (her zaman local storage kullan)
+        final firebaseUser = ref.read(currentFirebaseUserProvider);
+        final userId = firebaseUser?.uid ?? ''; // Guest için boş string
+        final localStats = ref.read(localStatisticsServiceProvider);
+        print('[ExamSimulationPage] Saving answer - UserId: $userId, IsCorrect: $isCorrect');
+        
+        // Detaylı istatistik kaydet
+        localStats.incrementQuestion(
+          userId: userId, 
+          isCorrect: isCorrect,
+          subject: currentQuestion.subject,
+          profession: currentQuestion.targetProfessions.isNotEmpty ? currentQuestion.targetProfessions.first.name : null,
+          ministry: currentQuestion.ministry,
+          isRandomQuestion: false, // Bu test sorusu
+        );
+        print('[ExamSimulationPage] Answer saved successfully');
     ref.read(currentExamProvider.notifier).answerQuestion(
       currentQuestion.id,
       _selectedAnswerIndex!,
@@ -429,10 +459,12 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
   void _completeExam() {
     _timer?.cancel();
     ref.read(currentExamProvider.notifier).completeExam();
-    // Record study time locally
+    
+    // Record study time and test completion locally (her zaman local storage kullan)
     final firebaseUser = ref.read(currentFirebaseUserProvider);
-    final userId = firebaseUser?.uid ?? '';
+    final userId = firebaseUser?.uid ?? ''; // Guest için boş string
     final localStats = ref.read(localStatisticsServiceProvider);
+    
     // Convert seconds to minutes (rounded)
     final int totalSeconds = ref.read(currentExamProvider)?.durationInMinutes == null
         ? 0
@@ -442,6 +474,11 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
     if (minutes > 0) {
       localStats.addStudyTimeMinutes(userId: userId, minutes: minutes);
     }
+    
+    // Test tamamlama sayısını artır
+    localStats.incrementTestCompleted(userId: userId);
+    print('[ExamSimulationPage] Test completed - UserId: $userId');
+    
     setState(() {
       _showResults = true;
     });
@@ -497,7 +534,7 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
       context: context,
       builder: (BuildContext context) => AlertDialog(
         title: const Text('Sınavdan Çık'),
-        content: const Text('Sınavdan çıkmak istediğinizden emin misiniz? İlerlemeniz kaydedilmeyecek.'),
+        content: const Text('Sınavdan çıkmak istediğinizden emin misiniz? Cevapladığınız sorular kaydedilmiştir.'),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
@@ -664,7 +701,7 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
         },
         onBackToHome: () {
           ref.read(currentExamProvider.notifier).clearExam();
-          context.pop();
+          context.go('/home');
         },
       );
     }
@@ -751,17 +788,6 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
             ),
             child: Row(
               children: [
-                Expanded(
-                  child: OutlinedButton(
-                    onPressed: exam.currentQuestionIndex > 0 ? _previousQuestion : null,
-                    style: OutlinedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(vertical: 12),
-                      side: BorderSide(color: AppTheme.primaryNavyBlue),
-                    ),
-                    child: const Text('Önceki'),
-                  ),
-                ),
-                const SizedBox(width: 16),
                 Expanded(
                   flex: 2,
                   child: ElevatedButton(

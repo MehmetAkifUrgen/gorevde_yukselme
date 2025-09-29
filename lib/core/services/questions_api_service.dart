@@ -60,7 +60,7 @@ class QuestionsApiService {
     final List<Question> questions = [];
     
     // Process all categories dynamically
-    for (final categoryEntry in apiResponse.categories.entries) {
+    for (final categoryEntry in apiResponse.cikmisSorular.entries) {
       final categoryName = categoryEntry.key;
       final categoryData = categoryEntry.value;
       
@@ -84,84 +84,58 @@ class QuestionsApiService {
 
   void _processCategory(
     List<Question> questions,
-    Map<String, Map<String, List<ApiQuestion>>> categoryData,
+    Map<String, Map<String, Map<String, List<ApiQuestion>>>> categoryData,
     String categoryName,
     String? filterByMinistry,
     String? filterByProfession,
     String? filterBySubject,
   ) {
-    // Note: categoryData structure is actually Category > Ministry > Profession > Subject
-    // But the type signature shows Map<String, Map<String, List<ApiQuestion>>> which is 3-level
-    // This is because the API response model doesn't match the actual JSON structure
-    // We need to handle this by accessing raw JSON data for 4-level filtering
-    
-    if (_rawJsonData == null) {
-      return;
-    }
-    
-    try {
-      final categoryRawData = _rawJsonData![categoryName] as Map<String, dynamic>?;
-      if (categoryRawData == null) {
-        return;
+    // Process ministries (second level)
+    for (final ministryEntry in categoryData.entries) {
+      final ministryName = ministryEntry.key;
+      
+      // Skip if filtering by ministry and this doesn't match
+      if (filterByMinistry != null && ministryName != filterByMinistry) {
+        continue;
       }
       
-      // Process ministries (second level)
-      for (final ministryEntry in categoryRawData.entries) {
-        final ministryName = ministryEntry.key;
+      final ministryData = ministryEntry.value;
+      
+      // Process professions (third level)
+      for (final professionEntry in ministryData.entries) {
+        final professionName = professionEntry.key;
         
-        // Skip if filtering by ministry and this doesn't match
-        if (filterByMinistry != null && ministryName != filterByMinistry) {
+        // Skip if filtering by profession and this doesn't match
+        if (filterByProfession != null && professionName != filterByProfession) {
           continue;
         }
         
-        final ministryData = ministryEntry.value as Map<String, dynamic>?;
-        if (ministryData == null) continue;
+        final professionData = professionEntry.value;
         
-        // Process professions (third level)
-        for (final professionEntry in ministryData.entries) {
-          final professionName = professionEntry.key;
+        // Process subjects (fourth level)
+        for (final subjectEntry in professionData.entries) {
+          final subjectName = subjectEntry.key;
           
-          // Skip if filtering by profession and this doesn't match
-          if (filterByProfession != null && professionName != filterByProfession) {
+          // Skip if filtering by subject and this doesn't match
+          if (filterBySubject != null && subjectName != filterBySubject) {
             continue;
           }
           
-          final professionData = professionEntry.value as Map<String, dynamic>?;
-          if (professionData == null) continue;
+          final apiQuestions = subjectEntry.value;
           
-          // Process subjects (fourth level)
-          for (final subjectEntry in professionData.entries) {
-            final subjectName = subjectEntry.key;
-            
-            // Skip if filtering by subject and this doesn't match
-            if (filterBySubject != null && subjectName != filterBySubject) {
-              continue;
-            }
-            
-            final subjectData = subjectEntry.value as List<dynamic>?;
-            if (subjectData == null) continue;
-            
-            // Convert to ApiQuestion objects and process
-            for (final questionData in subjectData) {
-              try {
-                final apiQuestion = ApiQuestion.fromJson(questionData as Map<String, dynamic>);
-                final question = _convertApiQuestionToQuestion(
-                  apiQuestion,
-                  categoryName,
-                  ministryName,
-                  professionName,
-                  subjectName,
-                );
-                questions.add(question);
-              } catch (e) {
-                // Skip invalid questions
-              }
-            }
+          // Convert to Question objects and process
+          for (final apiQuestion in apiQuestions) {
+            final question = _convertApiQuestionToQuestion(
+              apiQuestion,
+              categoryName,
+              ministryName,
+              professionName,
+              subjectName,
+            );
+            questions.add(question);
           }
         }
       }
-    } catch (e) {
-      // Skip category processing on error
     }
   }
 
@@ -197,6 +171,8 @@ class QuestionsApiService {
       category: category,
       targetProfessions: targetProfessions,
       isStarred: false,
+      subject: subjectName,
+      ministry: ministryName,
     );
   }
   
@@ -212,71 +188,54 @@ class QuestionsApiService {
 
   /// Gets available categories from the API response
   List<String> getAvailableCategories(ApiQuestionsResponse apiResponse) {
-    return apiResponse.categories.keys.toList();
+    return apiResponse.cikmisSorular.keys.toList();
   }
 
-  /// Gets available professions for a specific category
-  List<String> getAvailableProfessions(
+  /// Gets available ministries for a specific category
+  List<String> getAvailableMinistries(
     ApiQuestionsResponse apiResponse,
     String categoryName,
   ) {
-    final categoryData = apiResponse.categories[categoryName];
+    final categoryData = apiResponse.cikmisSorular[categoryName];
     return categoryData?.keys.toList() ?? [];
   }
 
-  /// Gets available subjects for a specific category and profession
+  /// Gets available professions for a specific category and ministry
+  List<String> getAvailableProfessions(
+    ApiQuestionsResponse apiResponse,
+    String categoryName,
+    String ministryName,
+  ) {
+    final categoryData = apiResponse.cikmisSorular[categoryName];
+    if (categoryData != null) {
+      final ministryData = categoryData[ministryName];
+      return ministryData?.keys.toList() ?? [];
+    }
+    return [];
+  }
+
+  /// Gets available subjects for a specific category, ministry and profession
   List<String> getAvailableSubjects(
     ApiQuestionsResponse apiResponse,
     String categoryName,
+    String ministryName,
     String professionName,
   ) {
-    final categoryData = apiResponse.categories[categoryName];
+    final categoryData = apiResponse.cikmisSorular[categoryName];
     
     if (categoryData != null) {
-      final professionData = categoryData[professionName];
-      if (professionData != null) {
-        final subjects = professionData.keys.toList();
-        return subjects;
+      final ministryData = categoryData[ministryName];
+      if (ministryData != null) {
+        final professionData = ministryData[professionName];
+        if (professionData != null) {
+          return professionData.keys.toList();
+        }
       }
     }
     
     return [];
   }
 
-  List<String> getAvailableSubjectsForMinistryAndProfession({
-    required String categoryName,
-    required String ministryName,
-    required String professionName,
-  }) {
-    if (_rawJsonData == null) {
-      return [];
-    }
-    
-    try {
-      // Access raw JSON data directly to get subjects
-      final categoryData = _rawJsonData![categoryName] as Map<String, dynamic>?;
-      if (categoryData == null) {
-        return [];
-      }
-      
-      final ministryData = categoryData[ministryName] as Map<String, dynamic>?;
-      if (ministryData == null) {
-        return [];
-      }
-      
-      final professionData = ministryData[professionName] as Map<String, dynamic>?;
-      if (professionData == null) {
-        return [];
-      }
-      
-      // professionData keys are subject names (e.g., "2017 Çıkmış Sorular")
-      final subjects = professionData.keys.toList();
-      
-      return subjects;
-    } catch (e) {
-      return [];
-    }
-  }
 
   void dispose() {
     _httpClient.close();

@@ -59,6 +59,7 @@ const _$SubscriptionPlanEnumMap = {
 const _$StoreTypeEnumMap = {
   StoreType.googlePlay: 'googlePlay',
   StoreType.appStore: 'appStore',
+  StoreType.premiumCode: 'premiumCode',
   StoreType.unknown: 'unknown',
 };
 

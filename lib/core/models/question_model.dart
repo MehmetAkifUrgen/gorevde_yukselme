@@ -27,6 +27,8 @@ class Question extends Equatable {
   final QuestionCategory category;
   final List<UserProfession> targetProfessions;
   final bool isStarred;
+  final String? subject;
+  final String? ministry;
 
   const Question({
     required this.id,
@@ -38,6 +40,8 @@ class Question extends Equatable {
     required this.category,
     required this.targetProfessions,
     this.isStarred = false,
+    this.subject,
+    this.ministry,
   });
 
   Question copyWith({
@@ -50,6 +54,8 @@ class Question extends Equatable {
     QuestionCategory? category,
     List<UserProfession>? targetProfessions,
     bool? isStarred,
+    String? subject,
+    String? ministry,
   }) {
     return Question(
       id: id ?? this.id,
@@ -61,6 +67,8 @@ class Question extends Equatable {
       category: category ?? this.category,
       targetProfessions: targetProfessions ?? this.targetProfessions,
       isStarred: isStarred ?? this.isStarred,
+      subject: subject ?? this.subject,
+      ministry: ministry ?? this.ministry,
     );
   }
 
@@ -79,6 +87,8 @@ class Question extends Equatable {
         category,
         targetProfessions,
         isStarred,
+        subject,
+        ministry,
       ];
 }
 

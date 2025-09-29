@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/providers/auth_providers.dart';
 import '../../../../core/models/user_model.dart';
+import '../../../../core/services/local_statistics_service.dart';
 import '../../../subscription/presentation/widgets/ad_banner_widget.dart';
 
 class PerformanceAnalysisPage extends ConsumerStatefulWidget {
@@ -30,7 +31,14 @@ class _PerformanceAnalysisPageState extends ConsumerState<PerformanceAnalysisPag
 
   Future<void> _loadGuestStatistics() async {
     try {
-      final stats = await ref.read(localStatisticsServiceProvider).getStats('');
+      print('[PerformanceAnalysisPage] Loading local statistics...');
+      // Giriş yapmış kullanıcı için userId, misafir için boş string
+      final firebaseUser = ref.read(currentFirebaseUserProvider);
+      final userId = firebaseUser?.uid ?? '';
+      print('[PerformanceAnalysisPage] Loading stats for userId: $userId');
+      
+      final stats = await ref.read(localStatisticsServiceProvider).getStats(userId);
+      print('[PerformanceAnalysisPage] Local stats loaded: $stats');
       if (mounted) {
         setState(() {
           _guestStats = stats;
@@ -38,6 +46,7 @@ class _PerformanceAnalysisPageState extends ConsumerState<PerformanceAnalysisPag
         });
       }
     } catch (e) {
+      print('[PerformanceAnalysisPage] Error loading local stats: $e');
       if (mounted) {
         setState(() {
           _isLoadingGuestStats = false;
@@ -68,6 +77,15 @@ class _PerformanceAnalysisPageState extends ConsumerState<PerformanceAnalysisPag
           ],
         ),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.refresh),
+            onPressed: () {
+              print('[PerformanceAnalysisPage] Refresh button pressed');
+              // Refresh performance data
+              ref.invalidate(currentUserProfileProvider);
+              _loadGuestStatistics();
+            },
+          ),
           PopupMenuButton<String>(
             initialValue: selectedPeriod,
             onSelected: (value) {
@@ -106,6 +124,10 @@ class _PerformanceAnalysisPageState extends ConsumerState<PerformanceAnalysisPag
           _buildQuickStats(),
           const SizedBox(height: 24),
           
+          // Subject Statistics
+          if (_guestStats != null) _buildSubjectStatistics(_guestStats!),
+          const SizedBox(height: 24),
+          
           // Ad Banner for non-premium users
           Consumer(
             builder: (context, ref, child) {
@@ -128,9 +150,6 @@ class _PerformanceAnalysisPageState extends ConsumerState<PerformanceAnalysisPag
   }
 
   Widget _buildPerformanceSummary() {
-    final currentUser = ref.watch(currentUserProfileProvider);
-    final isAuthenticated = ref.watch(isAuthenticatedProvider);
-    
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -141,77 +160,8 @@ class _PerformanceAnalysisPageState extends ConsumerState<PerformanceAnalysisPag
           ),
         ),
         const SizedBox(height: 16),
-        isAuthenticated 
-          ? currentUser.when(
-              data: (user) {
-                if (user == null) {
-                  return const Center(child: Text('Performans verilerini görmek için giriş yapın'));
-                }
-            
-            final stats = user.statistics;
-            final accuracy = stats.accuracy;
-            final totalQuestions = stats.totalQuestionsAnswered;
-            final streak = stats.currentStreak;
-            final avgTimePerQuestion = totalQuestions > 0 
-                ? (stats.totalStudyTimeMinutes / totalQuestions).toStringAsFixed(1)
-                : '0.0';
-            
-            return Column(
-              children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: _buildSummaryCard(
-                        'Genel Puan',
-                        '${accuracy.toStringAsFixed(1)}%',
-                        Icons.grade,
-                        Colors.blue,
-                        'Doğruluk oranı',
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: _buildSummaryCard(
-                        'Çözülen Sorular',
-                        totalQuestions.toString(),
-                        Icons.quiz,
-                        Colors.green,
-                        '${stats.correctAnswers} doğru',
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 12),
-                Row(
-                  children: [
-                    Expanded(
-                      child: _buildSummaryCard(
-                        'Seri',
-                        streak.toString(),
-                        Icons.local_fire_department,
-                        Colors.orange,
-                        'Gün',
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: _buildSummaryCard(
-                        'Ort. Süre',
-                        '$avgTimePerQuestion dk',
-                        Icons.timer,
-                        Colors.purple,
-                        'Soru başına',
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            );
-          },
-          loading: () => const Center(child: CircularProgressIndicator()),
-          error: (error, stack) => Center(child: Text('Error: $error')),
-        )
-        : _buildGuestStatistics(),
+        // Her zaman local statistics kullan (hem guest hem authenticated için)
+        _buildGuestStatistics(),
       ],
     );
   }
@@ -230,6 +180,8 @@ class _PerformanceAnalysisPageState extends ConsumerState<PerformanceAnalysisPag
     final correctAnswers = stats['correct'] ?? 0;
     final incorrectAnswers = stats['incorrect'] ?? 0;
     final studyTimeMinutes = stats['studyTimeMinutes'] ?? 0;
+    final totalTests = stats['totalTests'] ?? 0;
+    final totalRandomQuestions = stats['totalRandomQuestions'] ?? 0;
     
     if (totalQuestions == 0) {
       return const Center(
@@ -297,6 +249,30 @@ class _PerformanceAnalysisPageState extends ConsumerState<PerformanceAnalysisPag
                 Icons.timer,
                 Colors.purple,
                 'Soru başına',
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 12),
+        Row(
+          children: [
+            Expanded(
+              child: _buildSummaryCard(
+                'Tamamlanan Test',
+                totalTests.toString(),
+                Icons.assignment_turned_in,
+                Colors.indigo,
+                'Test sayısı',
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: _buildSummaryCard(
+                'Soru Karıştır',
+                totalRandomQuestions.toString(),
+                Icons.shuffle,
+                Colors.teal,
+                'Random sorular',
               ),
             ),
           ],
@@ -373,9 +349,6 @@ class _PerformanceAnalysisPageState extends ConsumerState<PerformanceAnalysisPag
   }
 
   Widget _buildQuickStats() {
-    final currentUser = ref.watch(currentUserProfileProvider);
-    final isAuthenticated = ref.watch(isAuthenticatedProvider);
-    
     return Card(
       elevation: 2,
       child: Padding(
@@ -390,34 +363,8 @@ class _PerformanceAnalysisPageState extends ConsumerState<PerformanceAnalysisPag
               ),
             ),
             const SizedBox(height: 16),
-            isAuthenticated 
-              ? currentUser.when(
-                  data: (user) {
-                    if (user == null) {
-                      return const Center(child: Text('İstatistikleri görmek için giriş yapın'));
-                    }
-                
-                final stats = user.statistics;
-                final correctAnswers = stats.correctAnswers;
-                final wrongAnswers = stats.incorrectAnswers;
-                final totalQuestions = stats.totalQuestionsAnswered;
-                final accuracy = stats.accuracy;
-                final studyTimeHours = (stats.totalStudyTimeMinutes / 60).toStringAsFixed(1);
-                
-                return Column(
-                  children: [
-                    _buildStatRow('Doğru Cevaplar', correctAnswers.toString(), '${accuracy.toStringAsFixed(1)}%'),
-                    _buildStatRow('Yanlış Cevaplar', wrongAnswers.toString(), '${(100 - accuracy).toStringAsFixed(1)}%'),
-                    _buildStatRow('Toplam Sorular', totalQuestions.toString(), 'Cevaplanmış'),
-                    _buildStatRow('Sınavlar', stats.totalExamsTaken.toString(), 'Tamamlanmış'),
-                    _buildStatRow('Toplam Çalışma Süresi', '$studyTimeHours saat', 'Tüm zamanlar'),
-                  ],
-                );
-              },
-              loading: () => const Center(child: CircularProgressIndicator()),
-              error: (error, stack) => Center(child: Text('Hata: $error')),
-            )
-            : _buildGuestQuickStats(),
+            // Her zaman local statistics kullan (hem guest hem authenticated için)
+            _buildGuestQuickStats(),
           ],
         ),
       ),
@@ -492,4 +439,70 @@ class _PerformanceAnalysisPageState extends ConsumerState<PerformanceAnalysisPag
       ),
     );
   }
+
+  Widget _buildSubjectStatistics(Map<String, dynamic> stats) {
+    final subjectStats = stats['subjectStats'] as Map<String, dynamic>? ?? {};
+    
+    if (subjectStats.isEmpty) {
+      return const SizedBox.shrink();
+    }
+    
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Konu Bazlı Performans',
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 16),
+            ...subjectStats.entries.map((entry) {
+              final subjectName = entry.key;
+              final subjectData = entry.value as Map<String, dynamic>;
+              final total = subjectData['total'] ?? 0;
+              final correct = subjectData['correct'] ?? 0;
+              final accuracy = total > 0 ? (correct / total * 100).round() : 0;
+              
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4),
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 3,
+                      child: Text(
+                        subjectName,
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        '$total soru',
+                        style: Theme.of(context).textTheme.bodySmall,
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        '%$accuracy',
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: accuracy >= 70 ? Colors.green : accuracy >= 50 ? Colors.orange : Colors.red,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        textAlign: TextAlign.right,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }).toList(),
+          ],
+        ),
+      ),
+    );
+  }
+
 }

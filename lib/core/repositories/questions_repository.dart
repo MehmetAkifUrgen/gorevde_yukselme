@@ -139,7 +139,16 @@ class QuestionsRepositoryImpl implements QuestionsRepository {
     bool forceRefresh = false,
   }) async {
     final apiResponse = await _getApiResponse(forceRefresh: forceRefresh);
-    return _apiService.getAvailableProfessions(apiResponse, category);
+    // For backward compatibility, get all professions from all ministries
+    final List<String> allProfessions = [];
+    final ministries = _apiService.getAvailableMinistries(apiResponse, category);
+    
+    for (final ministry in ministries) {
+      final professions = _apiService.getAvailableProfessions(apiResponse, category, ministry);
+      allProfessions.addAll(professions);
+    }
+    
+    return allProfessions.toSet().toList(); // Remove duplicates
   }
 
   @override
@@ -149,7 +158,16 @@ class QuestionsRepositoryImpl implements QuestionsRepository {
     bool forceRefresh = false,
   }) async {
     final apiResponse = await _getApiResponse(forceRefresh: forceRefresh);
-    return _apiService.getAvailableSubjects(apiResponse, category, profession);
+    // For backward compatibility, get all subjects from all ministries
+    final List<String> allSubjects = [];
+    final ministries = _apiService.getAvailableMinistries(apiResponse, category);
+    
+    for (final ministry in ministries) {
+      final subjects = _apiService.getAvailableSubjects(apiResponse, category, ministry, profession);
+      allSubjects.addAll(subjects);
+    }
+    
+    return allSubjects.toSet().toList(); // Remove duplicates
   }
 
   @override

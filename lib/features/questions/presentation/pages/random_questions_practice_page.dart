@@ -5,7 +5,9 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/models/question_model.dart';
 import '../../../../core/providers/app_providers.dart';
+import '../../../../core/providers/auth_providers.dart';
 import '../../../../core/services/premium_features_service.dart';
+import '../../../../core/services/local_statistics_service.dart';
 import '../widgets/question_card.dart';
 
 class RandomQuestionsPracticePage extends ConsumerStatefulWidget {
@@ -79,6 +81,23 @@ class _RandomQuestionsPracticePageState extends ConsumerState<RandomQuestionsPra
         currentQuestion.id,
         isCorrect,
       );
+      
+        // Update local statistics (her zaman local storage kullan)
+        final firebaseUser = ref.read(currentFirebaseUserProvider);
+        final userId = firebaseUser?.uid ?? ''; // Guest için boş string
+        final localStats = ref.read(localStatisticsServiceProvider);
+        print('[RandomQuestionsPracticePage] Saving answer - UserId: $userId, IsCorrect: $isCorrect');
+        
+        // Detaylı istatistik kaydet
+        localStats.incrementQuestion(
+          userId: userId, 
+          isCorrect: isCorrect,
+          subject: currentQuestion.subject,
+          profession: currentQuestion.targetProfessions.isNotEmpty ? currentQuestion.targetProfessions.first.name : null,
+          ministry: currentQuestion.ministry,
+          isRandomQuestion: true, // Bu random question
+        );
+        print('[RandomQuestionsPracticePage] Answer saved successfully');
     }
 
     // Show feedback

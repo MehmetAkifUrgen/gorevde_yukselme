@@ -1,10 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gorevde_yukselme/core/providers/app_providers.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../models/question_model.dart';
 import '../services/questions_api_service.dart';
 import '../repositories/questions_repository.dart';
-import 'auth_providers.dart';
 
 // Questions API Service Provider
 final questionsApiServiceProvider = Provider<QuestionsApiService>((ref) {
@@ -209,14 +207,14 @@ final filteredQuestionsProvider = Provider<AsyncValue<List<Question>>>((ref) {
         // Note: This is a simple text-based filter since we're working with dynamic API data
         // In a real implementation, you might want to add category metadata to the Question model
         filteredQuestions = filteredQuestions.where((question) {
-          return question.id.contains(selectedCategory!);
+          return question.id.contains(selectedCategory);
         }).toList();
       }
       
       // Apply profession filter if selected
       if (selectedProfession != null) {
         filteredQuestions = filteredQuestions.where((question) {
-          return question.id.contains(selectedProfession!);
+          return question.id.contains(selectedProfession);
         }).toList();
       }
       
@@ -272,39 +270,53 @@ final apiCategoriesProvider = FutureProvider<List<String>>((ref) async {
 final apiProfessionsProvider = FutureProvider.family<List<String>, String>((ref, category) async {
   final apiService = ref.watch(questionsApiServiceProvider);
   final response = await apiService.fetchAllQuestions();
-  return apiService.getAvailableProfessions(response, category);
+  // Get all professions from all ministries for backward compatibility
+  final List<String> allProfessions = [];
+  final ministries = apiService.getAvailableMinistries(response, category);
+  
+  for (final ministry in ministries) {
+    final professions = apiService.getAvailableProfessions(response, category, ministry);
+    allProfessions.addAll(professions);
+  }
+  
+  return allProfessions.toSet().toList(); // Remove duplicates
 });
 
-// API Ministries Provider - Gets all ministries (first level keys) for a specific category
+// API Ministries Provider - Gets all ministries for a specific category
 final apiMinistriesProvider = FutureProvider.family<List<String>, String>((ref, category) async {
   final apiService = ref.watch(questionsApiServiceProvider);
   final response = await apiService.fetchAllQuestions();
-  return apiService.getAvailableProfessions(response, category); // This actually returns ministries for the category
+  return apiService.getAvailableMinistries(response, category);
 });
 
 // API Professions For Ministry Provider - Gets all professions for a specific category and ministry
 final apiProfessionsForMinistryProvider = FutureProvider.family<List<String>, ({String category, String ministry})>((ref, params) async {
   final apiService = ref.watch(questionsApiServiceProvider);
   final response = await apiService.fetchAllQuestions();
-  return apiService.getAvailableSubjects(response, params.category, params.ministry); // This actually returns professions for the ministry
+  return apiService.getAvailableProfessions(response, params.category, params.ministry);
 });
 
 // API Subjects For Ministry And Profession Provider - Gets all subjects for a specific category, ministry and profession
 final apiSubjectsForMinistryAndProfessionProvider = FutureProvider.family<List<String>, ({String category, String ministry, String profession})>((ref, params) async {
   final apiService = ref.watch(questionsApiServiceProvider);
-  await apiService.fetchAllQuestions(); // This loads the data into the service
-  return apiService.getAvailableSubjectsForMinistryAndProfession(
-    categoryName: params.category,
-    ministryName: params.ministry,
-    professionName: params.profession,
-  );
+  final response = await apiService.fetchAllQuestions();
+  return apiService.getAvailableSubjects(response, params.category, params.ministry, params.profession);
 });
 
-// API Subjects Provider - Gets all subjects for a specific category and profession
+// API Subjects Provider - Gets all subjects for a specific category and profession (backward compatibility)
 final apiSubjectsProvider = FutureProvider.family<List<String>, ({String category, String profession})>((ref, params) async {
   final apiService = ref.watch(questionsApiServiceProvider);
   final response = await apiService.fetchAllQuestions();
-  return apiService.getAvailableSubjects(response, params.category, params.profession);
+  // Get all subjects from all ministries for backward compatibility
+  final List<String> allSubjects = [];
+  final ministries = apiService.getAvailableMinistries(response, params.category);
+  
+  for (final ministry in ministries) {
+    final subjects = apiService.getAvailableSubjects(response, params.category, ministry, params.profession);
+    allSubjects.addAll(subjects);
+  }
+  
+  return allSubjects.toSet().toList(); // Remove duplicates
 });
 
 // API Questions Count Provider - Gets total number of questions in API

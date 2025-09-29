@@ -17,8 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ApiQuestionsResponse {
-  Map<String, Map<String, Map<String, List<ApiQuestion>>>> get categories =>
-      throw _privateConstructorUsedError;
+  Map<String, Map<String, Map<String, Map<String, List<ApiQuestion>>>>>
+  get cikmisSorular => throw _privateConstructorUsedError;
 
   /// Create a copy of ApiQuestionsResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -35,7 +35,8 @@ abstract class $ApiQuestionsResponseCopyWith<$Res> {
   ) = _$ApiQuestionsResponseCopyWithImpl<$Res, ApiQuestionsResponse>;
   @useResult
   $Res call({
-    Map<String, Map<String, Map<String, List<ApiQuestion>>>> categories,
+    Map<String, Map<String, Map<String, Map<String, List<ApiQuestion>>>>>
+    cikmisSorular,
   });
 }
 
@@ -56,15 +57,15 @@ class _$ApiQuestionsResponseCopyWithImpl<
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? categories = null}) {
+  $Res call({Object? cikmisSorular = null}) {
     return _then(
       _value.copyWith(
-            categories: null == categories
-                ? _value.categories
-                : categories // ignore: cast_nullable_to_non_nullable
+            cikmisSorular: null == cikmisSorular
+                ? _value.cikmisSorular
+                : cikmisSorular // ignore: cast_nullable_to_non_nullable
                       as Map<
                         String,
-                        Map<String, Map<String, List<ApiQuestion>>>
+                        Map<String, Map<String, Map<String, List<ApiQuestion>>>>
                       >,
           )
           as $Val,
@@ -82,7 +83,8 @@ abstract class _$$ApiQuestionsResponseImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
-    Map<String, Map<String, Map<String, List<ApiQuestion>>>> categories,
+    Map<String, Map<String, Map<String, Map<String, List<ApiQuestion>>>>>
+    cikmisSorular,
   });
 }
 
@@ -99,13 +101,16 @@ class __$$ApiQuestionsResponseImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? categories = null}) {
+  $Res call({Object? cikmisSorular = null}) {
     return _then(
       _$ApiQuestionsResponseImpl(
-        categories: null == categories
-            ? _value._categories
-            : categories // ignore: cast_nullable_to_non_nullable
-                  as Map<String, Map<String, Map<String, List<ApiQuestion>>>>,
+        cikmisSorular: null == cikmisSorular
+            ? _value._cikmisSorular
+            : cikmisSorular // ignore: cast_nullable_to_non_nullable
+                  as Map<
+                    String,
+                    Map<String, Map<String, Map<String, List<ApiQuestion>>>>
+                  >,
       ),
     );
   }
@@ -115,21 +120,26 @@ class __$$ApiQuestionsResponseImplCopyWithImpl<$Res>
 
 class _$ApiQuestionsResponseImpl implements _ApiQuestionsResponse {
   const _$ApiQuestionsResponseImpl({
-    required final Map<String, Map<String, Map<String, List<ApiQuestion>>>>
-    categories,
-  }) : _categories = categories;
+    required final Map<
+      String,
+      Map<String, Map<String, Map<String, List<ApiQuestion>>>>
+    >
+    cikmisSorular,
+  }) : _cikmisSorular = cikmisSorular;
 
-  final Map<String, Map<String, Map<String, List<ApiQuestion>>>> _categories;
+  final Map<String, Map<String, Map<String, Map<String, List<ApiQuestion>>>>>
+  _cikmisSorular;
   @override
-  Map<String, Map<String, Map<String, List<ApiQuestion>>>> get categories {
-    if (_categories is EqualUnmodifiableMapView) return _categories;
+  Map<String, Map<String, Map<String, Map<String, List<ApiQuestion>>>>>
+  get cikmisSorular {
+    if (_cikmisSorular is EqualUnmodifiableMapView) return _cikmisSorular;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_categories);
+    return EqualUnmodifiableMapView(_cikmisSorular);
   }
 
   @override
   String toString() {
-    return 'ApiQuestionsResponse(categories: $categories)';
+    return 'ApiQuestionsResponse(cikmisSorular: $cikmisSorular)';
   }
 
   @override
@@ -138,15 +148,15 @@ class _$ApiQuestionsResponseImpl implements _ApiQuestionsResponse {
         (other.runtimeType == runtimeType &&
             other is _$ApiQuestionsResponseImpl &&
             const DeepCollectionEquality().equals(
-              other._categories,
-              _categories,
+              other._cikmisSorular,
+              _cikmisSorular,
             ));
   }
 
   @override
   int get hashCode => Object.hash(
     runtimeType,
-    const DeepCollectionEquality().hash(_categories),
+    const DeepCollectionEquality().hash(_cikmisSorular),
   );
 
   /// Create a copy of ApiQuestionsResponse
@@ -170,12 +180,16 @@ class _$ApiQuestionsResponseImpl implements _ApiQuestionsResponse {
 
 abstract class _ApiQuestionsResponse implements ApiQuestionsResponse {
   const factory _ApiQuestionsResponse({
-    required final Map<String, Map<String, Map<String, List<ApiQuestion>>>>
-    categories,
+    required final Map<
+      String,
+      Map<String, Map<String, Map<String, List<ApiQuestion>>>>
+    >
+    cikmisSorular,
   }) = _$ApiQuestionsResponseImpl;
 
   @override
-  Map<String, Map<String, Map<String, List<ApiQuestion>>>> get categories;
+  Map<String, Map<String, Map<String, Map<String, List<ApiQuestion>>>>>
+  get cikmisSorular;
 
   /// Create a copy of ApiQuestionsResponse
   /// with the given fields replaced by the non-null parameter values.
