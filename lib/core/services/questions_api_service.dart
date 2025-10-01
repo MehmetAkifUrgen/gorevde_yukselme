@@ -236,6 +236,79 @@ class QuestionsApiService {
     return [];
   }
 
+  /// Gets available mini question categories
+  List<String> getAvailableMiniCategories(ApiQuestionsResponse apiResponse) {
+    return apiResponse.miniSorular.keys.toList();
+  }
+
+  /// Gets available ministries for mini questions in a specific category
+  List<String> getAvailableMiniMinistries(
+    ApiQuestionsResponse apiResponse,
+    String categoryName,
+  ) {
+    final categoryData = apiResponse.miniSorular[categoryName];
+    return categoryData?.keys.toList() ?? [];
+  }
+
+  /// Gets available professions for mini questions in a specific category and ministry
+  List<String> getAvailableMiniProfessions(
+    ApiQuestionsResponse apiResponse,
+    String categoryName,
+    String ministryName,
+  ) {
+    final categoryData = apiResponse.miniSorular[categoryName];
+    if (categoryData != null) {
+      final ministryData = categoryData[ministryName];
+      return ministryData?.keys.toList() ?? [];
+    }
+    return [];
+  }
+
+  /// Gets available subjects for mini questions in a specific category, ministry and profession
+  List<String> getAvailableMiniSubjects(
+    ApiQuestionsResponse apiResponse,
+    String categoryName,
+    String ministryName,
+    String professionName,
+  ) {
+    final categoryData = apiResponse.miniSorular[categoryName];
+    
+    if (categoryData != null) {
+      final ministryData = categoryData[ministryName];
+      if (ministryData != null) {
+        final professionData = ministryData[professionName];
+        if (professionData != null) {
+          return professionData.keys.toList();
+        }
+      }
+    }
+    
+    return [];
+  }
+
+  /// Gets mini questions for a specific category, ministry, profession and subject
+  List<ApiQuestion> getMiniQuestions(
+    ApiQuestionsResponse apiResponse,
+    String categoryName,
+    String ministryName,
+    String professionName,
+    String subjectName,
+  ) {
+    final categoryData = apiResponse.miniSorular[categoryName];
+    
+    if (categoryData != null) {
+      final ministryData = categoryData[ministryName];
+      if (ministryData != null) {
+        final professionData = ministryData[professionName];
+        if (professionData != null) {
+          return professionData[subjectName] ?? [];
+        }
+      }
+    }
+    
+    return [];
+  }
+
 
   void dispose() {
     _httpClient.close();

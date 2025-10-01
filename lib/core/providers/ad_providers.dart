@@ -45,6 +45,25 @@ final questionCounterProvider = StateNotifierProvider<QuestionCounterNotifier, i
   return QuestionCounterNotifier();
 });
 
+// Mini Questions Counter Provider
+class MiniQuestionsCounterNotifier extends StateNotifier<int> {
+  MiniQuestionsCounterNotifier() : super(0);
+
+  void increment() {
+    state++;
+  }
+
+  void reset() {
+    state = 0;
+  }
+
+  bool get shouldShowAdAfter5 => state >= 5;
+}
+
+final miniQuestionsCounterProvider = StateNotifierProvider<MiniQuestionsCounterNotifier, int>((ref) {
+  return MiniQuestionsCounterNotifier();
+});
+
 // Ad Display Provider
 class AdDisplayNotifier extends StateNotifier<bool> {
   final Ref _ref;

@@ -1,6 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gorevde_yukselme/core/providers/app_providers.dart';
 import '../models/question_model.dart';
+import '../models/user_model.dart';
+import '../models/api_question_model.dart';
 import '../services/questions_api_service.dart';
 import '../repositories/questions_repository.dart';
 
@@ -180,10 +182,73 @@ class QuestionsStateNotifier extends StateNotifier<AsyncValue<List<Question>>> {
   }
 }
 
+// Mini Questions State Notifier
+class MiniQuestionsStateNotifier extends StateNotifier<AsyncValue<List<Question>>> {
+  final QuestionsApiService _apiService;
+  
+  MiniQuestionsStateNotifier(this._apiService) : super(const AsyncValue.loading());
+  
+  Future<void> loadMiniQuestions({
+    required String category,
+    required String ministry,
+    required String profession,
+    required String subject,
+    bool forceRefresh = false,
+  }) async {
+    state = const AsyncValue.loading();
+    
+    try {
+      final response = await _apiService.fetchAllQuestions();
+      final apiQuestions = _apiService.getMiniQuestions(response, category, ministry, profession, subject);
+      
+      if (apiQuestions.isEmpty) {
+        state = AsyncValue.data([]);
+        return;
+      }
+      
+      // Convert API questions to app Question models
+      final questions = apiQuestions.map((apiQuestion) {
+        // Convert options map to list
+        final optionsList = apiQuestion.secenekler.values.toList();
+        
+        // Find correct answer index
+        final correctAnswerIndex = optionsList.indexOf(apiQuestion.dogruCevap);
+        
+        // Generate unique ID
+        final id = 'mini_${category}_${ministry}_${profession}_${subject}_${apiQuestion.soruNo}';
+        
+        return Question(
+          id: id,
+          questionText: apiQuestion.soru,
+          options: optionsList,
+          correctAnswerIndex: correctAnswerIndex >= 0 ? correctAnswerIndex : 0,
+          explanation: apiQuestion.ozet,
+          difficulty: QuestionDifficulty.medium,
+          category: QuestionCategory.generalRegulations,
+          targetProfessions: [UserProfession.generalRegulations],
+          isStarred: false,
+          subject: subject,
+          ministry: ministry,
+        );
+      }).toList();
+      
+      state = AsyncValue.data(questions);
+    } catch (error, stackTrace) {
+      state = AsyncValue.error(error, stackTrace);
+    }
+  }
+}
+
 // Questions State Provider
 final questionsStateProvider = StateNotifierProvider<QuestionsStateNotifier, AsyncValue<List<Question>>>((ref) {
   final repository = ref.watch(questionsRepositoryProvider);
   return QuestionsStateNotifier(repository);
+});
+
+// Mini Questions State Provider
+final miniQuestionsStateProvider = StateNotifierProvider<MiniQuestionsStateNotifier, AsyncValue<List<Question>>>((ref) {
+  final apiService = ref.watch(questionsApiServiceProvider);
+  return MiniQuestionsStateNotifier(apiService);
 });
 
 // Selected Category Provider
@@ -191,6 +256,12 @@ final selectedCategoryProvider = StateProvider<String?>((ref) => null);
 
 // Selected Profession Provider
 final selectedProfessionProvider = StateProvider<String?>((ref) => null);
+
+// Mini Questions Selected providers for UI state management
+final selectedMiniCategoryProvider = StateProvider<String?>((ref) => null);
+final selectedMiniMinistryProvider = StateProvider<String?>((ref) => null);
+final selectedMiniProfessionProvider = StateProvider<String?>((ref) => null);
+final selectedMiniSubjectProvider = StateProvider<String?>((ref) => null);
 
 // Filtered Questions Provider (based on selected category and profession)
 final filteredQuestionsProvider = Provider<AsyncValue<List<Question>>>((ref) {
@@ -296,6 +367,44 @@ final apiProfessionsForMinistryProvider = FutureProvider.family<List<String>, ({
   return apiService.getAvailableProfessions(response, params.category, params.ministry);
 });
 
+// API Subjects Provider - Gets all subjects for a specific category, ministry and profession
+final apiSubjectsProvider = FutureProvider.family<List<String>, ({String category, String ministry, String profession})>((ref, params) async {
+  final apiService = ref.watch(questionsApiServiceProvider);
+  final response = await apiService.fetchAllQuestions();
+  return apiService.getAvailableSubjects(response, params.category, params.ministry, params.profession);
+});
+
+// Mini Questions Providers
+final miniCategoriesProvider = FutureProvider<List<String>>((ref) async {
+  final apiService = ref.watch(questionsApiServiceProvider);
+  final response = await apiService.fetchAllQuestions();
+  return apiService.getAvailableMiniCategories(response);
+});
+
+final miniMinistriesProvider = FutureProvider.family<List<String>, String>((ref, category) async {
+  final apiService = ref.watch(questionsApiServiceProvider);
+  final response = await apiService.fetchAllQuestions();
+  return apiService.getAvailableMiniMinistries(response, category);
+});
+
+final miniProfessionsProvider = FutureProvider.family<List<String>, ({String category, String ministry})>((ref, params) async {
+  final apiService = ref.watch(questionsApiServiceProvider);
+  final response = await apiService.fetchAllQuestions();
+  return apiService.getAvailableMiniProfessions(response, params.category, params.ministry);
+});
+
+final miniSubjectsProvider = FutureProvider.family<List<String>, ({String category, String ministry, String profession})>((ref, params) async {
+  final apiService = ref.watch(questionsApiServiceProvider);
+  final response = await apiService.fetchAllQuestions();
+  return apiService.getAvailableMiniSubjects(response, params.category, params.ministry, params.profession);
+});
+
+final miniQuestionsProvider = FutureProvider.family<List<ApiQuestion>, ({String category, String ministry, String profession, String subject})>((ref, params) async {
+  final apiService = ref.watch(questionsApiServiceProvider);
+  final response = await apiService.fetchAllQuestions();
+  return apiService.getMiniQuestions(response, params.category, params.ministry, params.profession, params.subject);
+});
+
 // API Subjects For Ministry And Profession Provider - Gets all subjects for a specific category, ministry and profession
 final apiSubjectsForMinistryAndProfessionProvider = FutureProvider.family<List<String>, ({String category, String ministry, String profession})>((ref, params) async {
   final apiService = ref.watch(questionsApiServiceProvider);
@@ -304,7 +413,7 @@ final apiSubjectsForMinistryAndProfessionProvider = FutureProvider.family<List<S
 });
 
 // API Subjects Provider - Gets all subjects for a specific category and profession (backward compatibility)
-final apiSubjectsProvider = FutureProvider.family<List<String>, ({String category, String profession})>((ref, params) async {
+final apiSubjectsLegacyProvider = FutureProvider.family<List<String>, ({String category, String profession})>((ref, params) async {
   final apiService = ref.watch(questionsApiServiceProvider);
   final response = await apiService.fetchAllQuestions();
   // Get all subjects from all ministries for backward compatibility

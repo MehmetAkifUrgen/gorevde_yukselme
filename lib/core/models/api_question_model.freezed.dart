@@ -19,6 +19,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ApiQuestionsResponse {
   Map<String, Map<String, Map<String, Map<String, List<ApiQuestion>>>>>
   get cikmisSorular => throw _privateConstructorUsedError;
+  Map<String, Map<String, Map<String, Map<String, List<ApiQuestion>>>>>
+  get miniSorular => throw _privateConstructorUsedError;
 
   /// Create a copy of ApiQuestionsResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -37,6 +39,8 @@ abstract class $ApiQuestionsResponseCopyWith<$Res> {
   $Res call({
     Map<String, Map<String, Map<String, Map<String, List<ApiQuestion>>>>>
     cikmisSorular,
+    Map<String, Map<String, Map<String, Map<String, List<ApiQuestion>>>>>
+    miniSorular,
   });
 }
 
@@ -57,12 +61,19 @@ class _$ApiQuestionsResponseCopyWithImpl<
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? cikmisSorular = null}) {
+  $Res call({Object? cikmisSorular = null, Object? miniSorular = null}) {
     return _then(
       _value.copyWith(
             cikmisSorular: null == cikmisSorular
                 ? _value.cikmisSorular
                 : cikmisSorular // ignore: cast_nullable_to_non_nullable
+                      as Map<
+                        String,
+                        Map<String, Map<String, Map<String, List<ApiQuestion>>>>
+                      >,
+            miniSorular: null == miniSorular
+                ? _value.miniSorular
+                : miniSorular // ignore: cast_nullable_to_non_nullable
                       as Map<
                         String,
                         Map<String, Map<String, Map<String, List<ApiQuestion>>>>
@@ -85,6 +96,8 @@ abstract class _$$ApiQuestionsResponseImplCopyWith<$Res>
   $Res call({
     Map<String, Map<String, Map<String, Map<String, List<ApiQuestion>>>>>
     cikmisSorular,
+    Map<String, Map<String, Map<String, Map<String, List<ApiQuestion>>>>>
+    miniSorular,
   });
 }
 
@@ -101,12 +114,19 @@ class __$$ApiQuestionsResponseImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? cikmisSorular = null}) {
+  $Res call({Object? cikmisSorular = null, Object? miniSorular = null}) {
     return _then(
       _$ApiQuestionsResponseImpl(
         cikmisSorular: null == cikmisSorular
             ? _value._cikmisSorular
             : cikmisSorular // ignore: cast_nullable_to_non_nullable
+                  as Map<
+                    String,
+                    Map<String, Map<String, Map<String, List<ApiQuestion>>>>
+                  >,
+        miniSorular: null == miniSorular
+            ? _value._miniSorular
+            : miniSorular // ignore: cast_nullable_to_non_nullable
                   as Map<
                     String,
                     Map<String, Map<String, Map<String, List<ApiQuestion>>>>
@@ -125,7 +145,11 @@ class _$ApiQuestionsResponseImpl implements _ApiQuestionsResponse {
       Map<String, Map<String, Map<String, List<ApiQuestion>>>>
     >
     cikmisSorular,
-  }) : _cikmisSorular = cikmisSorular;
+    final Map<String, Map<String, Map<String, Map<String, List<ApiQuestion>>>>>
+        miniSorular =
+        const {},
+  }) : _cikmisSorular = cikmisSorular,
+       _miniSorular = miniSorular;
 
   final Map<String, Map<String, Map<String, Map<String, List<ApiQuestion>>>>>
   _cikmisSorular;
@@ -137,9 +161,20 @@ class _$ApiQuestionsResponseImpl implements _ApiQuestionsResponse {
     return EqualUnmodifiableMapView(_cikmisSorular);
   }
 
+  final Map<String, Map<String, Map<String, Map<String, List<ApiQuestion>>>>>
+  _miniSorular;
+  @override
+  @JsonKey()
+  Map<String, Map<String, Map<String, Map<String, List<ApiQuestion>>>>>
+  get miniSorular {
+    if (_miniSorular is EqualUnmodifiableMapView) return _miniSorular;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_miniSorular);
+  }
+
   @override
   String toString() {
-    return 'ApiQuestionsResponse(cikmisSorular: $cikmisSorular)';
+    return 'ApiQuestionsResponse(cikmisSorular: $cikmisSorular, miniSorular: $miniSorular)';
   }
 
   @override
@@ -150,6 +185,10 @@ class _$ApiQuestionsResponseImpl implements _ApiQuestionsResponse {
             const DeepCollectionEquality().equals(
               other._cikmisSorular,
               _cikmisSorular,
+            ) &&
+            const DeepCollectionEquality().equals(
+              other._miniSorular,
+              _miniSorular,
             ));
   }
 
@@ -157,6 +196,7 @@ class _$ApiQuestionsResponseImpl implements _ApiQuestionsResponse {
   int get hashCode => Object.hash(
     runtimeType,
     const DeepCollectionEquality().hash(_cikmisSorular),
+    const DeepCollectionEquality().hash(_miniSorular),
   );
 
   /// Create a copy of ApiQuestionsResponse
@@ -185,11 +225,16 @@ abstract class _ApiQuestionsResponse implements ApiQuestionsResponse {
       Map<String, Map<String, Map<String, List<ApiQuestion>>>>
     >
     cikmisSorular,
+    final Map<String, Map<String, Map<String, Map<String, List<ApiQuestion>>>>>
+    miniSorular,
   }) = _$ApiQuestionsResponseImpl;
 
   @override
   Map<String, Map<String, Map<String, Map<String, List<ApiQuestion>>>>>
   get cikmisSorular;
+  @override
+  Map<String, Map<String, Map<String, Map<String, List<ApiQuestion>>>>>
+  get miniSorular;
 
   /// Create a copy of ApiQuestionsResponse
   /// with the given fields replaced by the non-null parameter values.

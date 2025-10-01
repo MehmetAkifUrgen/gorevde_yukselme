@@ -186,7 +186,7 @@ class SubjectListPage extends ConsumerWidget {
               const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: () => ref.refresh(
-                  apiSubjectsProvider((category: decodedExamType, profession: decodedProfession))
+                  apiSubjectsProvider((category: decodedExamType, profession: decodedProfession) as ({String category, String ministry, String profession}))
                 ),
                 child: const Text('Tekrar Dene'),
               ),

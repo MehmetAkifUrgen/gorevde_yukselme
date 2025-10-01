@@ -9,6 +9,7 @@ part 'api_question_model.g.dart';
 class ApiQuestionsResponse with _$ApiQuestionsResponse {
   const factory ApiQuestionsResponse({
     required Map<String, Map<String, Map<String, Map<String, List<ApiQuestion>>>>> cikmisSorular,
+    @Default({}) Map<String, Map<String, Map<String, Map<String, List<ApiQuestion>>>>> miniSorular,
   }) = _ApiQuestionsResponse;
 
   factory ApiQuestionsResponse.fromJson(Map<String, dynamic> json) {
@@ -90,7 +91,84 @@ class ApiQuestionsResponse with _$ApiQuestionsResponse {
       }
       
       print('DEBUG: ApiQuestionsResponse.fromJson completed with ${cikmisSorular.length} categories');
-      return ApiQuestionsResponse(cikmisSorular: cikmisSorular);
+      
+      // Process mini_sorular if exists
+      Map<String, Map<String, Map<String, Map<String, List<ApiQuestion>>>>> miniSorular = {};
+      if (json.containsKey('mini_sorular')) {
+        print('DEBUG: Processing mini_sorular');
+        final miniSorularData = json['mini_sorular'] as Map<String, dynamic>;
+        
+        for (final entry in miniSorularData.entries) {
+          final categoryName = entry.key;
+          print('DEBUG: Processing mini category: $categoryName');
+          
+          if (entry.value is! Map<String, dynamic>) {
+            print('ERROR: Expected Map<String, dynamic> for mini category $categoryName, got ${entry.value.runtimeType}');
+            continue;
+          }
+          
+          final categoryData = entry.value as Map<String, dynamic>;
+          final Map<String, Map<String, Map<String, List<ApiQuestion>>>> ministries = {};
+          
+          for (final ministryEntry in categoryData.entries) {
+            final ministryName = ministryEntry.key;
+            print('DEBUG: Processing mini ministry: $ministryName in category: $categoryName');
+            
+            if (ministryEntry.value is! Map<String, dynamic>) {
+              print('ERROR: Expected Map<String, dynamic> for mini ministry $ministryName, got ${ministryEntry.value.runtimeType}');
+              continue;
+            }
+            
+            final ministryData = ministryEntry.value as Map<String, dynamic>;
+            final Map<String, Map<String, List<ApiQuestion>>> professions = {};
+            
+            for (final professionEntry in ministryData.entries) {
+              final professionName = professionEntry.key;
+              print('DEBUG: Processing mini profession: $professionName in ministry: $ministryName');
+              
+              if (professionEntry.value is! Map<String, dynamic>) {
+                print('ERROR: Expected Map<String, dynamic> for mini profession $professionName, got ${professionEntry.value.runtimeType}');
+                continue;
+              }
+              
+              final professionData = professionEntry.value as Map<String, dynamic>;
+              final Map<String, List<ApiQuestion>> subjects = {};
+              
+              for (final subjectEntry in professionData.entries) {
+                final subjectName = subjectEntry.key;
+                print('DEBUG: Processing mini subject: $subjectName in profession: $professionName');
+                
+                // Subject data is directly a List of questions
+                if (subjectEntry.value is! List) {
+                  print('ERROR: Expected List for mini subject $subjectName, got ${subjectEntry.value.runtimeType}');
+                  continue;
+                }
+                
+                try {
+                  final subjectQuestions = (subjectEntry.value as List)
+                      .map((q) => ApiQuestion.fromJson(q as Map<String, dynamic>))
+                      .toList();
+                  
+                  subjects[subjectName] = subjectQuestions;
+                  print('DEBUG: Successfully processed ${subjectQuestions.length} mini questions for subject: $subjectName');
+                } catch (e, stackTrace) {
+                  print('ERROR: Failed to process mini questions for subject $subjectName: $e');
+                  print('DEBUG: Stack trace: $stackTrace');
+                  print('DEBUG: Raw mini subject data: ${subjectEntry.value}');
+                }
+              }
+              
+              professions[professionName] = subjects;
+            }
+            
+            ministries[ministryName] = professions;
+          }
+          
+          miniSorular[categoryName] = ministries;
+        }
+      }
+      
+      return ApiQuestionsResponse(cikmisSorular: cikmisSorular, miniSorular: miniSorular);
     }
     
     // Fallback to old structure for backward compatibility
@@ -192,12 +270,91 @@ class ApiQuestionsResponse with _$ApiQuestionsResponse {
     for (final entry in categories.entries) {
       cikmisSorular[entry.key] = {'Genel': entry.value};
     }
-    return ApiQuestionsResponse(cikmisSorular: cikmisSorular);
+    
+    // Process mini_sorular if exists in old structure
+    Map<String, Map<String, Map<String, Map<String, List<ApiQuestion>>>>> miniSorular = {};
+    if (json.containsKey('mini_sorular')) {
+      print('DEBUG: Processing mini_sorular in old structure');
+      final miniSorularData = json['mini_sorular'] as Map<String, dynamic>;
+      
+      for (final entry in miniSorularData.entries) {
+        final categoryName = entry.key;
+        print('DEBUG: Processing mini category: $categoryName');
+        
+        if (entry.value is! Map<String, dynamic>) {
+          print('ERROR: Expected Map<String, dynamic> for mini category $categoryName, got ${entry.value.runtimeType}');
+          continue;
+        }
+        
+        final categoryData = entry.value as Map<String, dynamic>;
+        final Map<String, Map<String, Map<String, List<ApiQuestion>>>> ministries = {};
+        
+        for (final ministryEntry in categoryData.entries) {
+          final ministryName = ministryEntry.key;
+          print('DEBUG: Processing mini ministry: $ministryName in category: $categoryName');
+          
+          if (ministryEntry.value is! Map<String, dynamic>) {
+            print('ERROR: Expected Map<String, dynamic> for mini ministry $ministryName, got ${ministryEntry.value.runtimeType}');
+            continue;
+          }
+          
+          final ministryData = ministryEntry.value as Map<String, dynamic>;
+          final Map<String, Map<String, List<ApiQuestion>>> professions = {};
+          
+          for (final professionEntry in ministryData.entries) {
+            final professionName = professionEntry.key;
+            print('DEBUG: Processing mini profession: $professionName in ministry: $ministryName');
+            
+            if (professionEntry.value is! Map<String, dynamic>) {
+              print('ERROR: Expected Map<String, dynamic> for mini profession $professionName, got ${professionEntry.value.runtimeType}');
+              continue;
+            }
+            
+            final professionData = professionEntry.value as Map<String, dynamic>;
+            final Map<String, List<ApiQuestion>> subjects = {};
+            
+            for (final subjectEntry in professionData.entries) {
+              final subjectName = subjectEntry.key;
+              print('DEBUG: Processing mini subject: $subjectName in profession: $professionName');
+              
+              // Subject data is directly a List of questions
+              if (subjectEntry.value is! List) {
+                print('ERROR: Expected List for mini subject $subjectName, got ${subjectEntry.value.runtimeType}');
+                continue;
+              }
+              
+              try {
+                final subjectQuestions = (subjectEntry.value as List)
+                    .map((q) => ApiQuestion.fromJson(q as Map<String, dynamic>))
+                    .toList();
+                
+                subjects[subjectName] = subjectQuestions;
+                print('DEBUG: Successfully processed ${subjectQuestions.length} mini questions for subject: $subjectName');
+              } catch (e, stackTrace) {
+                print('ERROR: Failed to process mini questions for subject $subjectName: $e');
+                print('DEBUG: Stack trace: $stackTrace');
+                print('DEBUG: Raw mini subject data: ${subjectEntry.value}');
+              }
+            }
+            
+            professions[professionName] = subjects;
+          }
+          
+          ministries[ministryName] = professions;
+        }
+        
+        miniSorular[categoryName] = ministries;
+      }
+    }
+    
+    return ApiQuestionsResponse(cikmisSorular: cikmisSorular, miniSorular: miniSorular);
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> json = {};
     
+    // Process cikmis_sorular
+    final Map<String, dynamic> cikmisSorularJson = {};
     for (final categoryEntry in cikmisSorular.entries) {
       final categoryName = categoryEntry.key;
       final ministries = categoryEntry.value;
@@ -229,10 +386,52 @@ class ApiQuestionsResponse with _$ApiQuestionsResponse {
         categoryJson[ministryName] = ministryJson;
       }
       
-      json[categoryName] = categoryJson;
+      cikmisSorularJson[categoryName] = categoryJson;
     }
     
-    return {'cikmis_sorular': json};
+    json['cikmis_sorular'] = cikmisSorularJson;
+    
+    // Process mini_sorular
+    if (this.miniSorular.isNotEmpty) {
+      final Map<String, dynamic> miniSorularJson = {};
+      for (final categoryEntry in this.miniSorular.entries) {
+        final categoryName = categoryEntry.key;
+        final ministries = categoryEntry.value;
+        
+        final Map<String, dynamic> categoryJson = {};
+        
+        for (final ministryEntry in ministries.entries) {
+          final ministryName = ministryEntry.key;
+          final professions = ministryEntry.value;
+          
+          final Map<String, dynamic> ministryJson = {};
+          
+          for (final professionEntry in professions.entries) {
+            final professionName = professionEntry.key;
+            final subjects = professionEntry.value;
+            
+            final Map<String, dynamic> professionJson = {};
+            
+            for (final subjectEntry in subjects.entries) {
+              final subjectName = subjectEntry.key;
+              final questions = subjectEntry.value;
+              
+              professionJson[subjectName] = questions.map((q) => q.toJson()).toList();
+            }
+            
+            ministryJson[professionName] = professionJson;
+          }
+          
+          categoryJson[ministryName] = ministryJson;
+        }
+        
+        miniSorularJson[categoryName] = categoryJson;
+      }
+      
+      json['mini_sorular'] = miniSorularJson;
+    }
+    
+    return json;
   }
 }
 

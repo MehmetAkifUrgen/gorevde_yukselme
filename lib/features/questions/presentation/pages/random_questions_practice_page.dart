@@ -8,17 +8,20 @@ import '../../../../core/providers/app_providers.dart';
 import '../../../../core/providers/auth_providers.dart';
 import '../../../../core/providers/ad_providers.dart';
 import '../../../../core/services/premium_features_service.dart';
-import '../../../../core/services/local_statistics_service.dart';
 import '../widgets/question_card.dart';
 
 class RandomQuestionsPracticePage extends ConsumerStatefulWidget {
   final List<Question> questions;
   final int? questionCount;
+  final String? title;
+  final bool isMiniQuestions;
 
   const RandomQuestionsPracticePage({
     super.key,
     required this.questions,
     this.questionCount,
+    this.title,
+    this.isMiniQuestions = false,
   });
 
   @override
@@ -52,7 +55,11 @@ class _RandomQuestionsPracticePageState extends ConsumerState<RandomQuestionsPra
     _answeredQuestionIds.clear();
     
     // Reset question counter for ads
-    ref.read(questionCounterProvider.notifier).reset();
+    if (widget.isMiniQuestions) {
+      ref.read(miniQuestionsCounterProvider.notifier).reset();
+    } else {
+      ref.read(questionCounterProvider.notifier).reset();
+    }
     
     // Select first question
     _selectNextQuestion();
@@ -200,10 +207,19 @@ class _RandomQuestionsPracticePageState extends ConsumerState<RandomQuestionsPra
     Navigator.of(context).pop(); // Close feedback dialog
     
     // Increment question counter
-    ref.read(questionCounterProvider.notifier).increment();
-    
-    // Check if we should show ad every 4 questions
-    ref.read(adDisplayProvider.notifier).showAdEvery4Questions();
+    if (widget.isMiniQuestions) {
+      ref.read(miniQuestionsCounterProvider.notifier).increment();
+      // Mini sorular için sadece 5. sorudan sonra reklam
+      final miniCounter = ref.read(miniQuestionsCounterProvider);
+      if (miniCounter == 5) {
+        // 5. sorudan sonra reklam göster
+        ref.read(adDisplayProvider.notifier).forceShowAd();
+      }
+    } else {
+      ref.read(questionCounterProvider.notifier).increment();
+      // Soruları Karıştır için her 4 soruda bir reklam
+      ref.read(adDisplayProvider.notifier).showAdEvery4Questions();
+    }
     
     // Check if we've reached target question count
     if (_totalAnswered >= _targetQuestionCount) {
@@ -381,45 +397,8 @@ class _RandomQuestionsPracticePageState extends ConsumerState<RandomQuestionsPra
   }
 
   Widget _buildQuestionLimitInfo() {
-    final user = ref.watch(userProvider);
-    final isPremium = user?.isPremium ?? false;
-    
-    if (isPremium) {
-      return const SizedBox.shrink();
-    }
-
-    final remainingQuestions = _premiumService.getRemainingQuestions();
-
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: BoxDecoration(
-        color: remainingQuestions > 0 ? Colors.blue.withValues(alpha: 0.1) : Colors.orange.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: remainingQuestions > 0 ? Colors.blue.withValues(alpha: 0.3) : Colors.orange.withValues(alpha: 0.3),
-        ),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(
-            remainingQuestions > 0 ? Icons.quiz : Icons.warning,
-            size: 14,
-            color: remainingQuestions > 0 ? Colors.blue : Colors.orange,
-          ),
-          const SizedBox(width: 4),
-          Text(
-            'Kalan: $remainingQuestions soru',
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w600,
-              color: remainingQuestions > 0 ? Colors.blue : Colors.orange,
-            ),
-          ),
-          
-        ],
-      ),
-    );
+    // Kalan soru mesajı kaldırıldı
+    return const SizedBox.shrink();
   }
 
   @override
@@ -427,7 +406,10 @@ class _RandomQuestionsPracticePageState extends ConsumerState<RandomQuestionsPra
     if (_currentQuestion == null) {
       return Scaffold(
         appBar: AppBar(
-          title: const Text('Rastgele Sorular'),
+          title: Text(
+            widget.title ?? 'Rastgele Sorular',
+            overflow: TextOverflow.ellipsis,
+          ),
           backgroundColor: AppTheme.primaryNavyBlue,
         ),
         body: const Center(
@@ -443,7 +425,10 @@ class _RandomQuestionsPracticePageState extends ConsumerState<RandomQuestionsPra
     return Scaffold(
       backgroundColor: AppTheme.lightGrey,
       appBar: AppBar(
-        title: const Text('Rastgele Sorular'),
+        title: Text(
+          widget.title ?? 'Rastgele Sorular',
+          overflow: TextOverflow.ellipsis,
+        ),
         backgroundColor: AppTheme.primaryNavyBlue,
         leading: IconButton(
           icon: const Icon(Icons.close),

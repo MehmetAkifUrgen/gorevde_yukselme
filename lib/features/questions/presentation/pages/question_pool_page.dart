@@ -5,6 +5,7 @@ import '../../../../core/providers/app_providers.dart';
 import '../../../../core/providers/questions_providers.dart' as questions_providers;
 import '../../../../core/models/question_model.dart';
 import 'random_questions_practice_page.dart';
+import 'mini_questions_page.dart';
 
 class QuestionPoolPage extends ConsumerStatefulWidget {
   const QuestionPoolPage({super.key});
@@ -262,54 +263,31 @@ class _QuestionPoolPageState extends ConsumerState<QuestionPoolPage> {
   }
 
   void _startMiniQuiz(BuildContext context) {
-    final questionsState = ref.read(questions_providers.questionsStateProvider);
+    final selectedExam = ref.read(selectedExamProvider);
+    final selectedMinistry = ref.read(selectedMinistryProvider);
+    final selectedProfession = ref.read(selectedProfessionProvider);
     
-    questionsState.when(
-      data: (questions) {
-        // Mini Quiz sorularını filtrele
-        final miniQuizQuestions = questions.where((question) {
-          return question.id.contains('Mini Quiz') || 
-                 question.id.contains('Genel Kültür') ||
-                 question.id.contains('Hızlı Test');
-        }).toList();
-        
-        if (miniQuizQuestions.isEmpty) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Mini Quiz soruları henüz eklenmemiş. Lütfen daha sonra tekrar deneyin.'),
-              duration: Duration(seconds: 3),
-            ),
-          );
-          return;
-        }
-        
-        // Mini Quiz sayfasına yönlendir
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => RandomQuestionsPracticePage(
-              questions: miniQuizQuestions,
-              questionCount: 10, // Mini quiz için 10 soru
-            ),
-          ),
-        );
-      },
-      loading: () {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Sorular yükleniyor, lütfen bekleyin...'),
-            duration: Duration(seconds: 2),
-          ),
-        );
-      },
-      error: (error, stackTrace) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Hata: $error'),
-            duration: const Duration(seconds: 3),
-          ),
-        );
-      },
+    // Tüm seçimlerin yapıldığını kontrol et
+    if (selectedExam == null || selectedMinistry == null || selectedProfession == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Lütfen önce sınav türü, bakanlık ve meslek seçimlerini yapın.'),
+          duration: Duration(seconds: 3),
+        ),
+      );
+      return;
+    }
+    
+    // Mini sorular sayfasına seçimleri aktararak yönlendir
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => MiniQuestionsPage(
+          selectedCategory: selectedExam,
+          selectedMinistry: selectedMinistry,
+          selectedProfession: selectedProfession,
+        ),
+      ),
     );
   }
 
