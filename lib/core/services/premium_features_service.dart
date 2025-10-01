@@ -23,10 +23,6 @@ class PremiumFeaturesService {
   bool _isPremium = false;
   SubscriptionModel? _currentSubscription;
   
-  // Feature usage tracking
-  int _dailyQuestionCount = 0;
-  DateTime _lastQuestionDate = DateTime.now();
-  
   // Constants for free tier limits
   static const int maxDailyQuestions = 5;
   static const int maxBookmarks = 10;
@@ -73,36 +69,20 @@ class PremiumFeaturesService {
   
   /// Check if user can ask more questions today
   bool canAskQuestion() {
-    if (_isPremium) return true;
-    
-    _checkDailyReset();
-    final totalAvailable = _adService.getTotalAvailableQuestions(maxDailyQuestions);
-    return _dailyQuestionCount < totalAvailable;
+    // Günlük limit kaldırıldı - tüm kullanıcılar sınırsız soru sorabilir
+    return true;
   }
   
   /// Get remaining questions for today
   int getRemainingQuestions() {
-    if (_isPremium) return -1; // Unlimited
-    
-    _checkDailyReset();
-    final baseRemaining = (maxDailyQuestions - _dailyQuestionCount).clamp(0, maxDailyQuestions);
-    final totalAvailable = _adService.getTotalAvailableQuestions(maxDailyQuestions);
-    return (totalAvailable - _dailyQuestionCount).clamp(0, totalAvailable);
+    // Günlük limit kaldırıldı - sınırsız soru
+    return -1; // Unlimited
   }
   
   /// Record a question asked
   Future<void> recordQuestionAsked() async {
-    if (_isPremium) return;
-    
-    _checkDailyReset();
-    _dailyQuestionCount++;
-    
-    // If we're beyond the base limit, consume an unlocked question
-    if (_dailyQuestionCount > maxDailyQuestions && _adService.hasUnlockedQuestions()) {
-      await _adService.consumeUnlockedQuestion();
-    }
-    
-    await _saveUsageData();
+    // Günlük limit kaldırıldı - soru sayısı kaydedilmiyor
+    return;
   }
   
   /// Check if user can create more bookmarks
@@ -181,43 +161,13 @@ class PremiumFeaturesService {
     };
   }
   
-  /// Check and reset daily counters if needed
-  void _checkDailyReset() {
-    final now = DateTime.now();
-    final lastDate = DateTime(_lastQuestionDate.year, _lastQuestionDate.month, _lastQuestionDate.day);
-    final currentDate = DateTime(now.year, now.month, now.day);
-    
-    if (currentDate.isAfter(lastDate)) {
-      _dailyQuestionCount = 0;
-      _lastQuestionDate = now;
-      _saveUsageData();
-    }
-  }
   
   /// Load usage data from storage
   Future<void> _loadUsageData() async {
-    try {
-      final prefs = await SharedPreferences.getInstance();
-      _dailyQuestionCount = prefs.getInt('daily_question_count') ?? 0;
-      final lastDateString = prefs.getString('last_question_date');
-      if (lastDateString != null) {
-        _lastQuestionDate = DateTime.parse(lastDateString);
-      }
-    } catch (e) {
-      debugPrint('Error loading usage data: $e');
-    }
+    // Günlük limit kaldırıldı - veri yükleme gerekmiyor
+    return;
   }
   
-  /// Save usage data to storage
-  Future<void> _saveUsageData() async {
-    try {
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setInt('daily_question_count', _dailyQuestionCount);
-      await prefs.setString('last_question_date', _lastQuestionDate.toIso8601String());
-    } catch (e) {
-      debugPrint('Error saving usage data: $e');
-    }
-  }
   
   /// Dispose resources
   void dispose() {

@@ -107,7 +107,6 @@ class SubjectListPage extends ConsumerWidget {
       backgroundColor: AppTheme.lightGrey,
       appBar: StandardAppBar(
         title: _getPageTitle(),
-        subtitle: 'Ana Sayfa > Bakanlıklar > $decodedCategory > $decodedProfession > Konular',
       ),
       body: subjectsAsync.when(
         data: (subjects) {

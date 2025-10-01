@@ -56,9 +56,7 @@ class MinistryListPage extends ConsumerWidget {
     return Scaffold(
       backgroundColor: AppTheme.lightGrey,
       appBar: StandardAppBar(
-        title: _getPageTitle(),
-        subtitle: 'Ana Sayfa > Bakanlıklar',
-      ),
+        title: _getPageTitle(),      ),
       body: ministriesAsync.when(
         data: (ministries) {
           if (ministries.isEmpty) {

@@ -209,8 +209,13 @@ final motivationalMessageProvider = StateProvider<String>((ref) {
     'Çalışmaya devam et, hedefin çok yakın!',
     'Her gün biraz daha ilerle, büyük başarılar seni bekliyor.',
   ];
-  messages.shuffle();
-  return messages.first;
+  
+  // Günlük bazlı random seçim
+  final now = DateTime.now();
+  final dayOfYear = now.difference(DateTime(now.year, 1, 1)).inDays;
+  final messageIndex = dayOfYear % messages.length;
+  
+  return messages[messageIndex];
 });
 
 // Navigation Index Provider for Bottom Navigation

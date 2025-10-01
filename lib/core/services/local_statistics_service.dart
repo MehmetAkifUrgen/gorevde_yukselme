@@ -16,6 +16,7 @@ class LocalStatisticsService {
         'studyTimeMinutes': 0,
         'totalTests': 0,
         'totalRandomQuestions': 0,
+        'totalMiniQuestions': 0,
         'subjectStats': <String, Map<String, dynamic>>{},
         'professionStats': <String, Map<String, dynamic>>{},
         'ministryStats': <String, Map<String, dynamic>>{},
@@ -42,6 +43,13 @@ class LocalStatisticsService {
       print('[LocalStatisticsService] Error parsing stats: $e');
       return _empty();
     }
+  }
+
+  Future<Map<String, dynamic>> getStatsForPeriod(String userId, String period) async {
+    // Şu anda tarih bazlı filtreleme yok, tüm istatistikleri döndür
+    // Gelecekte tarih bazlı filtreleme eklenebilir
+    print('[LocalStatisticsService] getStatsForPeriod called - UserId: $userId, Period: $period');
+    return await getStats(userId);
   }
 
   Future<void> _setStats(String userId, Map<String, dynamic> stats) async {
@@ -138,6 +146,14 @@ class LocalStatisticsService {
     final stats = await getStats(userId);
     stats['totalTests'] = (stats['totalTests'] as int) + 1;
     print('[LocalStatisticsService] Total tests: ${stats['totalTests']}');
+    await _setStats(userId, stats);
+  }
+
+  Future<void> incrementMiniQuestionsCompleted({required String userId, required int count}) async {
+    print('[LocalStatisticsService] incrementMiniQuestionsCompleted called - UserId: $userId, Count: $count');
+    final stats = await getStats(userId);
+    stats['totalMiniQuestions'] = (stats['totalMiniQuestions'] as int) + count;
+    print('[LocalStatisticsService] Total mini questions: ${stats['totalMiniQuestions']}');
     await _setStats(userId, stats);
   }
 

@@ -79,24 +79,8 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
   void dispose() {
     _timer?.cancel();
     
-    // Save study time when exiting without completion (her zaman local storage kullan)
-    final exam = ref.read(currentExamProvider);
-    if (exam != null && exam.status == ExamStatus.inProgress) {
-      final firebaseUser = ref.read(currentFirebaseUserProvider);
-      final userId = firebaseUser?.uid ?? ''; // Guest için boş string
-      final localStats = ref.read(localStatisticsServiceProvider);
-      
-      // Calculate elapsed time
-      final int totalSeconds = exam.durationInMinutes * 60;
-      final int elapsed = totalSeconds > 0 ? (totalSeconds - _remainingSeconds) : 0;
-      final int minutes = (elapsed / 60).round();
-      
-      if (minutes > 0) {
-        localStats.addStudyTimeMinutes(userId: userId, minutes: minutes);
-        print('[ExamSimulationPage] Study time saved on dispose: $minutes minutes');
-      }
-    }
-    
+    // Don't use ref in dispose method to avoid "Cannot use ref after widget was disposed" error
+    // Study time will be saved when exam is completed normally
     super.dispose();
   }
 
@@ -381,18 +365,7 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
       _showAnswerFeedback = true;
     });
 
-    // Show feedback for 2 seconds, then move to next question
-    Future.delayed(const Duration(milliseconds: 2000), () {
-      if (mounted) {
-        setState(() {
-          _showAnswerFeedback = false;
-          _selectedAnswerIndex = null;
-        });
-        
-        // Check if we should show an ad before moving to next question
-        _checkAndShowAd();
-      }
-    });
+    // Don't hide feedback automatically, wait for user to click next
   }
 
   Future<void> _checkAndShowAd() async {
@@ -715,9 +688,6 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
     return Scaffold(
       appBar: StandardAppBar(
         title: decodedSubject != null ? decodedSubject : (widget.examType?.displayName ?? 'Sınav'),
-        subtitle: decodedCategory != null && decodedProfession != null 
-            ? 'Ana Sayfa > Bakanlıklar > $decodedCategory > $decodedProfession > $decodedSubject > Test'
-            : 'Test Ekranı',
         onBackPressed: _exitExam,
         actions: [
           IconButton(
@@ -792,11 +762,15 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
             child: Row(
               children: [
                 Expanded(
-                  flex: 2,
                   child: ElevatedButton(
                     onPressed: () {
                       if (exam.currentQuestionIndex < exam.questions.length - 1) {
-                        _nextQuestion();
+                        // Hide feedback and check if we should show an ad before moving to next question
+                        setState(() {
+                          _showAnswerFeedback = false;
+                          _selectedAnswerIndex = null;
+                        });
+                        _checkAndShowAd();
                       } else {
                         _completeExam();
                       }
@@ -814,14 +788,16 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
                   ),
                 ),
                 const SizedBox(width: 16),
-                OutlinedButton(
-                  onPressed: _showEndExamConfirmation,
-                  style: OutlinedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-                    side: const BorderSide(color: Colors.red),
-                    foregroundColor: Colors.red,
+                Expanded(
+                  child: OutlinedButton(
+                    onPressed: _showEndExamConfirmation,
+                    style: OutlinedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      side: const BorderSide(color: Colors.red),
+                      foregroundColor: Colors.red,
+                    ),
+                    child: const Text('Bitir'),
                   ),
-                  child: const Text('Bitir'),
                 ),
               ],
             ),

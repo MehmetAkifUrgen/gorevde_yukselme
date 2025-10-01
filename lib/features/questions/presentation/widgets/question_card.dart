@@ -8,6 +8,7 @@ class QuestionCard extends StatefulWidget {
   final double fontSize;
   final Function(int) onAnswered;
   final VoidCallback onStarToggle;
+  final bool showStarIcon;
 
   const QuestionCard({
     super.key,
@@ -15,6 +16,7 @@ class QuestionCard extends StatefulWidget {
     required this.fontSize,
     required this.onAnswered,
     required this.onStarToggle,
+    this.showStarIcon = true,
   });
 
   @override
@@ -81,18 +83,19 @@ class _QuestionCardState extends State<QuestionCard> {
                       ),
                       tooltip: 'Soruyu Bildir',
                     ),
-                    IconButton(
-                      icon: Icon(
-                        widget.question.isStarred ? Icons.star : Icons.star_border,
-                        color: widget.question.isStarred ? AppTheme.accentGold : AppTheme.darkGrey,
+                    if (widget.showStarIcon)
+                      IconButton(
+                        icon: Icon(
+                          widget.question.isStarred ? Icons.star : Icons.star_border,
+                          color: widget.question.isStarred ? AppTheme.accentGold : AppTheme.darkGrey,
+                        ),
+                        onPressed: widget.onStarToggle,
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints(
+                          minWidth: 32,
+                          minHeight: 32,
+                        ),
                       ),
-                      onPressed: widget.onStarToggle,
-                      padding: EdgeInsets.zero,
-                      constraints: const BoxConstraints(
-                        minWidth: 32,
-                        minHeight: 32,
-                      ),
-                    ),
                   ],
                 ),
               ],

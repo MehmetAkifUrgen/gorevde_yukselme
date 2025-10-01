@@ -270,7 +270,7 @@ class _EmailVerificationPageState extends ConsumerState<EmailVerificationPage> {
                 
                 // App Logo/Title
                 Text(
-                  'GYUD',
+                  'Kamu Sınavlarına Hazırlık',
                   style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                     color: AppTheme.secondaryWhite,
                     fontSize: 32,

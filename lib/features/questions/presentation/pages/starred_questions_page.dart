@@ -396,95 +396,118 @@ class _StarredQuestionsPageState extends ConsumerState<StarredQuestionsPage> {
   Widget _buildPracticeMode(List<Question> questions, double fontSize) {
     final currentQuestion = questions[currentQuestionIndex];
     
-    return Column(
-      children: [
-        // Progress indicator
-        Container(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  Text(
-                    'Soru ${currentQuestionIndex + 1} / ${questions.length}',
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                  const Spacer(),
-                  Text(
-                    '${((currentQuestionIndex + 1) / questions.length * 100).round()}%',
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: AppTheme.lightTheme.primaryColor,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 8),
-              Row(
-                children: [
-                  Text(
-                    'Cevaplanan: ${_getAnsweredCount()} / ${questions.length}',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Colors.grey[600],
-                    ),
-                  ),
-                  const Spacer(),
-                  if (_getAnsweredCount() > 0)
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Favori Soruları Çöz'),
+        backgroundColor: AppTheme.lightTheme.primaryColor,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.exit_to_app),
+            onPressed: () {
+              setState(() {
+                isPracticeMode = false;
+                currentQuestionIndex = 0;
+                answers.clear();
+                isAnswered.clear();
+              });
+            },
+            tooltip: 'Çıkış',
+          ),
+        ],
+      ),
+      body: Column(
+        children: [
+          // Progress indicator
+          Container(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              children: [
+                Row(
+                  children: [
                     Text(
-                      'Doğru: ${_getCorrectCount()}',
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Colors.green,
-                        fontWeight: FontWeight.w500,
+                      'Soru ${currentQuestionIndex + 1} / ${questions.length}',
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    const Spacer(),
+                    Text(
+                      '${((currentQuestionIndex + 1) / questions.length * 100).round()}%',
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        color: AppTheme.lightTheme.primaryColor,
                       ),
                     ),
-                ],
-              ),
-            ],
-          ),
-        ),
-        
-        // Progress bar
-        LinearProgressIndicator(
-          value: (currentQuestionIndex + 1) / questions.length,
-          backgroundColor: Colors.grey[300],
-          valueColor: AlwaysStoppedAnimation<Color>(AppTheme.lightTheme.primaryColor),
-        ),
-        
-        // Question card
-        Expanded(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(16),
-            child: QuestionCard(
-              key: ValueKey(currentQuestion.id), // Force widget rebuild when question changes
-              question: currentQuestion,
-              fontSize: fontSize,
-              onAnswered: _onAnswered,
-              onStarToggle: _onStarToggle,
+                  ],
+                ),
+                const SizedBox(height: 8),
+                Row(
+                  children: [
+                    Text(
+                      'Cevaplanan: ${_getAnsweredCount()} / ${questions.length}',
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: Colors.grey[600],
+                      ),
+                    ),
+                    const Spacer(),
+                    if (_getAnsweredCount() > 0)
+                      Text(
+                        'Doğru: ${_getCorrectCount()}',
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: Colors.green,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                  ],
+                ),
+              ],
             ),
           ),
-        ),
-        
-        // Navigation buttons
-        Container(
-          padding: const EdgeInsets.all(16),
-          child: Row(
-            children: [
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: currentQuestionIndex > 0 ? _previousQuestion : null,
-                  child: const Text('Önceki'),
-                ),
-              ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: currentQuestionIndex < questions.length - 1 ? _nextQuestion : null,
-                  child: const Text('Sonraki'),
-                ),
-              ),
-            ],
+          
+          // Progress bar
+          LinearProgressIndicator(
+            value: (currentQuestionIndex + 1) / questions.length,
+            backgroundColor: Colors.grey[300],
+            valueColor: AlwaysStoppedAnimation<Color>(AppTheme.lightTheme.primaryColor),
           ),
-        ),
-      ],
+          
+          // Question card
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(16),
+              child: QuestionCard(
+                key: ValueKey(currentQuestion.id), // Force widget rebuild when question changes
+                question: currentQuestion,
+                fontSize: fontSize,
+                onAnswered: _onAnswered,
+                onStarToggle: () {
+                  // Favori sorular sayfasında favori ikonu gösterme
+                },
+                showStarIcon: false, // Favori ikonunu gizle
+              ),
+            ),
+          ),
+          
+          // Navigation buttons
+          Container(
+            padding: const EdgeInsets.all(16),
+            child: Row(
+              children: [
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: currentQuestionIndex > 0 ? _previousQuestion : null,
+                    child: const Text('Önceki'),
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: currentQuestionIndex < questions.length - 1 ? _nextQuestion : null,
+                    child: const Text('Sonraki'),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -726,19 +749,14 @@ class _StarredQuestionsPageState extends ConsumerState<StarredQuestionsPage> {
                       ...question.options.asMap().entries.map((entry) {
                         final index = entry.key;
                         final option = entry.value;
-                        final isCorrect = index == question.correctAnswerIndex;
                         
                         return Container(
                           margin: const EdgeInsets.only(bottom: 8),
                           padding: const EdgeInsets.all(12),
                           decoration: BoxDecoration(
-                            color: isCorrect 
-                                ? Colors.green.withOpacity(0.1)
-                                : Colors.grey.withOpacity(0.05),
+                            color: Colors.grey.withOpacity(0.05),
                             border: Border.all(
-                              color: isCorrect 
-                                  ? Colors.green
-                                  : Colors.grey.withOpacity(0.3),
+                              color: Colors.grey.withOpacity(0.3),
                               width: 1,
                             ),
                             borderRadius: BorderRadius.circular(8),
@@ -749,9 +767,7 @@ class _StarredQuestionsPageState extends ConsumerState<StarredQuestionsPage> {
                                 width: 24,
                                 height: 24,
                                 decoration: BoxDecoration(
-                                  color: isCorrect 
-                                      ? Colors.green
-                                      : AppTheme.primaryNavyBlue.withOpacity(0.1),
+                                  color: AppTheme.primaryNavyBlue.withOpacity(0.1),
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: Center(
@@ -760,7 +776,7 @@ class _StarredQuestionsPageState extends ConsumerState<StarredQuestionsPage> {
                                     style: TextStyle(
                                       fontSize: fontSize * 0.8,
                                       fontWeight: FontWeight.bold,
-                                      color: isCorrect ? Colors.white : AppTheme.primaryNavyBlue,
+                                      color: AppTheme.primaryNavyBlue,
                                     ),
                                   ),
                                 ),
@@ -771,17 +787,9 @@ class _StarredQuestionsPageState extends ConsumerState<StarredQuestionsPage> {
                                   option,
                                   style: TextStyle(
                                     fontSize: fontSize * 0.95,
-                                    color: isCorrect ? Colors.green.shade700 : null,
-                                    fontWeight: isCorrect ? FontWeight.w600 : null,
                                   ),
                                 ),
                               ),
-                              if (isCorrect)
-                                Icon(
-                                  Icons.check_circle,
-                                  color: Colors.green,
-                                  size: fontSize * 1.1,
-                                ),
                             ],
                           ),
                         );
@@ -789,47 +797,47 @@ class _StarredQuestionsPageState extends ConsumerState<StarredQuestionsPage> {
                       
                       const SizedBox(height: 16),
                       
-                      // Explanation
-                      if (question.explanation.isNotEmpty) ...[
-                        Container(
-                          padding: const EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                            color: Colors.blue.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.lightbulb_outline,
-                                    size: fontSize * 0.9,
-                                    color: Colors.blue,
-                                  ),
-                                  const SizedBox(width: 8),
-                                  Text(
-                                    'Açıklama',
-                                    style: TextStyle(
-                                      fontSize: fontSize * 0.9,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.blue,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                question.explanation,
-                                style: TextStyle(
-                                  fontSize: fontSize * 0.9,
-                                  color: Colors.blue.shade700,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
+                      // Explanation - Favori sorular sayfasında açıklamayı gizle
+                      // if (question.explanation.isNotEmpty) ...[
+                      //   Container(
+                      //     padding: const EdgeInsets.all(12),
+                      //     decoration: BoxDecoration(
+                      //       color: Colors.blue.withOpacity(0.1),
+                      //       borderRadius: BorderRadius.circular(8),
+                      //     ),
+                      //     child: Column(
+                      //       crossAxisAlignment: CrossAxisAlignment.start,
+                      //       children: [
+                      //         Row(
+                      //           children: [
+                      //             Icon(
+                      //               Icons.lightbulb_outline,
+                      //               size: fontSize * 0.9,
+                      //               color: Colors.blue,
+                      //             ),
+                      //             const SizedBox(width: 8),
+                      //             Text(
+                      //               'Açıklama',
+                      //               style: TextStyle(
+                      //                 fontSize: fontSize * 0.9,
+                      //                 fontWeight: FontWeight.bold,
+                      //                 color: Colors.blue,
+                      //               ),
+                      //             ),
+                      //           ],
+                      //         ),
+                      //         const SizedBox(height: 8),
+                      //         Text(
+                      //           question.explanation,
+                      //           style: TextStyle(
+                      //             fontSize: fontSize * 0.9,
+                      //             color: Colors.blue.shade700,
+                      //           ),
+                      //         ),
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ],
                     ],
                   ),
                 ),
@@ -845,39 +853,83 @@ class _StarredQuestionsPageState extends ConsumerState<StarredQuestionsPage> {
                 child: Row(
                   children: [
                     Expanded(
-                      child: ElevatedButton.icon(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                          _onStarToggle();
-                        },
-                        icon: Icon(
-                          question.isStarred ? Icons.star : Icons.star_border,
-                          color: Colors.white,
-                        ),
-                        label: Text(
-                          question.isStarred ? 'Favorilerden Çıkar' : 'Favorilere Ekle',
-                          style: const TextStyle(color: Colors.white),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: question.isStarred 
-                              ? Colors.orange 
-                              : AppTheme.primaryNavyBlue,
+                      flex: 1,
+                      child: SizedBox(
+                        height: 48,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            _onStarToggle();
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.orange,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            padding: EdgeInsets.zero,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Icon(
+                                Icons.star,
+                                color: Colors.white,
+                                size: 20,
+                              ),
+                              const SizedBox(width: 8),
+                              const Text(
+                                'Favorilerden Çıkar',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                    const SizedBox(width: 12),
-                    ElevatedButton.icon(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                        setState(() {
-                          isPracticeMode = true;
-                          currentQuestionIndex = filteredQuestions.indexOf(question);
-                        });
-                      },
-                      icon: const Icon(Icons.play_arrow, color: Colors.white),
-                      label: const Text('Çöz', style: TextStyle(color: Colors.white)),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green,
+                    const SizedBox(width: 8),
+                    Expanded(
+                      flex: 1,
+                      child: SizedBox(
+                        height: 48,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            setState(() {
+                              isPracticeMode = true;
+                              currentQuestionIndex = filteredQuestions.indexOf(question);
+                            });
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.green,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            padding: EdgeInsets.zero,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Icon(
+                                Icons.play_arrow, 
+                                color: Colors.white,
+                                size: 20,
+                              ),
+                              const SizedBox(width: 8),
+                              const Text(
+                                'Çöz', 
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     ),
                   ],

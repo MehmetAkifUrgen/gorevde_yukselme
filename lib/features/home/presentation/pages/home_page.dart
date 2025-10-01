@@ -23,7 +23,7 @@ class _HomePageState extends ConsumerState<HomePage> {
       backgroundColor: AppTheme.lightGrey,
       appBar: AppBar(
         title: Text(
-          'GYUD',
+          'Kamu Sınavlarına Hazırlık',
           style: Theme.of(context).appBarTheme.titleTextStyle,
         ),
         backgroundColor: AppTheme.primaryNavyBlue,

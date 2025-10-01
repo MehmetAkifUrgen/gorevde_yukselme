@@ -81,7 +81,7 @@ class MainApp extends ConsumerWidget {
     final router = AppRouter.createRouter(ref);
     
     return MaterialApp.router(
-      title: 'GYUD - Sınav Hazırlık Uygulaması',
+      title: 'Kamu Sınavlarına Hazırlık - Sınav Hazırlık Uygulaması',
       theme: AppTheme.lightTheme,
       routerConfig: router,
       debugShowCheckedModeBanner: false,

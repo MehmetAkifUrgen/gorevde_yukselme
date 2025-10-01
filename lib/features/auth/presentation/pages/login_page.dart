@@ -142,7 +142,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   
                   // App Logo/Title
                   Text(
-                    'GYUD',
+                    'Kamu Sınavlarına Hazırlık',
                     style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                       color: AppTheme.secondaryWhite,
                       fontSize: 32,

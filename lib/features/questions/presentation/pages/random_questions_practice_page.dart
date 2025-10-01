@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -37,11 +38,21 @@ class _RandomQuestionsPracticePageState extends ConsumerState<RandomQuestionsPra
   int _targetQuestionCount = 0;
   final Set<String> _answeredQuestionIds = <String>{};
   final PremiumFeaturesService _premiumService = PremiumFeaturesService();
+  
+  // Timer variables for mini questions
+  Timer? _timer;
+  int _elapsedSeconds = 0;
 
   @override
   void initState() {
     super.initState();
     _initializePracticeSession();
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
   }
 
   void _initializePracticeSession() {
@@ -63,6 +74,30 @@ class _RandomQuestionsPracticePageState extends ConsumerState<RandomQuestionsPra
     
     // Select first question
     _selectNextQuestion();
+    
+    // Start timer for mini questions
+    if (widget.isMiniQuestions) {
+      _startTimer();
+    }
+  }
+
+  void _startTimer() {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() {
+        _elapsedSeconds++;
+      });
+    });
+  }
+
+  void _stopTimer() {
+    _timer?.cancel();
+    _timer = null;
+  }
+
+  String _formatTime(int seconds) {
+    final minutes = seconds ~/ 60;
+    final remainingSeconds = seconds % 60;
+    return '${minutes.toString().padLeft(2, '0')}:${remainingSeconds.toString().padLeft(2, '0')}';
   }
 
   void _selectNextQuestion() {
@@ -231,6 +266,25 @@ class _RandomQuestionsPracticePageState extends ConsumerState<RandomQuestionsPra
   }
 
   void _completeSession() async {
+    // Stop timer for mini questions
+    if (widget.isMiniQuestions) {
+      _stopTimer();
+      
+      final firebaseUser = ref.read(currentFirebaseUserProvider);
+      final userId = firebaseUser?.uid ?? '';
+      final localStats = ref.read(localStatisticsServiceProvider);
+      
+      // Mini sorular için süre kaydet (gerçek süre + 3 dakika)
+      final realTimeMinutes = (_elapsedSeconds / 60).round();
+      final miniQuestionsTime = realTimeMinutes + 3;
+      localStats.addStudyTimeMinutes(userId: userId, minutes: miniQuestionsTime);
+      
+      // Mini sorular sayısını artır
+      localStats.incrementMiniQuestionsCompleted(userId: userId, count: _totalAnswered);
+      
+      print('[RandomQuestionsPracticePage] Mini questions completed - UserId: $userId, Questions: $_totalAnswered, Real time: ${_formatTime(_elapsedSeconds)}, Saved time: $miniQuestionsTime minutes');
+    }
+    
     // Show final ad before showing results
     await ref.read(adDisplayProvider.notifier).forceShowAd();
     
@@ -315,6 +369,23 @@ class _RandomQuestionsPracticePageState extends ConsumerState<RandomQuestionsPra
                       ),
                     ],
                   ),
+                  // Show time for mini questions
+                  if (widget.isMiniQuestions) ...[
+                    const SizedBox(height: 8),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text('Geçen Süre:'),
+                        Text(
+                          _formatTime(_elapsedSeconds),
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: AppTheme.primaryNavyBlue,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ],
               ),
             ),
@@ -440,11 +511,33 @@ class _RandomQuestionsPracticePageState extends ConsumerState<RandomQuestionsPra
             onPressed: _shuffleQuestions,
             tooltip: 'Soruları Karıştır',
           ),
+          // Timer for mini questions
+          if (widget.isMiniQuestions)
+            Padding(
+              padding: const EdgeInsets.only(right: 8),
+              child: Center(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: AppTheme.accentGold.withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Text(
+                    _formatTime(_elapsedSeconds),
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                      color: AppTheme.primaryNavyBlue,
+                    ),
+                  ),
+                ),
+              ),
+            ),
           Padding(
             padding: const EdgeInsets.only(right: 16),
             child: Center(
               child: Text(
-                '${_totalAnswered + 1}/$_targetQuestionCount',
+                '${_totalAnswered}/$_targetQuestionCount',
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,

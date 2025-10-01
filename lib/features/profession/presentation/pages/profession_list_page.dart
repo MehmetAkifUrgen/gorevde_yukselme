@@ -76,7 +76,6 @@ class ProfessionListPage extends ConsumerWidget {
       backgroundColor: AppTheme.lightGrey,
       appBar: StandardAppBar(
         title: _getPageTitle(),
-        subtitle: 'Ana Sayfa > Bakanlıklar > $category > Meslekler',
       ),
       body: professionsAsync.when(
         data: (professions) {

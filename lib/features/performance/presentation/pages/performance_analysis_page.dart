@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/providers/auth_providers.dart';
-import '../../../../core/models/user_model.dart';
-import '../../../../core/services/local_statistics_service.dart';
-import '../../../subscription/presentation/widgets/ad_banner_widget.dart';
 
 class PerformanceAnalysisPage extends ConsumerStatefulWidget {
   const PerformanceAnalysisPage({super.key});
@@ -16,7 +13,6 @@ class PerformanceAnalysisPage extends ConsumerStatefulWidget {
 class _PerformanceAnalysisPageState extends ConsumerState<PerformanceAnalysisPage>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  String selectedPeriod = 'Son 7 Gün';
   
   // Guest statistics data
   Map<String, dynamic>? _guestStats;
@@ -86,19 +82,6 @@ class _PerformanceAnalysisPageState extends ConsumerState<PerformanceAnalysisPag
               _loadGuestStatistics();
             },
           ),
-          PopupMenuButton<String>(
-            initialValue: selectedPeriod,
-            onSelected: (value) {
-              setState(() {
-                selectedPeriod = value;
-              });
-            },
-            itemBuilder: (context) => [
-              const PopupMenuItem(value: 'Son 7 Gün', child: Text('Son 7 Gün')),
-              const PopupMenuItem(value: 'Son 30 Gün', child: Text('Son 30 Gün')),
-              const PopupMenuItem(value: 'Tüm Zamanlar', child: Text('Tüm Zamanlar')),
-            ],
-          ),
         ],
       ),
       body: TabBarView(
@@ -127,23 +110,6 @@ class _PerformanceAnalysisPageState extends ConsumerState<PerformanceAnalysisPag
           // Subject Statistics
           if (_guestStats != null) _buildSubjectStatistics(_guestStats!),
           const SizedBox(height: 24),
-          
-          // Ad Banner for non-premium users
-          Consumer(
-            builder: (context, ref, child) {
-              final currentUser = ref.watch(currentUserProfileProvider);
-              return currentUser.when(
-                data: (user) {
-                  if (user?.subscriptionStatus != SubscriptionStatus.premium) {
-                    return const AdBannerWidget();
-                  }
-                  return const SizedBox.shrink();
-                },
-                loading: () => const SizedBox.shrink(),
-                error: (_, __) => const SizedBox.shrink(),
-              );
-            },
-          ),
         ],
       ),
     );
@@ -182,6 +148,7 @@ class _PerformanceAnalysisPageState extends ConsumerState<PerformanceAnalysisPag
     final studyTimeMinutes = stats['studyTimeMinutes'] ?? 0;
     final totalTests = stats['totalTests'] ?? 0;
     final totalRandomQuestions = stats['totalRandomQuestions'] ?? 0;
+    final totalMiniQuestions = stats['totalMiniQuestions'] ?? 0;
     
     if (totalQuestions == 0) {
       return const Center(
@@ -200,9 +167,6 @@ class _PerformanceAnalysisPageState extends ConsumerState<PerformanceAnalysisPag
     }
     
     final accuracy = totalQuestions > 0 ? (correctAnswers / totalQuestions * 100) : 0.0;
-    final avgTimePerQuestion = totalQuestions > 0 
-        ? (studyTimeMinutes / totalQuestions).toStringAsFixed(1)
-        : '0.0';
     
     return Column(
       children: [
@@ -244,11 +208,11 @@ class _PerformanceAnalysisPageState extends ConsumerState<PerformanceAnalysisPag
             const SizedBox(width: 12),
             Expanded(
               child: _buildSummaryCard(
-                'Ort. Süre',
-                '$avgTimePerQuestion dk',
-                Icons.timer,
-                Colors.purple,
-                'Soru başına',
+                'Mini Sorular',
+                totalMiniQuestions.toString(),
+                Icons.quiz_outlined,
+                Colors.orange,
+                'Mini quiz sorular',
               ),
             ),
           ],

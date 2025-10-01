@@ -5,7 +5,6 @@ import '../../../../core/theme/app_theme.dart';
 import '../../../../core/models/user_model.dart';
 import '../../../../core/models/user_statistics.dart';
 import '../../../../core/providers/auth_providers.dart';
-import '../../../subscription/presentation/widgets/ad_banner_widget.dart';
 import '../../../../core/widgets/support_dialog.dart';
 import '../widgets/change_password_dialog.dart';
 import '../widgets/delete_account_dialog.dart';
@@ -65,10 +64,6 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
                 // Support Section
                 _buildSupportSection(),
                 const SizedBox(height: 24),
-                
-                // Ad Banner for non-premium users
-                if (user.subscriptionStatus != SubscriptionStatus.premium)
-                  const AdBannerWidget(),
               ],
             ),
           );
