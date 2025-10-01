@@ -2,16 +2,16 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../core/models/subscription_model.dart';
 import '../../../../core/providers/app_providers.dart';
+import '../../../../core/providers/auth_providers.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../widgets/purchase_loading_dialog.dart';
-import '../widgets/generic_loading_dialog.dart';
 import '../widgets/subscription_plan_card.dart';
 import '../widgets/premium_features_list.dart';
-import '../widgets/premium_code_dialog.dart';
 import '../../../../core/utils/error_utils.dart';
 
 class SubscriptionPage extends ConsumerStatefulWidget {
@@ -226,6 +226,7 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
     final currentSubscription = ref.watch(subscriptionProvider);
     final availableProducts = ref.watch(availableProductsProvider);
     final isPremium = ref.watch(isPremiumUserProvider);
+    final isAuthenticated = ref.watch(isAuthenticatedProvider);
 
     // Listen to purchase results
     ref.listen<PurchaseResult?>(purchaseResultProvider, (previous, next) {
@@ -233,6 +234,11 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
         _handlePurchaseResult(next);
       }
     });
+
+    // Giriş yapmamış kullanıcılar için giriş zorunluluğu
+    if (!isAuthenticated) {
+      return _buildLoginRequiredView();
+    }
 
     return Scaffold(
       backgroundColor: AppTheme.lightGrey,
@@ -619,5 +625,196 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
 
   String _formatDate(DateTime date) {
     return '${date.day}/${date.month}/${date.year}';
+  }
+
+  Widget _buildLoginRequiredView() {
+    return Scaffold(
+      backgroundColor: AppTheme.lightGrey,
+      appBar: AppBar(
+        title: const Text(
+          'Premium Üyelik',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+        backgroundColor: AppTheme.primaryNavyBlue,
+        elevation: 0,
+        iconTheme: const IconThemeData(color: Colors.white),
+      ),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Premium Icon
+              Container(
+                width: 120,
+                height: 120,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [AppTheme.accentGold, AppTheme.accentGold.withValues(alpha: 0.7)],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  shape: BoxShape.circle,
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppTheme.accentGold.withValues(alpha: 0.3),
+                      blurRadius: 20,
+                      spreadRadius: 5,
+                    ),
+                  ],
+                ),
+                child: const Icon(
+                  Icons.star,
+                  size: 60,
+                  color: Colors.white,
+                ),
+              ),
+              
+              const SizedBox(height: 32),
+              
+              // Title
+              Text(
+                'Premium Üyelik',
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: AppTheme.primaryNavyBlue,
+                ),
+              ),
+              
+              const SizedBox(height: 16),
+              
+              // Message
+              Text(
+                'Premium üyelik satın almak için giriş yapmanız gerekmektedir.',
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  color: Colors.grey[600],
+                  height: 1.5,
+                ),
+              ),
+              
+              const SizedBox(height: 32),
+              
+              // Login Button
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    context.go('/login');
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppTheme.primaryNavyBlue,
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    elevation: 3,
+                  ),
+                  child: const Text(
+                    'Giriş Yap',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+              
+              const SizedBox(height: 16),
+              
+              // Register Button
+              SizedBox(
+                width: double.infinity,
+                child: OutlinedButton(
+                  onPressed: () {
+                    context.go('/register');
+                  },
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: AppTheme.primaryNavyBlue,
+                    side: BorderSide(color: AppTheme.primaryNavyBlue),
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  child: const Text(
+                    'Hesap Oluştur',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+              
+              const SizedBox(height: 24),
+              
+              // Premium Features Preview
+              Container(
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: 0.05),
+                      blurRadius: 10,
+                      offset: const Offset(0, 2),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Premium Özellikler',
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: AppTheme.primaryNavyBlue,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    _buildFeatureItem('Sınırsız soru çözme'),
+                    _buildFeatureItem('Reklamsız deneyim'),
+                    _buildFeatureItem('Detaylı performans analizi'),
+                    _buildFeatureItem('Offline çalışma modu'),
+                    _buildFeatureItem('Öncelikli destek'),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildFeatureItem(String text) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Row(
+        children: [
+          Icon(
+            Icons.check_circle,
+            color: AppTheme.accentGold,
+            size: 20,
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Text(
+              text,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                color: Colors.grey[700],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

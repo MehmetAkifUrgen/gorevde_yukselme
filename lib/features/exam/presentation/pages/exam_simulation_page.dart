@@ -456,7 +456,7 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
     }
   }
 
-  void _completeExam() {
+  void _completeExam() async {
     _timer?.cancel();
     ref.read(currentExamProvider.notifier).completeExam();
     
@@ -478,6 +478,9 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
     // Test tamamlama sayısını artır
     localStats.incrementTestCompleted(userId: userId);
     print('[ExamSimulationPage] Test completed - UserId: $userId');
+    
+    // Show final ad before showing results
+    await ref.read(adDisplayProvider.notifier).forceShowAd();
     
     setState(() {
       _showResults = true;

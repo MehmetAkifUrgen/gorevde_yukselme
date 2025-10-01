@@ -6,6 +6,7 @@ import '../../../../core/theme/app_theme.dart';
 import '../../../../core/models/question_model.dart';
 import '../../../../core/providers/app_providers.dart';
 import '../../../../core/providers/auth_providers.dart';
+import '../../../../core/providers/ad_providers.dart';
 import '../../../../core/services/premium_features_service.dart';
 import '../../../../core/services/local_statistics_service.dart';
 import '../widgets/question_card.dart';
@@ -25,10 +26,12 @@ class RandomQuestionsPracticePage extends ConsumerStatefulWidget {
 }
 
 class _RandomQuestionsPracticePageState extends ConsumerState<RandomQuestionsPracticePage> {
-  late List<Question> _practiceQuestions;
-  int _currentQuestionIndex = 0;
+  late List<Question> _allQuestions;
+  late List<Question> _availableQuestions;
+  Question? _currentQuestion;
   int _correctAnswers = 0;
   int _totalAnswered = 0;
+  int _targetQuestionCount = 0;
   final Set<String> _answeredQuestionIds = <String>{};
   final PremiumFeaturesService _premiumService = PremiumFeaturesService();
 
@@ -39,18 +42,44 @@ class _RandomQuestionsPracticePageState extends ConsumerState<RandomQuestionsPra
   }
 
   void _initializePracticeSession() {
-    final questionCount = widget.questionCount ?? 20;
-    final shuffledQuestions = List<Question>.from(widget.questions)..shuffle(Random());
+    _targetQuestionCount = widget.questionCount ?? 20;
+    _allQuestions = List<Question>.from(widget.questions);
+    _availableQuestions = List<Question>.from(_allQuestions);
+    _availableQuestions.shuffle(Random());
     
-    _practiceQuestions = shuffledQuestions.take(questionCount).toList();
-    _currentQuestionIndex = 0;
     _correctAnswers = 0;
     _totalAnswered = 0;
     _answeredQuestionIds.clear();
+    
+    // Reset question counter for ads
+    ref.read(questionCounterProvider.notifier).reset();
+    
+    // Select first question
+    _selectNextQuestion();
+  }
+
+  void _selectNextQuestion() {
+    if (_availableQuestions.isEmpty) {
+      // No more questions available, complete session
+      _completeSession();
+      return;
+    }
+    
+    // Select random question from available questions
+    final random = Random();
+    final randomIndex = random.nextInt(_availableQuestions.length);
+    _currentQuestion = _availableQuestions[randomIndex];
+    
+    // Remove selected question from available questions to prevent repetition
+    _availableQuestions.removeAt(randomIndex);
+    
+    setState(() {});
   }
 
   void _handleQuestionAnswered(int selectedIndex) {
-    final currentQuestion = _practiceQuestions[_currentQuestionIndex];
+    if (_currentQuestion == null) return;
+    
+    final currentQuestion = _currentQuestion!;
     final isCorrect = selectedIndex == currentQuestion.correctAnswerIndex;
     
     // Check if user can ask questions
@@ -156,7 +185,7 @@ class _RandomQuestionsPracticePageState extends ConsumerState<RandomQuestionsPra
           TextButton(
             onPressed: _goToNextQuestion,
             child: Text(
-              _currentQuestionIndex < _practiceQuestions.length - 1 
+              _totalAnswered < _targetQuestionCount 
                   ? 'Sonraki Soru' 
                   : 'Sonuçları Gör',
               style: const TextStyle(color: AppTheme.primaryNavyBlue),
@@ -170,16 +199,26 @@ class _RandomQuestionsPracticePageState extends ConsumerState<RandomQuestionsPra
   void _goToNextQuestion() {
     Navigator.of(context).pop(); // Close feedback dialog
     
-    if (_currentQuestionIndex < _practiceQuestions.length - 1) {
-      setState(() {
-        _currentQuestionIndex++;
-      });
-    } else {
+    // Increment question counter
+    ref.read(questionCounterProvider.notifier).increment();
+    
+    // Check if we should show ad every 4 questions
+    ref.read(adDisplayProvider.notifier).showAdEvery4Questions();
+    
+    // Check if we've reached target question count
+    if (_totalAnswered >= _targetQuestionCount) {
       _completeSession();
+    } else {
+      // Select next question (no repetition)
+      _selectNextQuestion();
     }
   }
 
-  void _completeSession() {
+  void _completeSession() async {
+    // Show final ad before showing results
+    await ref.read(adDisplayProvider.notifier).forceShowAd();
+    
+    // Show results after ad
     _showSessionResults();
   }
 
@@ -299,16 +338,16 @@ class _RandomQuestionsPracticePageState extends ConsumerState<RandomQuestionsPra
   }
 
   void _shuffleQuestions() {
-    setState(() {
-      // Mevcut soruları karıştır
-      _practiceQuestions.shuffle();
-      // İlk soruya dön
-      _currentQuestionIndex = 0;
-    });
+    // Reset available questions with all questions
+    _availableQuestions = List<Question>.from(_allQuestions);
+    _availableQuestions.shuffle(Random());
+    
+    // Remove already answered questions from available questions
+    _availableQuestions.removeWhere((question) => _answeredQuestionIds.contains(question.id));
     
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
-        content: Text('Sorular karıştırıldı!'),
+        content: Text('Kalan sorular karıştırıldı!'),
         duration: Duration(seconds: 2),
       ),
     );
@@ -385,21 +424,21 @@ class _RandomQuestionsPracticePageState extends ConsumerState<RandomQuestionsPra
 
   @override
   Widget build(BuildContext context) {
-    if (_practiceQuestions.isEmpty) {
+    if (_currentQuestion == null) {
       return Scaffold(
         appBar: AppBar(
           title: const Text('Rastgele Sorular'),
           backgroundColor: AppTheme.primaryNavyBlue,
         ),
         body: const Center(
-          child: Text('Uygun soru bulunamadı.'),
+          child: CircularProgressIndicator(),
         ),
       );
     }
 
-    final currentQuestion = _practiceQuestions[_currentQuestionIndex];
+    final currentQuestion = _currentQuestion!;
     final fontSize = ref.watch(fontSizeProvider);
-    final progress = (_currentQuestionIndex + 1) / _practiceQuestions.length;
+    final progress = _totalAnswered / _targetQuestionCount;
 
     return Scaffold(
       backgroundColor: AppTheme.lightGrey,
@@ -420,7 +459,7 @@ class _RandomQuestionsPracticePageState extends ConsumerState<RandomQuestionsPra
             padding: const EdgeInsets.only(right: 16),
             child: Center(
               child: Text(
-                '${_currentQuestionIndex + 1}/${_practiceQuestions.length}',
+                '${_totalAnswered + 1}/$_targetQuestionCount',
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,

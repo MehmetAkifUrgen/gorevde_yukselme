@@ -26,6 +26,25 @@ final wrongAnswerCounterProvider = StateNotifierProvider<WrongAnswerCounterNotif
   return WrongAnswerCounterNotifier();
 });
 
+// Question Counter Provider for Random Questions Practice
+class QuestionCounterNotifier extends StateNotifier<int> {
+  QuestionCounterNotifier() : super(0);
+
+  void increment() {
+    state++;
+  }
+
+  void reset() {
+    state = 0;
+  }
+
+  bool get shouldShowAd => state > 0 && state % 4 == 0;
+}
+
+final questionCounterProvider = StateNotifierProvider<QuestionCounterNotifier, int>((ref) {
+  return QuestionCounterNotifier();
+});
+
 // Ad Display Provider
 class AdDisplayNotifier extends StateNotifier<bool> {
   final Ref _ref;
@@ -85,6 +104,29 @@ class AdDisplayNotifier extends StateNotifier<bool> {
       state = false;
       return false;
     }
+  }
+
+  /// Show ad every 4 questions in random practice
+  Future<bool> showAdEvery4Questions() async {
+    final questionCount = _ref.read(questionCounterProvider);
+    final isPremium = _ref.read(isPremiumUserProvider);
+    
+    print('[AdDisplayNotifier] Question count: $questionCount');
+    print('[AdDisplayNotifier] Is premium: $isPremium');
+    
+    // Don't show ads to premium users
+    if (isPremium) {
+      print('[AdDisplayNotifier] User is premium, skipping ad');
+      return false;
+    }
+    
+    // Show ad every 4th question
+    if (questionCount > 0 && questionCount % 4 == 0) {
+      print('[AdDisplayNotifier] Showing ad for question #$questionCount');
+      return await _showInterstitialAd();
+    }
+    
+    return false;
   }
 
   /// Force show ad (for testing purposes)

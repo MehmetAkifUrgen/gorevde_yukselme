@@ -310,7 +310,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       ),
                       TextButton(
                         onPressed: () {
-                          context.go(AppRouter.registration);
+                          context.push(AppRouter.registration);
                         },
                         child: Text(
                           'Hesap Oluştur',

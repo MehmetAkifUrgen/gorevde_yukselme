@@ -277,30 +277,8 @@ class _PerformanceAnalysisPageState extends ConsumerState<PerformanceAnalysisPag
             ),
           ],
         ),
-        const SizedBox(height: 16),
-        Container(
-          padding: const EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            color: Colors.orange.withOpacity(0.1),
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: Colors.orange.withOpacity(0.3)),
-          ),
-          child: Row(
-            children: [
-              Icon(Icons.info_outline, color: Colors.orange, size: 20),
-              const SizedBox(width: 8),
-              Expanded(
-                child: Text(
-                  'Bu veriler sadece bu cihazda saklanır. Giriş yaparak tüm cihazlarınızda senkronize edebilirsiniz.',
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.orange[700],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
+       
+        
       ],
     );
   }

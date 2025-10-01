@@ -382,31 +382,55 @@ class _RegistrationPageState extends ConsumerState<RegistrationPage> {
                     ),
                   ),
                   
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 32),
                   
-                  // Sign In Link
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Zaten hesabınız var mı? ',
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: AppTheme.primaryNavyBlue,
-                        ),
+                  // Sign In Link - Better positioned
+                  Container(
+                    padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+                    decoration: BoxDecoration(
+                      color: AppTheme.secondaryWhite.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                        color: AppTheme.secondaryWhite.withOpacity(0.3),
+                        width: 1,
                       ),
-                      TextButton(
-                        onPressed: () {
-                          context.go(AppRouter.login);
-                        },
-                        child: Text(
-                          'Giriş Yap',
-                          style: TextStyle(
-                            color: AppTheme.accentGold,
-                            fontWeight: FontWeight.bold,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.login,
+                          color: AppTheme.secondaryWhite,
+                          size: 20,
+                        ),
+                        const SizedBox(width: 8),
+                        Text(
+                          'Zaten hesabınız var mı? ',
+                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: AppTheme.secondaryWhite,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
-                      ),
-                    ],
+                        TextButton(
+                          onPressed: () {
+                            context.pop(); // Geri dön
+                          },
+                          style: TextButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                            minimumSize: Size.zero,
+                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                          ),
+                          child: Text(
+                            'Giriş Yap',
+                            style: TextStyle(
+                              color: AppTheme.accentGold,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),

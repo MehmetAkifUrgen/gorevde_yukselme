@@ -36471,6 +36471,170 @@
                 }
             }
         }
+    },
+    "mini_sorular": {
+        "Görevde Yükselme": {
+            "Adalet Bakanlığı": {
+                "İdare Memuru": {
+                    "Mini Sorular 1":[
+                        {
+                            "soru_no": 5,
+                            "soru": "T.C. Anayasası’na göre milletvekilinin, Meclis çalışmalarına özürsüz veya izinsiz olarak bir ay içerisinde toplam beş birleşim günü katılmamasına bağlı olarak Genel Kurulun, milletvekilinin milletvekilliğinin düşmesi yönünde verdiği karara karşı ilgilinin Anayasa Mahkemesine yaptığı iptal başvurusunu, Anayasa Mahkemesi en geç kaç gün içerisinde karara bağlar?",
+                            "secenekler": {
+                                "A": "On beş",
+                                "B": "Yirmi",
+                                "C": "Yirmi beş",
+                                "D": "Otuz"
+                            },
+                            "dogru_cevap": "On beş",
+                            "ozet": "İlgili düzenlemeye göre On beş doğru ifadedir."
+                        },
+                        {
+                            "soru_no": 6,
+                            "soru": "I. Dünya Savaşı’na İtilaf Devletleri’nin yanında en son katılan ülke, aşağıdakilerden hangisidir?",
+                            "secenekler": {
+                                "A": "Avustralya",
+                                "B": "Hindistan",
+                                "C": "Kanada",
+                                "D": "ABD"
+                            },
+                            "dogru_cevap": "ABD",
+                            "ozet": "Numaralı maddeler değerlendirildiğinde doğru kombinasyon ABD olur."
+                        },
+                        {
+                            "soru_no": 7,
+                            "soru": "Ali Fuat Cebesoy’u, Batı Anadolu Umum Kuvayımilliye Kumandanlığı’na aşağıdakilerden hangisi atamıştır?",
+                            "secenekler": {
+                                "A": "Heyet-i Temsiliye",
+                                "B": "Osmanlı Hükûmeti",
+                                "C": "Türkiye Büyük Millet Meclisi",
+                                "D": "Son Osmanlı Mebusan Meclisi"
+                            },
+                            "dogru_cevap": "Heyet-i Temsiliye",
+                            "ozet": "Verilen sayısal/koşullu bilgiler altında doğru sonuç Heyet-i Temsiliye’dir."
+                        },
+                        {
+                            "soru_no": 8,
+                            "soru": "Türk ordusu, Dumlupınar Meydan Savaşı’nı hangi cephede kazanmıştır?",
+                            "secenekler": {
+                                "A": "Çanakkale",
+                                "B": "Kafkas",
+                                "C": "Güney",
+                                "D": "Batı"
+                            },
+                            "dogru_cevap": "Batı",
+                            "ozet": "Soru köküne en uygun ifade Batı olduğundan doğrudur."
+                        },
+                        {
+                            "soru_no": 9,
+                            "soru": "Düyûn-ı Umumiye, Lozan Barış Görüşmelerinde ele alınan aşağıdaki konulardan hangisiyle ilgilidir?",
+                            "secenekler": {
+                                "A": "Savaş tazminatları",
+                                "B": "Devlet borçları",
+                                "C": "Kapitülasyonlar",
+                                "D": "Boğazlar"
+                            },
+                            "dogru_cevap": "Devlet borçları",
+                            "ozet": "Soru köküne en uygun ifade Devlet borçları olduğundan doğrudur."
+                        },
+                        {
+                            "soru_no": 10,
+                            "soru": "Aşağıdakilerden hangisi Şeyh Sait Ayaklanması ve Menemen Olayı için söylenebilecek bir ortak özelliktir?",
+                            "secenekler": {
+                                "A": "Laikliğe ve cumhuriyete tepki olarak ortaya çıkmaları",
+                                "B": "Aynı gün ve tarihte meydana gelmeleri",
+                                "C": "İngilizler tarafından desteklenmeleri",
+                                "D": "Aynı bölgede gerçekleşmeleri 4 İDARE MEMURU A"
+                            },
+                            "dogru_cevap": "Laikliğe ve cumhuriyete tepki olarak ortaya çıkmaları",
+                            "ozet": "Verilen sayısal/koşullu bilgiler altında doğru sonuç Laikliğe ve cumhuriyete tepki olarak ortaya çıkmaları’dir."
+                        },
+                        {
+                            "soru_no": 11,
+                            "soru": "Aşağıdakilerden hangisi Tanzimat Dönemi demokratikleşme hareketleriyle ilgili belgeler arasında yer alır?",
+                            "secenekler": {
+                                "A": "Fatih Sultan Mehmet Ahidnamesi",
+                                "B": "Islahat Fermanı",
+                                "C": "Kanun-i Esasi",
+                                "D": "Sened-i İttifak"
+                            },
+                            "dogru_cevap": "Islahat Fermanı",
+                            "ozet": "Soru köküne en uygun ifade Islahat Fermanı olduğundan doğrudur."
+                        },
+                        {
+                            "soru_no": 12,
+                            "soru": "Temel hak ve özgürlüklerin kötüye kullanılmaması kuralı aşağıdakilerden hangisiyle anayasa hukukumuza girmiştir?",
+                            "secenekler": {
+                                "A": "1961 Anayasası’nın kabulü ile",
+                                "B": "1982 Anayasası’nın kabulü ile",
+                                "C": "1961 Anayasası’nda 1971’de yapılan değişiklikle",
+                                "D": "1982 Anayasası’nda 2001’de yapılan değişiklikle"
+                            },
+                            "dogru_cevap": "1961 Anayasası’nda 1971’de yapılan değişiklikle",
+                            "ozet": "İlgili düzenlemeye göre 1961 Anayasası’nda 1971’de yapılan değişiklikle doğru ifadedir."
+                        },
+                        {
+                            "soru_no": 13,
+                            "soru": "Fransız İnsan ve Yurttaş Hakları Bildirgesi’nin 7. madddesinde şu ifadeler yer almaktadır: “Yasanın gösterdiği durumlar dışında hiç kimse suçlanamaz, tutuklanamaz, gözaltına alınamaz. Bütün bunlar için yasanın koyduğu biçimlere uymak gerekir. Keyfi buyruklar verilmesini isteyenler, verenler ve yerine getirenler cezalandırılır; ancak yasa gereği tutulan ya da çağrılan her vatandaş hemen uymaya mecburdur; direnenler cezalandırılır.” Bu madde aşağıdakilerden hangisini vurgulamaktadır?",
+                            "secenekler": {
+                                "A": "Kuvvetler birliğini",
+                                "B": "Hukukun üstünlüğünü",
+                                "C": "Sosyal devlet anlayışını",
+                                "D": "Suç ve cezanın şahsiliğini"
+                            },
+                            "dogru_cevap": "Hukukun üstünlüğünü",
+                            "ozet": "Verilen sayısal/koşullu bilgiler altında doğru sonuç Hukukun üstünlüğünü’dir."
+                        },
+                        {
+                            "soru_no": 14,
+                            "soru": "I. Mülkiyet hakkı II. Sendika kurma hakkı III. Sosyal güvenlik hakkı Yukarıdakilerden hangileri negatif statü hakları arasında yer alır?",
+                            "secenekler": {
+                                "A": "Yalnız I",
+                                "B": "Yalnız II",
+                                "C": "I ve II",
+                                "D": "II ve III"
+                            },
+                            "dogru_cevap": "Yalnız I",
+                            "ozet": "Numaralı maddeler değerlendirildiğinde doğru kombinasyon Yalnız I olur."
+                        }
+                    
+                    ]
+                },
+                "İdari İşler Müdürü": {},
+                "İkinci Müdür": {},
+                "İnfaz Koruma Baş Memurluğu": {},
+                "Şef": {},
+                "Zabıt Katibi": {},
+                "İcra Müdür ve Müdür Yardımcıları": {},
+                "Denetimli Serbestlik Müdür Yardımcılığı": {},
+                "Memur": {},
+                "Sayman": {}
+            }
+        },
+        "Ünvan Değişikliği": {
+            "Adalet Bakanlığı": {
+                "İdare Memuru": {},
+                "Şef": {},
+                "Sayman": {},
+                "İkinci Müdür": {},
+                "İnfaz Koruma Baş Memurluğu": {},
+                "Sosyolog": {},
+                "Öğretmen": {},
+                "Gıda Mühendisi": {},
+                "Makine Mühendisi": {},
+                "Orman Endüstri Mühendisi": {},
+                "Çevre Mühendisi": {},
+                "Elektrik Elektronik Mühendisi": {},
+                "Tekstil Mühendisi": {},
+                "Bilgisayar Teknisyeni": {},
+                "Mobilya Teknisyeni": {},
+                "İnşaat Teknisyeni": {},
+                "Gıda Teknisyeni": {},
+                "Elektrik Teknisyeni": {},
+                "Ziraat Teknisyeni": {},
+                "Makine Teknisyeni": {},
+                "Sağlık Memuru": {}
+            }
+        }
     }
-   
 }
