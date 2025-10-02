@@ -340,7 +340,7 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
           ),
           const SizedBox(height: 8),
           Text(
-              subscription.plan == SubscriptionPlan.monthly ? 'Aylık Plan' : 'Yıllık Plan',
+              subscription.plan == SubscriptionPlan.monthly ? 'Aylık Plan' : '3 Aylık Plan',
               style: TextStyle(
                 fontSize: 16,
                 color: AppTheme.primaryNavyBlue.withValues(alpha: 0.8),

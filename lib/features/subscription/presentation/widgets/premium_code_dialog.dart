@@ -285,7 +285,7 @@ class _PremiumCodeDialogState extends ConsumerState<PremiumCodeDialog> {
                   const SizedBox(height: 8),
                   Text(
                     '• GYUD-MONTHLY-XXXX (Aylık Premium)\n'
-                    '• GYUD-YEARLY-XXXX (Yıllık Premium)\n'
+                    '• GYUD-QUARTERLY-XXXX (3 Aylık Premium)\n'
                     '• PROMO-XXXX (Promosyon Kodları)\n'
                     '• GIFT-XXXX (Hediye Kodları)',
                     style: TextStyle(

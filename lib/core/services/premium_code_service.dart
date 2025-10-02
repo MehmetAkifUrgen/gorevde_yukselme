@@ -185,17 +185,17 @@ class PremiumCodeService {
     if (code.startsWith('GYUD-MONTHLY-')) {
       plan = SubscriptionPlan.monthly;
       durationDays = 30;
-    } else if (code.startsWith('GYUD-YEARLY-')) {
-      plan = SubscriptionPlan.yearly;
-      durationDays = 365;
+    } else if (code.startsWith('GYUD-QUARTERLY-')) {
+      plan = SubscriptionPlan.quarterly;
+      durationDays = 90;
     } else if (code.startsWith('PROMO-')) {
       // Promo codes are usually monthly
       plan = SubscriptionPlan.monthly;
       durationDays = 30;
     } else if (code.startsWith('GIFT-')) {
-      // Gift codes can be yearly
-      plan = SubscriptionPlan.yearly;
-      durationDays = 365;
+      // Gift codes can be quarterly
+      plan = SubscriptionPlan.quarterly;
+      durationDays = 90;
     } else if (code.startsWith('TEST-')) {
       // Test codes are monthly
       plan = SubscriptionPlan.monthly;

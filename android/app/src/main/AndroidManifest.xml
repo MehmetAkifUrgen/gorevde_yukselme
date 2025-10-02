@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     
     <application
-        android:label="gorevde_yukselme"
+        android:label="Kamu Sınavlarına Hazırlık"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

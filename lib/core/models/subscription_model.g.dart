@@ -53,7 +53,7 @@ Map<String, dynamic> _$$SubscriptionModelImplToJson(
 const _$SubscriptionPlanEnumMap = {
   SubscriptionPlan.free: 'free',
   SubscriptionPlan.monthly: 'monthly',
-  SubscriptionPlan.yearly: 'yearly',
+  SubscriptionPlan.quarterly: 'quarterly',
 };
 
 const _$StoreTypeEnumMap = {

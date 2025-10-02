@@ -36,14 +36,14 @@ Google Play Console'da şu adımları takip edin:
 - **Grace period**: 3 days
 - **Free trial**: 7 days (opsiyonel)
 
-#### Yıllık Premium
-- **Product ID**: `gorevde_yukselme_yearly`
-- **Name**: Yıllık Premium Üyelik
-- **Description**: Tüm premium özellikler + tasarruf
+#### 3 Aylık Premium
+- **Product ID**: `gorevde_yukselme_quarterly`
+- **Name**: 3 Aylık Premium Üyelik
+- **Description**: En iyi tasarruf ile premium özellikler
 - **Price**: Mağaza tarafından belirlenir (Google Play Console'da ayarlayın)
-- **Billing period**: 1 year
-- **Grace period**: 7 days
-- **Free trial**: 14 days (opsiyonel)
+- **Billing period**: 3 months
+- **Grace period**: 5 days
+- **Free trial**: 7 days (opsiyonel)
 
 ### 3. Google Play Console Ayarları
 ```xml
@@ -82,12 +82,6 @@ App Store Connect'te şu adımları takip edin:
 - **Price**: Mağaza tarafından belirlenir (App Store Connect'te ayarlayın)
 - **Free Trial**: 7 days (opsiyonel)
 
-#### Yıllık Premium
-- **Product ID**: `com.gorevdeyukselme.yearly`
-- **Reference Name**: Yearly Premium
-- **Subscription Duration**: 1 Year
-- **Price**: Mağaza tarafından belirlenir (App Store Connect'te ayarlayın)
-- **Free Trial**: 14 days (opsiyonel)
 
 ### 2. iOS Info.plist Ayarları
 ```xml
@@ -111,13 +105,13 @@ Uygulama şu kod formatlarını destekler:
 
 #### Resmi Kodlar
 - `GYUD-MONTHLY-XXXX` - Aylık Premium (30 gün)
-- `GYUD-YEARLY-XXXX` - Yıllık Premium (365 gün)
+- `GYUD-QUARTERLY-XXXX` - 3 Aylık Premium (90 gün)
 
 #### Promosyon Kodları
 - `PROMO-XXXX` - Promosyon kodları (genellikle aylık)
 
 #### Hediye Kodları
-- `GIFT-XXXX` - Hediye kodları (genellikle yıllık)
+- `GIFT-XXXX` - Hediye kodları (genellikle 3 aylık)
 
 #### Test Kodları (Sadece Debug Modunda)
 - `TEST-XXXX` - Test kodları
@@ -125,7 +119,7 @@ Uygulama şu kod formatlarını destekler:
 ### Kod Örnekleri
 ```
 GYUD-MONTHLY-ABC123
-GYUD-YEARLY-XYZ789
+GYUD-QUARTERLY-XYZ789
 PROMO-SUMMER2024
 GIFT-NEWYEAR2024
 TEST-DEVELOPER
@@ -147,7 +141,7 @@ Debug modunda şu test kodları kullanılabilir:
 
 ```
 TEST-MONTHLY-001
-TEST-YEARLY-001
+TEST-QUARTERLY-001
 TEST-PROMO-001
 TEST-GIFT-001
 ```

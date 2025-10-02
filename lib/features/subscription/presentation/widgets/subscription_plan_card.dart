@@ -18,8 +18,6 @@ class SubscriptionPlanCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isYearly = product.plan == SubscriptionPlan.yearly;
-    final monthlyPrice = isYearly ? (product.price / 12) : product.price;
     
     return GestureDetector(
       onTap: onTap,
@@ -53,14 +51,14 @@ class SubscriptionPlanCard extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          isYearly ? 'Yıllık Plan' : 'Aylık Plan',
+                          _getPlanTitle(),
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                             color: AppTheme.primaryNavyBlue,
                           ),
                         ),
-                        if (isYearly) ...[
+                        if (product.plan == SubscriptionPlan.quarterly) ...[
                           const SizedBox(width: 8),
                           Container(
                             padding: const EdgeInsets.symmetric(
@@ -72,7 +70,7 @@ class SubscriptionPlanCard extends StatelessWidget {
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: const Text(
-                              '%60 İNDİRİM',
+                              'EN İYİ TASARRUF',
                               style: TextStyle(
                                 fontSize: 10,
                                 fontWeight: FontWeight.bold,
@@ -85,7 +83,7 @@ class SubscriptionPlanCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      isYearly ? 'En popüler seçenek' : 'Esnek ödeme',
+                      _getPlanSubtitle(),
                       style: TextStyle(
                         fontSize: 14,
                         color: AppTheme.darkGrey,
@@ -115,7 +113,7 @@ class SubscriptionPlanCard extends StatelessWidget {
                 ),
                 const SizedBox(width: 4),
                 Text(
-                  isYearly ? '/yıl' : '/ay',
+                  _getPlanPeriod(),
                   style: TextStyle(
                     fontSize: 16,
                     color: AppTheme.darkGrey,
@@ -123,10 +121,10 @@ class SubscriptionPlanCard extends StatelessWidget {
                 ),
               ],
             ),
-            if (isYearly) ...[
+            if (product.plan == SubscriptionPlan.quarterly) ...[
               const SizedBox(height: 4),
               Text(
-                'Aylık ₺${monthlyPrice.toStringAsFixed(2)}',
+                'Aylık ₺${(product.price / 3).toStringAsFixed(2)}',
                 style: TextStyle(
                   fontSize: 14,
                   color: AppTheme.darkGrey,
@@ -163,5 +161,38 @@ class SubscriptionPlanCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String _getPlanTitle() {
+    switch (product.plan) {
+      case SubscriptionPlan.monthly:
+        return 'Aylık Plan';
+      case SubscriptionPlan.quarterly:
+        return '3 Aylık Plan';
+      default:
+        return 'Premium Plan';
+    }
+  }
+
+  String _getPlanSubtitle() {
+    switch (product.plan) {
+      case SubscriptionPlan.monthly:
+        return 'Esnek ödeme';
+      case SubscriptionPlan.quarterly:
+        return 'En popüler seçenek';
+      default:
+        return 'Premium özellikler';
+    }
+  }
+
+  String _getPlanPeriod() {
+    switch (product.plan) {
+      case SubscriptionPlan.monthly:
+        return '/ay';
+      case SubscriptionPlan.quarterly:
+        return '/3 ay';
+      default:
+        return '';
+    }
   }
 }

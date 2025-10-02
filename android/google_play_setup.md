@@ -24,18 +24,18 @@ Aşağıdaki ürün kimliklerini Google Play Console'da oluşturun:
 
 #### Abonelik Ürünleri:
 1. **Aylık Premium Abonelik**
-   - Product ID: `premium_monthly`
+   - Product ID: `gorevde_yukselme_monthly`
    - Ürün Türü: Subscription (Abonelik)
    - Fiyat: Google Play Console'da belirlenir
    - Yenileme Süresi: 1 ay
    - Açıklama: "Aylık premium üyelik - Sınırsız soru çözme ve reklamsız deneyim"
 
-2. **Yıllık Premium Abonelik**
-   - Product ID: `premium_yearly`
+2. **3 Aylık Premium Abonelik**
+   - Product ID: `gorevde_yukselme_quarterly`
    - Ürün Türü: Subscription (Abonelik)
    - Fiyat: Google Play Console'da belirlenir
-   - Yenileme Süresi: 1 yıl
-   - Açıklama: "Yıllık premium üyelik - Tasarruflu, sınırsız soru çözme ve reklamsız deneyim"
+   - Yenileme Süresi: 3 ay
+   - Açıklama: "3 Aylık premium üyelik - En iyi tasarruf, sınırsız soru çözme ve reklamsız deneyim"
 
 ## 4. Abonelik Grupları (Subscription Groups)
 

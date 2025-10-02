@@ -15,7 +15,7 @@ enum StoreType {
 enum SubscriptionPlan {
   free,
   monthly,
-  yearly,
+  quarterly,
 }
 
 /// Premium features available to subscribers
@@ -105,19 +105,19 @@ class PurchaseResult with _$PurchaseResult {
 class ProductIds {
   // Google Play Store product IDs
   static const String googlePlayMonthly = 'gorevde_yukselme_monthly';
-  static const String googlePlayYearly = 'gorevde_yukselme_yearly';
+  static const String googlePlayQuarterly = 'gorevde_yukselme_quarterly';
   
   // App Store product IDs
   static const String appStoreMonthly = 'com.gorevdeyukselme.monthly';
-  static const String appStoreYearly = 'com.gorevdeyukselme.yearly';
+  static const String appStoreQuarterly = 'com.gorevdeyukselme.quarterly';
   
   /// Get product IDs for current platform
   static List<String> getProductIds(StoreType store) {
     switch (store) {
       case StoreType.googlePlay:
-        return [googlePlayMonthly, googlePlayYearly];
+        return [googlePlayMonthly, googlePlayQuarterly];
       case StoreType.appStore:
-        return [appStoreMonthly, appStoreYearly];
+        return [appStoreMonthly, appStoreQuarterly];
       case StoreType.premiumCode:
         return []; // Premium codes don't have product IDs
       case StoreType.unknown:
@@ -129,8 +129,8 @@ class ProductIds {
   static SubscriptionPlan getPlanFromProductId(String productId) {
     if (productId.contains('monthly')) {
       return SubscriptionPlan.monthly;
-    } else if (productId.contains('yearly')) {
-      return SubscriptionPlan.yearly;
+    } else if (productId.contains('quarterly')) {
+      return SubscriptionPlan.quarterly;
     }
     return SubscriptionPlan.free;
   }
@@ -180,8 +180,8 @@ class SubscriptionPlanInfo {
         PremiumFeature.prioritySupport,
       ],
     },
-    SubscriptionPlan.yearly: {
-      'name': 'Yıllık Premium',
+    SubscriptionPlan.quarterly: {
+      'name': '3 Aylık Premium',
       'price': 0.0, // Price will come from store
       'currency': 'TL',
       'features': [
@@ -193,7 +193,7 @@ class SubscriptionPlanInfo {
         PremiumFeature.customStudyPlans,
         PremiumFeature.advancedFilters,
       ],
-      'savings': 'Tasarruf',
+      'savings': 'En İyi Tasarruf',
     },
   };
   

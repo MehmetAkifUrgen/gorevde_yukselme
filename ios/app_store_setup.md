@@ -24,7 +24,7 @@ Aşağıdaki ürün kimliklerini App Store Connect'te oluşturun:
 
 #### Auto-Renewable Subscriptions:
 1. **Aylık Premium Abonelik**
-   - Product ID: `premium_monthly`
+   - Product ID: `com.gorevdeyukselme.monthly`
    - Reference Name: "Premium Monthly Subscription"
    - Subscription Group: "Premium Membership"
    - Subscription Duration: 1 Month
@@ -33,23 +33,23 @@ Aşağıdaki ürün kimliklerini App Store Connect'te oluşturun:
      - Display Name: "Aylık Premium Üyelik"
      - Description: "Sınırsız soru çözme, reklamsız deneyim ve premium özellikler"
 
-2. **Yıllık Premium Abonelik**
-   - Product ID: `premium_yearly`
-   - Reference Name: "Premium Yearly Subscription"
+2. **3 Aylık Premium Abonelik**
+   - Product ID: `com.gorevdeyukselme.quarterly`
+   - Reference Name: "Premium Quarterly Subscription"
    - Subscription Group: "Premium Membership"
-   - Subscription Duration: 1 Year
+   - Subscription Duration: 3 Months
    - Price: App Store Connect'te belirlenir
    - Localization (Turkish):
-     - Display Name: "Yıllık Premium Üyelik"
-     - Description: "Tasarruflu yıllık premium üyelik - Sınırsız soru çözme ve reklamsız deneyim"
+     - Display Name: "3 Aylık Premium Üyelik"
+     - Description: "En iyi tasarruf ile premium özellikler"
 
 ## 4. Subscription Groups
 
 1. Subscription Group Name: "Premium Membership"
 2. Her iki ürünü de bu gruba ekleyin
 3. Subscription levels:
-   - Level 1: Monthly (premium_monthly)
-   - Level 2: Yearly (premium_yearly)
+   - Level 1: Monthly (com.gorevdeyukselme.monthly)
+   - Level 2: Quarterly (com.gorevdeyukselme.quarterly)
 
 ## 5. Agreements, Tax, and Banking
 
@@ -140,7 +140,7 @@ Gerekli izinler zaten `in_app_purchase` paketi tarafından otomatik eklenir.
 ```
 Bu uygulama premium abonelik sistemi içerir:
 - Aylık abonelik: ₺29.99
-- Yıllık abonelik: ₺149.99
+- 3 Aylık abonelik: ₺89.99
 
 Premium özellikler:
 - Sınırsız soru çözme
