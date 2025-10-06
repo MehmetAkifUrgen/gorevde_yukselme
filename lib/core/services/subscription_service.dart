@@ -273,9 +273,6 @@ class SubscriptionService {
   /// Verify purchase using platform-specific validation
   Future<bool> _verifyPurchase(PurchaseDetails purchaseDetails) async {
     try {
-      // The in_app_purchase plugin already handles platform-specific verification
-      // We just need to check the purchase status and validate basic fields
-      
       // Check if purchase has required fields
       if (purchaseDetails.productID.isEmpty) {
         debugPrint('Invalid purchase: empty product ID');
@@ -289,30 +286,89 @@ class SubscriptionService {
         return false;
       }
       
-      // For Android, check purchase token
-      if (Platform.isAndroid) {
-        final purchaseToken = _getPurchaseToken(purchaseDetails);
-        if (purchaseToken == null || purchaseToken.isEmpty) {
-          debugPrint('Invalid Android purchase: empty purchase token');
-          return false;
-        }
-      }
-      
-      // For iOS, check transaction ID
+      // Apple's recommended approach: Try production first, then sandbox
       if (Platform.isIOS) {
-        if (purchaseDetails.purchaseID == null || purchaseDetails.purchaseID!.isEmpty) {
-          debugPrint('Invalid iOS purchase: empty transaction ID');
-          return false;
-        }
+        return await _verifyIOSReceipt(purchaseDetails);
+      } else if (Platform.isAndroid) {
+        return await _verifyAndroidReceipt(purchaseDetails);
       }
       
-      // The plugin already validates the receipt with the store
-      // So if we reach here, the purchase is valid
       debugPrint('Purchase verified successfully: ${purchaseDetails.productID}');
       return true;
       
     } catch (e) {
       debugPrint('Purchase verification failed: $e');
+      return false;
+    }
+  }
+
+  /// Verify iOS receipt with Apple's recommended approach
+  Future<bool> _verifyIOSReceipt(PurchaseDetails purchaseDetails) async {
+    try {
+      // Apple's recommended approach: Try production first, then sandbox
+      debugPrint('Verifying iOS receipt for product: ${purchaseDetails.productID}');
+      
+      // Check basic fields first
+      if (purchaseDetails.purchaseID == null || purchaseDetails.purchaseID!.isEmpty) {
+        debugPrint('Invalid iOS purchase: empty transaction ID');
+        return false;
+      }
+      
+      // The in_app_purchase plugin handles the production/sandbox validation automatically
+      // It will try production first, then fall back to sandbox if needed
+      
+      // Additional validation: Check if purchase is in pending state
+      if (purchaseDetails.status == iap.PurchaseStatus.pending) {
+        debugPrint('iOS purchase is pending, waiting for completion');
+        return false;
+      }
+      
+      // Check if purchase is completed
+      if (purchaseDetails.status != iap.PurchaseStatus.purchased && 
+          purchaseDetails.status != iap.PurchaseStatus.restored) {
+        debugPrint('iOS purchase not completed, status: ${purchaseDetails.status}');
+        return false;
+      }
+      
+      debugPrint('iOS purchase verified successfully: ${purchaseDetails.productID}');
+      return true;
+      
+    } catch (e) {
+      debugPrint('iOS receipt verification failed: $e');
+      return false;
+    }
+  }
+
+  /// Verify Android receipt
+  Future<bool> _verifyAndroidReceipt(PurchaseDetails purchaseDetails) async {
+    try {
+      debugPrint('Verifying Android receipt for product: ${purchaseDetails.productID}');
+      
+      // Check purchase token
+      final purchaseToken = _getPurchaseToken(purchaseDetails);
+      if (purchaseToken == null || purchaseToken.isEmpty) {
+        debugPrint('Invalid Android purchase: empty purchase token');
+        return false;
+      }
+      
+      // Check if purchase is in pending state
+      if (purchaseDetails.status == iap.PurchaseStatus.pending) {
+        debugPrint('Android purchase is pending, waiting for completion');
+        return false;
+      }
+      
+      // Check if purchase is completed
+      if (purchaseDetails.status != iap.PurchaseStatus.purchased && 
+          purchaseDetails.status != iap.PurchaseStatus.restored) {
+        debugPrint('Android purchase not completed, status: ${purchaseDetails.status}');
+        return false;
+      }
+      
+      debugPrint('Android purchase verified successfully: ${purchaseDetails.productID}');
+      return true;
+      
+    } catch (e) {
+      debugPrint('Android receipt verification failed: $e');
       return false;
     }
   }

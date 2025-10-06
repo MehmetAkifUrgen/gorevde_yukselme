@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../core/models/subscription_model.dart';
 import '../../../../core/providers/app_providers.dart';
@@ -284,7 +283,6 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
                 const SizedBox(height: 24),
                 
                 // Terms and Privacy
-                _buildTermsAndPrivacy(),
                 
                 const SizedBox(height: 32),
               ],
@@ -503,125 +501,8 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
 
 
 
-  Widget _buildTermsAndPrivacy() {
-    return Column(
-      children: [
-        Text(
-          'Satın alma işlemi ile Kullanım Şartları ve Gizlilik Politikası\'nı kabul etmiş olursunuz.',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 12,
-            color: AppTheme.darkGrey,
-            height: 1.4,
-          ),
-        ),
-        const SizedBox(height: 8),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextButton(
-              onPressed: _openTermsOfService,
-              child: Text(
-                'Kullanım Şartları',
-                style: TextStyle(
-                  fontSize: 12,
-                  color: AppTheme.primaryNavyBlue,
-                  decoration: TextDecoration.underline,
-                ),
-              ),
-            ),
-            Text(
-              ' • ',
-              style: TextStyle(
-                color: AppTheme.darkGrey,
-              ),
-            ),
-            TextButton(
-              onPressed: _openPrivacyPolicy,
-              child: Text(
-                'Gizlilik Politikası',
-                style: TextStyle(
-                  fontSize: 12,
-                  color: AppTheme.primaryNavyBlue,
-                  decoration: TextDecoration.underline,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
 
-  Future<void> _openTermsOfService() async {
-    const url = 'https://gorevdeyukselme.com/terms-of-service';
-    
-    if (!context.mounted) return;
-    
-    try {
-      final canLaunch = await canLaunchUrl(Uri.parse(url));
-      if (!context.mounted) return;
-      
-      if (canLaunch) {
-        await launchUrl(
-          Uri.parse(url),
-          mode: LaunchMode.externalApplication,
-        );
-      } else {
-        if (!context.mounted) return;
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Kullanım şartları sayfası açılamadı'),
-            backgroundColor: Colors.red,
-          ),
-        );
-      }
-    } catch (e) {
-      if (!context.mounted) return;
-      
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Hata: \${e.toString()}'),
-          backgroundColor: Colors.red,
-        ),
-      );
-    }
-  }
 
-  Future<void> _openPrivacyPolicy() async {
-    const url = 'https://gorevdeyukselme.com/privacy-policy';
-    
-    if (!context.mounted) return;
-    
-    try {
-      final canLaunch = await canLaunchUrl(Uri.parse(url));
-      if (!context.mounted) return;
-      
-      if (canLaunch) {
-        await launchUrl(
-          Uri.parse(url),
-          mode: LaunchMode.externalApplication,
-        );
-      } else {
-        if (!context.mounted) return;
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Gizlilik politikası sayfası açılamadı'),
-            backgroundColor: Colors.red,
-          ),
-        );
-      }
-    } catch (e) {
-      if (!context.mounted) return;
-      
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Hata: \${e.toString()}'),
-          backgroundColor: Colors.red,
-        ),
-      );
-    }
-  }
 
   String _formatDate(DateTime date) {
     return '${date.day}/${date.month}/${date.year}';

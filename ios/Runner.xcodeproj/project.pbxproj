@@ -17,6 +17,7 @@
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
 		B5C670A7690D007FC9A2E4DE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 487D4165CA7DE2FBA6A02838 /* GoogleService-Info.plist */; };
 		BBD7F6FBE4D23D5549DB45DC /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BAE90C30A1982C7B275CFED /* Pods_Runner.framework */; };
+		E3D4436F2E912BEE0058629B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3D4436E2E912BEE0058629B /* StoreKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,8 @@
 		CD699B1F1D96DEA1F84B071B /* Pods-Runner.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig"; sourceTree = "<group>"; };
 		D921C0BE028246F32A2D8A05 /* Pods-Runner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug.xcconfig"; sourceTree = "<group>"; };
 		DD137A271CCE722496D62503 /* Pods-RunnerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release.xcconfig"; sourceTree = "<group>"; };
+		E3D4436D2E912BD70058629B /* RunnerRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RunnerRelease.entitlements; sourceTree = "<group>"; };
+		E3D4436E2E912BEE0058629B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +86,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BBD7F6FBE4D23D5549DB45DC /* Pods_Runner.framework in Frameworks */,
+				E3D4436F2E912BEE0058629B /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,6 +117,7 @@
 		946C685BEBCC6774B468EF03 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E3D4436E2E912BEE0058629B /* StoreKit.framework */,
 				4BAE90C30A1982C7B275CFED /* Pods_Runner.framework */,
 				337F85F494260F47A464629D /* Pods_RunnerTests.framework */,
 			);
@@ -155,6 +160,7 @@
 		97C146F01CF9000F007C117D /* Runner */ = {
 			isa = PBXGroup;
 			children = (
+				E3D4436D2E912BD70058629B /* RunnerRelease.entitlements */,
 				97C146FA1CF9000F007C117D /* Main.storyboard */,
 				97C146FD1CF9000F007C117D /* Assets.xcassets */,
 				97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */,
@@ -283,13 +289,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -357,13 +359,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -526,8 +524,8 @@
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = DM573QJ7TM;
 				ENABLE_BITCODE = NO;
-				FLUTTER_BUILD_NAME = 1.0.1;
-				FLUTTER_BUILD_NUMBER = 2;
+				FLUTTER_BUILD_NAME = 1.0.2;
+				FLUTTER_BUILD_NUMBER = 3;
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -715,8 +713,8 @@
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = DM573QJ7TM;
 				ENABLE_BITCODE = NO;
-				FLUTTER_BUILD_NAME = 1.0.1;
-				FLUTTER_BUILD_NUMBER = 2;
+				FLUTTER_BUILD_NAME = 1.0.2;
+				FLUTTER_BUILD_NUMBER = 3;
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -737,6 +735,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Runner/RunnerRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
@@ -744,8 +743,8 @@
 				DEVELOPMENT_TEAM = DM573QJ7TM;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = DM573QJ7TM;
 				ENABLE_BITCODE = NO;
-				FLUTTER_BUILD_NAME = 1.0.1;
-				FLUTTER_BUILD_NUMBER = 2;
+				FLUTTER_BUILD_NAME = 1.0.2;
+				FLUTTER_BUILD_NUMBER = 3;
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

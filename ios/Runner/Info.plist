@@ -46,7 +46,7 @@
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>GADApplicationIdentifier</key>
-	<string>ca-app-pub-3940256099942544~1458002511</string>
+	<string>ca-app-pub-6622076556391878~1389003903</string>
 	
 	<!-- StoreKit Configuration -->
 	<key>SKAdNetworkItems</key>

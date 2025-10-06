@@ -6,6 +6,7 @@ import '../../../../core/models/user_model.dart';
 import '../../../../core/models/user_statistics.dart';
 import '../../../../core/providers/auth_providers.dart';
 import '../../../../core/widgets/support_dialog.dart';
+import '../../../../core/widgets/admob_banner_widget.dart';
 import '../widgets/change_password_dialog.dart';
 import '../widgets/delete_account_dialog.dart';
 

@@ -120,6 +120,32 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     }
   }
 
+  Future<void> _handleAppleSignIn() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      await ref.read(authNotifierProvider.notifier).signInWithApple();
+
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+        context.go(AppRouter.home);
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+        
+        // Apple Sign-In hatası için özel mesaj göster
+        ErrorUtils.showGeneralError(context, e);
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -274,6 +300,20 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             backgroundColor: AppTheme.secondaryWhite,
                             foregroundColor: AppTheme.primaryNavyBlue,
                             side: const BorderSide(color: AppTheme.mediumGrey),
+                          ),
+                        ),
+                        
+                        const SizedBox(height: 12),
+                        
+                        // Apple Sign In Button
+                        OutlinedButton.icon(
+                          onPressed: _isLoading ? null : _handleAppleSignIn,
+                          icon: const Icon(Icons.apple, size: 24),
+                          label: const Text('Apple ile Giriş Yap'),
+                          style: OutlinedButton.styleFrom(
+                            backgroundColor: Colors.black,
+                            foregroundColor: AppTheme.secondaryWhite,
+                            side: const BorderSide(color: Colors.black),
                           ),
                         ),
                         

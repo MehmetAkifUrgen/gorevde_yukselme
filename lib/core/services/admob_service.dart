@@ -8,11 +8,15 @@ class AdMobService {
   
   AdMobService._();
 
-  // Test Ad Unit ID - Production'da gerçek ID kullanılacak
+  // Test Ad Unit IDs
   static const String _testInterstitialAdUnitId = 'ca-app-pub-3940256099942544/1033173712';
+  static const String _testBannerAdUnitId = 'ca-app-pub-3940256099942544/6300978111';
   
-  // Production Ad Unit ID - Firebase Console'dan alınacak
-  static const String _productionInterstitialAdUnitId = 'ca-app-pub-3940256099942544/1033173712'; // TODO: Replace with real ID
+  // Production Ad Unit IDs
+  static const String _productionInterstitialAdUnitIdAndroid = 'ca-app-pub-6622076556391878/3632023867';
+  static const String _productionInterstitialAdUnitIdIOS = 'ca-app-pub-6622076556391878/7878514344';
+  static const String _productionBannerAdUnitIdAndroid = 'ca-app-pub-6622076556391878/6300978111'; // TODO: Get real Android banner ID
+  static const String _productionBannerAdUnitIdIOS = 'ca-app-pub-6622076556391878/6300978111'; // TODO: Get real iOS banner ID
   
   InterstitialAd? _interstitialAd;
   bool _isInitialized = false;
@@ -20,11 +24,20 @@ class AdMobService {
   // Get appropriate ad unit ID based on platform and environment
   String get _interstitialAdUnitId {
     if (Platform.isAndroid) {
-      return _productionInterstitialAdUnitId; // TODO: Replace with real Android ID
+      return _productionInterstitialAdUnitIdAndroid;
     } else if (Platform.isIOS) {
-      return _productionInterstitialAdUnitId; // TODO: Replace with real iOS ID
+      return _productionInterstitialAdUnitIdIOS;
     }
     return _testInterstitialAdUnitId;
+  }
+
+  String get _bannerAdUnitId {
+    if (Platform.isAndroid) {
+      return _productionBannerAdUnitIdAndroid;
+    } else if (Platform.isIOS) {
+      return _productionBannerAdUnitIdIOS;
+    }
+    return _testBannerAdUnitId;
   }
 
   /// Initialize AdMob SDK
@@ -130,6 +143,9 @@ class AdMobService {
 
   /// Check if interstitial ad is loaded
   bool get isInterstitialAdLoaded => _interstitialAd != null;
+
+  /// Get banner ad unit ID for external use
+  String get bannerAdUnitId => _bannerAdUnitId;
 
   /// Dispose all ads
   void dispose() {

@@ -1,21 +1,25 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'google_signin_service.dart';
+import 'apple_signin_service.dart';
 import 'session_service.dart';
 
 class AuthService {
   final FirebaseAuth _firebaseAuth;
   final GoogleSignInService _googleSignInService;
+  final AppleSignInService _appleSignInService;
   final FirebaseCrashlytics? _crashlytics;
   final SessionService? _sessionService;
 
   AuthService({
     FirebaseAuth? firebaseAuth,
     GoogleSignInService? googleSignInService,
+    AppleSignInService? appleSignInService,
     FirebaseCrashlytics? crashlytics,
     SessionService? sessionService,
   })  : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
         _googleSignInService = googleSignInService ?? GoogleSignInService(),
+        _appleSignInService = appleSignInService ?? AppleSignInService(),
         _crashlytics = crashlytics,
         _sessionService = sessionService;
 
@@ -81,6 +85,31 @@ class AuthService {
         information: ['Google sign in failed'],
       );
       rethrow;
+    }
+  }
+
+  // Sign in with Apple
+  Future<UserCredential?> signInWithApple() async {
+    try {
+      return await _appleSignInService.signInWithApple();
+    } catch (e) {
+      await _crashlytics?.recordError(
+        e,
+        null,
+        fatal: false,
+        information: ['Apple sign in failed'],
+      );
+      rethrow;
+    }
+  }
+
+  // Check if Apple Sign-In is available
+  Future<bool> isAppleSignInAvailable() async {
+    try {
+      return await _appleSignInService.isAvailable();
+    } catch (e) {
+      print('[AuthService] Error checking Apple Sign-In availability: $e');
+      return false;
     }
   }
 
@@ -377,7 +406,7 @@ class AuthService {
              await targetUser.sendEmailVerification(actionCodeSettings);
              print('[AuthService] Email verification sent successfully to: ${targetUser.email}');
              break; // Success, exit retry loop
-          } on FirebaseAuthException catch (e) {
+          } on FirebaseAuthException {
             retryCount++;
             if (retryCount >= maxRetries) {
               rethrow; // Max retries reached, throw the error
@@ -480,7 +509,7 @@ class AuthService {
     try {
       final user = _firebaseAuth.currentUser;
       if (user != null && _sessionService != null) {
-        await _sessionService!.saveSession(user.uid, user.email ?? '');
+        await _sessionService.saveSession(user.uid, user.email ?? '');
       }
     } catch (e) {
       await _crashlytics?.recordError(

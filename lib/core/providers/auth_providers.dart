@@ -233,6 +233,76 @@ class AuthNotifier extends StateNotifier<AsyncValue<firebase_auth.User?>> {
     }
   }
 
+  Future<void> signInWithApple() async {
+    print('[AuthNotifier] Starting Apple Sign-In...');
+    state = const AsyncValue.loading();
+    try {
+      final credential = await _authService.signInWithApple();
+      
+      print('[AuthNotifier] Apple Sign-In credential received: ${credential != null ? 'Success' : 'Null'}');
+      
+      // Kullanıcı iptal etti veya credential null
+      if (credential == null) {
+        print('[AuthNotifier] User canceled Apple Sign-In or credential is null');
+        // State'i önceki duruma geri döndür (null user)
+        state = const AsyncValue.data(null);
+        return;
+      }
+      
+      if (credential.user != null) {
+        print('[AuthNotifier] Firebase user obtained: ${credential.user!.email}');
+        print('[AuthNotifier] Checking user profile in Firestore...');
+        
+        // Check if user profile exists, if not create one
+        final userDoc = await _firestoreService.getUserProfile(
+          userId: credential.user!.uid,
+        );
+        
+        if (!userDoc.exists) {
+          print('[AuthNotifier] User profile does not exist, creating new profile...');
+          await _firestoreService.createUserProfile(
+            userId: credential.user!.uid,
+            userData: {
+              'email': credential.user!.email ?? '',
+              'displayName': credential.user!.displayName ?? '',
+              'photoURL': credential.user!.photoURL ?? '',
+              'profession': 'student', // Default profession
+              'notificationsEnabled': true,
+              'questionsAnsweredToday': 0,
+              'totalQuestionsAnswered': 0,
+              'correctAnswers': 0,
+              'incorrectAnswers': 0,
+              'averageScore': 0.0,
+              'studyStreak': 0,
+              'lastActiveDate': DateTime.now().toIso8601String(),
+            },
+          );
+        } else {
+          print('[AuthNotifier] User profile already exists');
+        }
+        
+        print('[AuthNotifier] Saving user session...');
+        // Oturumu kaydet
+        await _authService.saveUserSession();
+        
+        print('[AuthNotifier] Merging guest data to remote...');
+        // Merge guest data to remote after Apple login
+        await _localStats.mergeGuestToRemote(userId: credential.user!.uid, firestore: _firestoreService);
+        
+        print('[AuthNotifier] Apple Sign-In completed successfully');
+        state = AsyncValue.data(credential.user);
+      } else {
+        print('[AuthNotifier] Credential exists but user is null');
+        // Credential var ama user null - bu durumda da state'i null yap
+        state = const AsyncValue.data(null);
+      }
+    } catch (error, stackTrace) {
+      print('[AuthNotifier] Apple Sign-In error: $error');
+      print('[AuthNotifier] Error type: ${error.runtimeType}');
+      state = AsyncValue.error(error, stackTrace);
+    }
+  }
+
   Future<bool> isEmailRegisteredWithGoogle({required String email}) async {
     try {
       print('[AuthNotifier] Checking if email is registered with Google: $email');

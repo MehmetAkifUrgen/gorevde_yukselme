@@ -8,6 +8,7 @@ import '../../../../core/models/question_model.dart';
 import '../../../../core/providers/app_providers.dart';
 import '../../../../core/providers/auth_providers.dart';
 import '../../../../core/providers/ad_providers.dart';
+import '../../../../core/widgets/admob_banner_widget.dart';
 import '../../../../core/services/premium_features_service.dart';
 import '../widgets/question_card.dart';
 
@@ -607,13 +608,22 @@ class _RandomQuestionsPracticePageState extends ConsumerState<RandomQuestionsPra
           Expanded(
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(16),
-              child: QuestionCard(
-                question: currentQuestion,
-                fontSize: fontSize,
-                onAnswered: _handleQuestionAnswered,
-                onStarToggle: () {
-                  ref.read(questionsProvider.notifier).toggleQuestionStar(currentQuestion.id);
-                },
+              child: Column(
+                children: [
+                  QuestionCard(
+                    question: currentQuestion,
+                    fontSize: fontSize,
+                    onAnswered: _handleQuestionAnswered,
+                    onStarToggle: () {
+                      ref.read(questionsProvider.notifier).toggleQuestionStar(currentQuestion.id);
+                    },
+                  ),
+                  
+                  const SizedBox(height: 16),
+                  
+                  // Banner Ad
+                  const AdMobBannerWidget(),
+                ],
               ),
             ),
           ),
