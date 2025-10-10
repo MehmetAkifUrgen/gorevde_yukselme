@@ -22,19 +22,34 @@ class AppleSignInService {
 
       print('[AppleSignInService] Starting Apple Sign-In process...');
       
-      // Request Apple ID credential
+      // Check if Apple Sign-In is available
+      final bool isAvailable = await SignInWithApple.isAvailable();
+      if (!isAvailable) {
+        print('[AppleSignInService] Apple Sign-In is not available on this device');
+        throw Exception('Apple Sign-In is not available on this device');
+      }
+      
+      // Request Apple ID credential with timeout
       final credential = await SignInWithApple.getAppleIDCredential(
         scopes: [
           AppleIDAuthorizationScopes.email,
           AppleIDAuthorizationScopes.fullName,
         ],
+      ).timeout(
+        const Duration(seconds: 30),
+        onTimeout: () {
+          throw Exception('Apple Sign-In timed out');
+        },
       );
 
       print('[AppleSignInService] Apple credential obtained');
       print('[AppleSignInService] User ID: ${credential.userIdentifier}');
       print('[AppleSignInService] Email: ${credential.email}');
-      print('[AppleSignInService] Given Name: ${credential.givenName}');
-      print('[AppleSignInService] Family Name: ${credential.familyName}');
+
+      // Validate tokens
+      if (credential.identityToken == null) {
+        throw Exception('Apple identity token is missing');
+      }
 
       // Create Firebase credential
       final oauthCredential = OAuthProvider("apple.com").credential(
@@ -44,16 +59,21 @@ class AppleSignInService {
 
       print('[AppleSignInService] Firebase credential created, signing in...');
 
-      // Sign in to Firebase with Apple credential
-      final UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(oauthCredential);
+      // Sign in to Firebase with Apple credential with timeout
+      final UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(oauthCredential).timeout(
+        const Duration(seconds: 20),
+        onTimeout: () {
+          throw Exception('Firebase sign-in timed out');
+        },
+      );
       
       print('[AppleSignInService] Firebase sign-in successful');
       print('[AppleSignInService] Firebase user: ${userCredential.user?.email}');
-      print('[AppleSignInService] Firebase user ID: ${userCredential.user?.uid}');
       
       return userCredential;
     } catch (error, stackTrace) {
       print('[AppleSignInService] Error during Apple Sign-In: $error');
+      print('[AppleSignInService] Error type: ${error.runtimeType}');
       
       // Record error to Crashlytics
       await _crashlytics?.recordError(
@@ -63,7 +83,8 @@ class AppleSignInService {
         information: ['Apple Sign-In failed'],
       );
       
-      rethrow;
+      // Don't rethrow, return null instead to prevent crashes
+      return null;
     }
   }
 

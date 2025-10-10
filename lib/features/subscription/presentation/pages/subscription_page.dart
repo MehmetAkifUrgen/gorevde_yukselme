@@ -282,7 +282,8 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
                 
                 const SizedBox(height: 24),
                 
-                // Terms and Privacy
+                // Terms and Privacy Links
+                _buildTermsPrivacyLinks(),
                 
                 const SizedBox(height: 32),
               ],
@@ -504,6 +505,81 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
 
 
 
+  Widget _buildTermsPrivacyLinks() {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.05),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Yasal Bilgiler',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: AppTheme.primaryNavyBlue,
+            ),
+          ),
+          const SizedBox(height: 12),
+          
+          // Terms of Use Link
+          GestureDetector(
+            onTap: () => context.push('/terms-privacy'),
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 8),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.description,
+                    color: AppTheme.primaryNavyBlue,
+                    size: 20,
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      'Kullanım Koşulları ve Gizlilik Politikası',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: AppTheme.primaryNavyBlue,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                  Icon(
+                    Icons.arrow_forward_ios,
+                    size: 16,
+                    color: Colors.grey[600],
+                  ),
+                ],
+              ),
+            ),
+          ),
+          
+          const SizedBox(height: 8),
+          
+          // Subscription Info
+          Text(
+            'Abonelikler otomatik yenilenir. Apple\'ın standart Kullanım Koşulları geçerlidir.',
+            style: TextStyle(
+              fontSize: 12,
+              color: Colors.grey[600],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   String _formatDate(DateTime date) {
     return '${date.day}/${date.month}/${date.year}';
   }
@@ -662,9 +738,8 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
                     const SizedBox(height: 16),
                     _buildFeatureItem('Sınırsız soru çözme'),
                     _buildFeatureItem('Reklamsız deneyim'),
-                    _buildFeatureItem('Detaylı performans analizi'),
-                    _buildFeatureItem('Offline çalışma modu'),
-                    _buildFeatureItem('Öncelikli destek'),
+               
+    
                   ],
                 ),
               ),

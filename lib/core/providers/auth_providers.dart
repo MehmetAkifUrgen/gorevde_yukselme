@@ -163,7 +163,7 @@ class AuthNotifier extends StateNotifier<AsyncValue<firebase_auth.User?>> {
     }
   }
 
-  Future<void> signInWithGoogle() async {
+  Future<firebase_auth.UserCredential?> signInWithGoogle() async {
     print('[AuthNotifier] Starting Google Sign-In...');
     state = const AsyncValue.loading();
     try {
@@ -176,7 +176,7 @@ class AuthNotifier extends StateNotifier<AsyncValue<firebase_auth.User?>> {
         print('[AuthNotifier] User canceled Google Sign-In or credential is null');
         // State'i önceki duruma geri döndür (null user)
         state = const AsyncValue.data(null);
-        return;
+        return null;
       }
       
       if (credential.user != null) {
@@ -207,29 +207,17 @@ class AuthNotifier extends StateNotifier<AsyncValue<firebase_auth.User?>> {
               'lastActiveDate': DateTime.now().toIso8601String(),
             },
           );
-        } else {
-          print('[AuthNotifier] User profile already exists');
         }
-        
-        print('[AuthNotifier] Saving user session...');
-        // Oturumu kaydet
         await _authService.saveUserSession();
-        
-        print('[AuthNotifier] Merging guest data to remote...');
-        // Merge guest data to remote after Google login
         await _localStats.mergeGuestToRemote(userId: credential.user!.uid, firestore: _firestoreService);
-        
-        print('[AuthNotifier] Google Sign-In completed successfully');
         state = AsyncValue.data(credential.user);
-      } else {
-        print('[AuthNotifier] Credential exists but user is null');
-        // Credential var ama user null - bu durumda da state'i null yap
-        state = const AsyncValue.data(null);
+        return credential;
       }
+      return null;
     } catch (error, stackTrace) {
       print('[AuthNotifier] Google Sign-In error: $error');
-      print('[AuthNotifier] Error type: ${error.runtimeType}');
       state = AsyncValue.error(error, stackTrace);
+      return null;
     }
   }
 

@@ -1,3 +1,5 @@
+import 'dart:io' show Platform;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -100,23 +102,34 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     });
 
     try {
-      await ref.read(authNotifierProvider.notifier).signInWithGoogle();
-
-      if (mounted) {
-        setState(() {
-          _isLoading = false;
-        });
+      final result = await ref.read(authNotifierProvider.notifier).signInWithGoogle();
+      
+      if (!mounted) return;
+      
+      setState(() {
+        _isLoading = false;
+      });
+      
+      if (result != null) {
         context.go(AppRouter.home);
+      } else {
+        // Kullanıcı iptal etti veya bir hata oluştu
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Google ile giriş başarısız oldu. Lütfen tekrar deneyin.'),
+            duration: Duration(seconds: 3),
+          ),
+        );
       }
     } catch (e) {
-      if (mounted) {
-        setState(() {
-          _isLoading = false;
-        });
-        
-        // Google Sign-In hatası için özel mesaj göster
-        ErrorUtils.showGeneralError(context, e);
-      }
+      if (!mounted) return;
+      
+      setState(() {
+        _isLoading = false;
+      });
+      
+      // Google Sign-In hatası için özel mesaj göster
+      ErrorUtils.showGeneralError(context, e);
     }
   }
 
@@ -306,16 +319,18 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         const SizedBox(height: 12),
                         
                         // Apple Sign In Button
-                        OutlinedButton.icon(
-                          onPressed: _isLoading ? null : _handleAppleSignIn,
-                          icon: const Icon(Icons.apple, size: 24),
-                          label: const Text('Apple ile Giriş Yap'),
-                          style: OutlinedButton.styleFrom(
-                            backgroundColor: Colors.black,
-                            foregroundColor: AppTheme.secondaryWhite,
-                            side: const BorderSide(color: Colors.black),
+                        if (Platform.isIOS) ...[
+                          OutlinedButton.icon(
+                            onPressed: _isLoading ? null : _handleAppleSignIn,
+                            icon: const Icon(Icons.apple, size: 24),
+                            label: const Text('Apple ile Giriş Yap'),
+                            style: OutlinedButton.styleFrom(
+                              backgroundColor: Colors.black,
+                              foregroundColor: AppTheme.secondaryWhite,
+                              side: const BorderSide(color: Colors.black),
+                            ),
                           ),
-                        ),
+                        ],
                         
                         const SizedBox(height: 24),
                         

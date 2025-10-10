@@ -126,23 +126,34 @@ class _RegistrationPageState extends ConsumerState<RegistrationPage> {
     });
 
     try {
-      await ref.read(authNotifierProvider.notifier).signInWithGoogle();
-
-      if (mounted) {
-        setState(() {
-          _isLoading = false;
-        });
+      final result = await ref.read(authNotifierProvider.notifier).signInWithGoogle();
+      
+      if (!mounted) return;
+      
+      setState(() {
+        _isLoading = false;
+      });
+      
+      if (result != null) {
         context.go(AppRouter.home);
+      } else {
+        // Kullanıcı iptal etti veya bir hata oluştu
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Google ile giriş başarısız oldu. Lütfen tekrar deneyin.'),
+            duration: Duration(seconds: 3),
+          ),
+        );
       }
     } catch (e) {
-      if (mounted) {
-        setState(() {
-          _isLoading = false;
-        });
-        
-        // Google Sign-In hatası için özel mesaj göster
-        ErrorUtils.showGeneralError(context, e);
-      }
+      if (!mounted) return;
+      
+      setState(() {
+        _isLoading = false;
+      });
+      
+      // Google Sign-In hatası için özel mesaj göster
+      ErrorUtils.showGeneralError(context, e);
     }
   }
 

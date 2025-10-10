@@ -112,6 +112,11 @@ class _HomePageState extends ConsumerState<HomePage> {
             
             const SizedBox(height: 24),
             
+            // Ads Information for Non-Premium Users
+            _buildAdsInfoSection(),
+            
+            const SizedBox(height: 24),
+            
             // Real AdMob Banner Ad
             const LargeBannerAdWidget(),
             
@@ -122,7 +127,78 @@ class _HomePageState extends ConsumerState<HomePage> {
     );
   }
 
-
+  Widget _buildAdsInfoSection() {
+    final isPremium = ref.watch(isPremiumUserProvider);
+    
+    if (isPremium) {
+      return const SizedBox.shrink();
+    }
+    
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24),
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.orange.withValues(alpha: 0.1),
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: Colors.orange.withValues(alpha: 0.3),
+            width: 1,
+          ),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(
+                  Icons.info_outline,
+                  color: Colors.orange[700],
+                  size: 20,
+                ),
+                const SizedBox(width: 8),
+                Text(
+                  'Reklam Bilgisi',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.orange[700],
+                  ),
+                ),
+                const Spacer(),
+                GestureDetector(
+                  onTap: () => context.push('/subscription'),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    decoration: BoxDecoration(
+                      color: AppTheme.primaryNavyBlue,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: const Text(
+                      'Premium Ol',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'Ücretsiz kullanıcılarda reklamlar gösterilir. Premium üyelik ile tüm reklamlar kaldırılır.',
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.orange[700],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 
   Widget _buildExamTypeCard(
     BuildContext context,

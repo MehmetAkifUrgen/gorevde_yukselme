@@ -82,13 +82,13 @@ class SubscriptionPlanCard extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 4),
-                    Text(
-                      _getPlanSubtitle(),
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: AppTheme.darkGrey,
-                      ),
-                    ),
+                    // Text(
+                    //   _getPlanSubtitle(),
+                    //   style: TextStyle(
+                    //     fontSize: 14,
+                    //     color: AppTheme.darkGrey,
+                    //   ),
+                    // ),
                   ],
                 ),
                 Radio<bool>(
@@ -164,35 +164,21 @@ class SubscriptionPlanCard extends StatelessWidget {
   }
 
   String _getPlanTitle() {
-    switch (product.plan) {
-      case SubscriptionPlan.monthly:
-        return 'Aylık Plan';
-      case SubscriptionPlan.quarterly:
-        return '3 Aylık Plan';
-      default:
-        return 'Premium Plan';
-    }
-  }
-
-  String _getPlanSubtitle() {
-    switch (product.plan) {
-      case SubscriptionPlan.monthly:
-        return 'Esnek ödeme';
-      case SubscriptionPlan.quarterly:
-        return 'En popüler seçenek';
-      default:
-        return 'Premium özellikler';
-    }
+    return product.title;
   }
 
   String _getPlanPeriod() {
-    switch (product.plan) {
-      case SubscriptionPlan.monthly:
-        return '/ay';
-      case SubscriptionPlan.quarterly:
-        return '/3 ay';
-      default:
-        return '';
-    }
+    return product.subscriptionPeriod ?? '';
   }
+
+  // String _getPlanSubtitle() {
+  //   switch (product.plan) {
+  //     case SubscriptionPlan.monthly:
+  //       return 'Esnek ödeme';
+  //     case SubscriptionPlan.quarterly:
+  //       return 'En popüler seçenek';
+  //     default:
+  //       return 'Premium özellikler';
+  //   }
+  // }
 }

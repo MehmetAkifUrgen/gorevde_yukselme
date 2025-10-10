@@ -9,7 +9,7 @@ class GoogleSignInService {
   
   GoogleSignInService._internal() {
     _googleSignIn = GoogleSignIn(
-      clientId: '933845628166-l0lqq3c6smkmqmebavh99r7m46cfejnf.apps.googleusercontent.com', // Release client ID
+      clientId: '933845628166-4rt8461pls7smu34a77bft67767uhkff.apps.googleusercontent.com', // iOS client ID
       serverClientId: '933845628166-22vb551ktpt93jdu4pj1q2jh5m1562gf.apps.googleusercontent.com', // Web client ID
       scopes: [
         'email',
@@ -37,27 +37,54 @@ class GoogleSignInService {
   Future<UserCredential?> signInWithGoogle() async {
     try {
       print('[GoogleSignInService] Starting Google Sign-In process...');
-      print('[GoogleSignInService] Client ID: 933845628166-l0lqq3c6smkmqmebavh99r7m46cfejnf.apps.googleusercontent.com');
       
-      // Trigger the authentication flow
-      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      // Trigger the authentication flow with timeout
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn().timeout(
+        const Duration(seconds: 30),
+        onTimeout: () {
+          print('[GoogleSignInService] Sign-in timed out');
+          return null; // Return null instead of throwing exception
+        },
+      );
       
       if (googleUser == null) {
-        print('[GoogleSignInService] User canceled the sign-in');
+        print('[GoogleSignInService] User canceled the sign-in or timed out');
         return null;
       }
 
       print('[GoogleSignInService] Google user obtained: ${googleUser.email}');
-      print('[GoogleSignInService] Google user ID: ${googleUser.id}');
 
-      // Obtain the auth details from the request
-      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+      // Obtain the auth details from the request with timeout
+      final GoogleSignInAuthentication googleAuth;
+      try {
+        googleAuth = await googleUser.authentication.timeout(
+          const Duration(seconds: 15),
+          onTimeout: () {
+            print('[GoogleSignInService] Authentication timed out');
+            throw Exception('Google authentication timed out');
+          },
+        );
+      } catch (e) {
+        print('[GoogleSignInService] Authentication failed: $e');
+        await _crashlytics?.recordError(
+          e,
+          null,
+          fatal: false,
+          information: ['Google authentication failed'],
+        );
+        return null; // Return null instead of propagating the error
+      }
       
       print('[GoogleSignInService] Google auth obtained');
-      print('[GoogleSignInService] Access token: ${googleAuth.accessToken != null ? 'Present' : 'Missing'}');
-      print('[GoogleSignInService] ID token: ${googleAuth.idToken != null ? 'Present' : 'Missing'}');
+      
+      // Validate tokens - handle missing tokens gracefully
+      if (googleAuth.accessToken == null && googleAuth.idToken == null) {
+        print('[GoogleSignInService] Both access token and ID token are missing');
+        await _crashlytics?.log('Google authentication tokens are missing');
+        return null; // Return null instead of throwing exception
+      }
 
-      // Create a new credential
+      // Create a new credential - use null-safe access
       final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
@@ -65,25 +92,44 @@ class GoogleSignInService {
       
       print('[GoogleSignInService] Credential created, signing in with Firebase...');
 
-      // Sign in to Firebase with the Google credential
-      final UserCredential userCredential = await _firebaseAuth.signInWithCredential(credential);
-      
-      print('[GoogleSignInService] Firebase sign-in successful');
-      print('[GoogleSignInService] Firebase user: ${userCredential.user?.email}');
-      print('[GoogleSignInService] Firebase user ID: ${userCredential.user?.uid}');
-      
-      return userCredential;
+      // Sign in to Firebase with the Google credential with timeout
+      try {
+        final UserCredential userCredential = await _firebaseAuth.signInWithCredential(credential).timeout(
+          const Duration(seconds: 20),
+          onTimeout: () {
+            print('[GoogleSignInService] Firebase sign-in timed out');
+            throw Exception('Firebase sign-in timed out');
+          },
+        );
+        
+        print('[GoogleSignInService] Firebase sign-in successful');
+        print('[GoogleSignInService] Firebase user: ${userCredential.user?.email}');
+        
+        return userCredential;
+      } catch (e) {
+        print('[GoogleSignInService] Firebase sign-in failed: $e');
+        await _crashlytics?.recordError(
+          e,
+          null,
+          fatal: false,
+          information: ['Firebase sign-in with Google credential failed'],
+        );
+        return null; // Return null instead of propagating the error
+      }
     } catch (error, stackTrace) {
       print('[GoogleSignInService] Exception occurred: $error');
       print('[GoogleSignInService] Exception type: ${error.runtimeType}');
-      print('[GoogleSignInService] Stack trace: $stackTrace');
       
+      // Record error to Crashlytics
       await _crashlytics?.recordError(
         error,
         stackTrace,
-        reason: 'Google Sign-In failed',
+        fatal: false,
+        information: ['Google Sign-In failed'],
       );
-      rethrow;
+      
+      // Don't rethrow, return null instead to prevent crashes
+      return null;
     }
   }
 

@@ -1,0 +1,79 @@
+{
+  "identifier" : "test_configuration",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+
+  ],
+  "settings" : {
+    "_applicationInternalID" : "com.gyudsoft.apps",
+    "_developerTeamID" : "DM573QJ7TM",
+    "_lastSynchronizedDate" : 719164144.87442696
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "20926036",
+      "localizations" : [
+
+      ],
+      "name" : "Premium Subscriptions",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "49.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "6450435387",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Monthly subscription for premium access",
+              "displayName" : "Monthly Premium",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "com.gorevdeyukselme.monthly",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Monthly Premium",
+          "subscriptionGroupID" : "20926036",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "129.99",
+          "familyShareable" : false,
+          "groupNumber" : 2,
+          "internalID" : "6450435499",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Quarterly subscription for premium access",
+              "displayName" : "Quarterly Premium",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "com.gorevdeyukselme.quarterly",
+          "recurringSubscriptionPeriod" : "P3M",
+          "referenceName" : "Quarterly Premium",
+          "subscriptionGroupID" : "20926036",
+          "type" : "RecurringSubscription"
+        }
+      ]
+    }
+  ],
+  "version" : {
+    "major" : 2,
+    "minor" : 0
+  }
+}

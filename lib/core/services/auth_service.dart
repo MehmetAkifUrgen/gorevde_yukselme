@@ -76,15 +76,21 @@ class AuthService {
   // Sign in with Google
   Future<UserCredential?> signInWithGoogle() async {
     try {
-      return await _googleSignInService.signInWithGoogle();
+      final result = await _googleSignInService.signInWithGoogle();
+      if (result == null) {
+        print('[AuthService] Google sign in returned null');
+      }
+      return result;
     } catch (e) {
+      print('[AuthService] Google sign in failed: $e');
       await _crashlytics?.recordError(
         e,
         null,
         fatal: false,
         information: ['Google sign in failed'],
       );
-      rethrow;
+      // Return null instead of rethrowing to prevent app crashes
+      return null;
     }
   }
 

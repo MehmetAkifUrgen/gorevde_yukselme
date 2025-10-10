@@ -8,6 +8,7 @@ import '../../features/auth/presentation/pages/email_verification_page.dart';
 import '../../features/questions/presentation/pages/random_questions_practice_page.dart';
 import '../../features/exam/presentation/pages/exam_simulation_page.dart';
 import '../../features/subscription/presentation/pages/subscription_page.dart';
+import '../../features/subscription/presentation/pages/terms_privacy_page.dart';
 import '../../features/ministry/presentation/pages/ministry_list_page.dart';
 import '../../features/profession/presentation/pages/profession_list_page.dart';
 import '../../features/subject/presentation/pages/subject_list_page.dart';
@@ -28,6 +29,7 @@ class AppRouter {
   static const String performanceAnalysis = '/performance-analysis';
   static const String profile = '/profile';
   static const String subscription = '/subscription';
+  static const String termsPrivacy = '/terms-privacy';
   static const String profileEdit = '/profile/edit';
   static const String privacy = '/privacy';
   static const String help = '/help';
@@ -45,7 +47,7 @@ class AppRouter {
         if (isAuthenticated && !isEmailVerified) {
           // Email verification sayfasında değilse, oraya yönlendir
           if (state.uri.path != emailVerification) {
-            final email = user?.email ?? '';
+            final email = user.email ?? '';
             return '$emailVerification?email=${Uri.encodeComponent(email)}';
           }
         }
@@ -122,6 +124,10 @@ class AppRouter {
         GoRoute(
           path: subscription,
           builder: (context, state) => const SubscriptionPage(),
+        ),
+        GoRoute(
+          path: termsPrivacy,
+          builder: (context, state) => const TermsPrivacyPage(),
         ),
         GoRoute(
           path: '/ministry-list/:examType',
