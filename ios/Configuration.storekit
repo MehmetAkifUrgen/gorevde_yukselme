@@ -13,7 +13,7 @@
   },
   "subscriptionGroups" : [
     {
-      "id" : "20926036",
+      "id" : "21808981",
       "localizations" : [
 
       ],
@@ -26,7 +26,7 @@
           "codeOffers" : [
 
           ],
-          "displayPrice" : "49.99",
+          "displayPrice" : "79.99",
           "familyShareable" : false,
           "groupNumber" : 1,
           "internalID" : "6450435387",
@@ -38,10 +38,10 @@
               "locale" : "en_US"
             }
           ],
-          "productID" : "com.gorevdeyukselme.monthly",
+          "productID" : "com.gyudsoft.apps.monthly",
           "recurringSubscriptionPeriod" : "P1M",
           "referenceName" : "Monthly Premium",
-          "subscriptionGroupID" : "20926036",
+          "subscriptionGroupID" : "21808981",
           "type" : "RecurringSubscription"
         },
         {
@@ -51,7 +51,7 @@
           "codeOffers" : [
 
           ],
-          "displayPrice" : "129.99",
+          "displayPrice" : "199.99",
           "familyShareable" : false,
           "groupNumber" : 2,
           "internalID" : "6450435499",
@@ -63,10 +63,10 @@
               "locale" : "en_US"
             }
           ],
-          "productID" : "com.gorevdeyukselme.quarterly",
+          "productID" : "com.gyudsoft.apps.quarterly",
           "recurringSubscriptionPeriod" : "P3M",
           "referenceName" : "Quarterly Premium",
-          "subscriptionGroupID" : "20926036",
+          "subscriptionGroupID" : "21808981",
           "type" : "RecurringSubscription"
         }
       ]

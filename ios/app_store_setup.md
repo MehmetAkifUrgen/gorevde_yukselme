@@ -24,7 +24,7 @@ Aşağıdaki ürün kimliklerini App Store Connect'te oluşturun:
 
 #### Auto-Renewable Subscriptions:
 1. **Aylık Premium Abonelik**
-   - Product ID: `com.gorevdeyukselme.monthly`
+   - Product ID: `com.gyudsoft.apps.monthly`
    - Reference Name: "Premium Monthly Subscription"
    - Subscription Group: "Premium Membership"
    - Subscription Duration: 1 Month
@@ -34,7 +34,7 @@ Aşağıdaki ürün kimliklerini App Store Connect'te oluşturun:
      - Description: "Sınırsız soru çözme, reklamsız deneyim ve premium özellikler"
 
 2. **3 Aylık Premium Abonelik**
-   - Product ID: `com.gorevdeyukselme.quarterly`
+   - Product ID: `com.gyudsoft.apps.quarterly`
    - Reference Name: "Premium Quarterly Subscription"
    - Subscription Group: "Premium Membership"
    - Subscription Duration: 3 Months
@@ -48,8 +48,8 @@ Aşağıdaki ürün kimliklerini App Store Connect'te oluşturun:
 1. Subscription Group Name: "Premium Membership"
 2. Her iki ürünü de bu gruba ekleyin
 3. Subscription levels:
-   - Level 1: Monthly (com.gorevdeyukselme.monthly)
-   - Level 2: Quarterly (com.gorevdeyukselme.quarterly)
+ - Level 1: Monthly (com.gyudsoft.apps.monthly)
+ - Level 2: Quarterly (com.gyudsoft.apps.quarterly)
 
 ## 5. Agreements, Tax, and Banking
 

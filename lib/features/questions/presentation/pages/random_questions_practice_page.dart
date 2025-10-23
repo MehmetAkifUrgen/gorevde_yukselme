@@ -37,6 +37,7 @@ class _RandomQuestionsPracticePageState extends ConsumerState<RandomQuestionsPra
   int _correctAnswers = 0;
   int _totalAnswered = 0;
   int _targetQuestionCount = 0;
+  int? _selectedAnswerIndex;
   final Set<String> _answeredQuestionIds = <String>{};
   final PremiumFeaturesService _premiumService = PremiumFeaturesService();
   
@@ -125,6 +126,11 @@ class _RandomQuestionsPracticePageState extends ConsumerState<RandomQuestionsPra
     final currentQuestion = _currentQuestion!;
     final isCorrect = selectedIndex == currentQuestion.correctAnswerIndex;
     
+    // Seçilen cevap indeksini ayarla
+    setState(() {
+      _selectedAnswerIndex = selectedIndex;
+    });
+    
     // Check if user can ask questions
     if (!_premiumService.canAskQuestion()) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -179,7 +185,7 @@ class _RandomQuestionsPracticePageState extends ConsumerState<RandomQuestionsPra
   void _showAnswerFeedback(bool isCorrect, Question question) {
     showDialog(
       context: context,
-      barrierDismissible: false,
+      barrierDismissible: true, // Allow dismissing by tapping outside
       builder: (context) => AlertDialog(
         title: Row(
           children: [
@@ -226,7 +232,7 @@ class _RandomQuestionsPracticePageState extends ConsumerState<RandomQuestionsPra
         ),
         actions: [
           TextButton(
-            onPressed: _goToNextQuestion,
+            onPressed: _goToNextQuestion, // Sonraki soruya geç
             child: Text(
               _totalAnswered < _targetQuestionCount 
                   ? 'Sonraki Soru' 
@@ -240,7 +246,10 @@ class _RandomQuestionsPracticePageState extends ConsumerState<RandomQuestionsPra
   }
 
   void _goToNextQuestion() {
-    Navigator.of(context).pop(); // Close feedback dialog
+    // Eğer dialog açıksa kapat, değilse devam et
+    if (ModalRoute.of(context)?.isCurrent == false) {
+      Navigator.of(context).pop(); // Close feedback dialog if open
+    }
     
     // Increment question counter
     if (widget.isMiniQuestions) {
@@ -621,8 +630,28 @@ class _RandomQuestionsPracticePageState extends ConsumerState<RandomQuestionsPra
                   
                   const SizedBox(height: 16),
                   
+                  // Sonraki Soru butonu - cevap seçildiğinde görünür
+                  if (_selectedAnswerIndex != null)
+                    ElevatedButton(
+                      onPressed: _goToNextQuestion,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppTheme.primaryNavyBlue,
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                      child: Text(
+                        _totalAnswered < _targetQuestionCount ? 'Sonraki Soru' : 'Sonuçları Gör',
+                        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  
+                  const SizedBox(height: 16),
+                  
                   // Banner Ad
-                  const AdMobBannerWidget(),
+                  // const AdMobBannerWidget(), // Removed as per user's request
                 ],
               ),
             ),

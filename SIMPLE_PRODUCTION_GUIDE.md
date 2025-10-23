@@ -17,7 +17,7 @@
 
 ### 3. **Product ID'ler Düzeltildi**
 - ✅ Google Play: `gorevde_yukselme_monthly`, `gorevde_yukselme_quarterly`
-- ✅ App Store: `com.gorevdeyukselme.monthly`, `com.gorevdeyukselme.quarterly`
+- ✅ App Store: `com.gyudsoft.apps.monthly`, `com.gyudsoft.apps.quarterly`
 - ✅ Dokümantasyon güncellendi
 
 ## 🎯 Production'a Çıkmak İçin Yapılacaklar
@@ -38,8 +38,8 @@
 1. App Store Connect'e gir
 2. In-App Purchases > Auto-Renewable Subscriptions
 3. Bu product ID'leri oluştur:
-   - com.gorevdeyukselme.monthly (1 Month)
-   - com.gorevdeyukselme.quarterly (3 Months)
+- com.gyudsoft.apps.monthly (1 Month)
+- com.gyudsoft.apps.quarterly (3 Months)
 4. Subscription Group oluştur: "Premium Membership"
 5. Fiyatları ayarla
 ```

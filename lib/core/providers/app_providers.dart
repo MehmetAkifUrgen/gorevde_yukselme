@@ -240,12 +240,12 @@ class SubscriptionNotifier extends StateNotifier<SubscriptionModel?> {
   }
 
   Future<void> _init() async {
-    await _subscriptionService.initialize();
-    
-    // Listen to subscription changes
+    // Listen BEFORE initialization to avoid missing initial emissions
     _subscriptionService.subscriptionStream.listen((subscription) {
       state = subscription;
     });
+
+    await _subscriptionService.initialize();
   }
 
   Future<void> purchaseSubscription(String productId) async {
@@ -279,15 +279,20 @@ class ProductsNotifier extends StateNotifier<List<ProductModel>> {
   }
 
   Future<void> _init() async {
-    await _subscriptionService.initialize();
-    
-    // Listen to products changes
+    // Listen BEFORE initialization to avoid missing initial emissions
     _subscriptionService.productsStream.listen((products) {
       state = products;
     });
+
+    await _subscriptionService.initialize();
   }
 
   List<ProductModel> get products => _subscriptionService.availableProducts;
+
+  /// Manually trigger products reload (used when subscriptions are temporarily disabled)
+  Future<void> refresh() async {
+    await _subscriptionService.reloadProducts();
+  }
 }
 
 // Purchase Result Provider
@@ -304,12 +309,12 @@ class PurchaseResultNotifier extends StateNotifier<PurchaseResult?> {
   }
 
   Future<void> _init() async {
-    await _subscriptionService.initialize();
-    
-    // Listen to purchase results
+    // Listen BEFORE initialization to avoid missing initial emissions
     _subscriptionService.purchaseStream.listen((result) {
       state = result;
     });
+
+    await _subscriptionService.initialize();
   }
 
   void clearResult() {

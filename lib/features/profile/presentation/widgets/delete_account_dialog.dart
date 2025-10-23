@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import '../../../../core/services/firestore_service.dart';
 import '../../../../core/utils/error_utils.dart';
 
@@ -41,10 +43,64 @@ class _DeleteAccountDialogState extends State<DeleteAccountDialog> {
     debugPrint('[DeleteAccountDialog] WARNING: $message');
   }
 
+  Future<void> _reauthenticate(User user) async {
+    final providerIds = user.providerData.map((e) => e.providerId).toList();
+    _logInfo('User providers: $providerIds');
+
+    if (providerIds.contains('password')) {
+      final email = user.email;
+      if (email == null) {
+        throw Exception('E-posta bulunamadı, şifre ile yeniden doğrulama yapılamıyor');
+      }
+      final credential = EmailAuthProvider.credential(
+        email: email,
+        password: _passwordController.text,
+      );
+      await user.reauthenticateWithCredential(credential);
+      return;
+    }
+
+    if (providerIds.contains('google.com')) {
+      _logInfo('Starting Google re-authentication');
+      final googleSignIn = GoogleSignIn();
+      final googleUser = await googleSignIn.signIn();
+      if (googleUser == null) {
+        throw Exception('Google hesabı seçilmedi');
+      }
+      final googleAuth = await googleUser.authentication;
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+      await user.reauthenticateWithCredential(credential);
+      return;
+    }
+
+    if (providerIds.contains('apple.com')) {
+      _logInfo('Starting Apple re-authentication');
+      final appleIdCredential = await SignInWithApple.getAppleIDCredential(
+        scopes: const [],
+      );
+      final oauthCredential = OAuthProvider('apple.com').credential(
+        idToken: appleIdCredential.identityToken,
+        accessToken: appleIdCredential.authorizationCode,
+      );
+      await user.reauthenticateWithCredential(oauthCredential);
+      return;
+    }
+
+    throw Exception('Desteklenmeyen sağlayıcı ile giriş yapıldı');
+  }
+
   Future<void> _deleteAccount() async {
     _logInfo('Starting account deletion process');
     
-    if (!_formKey.currentState!.validate() || !_confirmDelete) {
+    final currentUser = FirebaseAuth.instance.currentUser;
+    final requiresPassword = currentUser?.providerData.any((p) => p.providerId == 'password') ?? false;
+
+    if ((!requiresPassword || _formKey.currentState!.validate()) && _confirmDelete == true) {
+      // proceed
+    } else {
       if (!_confirmDelete) {
         _logWarning('User did not confirm account deletion');
         _showErrorSnackBar('Hesap silme işlemini onaylamanız gerekiyor');
@@ -68,14 +124,8 @@ class _DeleteAccountDialogState extends State<DeleteAccountDialog> {
 
       _logInfo('Current user: ${user.uid}, email: ${user.email}');
 
-      // Re-authenticate user with password
       _logInfo('Starting re-authentication process');
-      final credential = EmailAuthProvider.credential(
-        email: user.email!,
-        password: _passwordController.text,
-      );
-
-      await user.reauthenticateWithCredential(credential);
+      await _reauthenticate(user);
       _logInfo('Re-authentication successful');
 
       // Delete user data from Firestore
@@ -145,6 +195,14 @@ class _DeleteAccountDialogState extends State<DeleteAccountDialog> {
 
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser;
+    final providerIds = user?.providerData.map((e) => e.providerId).toList() ?? [];
+    final requiresPassword = providerIds.contains('password');
+    final providerText = providerIds.contains('google.com')
+        ? 'Google'
+        : providerIds.contains('apple.com')
+            ? 'Apple'
+            : 'bağlı olduğunuz sağlayıcı';
     return AlertDialog(
       title: const Text(
         'Hesabı Sil',
@@ -165,33 +223,41 @@ class _DeleteAccountDialogState extends State<DeleteAccountDialog> {
                 ),
               ),
               const SizedBox(height: 16),
-              const Text(
-                'Devam etmek için şifrenizi girin:',
-                style: TextStyle(fontWeight: FontWeight.w500),
-              ),
+              requiresPassword
+                  ? const Text(
+                      'Devam etmek için şifrenizi girin:',
+                      style: TextStyle(fontWeight: FontWeight.w500),
+                    )
+                  : Text(
+                      'Devam etmek için $providerText ile kimliğiniz doğrulanacaktır.',
+                      style: const TextStyle(fontWeight: FontWeight.w500),
+                    ),
               const SizedBox(height: 8),
-              TextFormField(
-                controller: _passwordController,
-                obscureText: _obscurePassword,
-                decoration: InputDecoration(
-                  labelText: 'Şifre',
-                  border: const OutlineInputBorder(),
-                  suffixIcon: IconButton(
-                    icon: Icon(_obscurePassword ? Icons.visibility : Icons.visibility_off),
-                    onPressed: () {
-                      setState(() {
-                        _obscurePassword = !_obscurePassword;
-                      });
-                    },
+              if (requiresPassword)
+                TextFormField(
+                  controller: _passwordController,
+                  obscureText: _obscurePassword,
+                  decoration: InputDecoration(
+                    labelText: 'Şifre',
+                    border: const OutlineInputBorder(),
+                    suffixIcon: IconButton(
+                      icon: Icon(_obscurePassword ? Icons.visibility : Icons.visibility_off),
+                      onPressed: () {
+                        setState(() {
+                          _obscurePassword = !_obscurePassword;
+                        });
+                      },
+                    ),
                   ),
+                  validator: (value) {
+                    final user = FirebaseAuth.instance.currentUser;
+                    final requiresPassword = user?.providerData.any((p) => p.providerId == 'password') ?? false;
+                    if (requiresPassword && (value == null || value.isEmpty)) {
+                      return 'Şifre gerekli';
+                    }
+                    return null;
+                  },
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Şifre gerekli';
-                  }
-                  return null;
-                },
-              ),
               const SizedBox(height: 16),
               CheckboxListTile(
                 value: _confirmDelete,

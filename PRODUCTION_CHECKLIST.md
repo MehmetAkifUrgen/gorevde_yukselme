@@ -19,8 +19,8 @@
   - `gorevde_yukselme_monthly`
   - `gorevde_yukselme_quarterly`
 - [ ] App Store Connect'te doğru product ID'ler:
-  - `com.gorevdeyukselme.monthly`
-  - `com.gorevdeyukselme.quarterly`
+  - `com.gyudsoft.apps.monthly`
+  - `com.gyudsoft.apps.quarterly`
 
 ## ⚠️ Önemli - Yapılması Önerilen
 

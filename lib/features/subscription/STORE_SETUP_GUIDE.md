@@ -76,7 +76,7 @@ App Store Connect'te şu adımları takip edin:
 - **App Store Display Name**: Premium Üyelik
 
 #### Aylık Premium
-- **Product ID**: `com.gorevdeyukselme.monthly`
+ - **Product ID**: `com.gyudsoft.apps.monthly`
 - **Reference Name**: Monthly Premium
 - **Subscription Duration**: 1 Month
 - **Price**: Mağaza tarafından belirlenir (App Store Connect'te ayarlayın)

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../../../../core/router/app_router.dart';
 
 import '../../../../core/models/subscription_model.dart';
 import '../../../../core/providers/app_providers.dart';
@@ -12,6 +13,7 @@ import '../widgets/purchase_loading_dialog.dart';
 import '../widgets/subscription_plan_card.dart';
 import '../widgets/premium_features_list.dart';
 import '../../../../core/utils/error_utils.dart';
+import '../../../../core/widgets/support_dialog.dart';
 
 class SubscriptionPage extends ConsumerStatefulWidget {
   const SubscriptionPage({super.key});
@@ -78,7 +80,16 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
     _fadeController.forward();
     _slideController.forward();
     _pulseController.repeat(reverse: true);
-    
+
+    // Load subscription plans automatically when page opens
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // Force product reload to ensure plans appear without manual retry
+      try {
+        ref.read(availableProductsProvider.notifier).refresh();
+      } catch (_) {
+        // Provider may not be ready on first frame; ignore
+      }
+    });
   }
 
   @override
@@ -226,6 +237,7 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
     final availableProducts = ref.watch(availableProductsProvider);
     final isPremium = ref.watch(isPremiumUserProvider);
     final isAuthenticated = ref.watch(isAuthenticatedProvider);
+    final userProfileAsync = ref.watch(currentUserProfileProvider);
 
     // Listen to purchase results
     ref.listen<PurchaseResult?>(purchaseResultProvider, (previous, next) {
@@ -424,13 +436,13 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
         child: Column(
           children: [
             Icon(
-              Icons.hourglass_empty,
+              Icons.info_outline,
               size: 48,
               color: AppTheme.darkGrey,
             ),
             const SizedBox(height: 16),
             Text(
-              'Planlar Yükleniyor...',
+              'Planlar Şu An Görüntülenemiyor',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
@@ -439,11 +451,53 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
             ),
             const SizedBox(height: 8),
             Text(
-              'Premium planları yüklüyoruz, lütfen bekleyin.',
+              'Lütfen “Yeniden Dene” ile güncelleyin. Eğer hâlâ görünmüyorsa “Satın Almaları Geri Yükle” seçeneğini deneyin. Onay tamamlandığında planlar burada listelenecek.',
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: AppTheme.darkGrey,
               ),
+            ),
+            const SizedBox(height: 16),
+            Row(
+              children: [
+                Expanded(
+                  child: FilledButton.icon(
+                    onPressed: () async {
+                      await ref.read(availableProductsProvider.notifier).refresh();
+                    },
+                    icon: const Icon(Icons.refresh),
+                    label: const Text('Yeniden Dene'),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: OutlinedButton.icon(
+                    onPressed: () async {
+                      await ref.read(subscriptionProvider.notifier).restorePurchases();
+                    },
+                    icon: const Icon(Icons.restore),
+                    label: const Text('Satın Almaları Geri Yükle'),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            TextButton.icon(
+              onPressed: () {
+                ref.read(currentUserProfileProvider).when(
+                  data: (user) {
+                    if (user == null) return;
+                    showDialog(
+                      context: context,
+                      builder: (context) => SupportDialog(userProfile: user),
+                    );
+                  },
+                  loading: () {},
+                  error: (_, __) {},
+                );
+              },
+              icon: const Icon(Icons.help_outline),
+              label: const Text('Destek Al'),
             ),
           ],
         ),
@@ -661,7 +715,7 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    context.go('/login');
+                    context.go(AppRouter.login);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppTheme.primaryNavyBlue,
@@ -689,7 +743,7 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
                 width: double.infinity,
                 child: OutlinedButton(
                   onPressed: () {
-                    context.go('/register');
+                    context.go(AppRouter.registration);
                   },
                   style: OutlinedButton.styleFrom(
                     foregroundColor: AppTheme.primaryNavyBlue,

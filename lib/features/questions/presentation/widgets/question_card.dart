@@ -144,9 +144,9 @@ class _QuestionCardState extends State<QuestionCard> {
                   child: Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: backgroundColor ?? AppTheme.lightGrey,
+                      color: backgroundColor ?? AppTheme.secondaryWhite, // Changed from AppTheme.lightGrey
                       border: Border.all(
-                        color: borderColor ?? AppTheme.darkGrey.withValues(alpha: 0.3),
+                        color: borderColor ?? AppTheme.primaryNavyBlue.withValues(alpha: 0.5),
                         width: 1.5,
                       ),
                       borderRadius: BorderRadius.circular(8),
@@ -167,7 +167,7 @@ class _QuestionCardState extends State<QuestionCard> {
                             child: Text(
                               String.fromCharCode(65 + index), // A, B, C, D
                               style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                color: textColor ?? AppTheme.darkGrey,
+                                color: textColor ?? AppTheme.primaryNavyBlue, // Changed from AppTheme.darkGrey
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
@@ -179,7 +179,7 @@ class _QuestionCardState extends State<QuestionCard> {
                             option,
                             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                               fontSize: widget.fontSize * 0.9,
-                              color: textColor ?? AppTheme.darkGrey,
+                              color: Colors.black, // Changed from AppTheme.darkGrey
                               fontWeight: showResult && isCorrect ? FontWeight.w600 : null,
                             ),
                           ),

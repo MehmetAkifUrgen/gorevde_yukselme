@@ -108,8 +108,8 @@ class ProductIds {
   static const String googlePlayQuarterly = 'gorevde_yukselme_quarterly';
   
   // App Store product IDs
-  static const String appStoreMonthly = 'com.gorevdeyukselme.monthly';
-  static const String appStoreQuarterly = 'com.gorevdeyukselme.quarterly';
+  static const String appStoreMonthly = 'com.gyudsoft.apps.monthly';
+  static const String appStoreQuarterly = 'com.gyudsoft.apps.quarterly';
   
   /// Get product IDs for current platform
   static List<String> getProductIds(StoreType store) {
