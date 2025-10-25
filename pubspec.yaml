@@ -1,7 +1,7 @@
 name: gorevde_yukselme
 description: "A new Flutter project."
 publish_to: 'none'
-version: 1.1.2+12
+version: 1.1.5+15
 
 environment:
   sdk: ^3.8.1
@@ -47,6 +47,9 @@ dependencies:
   
   # In-App Purchases
   in_app_purchase: ^3.2.3
+  
+  # App Upgrade Prompt
+  upgrader: ^12.1.0
   
   # Firebase
   firebase_core: ^3.6.0

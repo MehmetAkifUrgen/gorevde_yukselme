@@ -45,51 +45,57 @@ class SubscriptionPlanCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          _getPlanTitle(),
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: AppTheme.primaryNavyBlue,
-                          ),
-                        ),
-                        if (product.plan == SubscriptionPlan.quarterly) ...[
-                          const SizedBox(width: 8),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 8,
-                              vertical: 4,
-                            ),
-                            decoration: BoxDecoration(
-                              color: AppTheme.successGreen,
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: const Text(
-                              'EN İYİ TASARRUF',
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Flexible(
+                            child: Text(
+                              _getPlanTitle(),
                               style: TextStyle(
-                                fontSize: 10,
+                                fontSize: 20,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.white,
+                                color: AppTheme.primaryNavyBlue,
+                              ),
+                              maxLines: 3,
+                              overflow: TextOverflow.fade,
+                            ),
+                          ),
+                          if (product.plan == SubscriptionPlan.quarterly) ...[
+                            const SizedBox(width: 8),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                                vertical: 4,
+                              ),
+                              decoration: BoxDecoration(
+                                color: AppTheme.successGreen,
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: const Text(
+                                'EN İYİ TASARRUF',
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
-                          ),
+                          ],
                         ],
-                      ],
-                    ),
-                    const SizedBox(height: 4),
-                    // Text(
-                    //   _getPlanSubtitle(),
-                    //   style: TextStyle(
-                    //     fontSize: 14,
-                    //     color: AppTheme.darkGrey,
-                    //   ),
-                    // ),
-                  ],
+                      ),
+                      const SizedBox(height: 4),
+                      // Text(
+                      //   _getPlanSubtitle(),
+                      //   style: TextStyle(
+                      //     fontSize: 14,
+                      //     color: AppTheme.darkGrey,
+                      //   ),
+                      // ),
+                    ],
+                  ),
                 ),
                 Radio<bool>(
                   value: true,

@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "933845628166-tct5972r71timseqpk5rf7g96g0k2pgq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gyudsoft.apps",
+            "certificate_hash": "bb29c0297577e656436c8913d69b05d757f41c78"
+          }
+        },
+        {
           "client_id": "933845628166-22vb551ktpt93jdu4pj1q2jh5m1562gf.apps.googleusercontent.com",
           "client_type": 3
         }

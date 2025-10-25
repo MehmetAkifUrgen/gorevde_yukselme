@@ -10,13 +10,10 @@ class AdMobService {
 
   // Test Ad Unit IDs
   static const String _testInterstitialAdUnitId = 'ca-app-pub-3940256099942544/1033173712';
-  static const String _testBannerAdUnitId = 'ca-app-pub-3940256099942544/6300978111';
   
   // Production Ad Unit IDs
   static const String _productionInterstitialAdUnitIdAndroid = 'ca-app-pub-6622076556391878/3632023867';
   static const String _productionInterstitialAdUnitIdIOS = 'ca-app-pub-6622076556391878/7878514344';
-  static const String _productionBannerAdUnitIdAndroid = 'ca-app-pub-6622076556391878/6300978111'; // TODO: Get real Android banner ID
-  static const String _productionBannerAdUnitIdIOS = 'ca-app-pub-6622076556391878/6300978111'; // TODO: Get real iOS banner ID
   
   InterstitialAd? _interstitialAd;
   bool _isInitialized = false;
@@ -29,15 +26,6 @@ class AdMobService {
       return _productionInterstitialAdUnitIdIOS;
     }
     return _testInterstitialAdUnitId;
-  }
-
-  String get _bannerAdUnitId {
-    if (Platform.isAndroid) {
-      return _productionBannerAdUnitIdAndroid;
-    } else if (Platform.isIOS) {
-      return _productionBannerAdUnitIdIOS;
-    }
-    return _testBannerAdUnitId;
   }
 
   /// Initialize AdMob SDK
@@ -143,9 +131,6 @@ class AdMobService {
 
   /// Check if interstitial ad is loaded
   bool get isInterstitialAdLoaded => _interstitialAd != null;
-
-  /// Get banner ad unit ID for external use
-  String get bannerAdUnitId => _bannerAdUnitId;
 
   /// Dispose all ads
   void dispose() {

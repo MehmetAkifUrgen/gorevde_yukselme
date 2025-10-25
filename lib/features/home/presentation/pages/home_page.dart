@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/providers/app_providers.dart';
-import '../../../../core/widgets/admob_banner_widget.dart';
 import '../widgets/motivational_banner.dart';
 
 class HomePage extends ConsumerStatefulWidget {
@@ -114,11 +113,6 @@ class _HomePageState extends ConsumerState<HomePage> {
             
             // Ads Information for Non-Premium Users
             _buildAdsInfoSection(),
-            
-            const SizedBox(height: 24),
-            
-            // Real AdMob Banner Ad
-            const LargeBannerAdWidget(),
             
             const SizedBox(height: 24),
           ],

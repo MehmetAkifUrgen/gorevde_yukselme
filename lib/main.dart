@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:upgrader/upgrader.dart';
 import 'package:gorevde_yukselme/core/providers/app_providers.dart';
 import 'package:gorevde_yukselme/core/services/session_service.dart';
 import 'package:gorevde_yukselme/core/services/admob_service.dart';
@@ -80,11 +81,13 @@ class MainApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final router = AppRouter.createRouter(ref);
     
-    return MaterialApp.router(
-      title: 'Kamu Sınavlarına Hazırlık - Sınav Hazırlık Uygulaması',
-      theme: AppTheme.lightTheme,
-      routerConfig: router,
-      debugShowCheckedModeBanner: false,
+    return UpgradeAlert(
+      child: MaterialApp.router(
+        title: 'Kamu Sınavlarına Hazırlık - Sınav Hazırlık Uygulaması',
+        theme: AppTheme.lightTheme,
+        routerConfig: router,
+        debugShowCheckedModeBanner: false,
+      ),
     );
   }
 }

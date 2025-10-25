@@ -8,7 +8,6 @@ import '../../../../core/models/question_model.dart';
 import '../../../../core/providers/app_providers.dart';
 import '../../../../core/providers/auth_providers.dart';
 import '../../../../core/providers/ad_providers.dart';
-import '../../../../core/widgets/admob_banner_widget.dart';
 import '../../../../core/services/premium_features_service.dart';
 import '../widgets/question_card.dart';
 
