@@ -195,6 +195,7 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
     );
   }
 
+  /// Purchase a subscription with retry mechanism
   Future<void> _purchaseSubscription(ProductModel product) async {
     try {
       // Show loading dialog
@@ -204,22 +205,8 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
         builder: (context) => const PurchaseLoadingDialog(),
       );
 
-      // Initiate purchase with timeout
-      await ref.read(subscriptionProvider.notifier).purchaseSubscription(product.id)
-          .timeout(
-            const Duration(seconds: 60), // Longer timeout for purchases
-            onTimeout: () {
-              throw TimeoutException('Satın alma işlemi zaman aşımına uğradı', const Duration(seconds: 60));
-            },
-          );
-    } on TimeoutException catch (_) {
-      // Close loading dialog
-      if (mounted) Navigator.of(context).pop();
-      
-      // Show timeout error
-      if (mounted) {
-        _showErrorDialog('Satın alma işlemi zaman aşımına uğradı. Lütfen tekrar deneyin.');
-      }
+      // Purchase with timeout and retry mechanism
+      await _purchaseWithRetry(product.id);
     } catch (e) {
       // Close loading dialog
       if (mounted) Navigator.of(context).pop();
@@ -227,6 +214,49 @@ class _SubscriptionPageState extends ConsumerState<SubscriptionPage>
       // Show error
       if (mounted) {
         ErrorUtils.showSubscriptionError(context, e);
+      }
+    }
+  }
+
+  /// Purchase with retry mechanism
+  Future<void> _purchaseWithRetry(String productId, {int maxRetries = 2}) async {
+    int attempts = 0;
+    
+    while (attempts <= maxRetries) {
+      try {
+        await ref.read(subscriptionProvider.notifier).purchaseSubscription(productId).timeout(
+          const Duration(seconds: 60),
+          onTimeout: () {
+            throw TimeoutException('Satın alma işlemi zaman aşımına uğradı', const Duration(seconds: 60));
+          },
+        );
+        
+        // If we reach here, purchase was initiated successfully
+        return;
+        
+      } catch (e) {
+        attempts++;
+        
+        if (attempts > maxRetries) {
+          // All retries exhausted
+          throw e;
+        }
+        
+        // Check if it's a retryable error
+        final errorString = e.toString().toLowerCase();
+        if (errorString.contains('network') || 
+            errorString.contains('timeout') ||
+            errorString.contains('service_unavailable') ||
+            errorString.contains('service_disconnected')) {
+          
+          // Wait before retry
+          await Future.delayed(Duration(seconds: attempts * 2));
+          debugPrint('Retrying purchase attempt ${attempts + 1}/$maxRetries');
+          continue;
+        } else {
+          // Non-retryable error, throw immediately
+          throw e;
+        }
       }
     }
   }

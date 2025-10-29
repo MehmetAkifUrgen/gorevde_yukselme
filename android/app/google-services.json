@@ -7,26 +7,26 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:933845628166:android:efac05c85088a0e2219a87",
+        "mobilesdk_app_id": "1:933845628166:android:3e2ac0068d3c8897219a87",
         "android_client_info": {
-          "package_name": "com.gyudsoft.apps"
+          "package_name": "com.dynamind.gyudsoft"
         }
       },
       "oauth_client": [
         {
-          "client_id": "933845628166-ql6claokfo10a0705r2965erojht57ql.apps.googleusercontent.com",
+          "client_id": "933845628166-eqoa5ro5gjoalfb4v6fe1thl1c6ghaf5.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.gyudsoft.apps",
+            "package_name": "com.dynamind.gyudsoft",
             "certificate_hash": "8da2c24be2380f22e27ca29035ff6fe9abb7045f"
           }
         },
         {
-          "client_id": "933845628166-tct5972r71timseqpk5rf7g96g0k2pgq.apps.googleusercontent.com",
+          "client_id": "933845628166-rf4b5unhep2cnub00clkes204rb2j31s.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.gyudsoft.apps",
-            "certificate_hash": "bb29c0297577e656436c8913d69b05d757f41c78"
+            "package_name": "com.dynamind.gyudsoft",
+            "certificate_hash": "343eebe54f66d754a52484f1d237a44a7f48f031"
           }
         },
         {

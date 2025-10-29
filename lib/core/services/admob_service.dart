@@ -12,8 +12,8 @@ class AdMobService {
   static const String _testInterstitialAdUnitId = 'ca-app-pub-3940256099942544/1033173712';
   
   // Production Ad Unit IDs
-  static const String _productionInterstitialAdUnitIdAndroid = 'ca-app-pub-6622076556391878/3632023867';
-  static const String _productionInterstitialAdUnitIdIOS = 'ca-app-pub-6622076556391878/7878514344';
+  static const String _productionInterstitialAdUnitIdAndroid = 'ca-app-pub-9923309503448713/7981855426';
+  static const String _productionInterstitialAdUnitIdIOS = 'ca-app-pub-9923309503448713/1405565133';
   
   InterstitialAd? _interstitialAd;
   bool _isInitialized = false;

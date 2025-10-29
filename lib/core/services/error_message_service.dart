@@ -128,28 +128,72 @@ class ErrorMessageService {
   String getSubscriptionErrorMessage(dynamic error) {
     final errorString = error.toString().toLowerCase();
     
+    // iOS specific errors
+    if (errorString.contains('storekit') || errorString.contains('skpayment')) {
+      if (errorString.contains('cancelled') || errorString.contains('user_cancelled')) {
+        return 'Satın alma işlemi iptal edildi';
+      } else if (errorString.contains('payment_invalid')) {
+        return 'Ödeme bilgileri geçersiz. Lütfen App Store ayarlarınızı kontrol edin';
+      } else if (errorString.contains('payment_not_allowed')) {
+        return 'Bu cihazda satın alma işlemi yapılamıyor';
+      } else if (errorString.contains('store_product_not_available')) {
+        return 'Bu ürün şu anda mevcut değil. Lütfen daha sonra tekrar deneyin';
+      } else if (errorString.contains('cloud_service_permission_denied')) {
+        return 'iCloud ayarlarınızı kontrol edin';
+      } else if (errorString.contains('cloud_service_network_connection_failed')) {
+        return 'İnternet bağlantınızı kontrol edin';
+      } else if (errorString.contains('cloud_service_revoked')) {
+        return 'App Store erişimi iptal edilmiş. Ayarlarınızı kontrol edin';
+      }
+    }
+    
+    // Android specific errors
+    if (errorString.contains('billing') || errorString.contains('google')) {
+      if (errorString.contains('user_cancelled') || errorString.contains('cancelled')) {
+        return 'Satın alma işlemi iptal edildi';
+      } else if (errorString.contains('item_already_owned')) {
+        return 'Bu ürün zaten satın alınmış';
+      } else if (errorString.contains('item_unavailable')) {
+        return 'Bu ürün şu anda mevcut değil';
+      } else if (errorString.contains('billing_unavailable')) {
+        return 'Google Play Faturalandırma servisi kullanılamıyor';
+      } else if (errorString.contains('developer_error')) {
+        return 'Uygulama hatası. Lütfen uygulamayı güncelleyin';
+      } else if (errorString.contains('service_unavailable')) {
+        return 'Google Play servisi şu anda kullanılamıyor';
+      } else if (errorString.contains('service_disconnected')) {
+        return 'Google Play bağlantısı kesildi';
+      } else if (errorString.contains('service_timeout')) {
+        return 'Google Play bağlantısı zaman aşımına uğradı';
+      } else if (errorString.contains('feature_not_supported')) {
+        return 'Bu özellik bu cihazda desteklenmiyor';
+      }
+    }
+    
+    // Network and receipt verification errors
+    if (errorString.contains('network_error') || errorString.contains('network')) {
+      return 'İnternet bağlantınızı kontrol edin ve tekrar deneyin';
+    } else if (errorString.contains('receipt') || errorString.contains('verification')) {
+      return 'Satın alma doğrulanamadı. Lütfen tekrar deneyin';
+    } else if (errorString.contains('timeout')) {
+      return 'İşlem zaman aşımına uğradı. Lütfen tekrar deneyin';
+    } else if (errorString.contains('product not found')) {
+      return 'Ürün bulunamadı. Lütfen uygulamayı yeniden başlatın';
+    } else if (errorString.contains('invalid receipt data')) {
+      return 'Geçersiz satın alma bilgisi. Lütfen tekrar deneyin';
+    }
+    
+    // General errors
     if (errorString.contains('user_cancelled') || errorString.contains('cancelled')) {
       return 'Satın alma işlemi iptal edildi';
-    } else if (errorString.contains('item_already_owned')) {
+    } else if (errorString.contains('already_owned') || errorString.contains('item_already_owned')) {
       return 'Bu ürün zaten satın alınmış';
-    } else if (errorString.contains('item_unavailable')) {
+    } else if (errorString.contains('unavailable') || errorString.contains('item_unavailable')) {
       return 'Bu ürün şu anda mevcut değil';
-    } else if (errorString.contains('billing_unavailable')) {
-      return 'Ödeme sistemi şu anda kullanılamıyor';
-    } else if (errorString.contains('developer_error')) {
-      return 'Geliştirici hatası. Lütfen uygulamayı güncelleyin';
-    } else if (errorString.contains('service_unavailable')) {
-      return 'Mağaza servisi şu anda kullanılamıyor';
-    } else if (errorString.contains('service_disconnected')) {
-      return 'Mağaza bağlantısı kesildi';
-    } else if (errorString.contains('service_timeout')) {
-      return 'Mağaza bağlantısı zaman aşımına uğradı';
-    } else if (errorString.contains('feature_not_supported')) {
-      return 'Bu özellik bu cihazda desteklenmiyor';
-    } else if (errorString.contains('network_error')) {
-      return 'İnternet bağlantınızı kontrol edin';
+    } else if (errorString.contains('not_allowed') || errorString.contains('permission')) {
+      return 'Satın alma işlemi için gerekli izinler yok';
     } else {
-      return 'Satın alma işlemi başarısız oldu';
+      return 'Satın alma işlemi başarısız oldu. Lütfen tekrar deneyin';
     }
   }
 

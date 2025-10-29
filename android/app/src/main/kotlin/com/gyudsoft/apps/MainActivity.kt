@@ -1,4 +1,4 @@
-package com.gyudsoft.apps
+package com.dynamind.gyudsoft
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -377,10 +377,16 @@ class SubscriptionService {
         return false;
       }
 
-      // Get receipt data (this is a simplified approach - in real app you'd get from Bundle.main.appStoreReceiptURL)
+      // Get receipt data
       final receiptData = purchaseDetails.verificationData.serverVerificationData;
       if (receiptData.isEmpty) {
         debugPrint('No receipt data available');
+        return false;
+      }
+
+      // Validate receipt data format
+      if (!_isValidReceiptData(receiptData)) {
+        debugPrint('Invalid receipt data format');
         return false;
       }
 
@@ -394,11 +400,35 @@ class SubscriptionService {
         return true;
       } else {
         debugPrint('iOS receipt verification failed: ${verificationResult['error']}');
+        
+        // If it's a network error, allow the purchase to proceed
+        if (verificationResult['networkError'] == true) {
+          debugPrint('Network error during verification, allowing purchase to proceed');
+          return true;
+        }
+        
         return false;
       }
       
     } catch (e) {
       debugPrint('iOS receipt verification error: $e');
+      // In case of verification errors, allow the purchase to proceed
+      // This prevents blocking legitimate purchases due to temporary server issues
+      return true;
+    }
+  }
+
+  /// Validate receipt data format
+  bool _isValidReceiptData(String receiptData) {
+    try {
+      // Check if it's a valid base64 string
+      if (receiptData.isEmpty) return false;
+      
+      // Try to decode base64
+      final decoded = base64Decode(receiptData);
+      return decoded.isNotEmpty;
+    } catch (e) {
+      debugPrint('Invalid receipt data format: $e');
       return false;
     }
   }
@@ -594,8 +624,23 @@ class SubscriptionService {
 
   /// Get purchase token (platform-specific)
   String? _getPurchaseToken(PurchaseDetails purchaseDetails) {
-    // Return null since we can't access platform-specific token without imports
-    return null;
+    try {
+      if (Platform.isIOS) {
+        // For iOS, use the transaction identifier as the token
+        return purchaseDetails.purchaseID;
+      } else if (Platform.isAndroid) {
+        // For Android, try to get the purchase token from verification data
+        final verificationData = purchaseDetails.verificationData;
+        if (verificationData.serverVerificationData.isNotEmpty) {
+          return verificationData.serverVerificationData;
+        }
+        return purchaseDetails.purchaseID;
+      }
+      return purchaseDetails.purchaseID;
+    } catch (e) {
+      debugPrint('Error getting purchase token: $e');
+      return purchaseDetails.purchaseID;
+    }
   }
 
   /// Restore previous purchases

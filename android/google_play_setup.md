@@ -12,7 +12,7 @@ Bu dosya, Google Play Console'da in-app purchase (uygulama içi satın alma) öz
 
 ### Gerekli Bilgiler:
 - Uygulama adı: "Görevde Yükselme"
-- Paket adı: `com.gyudsoft.apps` (build.gradle.kts'de tanımlı)
+- Paket adı: `com.dynamind.gyudsoft` (build.gradle.kts'de tanımlı)
 - Kategori: Eğitim
 - İçerik derecelendirmesi
 - Gizlilik politikası URL'si
