@@ -3,6 +3,7 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'google_signin_service.dart';
 import 'apple_signin_service.dart';
 import 'session_service.dart';
+import 'notification_service.dart';
 
 class AuthService {
   final FirebaseAuth _firebaseAuth;
@@ -497,6 +498,15 @@ class AuthService {
   // Sign out
   Future<void> signOut() async {
     try {
+      // Delete FCM token before signing out
+      try {
+        await NotificationService().deleteToken();
+        print('[AuthService] FCM token deleted on sign out');
+      } catch (tokenError) {
+        print('[AuthService] Failed to delete FCM token: $tokenError');
+        // Continue with sign out even if token deletion fails
+      }
+      
       await _googleSignInService.signOut();
       await _sessionService?.clearSession();
     } catch (e) {

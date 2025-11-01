@@ -6,6 +6,11 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     
+    <!-- Push Notification permissions -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    
     <application
         android:label="Kamu Sınavlarına Hazırlık"
         android:name="${applicationName}"
@@ -42,6 +47,21 @@
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-9923309503448713~7674733669"/>
+        
+        <!-- FCM Default Notification Channel -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="high_importance_channel" />
+        
+        <!-- FCM Default Notification Icon -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@mipmap/ic_launcher" />
+        
+        <!-- FCM Default Notification Color -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@android:color/white" />
             
     </application>
     <!-- Required to query activities that can process text, see:

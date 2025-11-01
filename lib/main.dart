@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:upgrader/upgrader.dart';
 import 'package:gorevde_yukselme/core/providers/app_providers.dart';
 import 'package:gorevde_yukselme/core/services/session_service.dart';
 import 'package:gorevde_yukselme/core/services/admob_service.dart';
+import 'package:gorevde_yukselme/core/services/notification_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'core/theme/app_theme.dart';
@@ -23,6 +25,9 @@ void main() async {
   // Initialize Firebase Crashlytics
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
   
+  // Register background message handler for FCM
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+  
   // Initialize AdMob after Firebase
   try {
     print('[Main] Starting AdMob initialization...');
@@ -31,6 +36,16 @@ void main() async {
   } catch (e) {
     print('[Main] AdMob initialization failed: $e');
     // Don't crash the app if AdMob fails
+  }
+  
+  // Initialize Push Notifications
+  try {
+    print('[Main] Starting Notification Service initialization...');
+    await NotificationService().initialize();
+    print('[Main] Notification Service initialized successfully');
+  } catch (e) {
+    print('[Main] Notification Service initialization failed: $e');
+    // Don't crash the app if notifications fail
   }
   
   // Initialize SharedPreferences
@@ -82,6 +97,10 @@ class MainApp extends ConsumerWidget {
     final router = AppRouter.createRouter(ref);
     
     return UpgradeAlert(
+      upgrader: Upgrader(
+        messages: UpgraderMessages(code: 'tr'),
+        countryCode: 'TR',
+      ),
       child: MaterialApp.router(
         title: 'Kamu Sınavlarına Hazırlık - Sınav Hazırlık Uygulaması',
         theme: AppTheme.lightTheme,
