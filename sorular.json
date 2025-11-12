@@ -2425,10 +2425,10 @@
                     ]
                 },
                 "İdari İşler Müdürü": {
-                    "2013 İdare İşler Müdürü Çıkmış Sorular 1": [
+                    "2013 İdari İşler Müdürü Çıkmış Sorular 1": [
                         {
                             "soru_no": 1,
-                            "soru": "Aynı anda basıldığında bilgisayarın açma –ka - pama düğmesine basmadan hafızayı tamamen silmemizi ve bilgisayarı yeniden başlatmamızı sağlayan ve ayrıca tuş kilitlenmesini de açan kısayol aşağıdakilerden hangisidir?",
+                            "soru": "Aynı anda basıldığında bilgisayarın açma –ka-pama düğmesine basmadan hafızayı tamamen silmemizi ve bilgisayarı yeniden başlatmamızı sağlayan ve ayrıca tuş kilitlenmesini de açan kısayol aşağıdakilerden hangisidir?",
                             "secenekler": {
                                 "A": "Ctrl+C",
                                 "B": "Ctrl+X",
@@ -2437,7 +2437,7 @@
                                 "E": "Ctrl+Alt+Del"
                             },
                             "dogru_cevap": "Ctrl+Alt+Del",
-                            "ozet": "Seçenekler mevzuat/tanımsal çerçeveye göre değerlendirildiğinde doğru cevap, kurala/ilkeye tam uyan Ctrl+Alt+Del olur; diğer şıklar kapsam dışı veya eksiktir."
+                            "ozet": "Bilgisayarı yeniden başlatmayı sağlayan ve tuş kilitlenmesini açan kısayol **Ctrl+Alt+Del**'dir."
                         },
                         {
                             "soru_no": 2,
@@ -2450,37 +2450,37 @@
                                 "E": "Sabit Disk Sürücüsü"
                             },
                             "dogru_cevap": "Mikroişlemci",
-                            "ozet": "Seçenekler mevzuat/tanımsal çerçeveye göre değerlendirildiğinde doğru cevap, kurala/ilkeye tam uyan Mikroişlemci olur; diğer şıklar kapsam dışı veya eksiktir."
+                            "ozet": "Bilgisayarın beyni olarak adlandırılan ve diğer birimleri kontrol eden bölüm **Mikroişlemcidir**."
                         },
                         {
                             "soru_no": 3,
-                            "soru": "Aşağıdakilerden hangisi Bilgi Güvenliği Yönetim Sistemi’nin sağlayacağı faydalardan değildir ?",
+                            "soru": "Aşağıdakilerden hangisi Bilgi Güvenliği Yönetim Sistemi’nin sağlayacağı faydalardan değildir?",
                             "secenekler": {
                                 "A": "İş sürekliliğini sağlamak",
                                 "B": "Çalışanların prestijinin korunmasını ve artışını sağlamak",
                                 "C": "Tehdit ve risklerin belirlenmesini ve etkin bir risk yönetimini sağlamak",
                                 "D": "Kurumsal prestijin korunmasını ve artışını sağlayamak",
-                                "E": "Kurum çalışanlarının güvenlik konusundaki farkındalık düzeyinin yükseltilmesi ve önemli güvenlik konularında bilgilendirilmesini sağlamak4. İcra ve iflas dairelerinde satışa çıkartılan mal-lara ilişkin online olarak teklif verilebilmesine sağlayan portal aşağıdakilerden hangisidir?"
+                                "E": "Kurum çalışanlarının güvenlik konusundaki farkındalık düzeyinin yükseltilmesi ve önemli güvenlik konularında bilgilendirilmesini sağlamak"
                             },
                             "dogru_cevap": "Çalışanların prestijinin korunmasını ve artışını sağlamak",
-                            "ozet": "Soru olumsuz köklüdür; seçenekler arasından kuralın/kurumun kapsamına GİRMEYEN/yanlış ifade Çalışanların prestijinin korunmasını ve artışını sağlamak’tir. Diğer şıklar ilgili mevzuata/tanıma uygundur."
+                            "ozet": "Bilgi Güvenliği Yönetim Sistemi'nin faydaları arasında, kurumsal prestijin korunması ve artırılması yer alırken, **Çalışanların prestijinin korunmasını ve artışını sağlamak** (B) yer almaz."
                         },
                         {
                             "soru_no": 4,
-                            "soru": "İcra ve iflas dairelerinde satışa çıkartılan mallara ilişkin online olarak teklif verilebilmesine sağlayan portal aşağıdakilerden hangisidir?",
+                            "soru": "İcra ve iflas dairelerinde satışa çıkartılan mal-lara ilişkin online olarak teklif verilebilmesine sağlayan portal aşağıdakilerden hangisidir?",
                             "secenekler": {
                                 "A": "Vatandaş Portalı",
                                 "B": "Kurum Portalı",
-                                "C": "e-Satış Portalı",
+                                "C": "e- Satış Portalı",
                                 "D": "Avukat Portalı",
                                 "E": "Bilirkişi Portalı"
                             },
-                            "dogru_cevap": "e-Satış Portalı",
-                            "ozet": "İcra satışlarında elektronik teklif verme yetkisi e‑Satış Portalı üzerindendir; diğer UYAP portalları bu işlevi karşılamaz. Dolayısıyla e-Satış Portalı isabetlidir."
+                            "dogru_cevap": "e- Satış Portalı",
+                            "ozet": "İcra ve iflas dairelerinde satışa çıkartılan mallara online teklif verilebilmesini sağlayan portal **e-Satış Portalı**'dır."
                         },
                         {
                             "soru_no": 5,
-                            "soru": "Openoffice.org Writer (Metin Düzenleyici) programında yapılan işlemin geri alınmasını sağlayan kısayol tuşu aşağıdakilerden hangi - sidir?",
+                            "soru": "Openoffice.org Writer (Metin Düzenleyici) programında yapılan işlemin geri alınmasını sağlayan kısayol tuşu aşağıdakilerden hangi-sidir?",
                             "secenekler": {
                                 "A": "Ctrl+A",
                                 "B": "Ctrl+Z",
@@ -2489,11 +2489,11 @@
                                 "E": "Ctrl+N"
                             },
                             "dogru_cevap": "Ctrl+Z",
-                            "ozet": "Seçenekler mevzuat/tanımsal çerçeveye göre değerlendirildiğinde doğru cevap, kurala/ilkeye tam uyan Ctrl+Z olur; diğer şıklar kapsam dışı veya eksiktir."
+                            "ozet": "Openoffice.org Writer programında yapılan işlemin geri alınmasını (Geri Al/Undo) sağlayan kısayol tuşu **Ctrl+Z**'dir."
                         },
                         {
                             "soru_no": 6,
-                            "soru": "Aşağıdakilerden hangisi Başbakanlık Afet ve Acil Durum Başkanlığı teşkilatından biri değildir ?",
+                            "soru": "Aşağıdakilerden hangisi Başbakanlık Afet ve Acil Durum Başkanlığı teşkilatından biri değildir?",
                             "secenekler": {
                                 "A": "Deprem Dairesi Başkanlığı",
                                 "B": "Müdahale Dairesi Başkanlığı",
@@ -2502,7 +2502,7 @@
                                 "E": "Planlama ve Zarar Azaltma Dairesi Başkanlığı"
                             },
                             "dogru_cevap": "Eğitim ve Sosyal Hizmetler Dairesi Başkanlığı",
-                            "ozet": "Soru olumsuz köklüdür; seçenekler arasından kuralın/kurumun kapsamına GİRMEYEN/yanlış ifade Eğitim ve Sosyal Hizmetler Dairesi Başkanlığı’tir. Diğer şıklar ilgili mevzuata/tanıma uygundur."
+                            "ozet": "Başbakanlık Afet ve Acil Durum Başkanlığı (AFAD) teşkilatında **Eğitim ve Sosyal Hizmetler Dairesi Başkanlığı** (D) bulunmamaktadır."
                         },
                         {
                             "soru_no": 7,
@@ -2515,7 +2515,7 @@
                                 "E": "Personel sayısı 100’den fazla olanlar"
                             },
                             "dogru_cevap": "Personel sayısı 100’den fazla olanlar",
-                            "ozet": "Bu konu pozitif hukukta açık bir süre sınırına bağlanmıştır; ilgili düzenleme Personel sayısı 100’den fazla olanlar İDARİ İŞLER MÜDÜRÜ3 A8. Aşağıdakilerden hangisi Kontrol Merkezi ve Karargah servisinin görevlerinden biridir?"
+                            "ozet": "Hassas bölgelerde, personel mevcudunun yıllık ortalaması **100’den fazla olan** (E) resmî ve hususi müesseseler sivil savunma planı yapmakla yükümlüdür."
                         },
                         {
                             "soru_no": 8,
@@ -2528,7 +2528,7 @@
                                 "E": "Ölülerin kimliklerini tespit etmek"
                             },
                             "dogru_cevap": "Sivil Savunma servislerini sevk ve idare etmek",
-                            "ozet": "Seçenekler mevzuat/tanımsal çerçeveye göre değerlendirildiğinde doğru cevap, kurala/ilkeye tam uyan Sivil Savunma servislerini sevk ve idare etmek olur; diğer şıklar kapsam dışı veya eksiktir."
+                            "ozet": "Kontrol Merkezi ve Karargah servisinin görevlerinden biri **Sivil Savunma servislerini sevk ve idare etmektir**."
                         },
                         {
                             "soru_no": 9,
@@ -2541,11 +2541,11 @@
                                 "E": "Yaralı ve hastalara ilk sıhhî yardımı yapmak"
                             },
                             "dogru_cevap": "Yangınları kontrole almak ve söndürmek",
-                            "ozet": "Seçenekler mevzuat/tanımsal çerçeveye göre değerlendirildiğinde doğru cevap, kurala/ilkeye tam uyan Yangınları kontrole almak ve söndürmek olur; diğer şıklar kapsam dışı veya eksiktir."
+                            "ozet": "İtfaiye Servisi'nin görevi, **Yangınları kontrole almak ve söndürmektir**."
                         },
                         {
                             "soru_no": 10,
-                            "soru": "Aşağıdakilerden hangisi aktif sabotajlardan biri değildir ?",
+                            "soru": "Aşağıdakilerden hangisi aktif sabotajlardan biri değildir?",
                             "secenekler": {
                                 "A": "Yangınla sabotaj",
                                 "B": "Mekanik sabotaj",
@@ -2554,7 +2554,7 @@
                                 "E": "Bakteriyolojik ve kimyasal sabotaj"
                             },
                             "dogru_cevap": "Sanal ve medyatik sabotaj",
-                            "ozet": "Soru olumsuz köklüdür; seçenekler arasından kuralın/kurumun kapsamına GİRMEYEN/yanlış ifade Sanal ve medyatik sabotaj’tir. Diğer şıklar ilgili mevzuata/tanıma uygundur."
+                            "ozet": "Pasif sabotajlar arasında kabul edilen **Sanal ve medyatik sabotaj** (C), aktif sabotajlardan biri değildir."
                         },
                         {
                             "soru_no": 11,
@@ -2564,53 +2564,53 @@
                                 "B": "Bakanlıklar",
                                 "C": "Başbakanlık",
                                 "D": "Bakanlar Kurulu",
-                                "E": "Genelkurmay Başkanlığı12. Aşağıdakilerden hangisi bütçelerin hazırlan - ması, uygulanması ve kontrolünde geçerli olan ilkelerden değildir ?"
+                                "E": "Genelkurmay Başkanlığı"
                             },
                             "dogru_cevap": "Valilikler",
-                            "ozet": "Seçenekler mevzuat/tanımsal çerçeveye göre değerlendirildiğinde doğru cevap, kurala/ilkeye tam uyan Valilikler olur; diğer şıklar kapsam dışı veya eksiktir."
+                            "ozet": "Sivil ihtiyati tedbirlerin ilan ve iptal yetkisi **Valilikler** (A) tarafından kullanılamaz; bu yetki merkezi otoriteye (Bakanlıklar, Başbakanlık, Bakanlar Kurulu) aittir."
                         },
                         {
                             "soru_no": 12,
-                            "soru": "Aşağıdakilerden hangisi bütçelerin hazırlan - ması, uygulanması ve kontrolünde geçerli olan ilkelerden değildir ?",
+                            "soru": "Aşağıdakilerden hangisi bütçelerin hazırlan-ması, uygulanması ve kontrolünde geçerli olan ilkelerden değildir?",
                             "secenekler": {
-                                "A": "Bütçeler, stratejik planlar dikkate alınarak izle - yen iki yılın bütçe tahminleriyle birlikte görüşü - lür ve değerlendirilir.",
-                                "B": "Bütçe gelir ve gider tahminleri ile uygulama sonuçlarının raporlanmasında açıklık, doğru - luk ve mali saydamlık esas alınır.",
-                                "C": "Belirli gelirlerin belirli giderlere tahsis edilme - mesi esastır.",
-                                "D": "Tüm gelir ve giderler gayri safi olarak bütçeler - de gösterilir.",
+                                "A": "Bütçeler, stratejik planlar dikkate alınarak izle-yen iki yılın bütçe tahminleriyle birlikte görüşü-lür ve değerlendirilir.",
+                                "B": "Bütçe gelir ve gider tahminleri ile uygulama sonuçlarının raporlanmasında açıklık, doğru-luk ve mali saydamlık esas alınır.",
+                                "C": "Belirli gelirlerin belirli giderlere tahsis edilme-mesi esastır.",
+                                "D": "Tüm gelir ve giderler gayri safi olarak bütçeler-de gösterilir.",
                                 "E": "Cari yılda kullanılmayan ödenekler bir sonraki yıl bütçesine devredilir."
                             },
                             "dogru_cevap": "Cari yılda kullanılmayan ödenekler bir sonraki yıl bütçesine devredilir.",
-                            "ozet": "Soru olumsuz köklüdür; seçenekler arasından kuralın/kurumun kapsamına GİRMEYEN/yanlış ifade Cari yılda kullanılmayan ödenekler bir sonraki yıl bütçesine devredilir.’tir. Diğer şıklar ilgili mevzuata/tanıma uygundur."
+                            "ozet": "Bütçe hukuku ilkelerinden olan *Yıllık Olma İlkesi* gereği, **Cari yılda kullanılmayan ödenekler bir sonraki yıl bütçesine devredilmez** (E)."
                         },
                         {
                             "soru_no": 13,
                             "soru": "Bütçe uygulama esaslarına ilişkin aşağıdaki-lerden hangisi yanlıştır?",
                             "secenekler": {
-                                "A": "Kamu idareleri, bütçelerinde yer alan ödenek - lerin üzerinde harcama yapamaz.",
-                                "B": "Merkezî yönetim kapsamındaki kamu idarele - rinin bütçeleri arasındaki ödenek aktarmaları üst yönetici onayıyla yapılır.",
-                                "C": "Özel bütçeli idareler ve sosyal güvenlik kurum - ları ayrıntılı finansman programlarını hazırlar ve harcamalarını bu programa uygun olarak yaparlar.",
-                                "D": "Bütçeyle verilen ödenekler, tahsis edildikleri amaçlar doğrultusunda yılı içinde yaptırılan iş, satın alınan mal ve hizmetler ile diğer giderle - rin karşılanmasında kullanılır.",
+                                "A": "Kamu idareleri, bütçelerinde yer alan ödenek-lerin üzerinde harcama yapamaz.",
+                                "B": "Merkezî yönetim kapsamındaki kamu idarele-rinin bütçeleri arasındaki ödenek aktarmaları üst yönetici onayıyla yapılır.",
+                                "C": "Özel bütçeli idareler ve sosyal güvenlik kurum-ları ayrıntılı finansman programlarını hazırlar ve harcamalarını bu programa uygun olarak yaparlar.",
+                                "D": "Bütçeyle verilen ödenekler, tahsis edildikleri amaçlar doğrultusunda yılı içinde yaptırılan iş, satın alınan mal ve hizmetler ile diğer giderle-rin karşılanmasında kullanılır.",
                                 "E": "Personel giderleri tertiplerinden, aktarma yapılmış tertiplerden ve yedek ödenekten aktarma yapılmış tertiplerden, diğer tertiplere ödenek aktarması yapılamaz."
                             },
-                            "dogru_cevap": "Merkezî yönetim kapsamındaki kamu idarele - rinin bütçeleri arasındaki ödenek aktarmaları üst yönetici onayıyla yapılır.",
-                            "ozet": "Soru olumsuz köklüdür; seçenekler arasından kuralın/kurumun kapsamına GİRMEYEN/yanlış ifade Merkezî yönetim kapsamındaki kamu idarele - rinin bütçeleri arasındaki ödenek aktarmaları üst yönetici onayıyla yapılır.’tir. Diğer şıklar ilgili mevzuata/tanıma uygundur."
+                            "dogru_cevap": "Merkezî yönetim kapsamındaki kamu idarele-rinin bütçeleri arasındaki ödenek aktarmaları üst yönetici onayıyla yapılır.",
+                            "ozet": "Merkezî yönetim kapsamındaki kamu idarelerinin bütçeleri arasındaki ödenek aktarmaları **Kanunla** yapılır. Bu nedenle (B) seçeneği yanlıştır."
                         },
                         {
                             "soru_no": 14,
                             "soru": "Bütçe ödeneklerinin kullanılmasında uyulacak esaslara ilişkin aşağıdaki ifadelerden hangisi yanlıştır?",
                             "secenekler": {
-                                "A": "Cari yılda kullanılmayan ödenekler yıl sonun - da iptal edilir.",
-                                "B": "Kamu idareleri bütçelerinde yer alan ödenek - lerin üzerinde harcama yapamaz.",
+                                "A": "Cari yılda kullanılmayan ödenekler yıl sonun-da iptal edilir.",
+                                "B": "Kamu idareleri bütçelerinde yer alan ödenek-lerin üzerinde harcama yapamaz.",
                                 "C": "Merkezî yönetim kapsamındaki kamu idareleri, ayrıntılı harcama programlarını hazırlar ve vize edilmek üzere Maliye Bakanlığına gönderir.",
-                                "D": "Özel bütçeli idareler ve sosyal güvenlik kurum - ları ayrıntılı finansman programlarını hazırlar ve harcamalarını bu programa uygun olarak yaparlar.",
-                                "E": "Ayrıntılı harcama ve finansman programlarının hazırlanmasına, vize edilmesine, uygulanma - sına ve uygulamanın izlenmesine dair usûl ve esaslar Maliye Bakanlığınca belirlenir."
+                                "D": "Özel bütçeli idareler ve sosyal güvenlik kurum-ları ayrıntılı finansman programlarını hazırlar ve harcamalarını bu programa uygun olarak yaparlar.",
+                                "E": "Ayrıntılı harcama ve finansman programlarının hazırlanmasına, vize edilmesine, uygulanma-sına ve uygulamanın izlenmesine dair usûl ve esaslar Maliye Bakanlığınca belirlenir."
                             },
                             "dogru_cevap": "Merkezî yönetim kapsamındaki kamu idareleri, ayrıntılı harcama programlarını hazırlar ve vize edilmek üzere Maliye Bakanlığına gönderir.",
-                            "ozet": "Soru olumsuz köklüdür; seçenekler arasından kuralın/kurumun kapsamına GİRMEYEN/yanlış ifade Merkezî yönetim kapsamındaki kamu idareleri, ayrıntılı harcama programlarını hazırlar ve vize edilmek üzere Maliye Bakanlığına gönderir.’tir. Diğer şıklar ilgili mevzuata/tanıma uygundur."
+                            "ozet": "Merkezi yönetim kapsamındaki kamu idarelerinin harcama programlarını hazırlaması ve vize ettirmesi Kanun'da yer alan bir esas **değildir**."
                         },
                         {
                             "soru_no": 15,
-                            "soru": "5018 sayılı Kamu Mali Yönetimi ve Kontrol Kanunu’na göre, gerçekleştirme görevlileri harcama talimatı üzerine, aşağıda sayılan han-gi işlemi yapmazlar ?",
+                            "soru": "5018 sayılı Kamu Mali Yönetimi ve Kontrol Kanunu’na göre, gerçekleştirme görevlileri harcama talimatı üzerine, aşağıda sayılan han-gi işlemi yapmazlar?",
                             "secenekler": {
                                 "A": "Hak sahibine ödemenin yapılması",
                                 "B": "Mal veya hizmetin satın alınması",
@@ -2619,7 +2619,7 @@
                                 "E": "Ödeme için gerekli belgelerin hazırlanması"
                             },
                             "dogru_cevap": "Hak sahibine ödemenin yapılması",
-                            "ozet": "5018 sayılı Kanun bütçe ilkelerini ve ödenek kurallarını belirler; doğru şık bu ilkeye uygundur, diğerleri kuralın istisnası ya da hatalı yorumdur: Hak sahibine ödemenin yapılması."
+                            "ozet": "Gerçekleştirme görevlileri, ödeme için gerekli belgeleri hazırlar, ancak **Hak sahibine ödemenin yapılması** (A) işlemi, Muhasebe Yetkilisi'nin görevidir."
                         },
                         {
                             "soru_no": 16,
@@ -2629,10 +2629,10 @@
                                 "B": "Devlet Muhasebesi Standartları Kurulu",
                                 "C": "Türkiye Muhasebe Standartları Kurulu",
                                 "D": "İç Denetim Koordinasyon Kurulu",
-                                "E": "Mali Denetim Koordinasyon Kurulu17. Üst yöneticiler 5018 sayılı Kamu Mali Yöneti-mi ve Kontrol Kanunu’nda belirtilen görev ve sorumluluklarının yerine getirilmesinden kime karşı sorumludurlar?"
+                                "E": "Mali Denetim Koordinasyon Kurulu"
                             },
-                            "dogru_cevap": "İç Denetim Koordinasyon Kurulu",
-                            "ozet": "Seçenekler mevzuat/tanımsal çerçeveye göre değerlendirildiğinde doğru cevap, kurala/ilkeye tam uyan İç Denetim Koordinasyon Kurulu olur; diğer şıklar kapsam dışı veya eksiktir."
+                            "dogru_cevap": "Devlet Muhasebesi Standartları Kurulu",
+                            "ozet": "Kamu idarelerinde uygulanacak muhasebe ve raporlama standartlarını belirlemek üzere oluşturulan kurul **Devlet Muhasebesi Standartları Kurulu**'dur (B)."
                         },
                         {
                             "soru_no": 17,
@@ -2645,7 +2645,7 @@
                                 "E": "Bakana, mahalli idarelerde ise meclislerine"
                             },
                             "dogru_cevap": "Bakana, mahalli idarelerde ise meclislerine",
-                            "ozet": "5018 sayılı Kanun bütçe ilkelerini ve ödenek kurallarını belirler; doğru şık bu ilkeye uygundur, diğerleri kuralın istisnası ya da hatalı yorumdur: Bakana, mahalli idarelerde ise meclislerine."
+                            "ozet": "Üst yöneticiler, görev ve sorumluluklarının yerine getirilmesinden, merkezî yönetimde **Bakana**, mahalli idarelerde ise **meclislerine** karşı sorumludurlar."
                         },
                         {
                             "soru_no": 18,
@@ -2658,7 +2658,7 @@
                                 "E": "Ziya Paşa"
                             },
                             "dogru_cevap": "Ahmet Cevdet Paşa",
-                            "ozet": "Seçenekler mevzuat/tanımsal çerçeveye göre değerlendirildiğinde doğru cevap, kurala/ilkeye tam uyan Ahmet Cevdet Paşa olur; diğer şıklar kapsam dışı veya eksiktir."
+                            "ozet": "İlk adliye nazırı (Adalet Bakanı), **Ahmet Cevdet Paşa**'dır."
                         },
                         {
                             "soru_no": 19,
@@ -2668,10 +2668,10 @@
                                 "B": "Özel Kalem Müdürlüğü",
                                 "C": "Eğitim Dairesi Başkanlığı",
                                 "D": "İdari ve Mali İşler Daire Başkanlığı",
-                                "E": "Uluslararası Hukuk ve Dış İlişkiler Genel Mü - dürlüğü"
+                                "E": "Uluslararası Hukuk ve Dış İlişkiler Genel Mü-dürlüğü"
                             },
-                            "dogru_cevap": "Uluslararası Hukuk ve Dış İlişkiler Genel Mü - dürlüğü",
-                            "ozet": "Seçenekler mevzuat/tanımsal çerçeveye göre değerlendirildiğinde doğru cevap, kurala/ilkeye tam uyan Uluslararası Hukuk ve Dış İlişkiler Genel Mü - dürlüğü olur; diğer şıklar kapsam dışı veya eksiktir."
+                            "dogru_cevap": "Uluslararası Hukuk ve Dış İlişkiler Genel Mü-dürlüğü",
+                            "ozet": "Verilen seçeneklerden **Uluslararası Hukuk ve Dış İlişkiler Genel Müdürlüğü** (E), Bakanlık ana hizmet birimidir."
                         },
                         {
                             "soru_no": 20,
@@ -2684,25 +2684,25 @@
                                 "E": "Adli Tıp Kurumu"
                             },
                             "dogru_cevap": "İdari ve Mali İşler Daire Başkanlığı",
-                            "ozet": "Seçenekler mevzuat/tanımsal çerçeveye göre değerlendirildiğinde doğru cevap, kurala/ilkeye tam uyan İdari ve Mali İşler Daire Başkanlığı olur; diğer şıklar kapsam dışı veya eksiktir."
+                            "ozet": "Bakanlık personelinin ve ailelerinin sağlık hizmetlerinden yararlanmasını sağlama görevi **İdari ve Mali İşler Daire Başkanlığı** (A) görev alanındadır."
                         }
                     ],
-                    "2013 İdare İşler Müdürü Çıkmış Sorular 2": [
+                    "2013 İdari İşler Müdürü Çıkmış Sorular 2": [
                         {
-                            "soru_no": 1,
-                            "soru": "Aşağıdakilerden hangisi Ceza İşleri Genel Müdürlüğünün görevleri arasında yer almaz?",
+                            "soru_no": 21,
+                            "soru": "Aşağıdakilerden hangisi Ceza İşleri Genel Mü-dürlüğünün görevleri arasında yer almaz?",
                             "secenekler": {
                                 "A": "Cezai işlemlere ilişkin Bakanlık yazışmalarını yürütmek",
-                                "B": "Cezai işlemlerle ilgili ihbar ve şikayetleri inceleyip gereğini yapmak",
-                                "C": "Kanunların Adalet Bakanlığına verdiği soruşturma kovuşturma ve disiplin işlemlerini yürütmek",
-                                "D": "Hakim ve mahkemeler tarafından verilip Yargıtayca incelenmeksizin kesinleşen karar ve hükümlere ilişkin yazılı emir işlemlerini yürütmek",
-                                "E": "Cezaları infaz edilen hükümlülerin işe yerleştirilmeleri konusunda infaz sonrası yardım müesseseleri ve diğer kurumlarla ilişkileri düzenlemek"
+                                "B": "Cezai işlemlerle ilgili ihbar ve şikâyetleri ince-leyip gereğini yapmak",
+                                "C": "Kanunların Adalet Bakanlığına verdiği so-ruşturma kovuşturma ve disiplin işlemlerini yürütmek",
+                                "D": "Hâkim ve mahkemeler tarafından verilip Yargı-tayca incelenmeksizin kesinleşen karar ve hü-kümlere ilişkin yazılı emir işlemlerini yürütmek",
+                                "E": "Cezaları infaz edilen hükümlülerin işe yer-leştirilmeleri konusunda infaz sonrası yardım müesseseleri ve diğer kurumlarla ilişkileri düzenlemek"
                             },
-                            "dogru_cevap": "Kanunların Adalet Bakanlığına verdiği soruşturma kovuşturma ve disiplin işlemlerini yürütmek",
-                            "ozet": "Soru olumsuz köklüdür; seçenekler arasından kuralın/kurumun kapsamına GİRMEYEN/yanlış ifade Kanunların Adalet Bakanlığına verdiği soruşturma kovuşturma ve disiplin işlemlerini yürütmek’tir. Diğer şıklar ilgili mevzuata/tanıma uygundur."
+                            "dogru_cevap": "Cezaları infaz edilen hükümlülerin işe yer-leştirilmeleri konusunda infaz sonrası yardım müesseseleri ve diğer kurumlarla ilişkileri düzenlemek",
+                            "ozet": "**Cezaları infaz edilen hükümlülerin işe yerleştirilmeleri konusunda infaz sonrası yardım müesseseleri ve diğer kurumlarla ilişkileri düzenlemek** (E) Ceza İnfaz Kurumları ve Tevkifevleri Genel Müdürlüğü'nün görevlerindendir, Ceza İşleri Genel Müdürlüğü'nün değil."
                         },
                         {
-                            "soru_no": 2,
+                            "soru_no": 22,
                             "soru": "Adliyelere ilk defa atanacak olan personelin uygulama ve sözlü sınavını aşağıdakilerden hangisi yapar?",
                             "secenekler": {
                                 "A": "ÖSYM",
@@ -2712,36 +2712,36 @@
                                 "E": "Adalet Bakanlığı Personel Genel Müdürlüğü"
                             },
                             "dogru_cevap": "Adalet Komisyonları",
-                            "ozet": "Seçenekler mevzuat/tanımsal çerçeveye göre değerlendirildiğinde doğru cevap, kurala/ilkeye tam uyan Adalet Komisyonları olur; diğer şıklar kapsam dışı veya eksiktir."
+                            "ozet": "Adliyelere ilk defa atanacak olan personelin uygulama ve sözlü sınavını **Adalet Komisyonları** (B) yapar."
                         },
                         {
-                            "soru_no": 3,
+                            "soru_no": 23,
                             "soru": "Adli Yargı İlk Derece Komisyonlarının kuruluşu aşağıdakilerden hangisi ile düzenlenmiştir?",
                             "secenekler": {
                                 "A": "Türk Ceza Kanunu",
                                 "B": "Ceza Muhakemeleri Kanunu",
                                 "C": "2802 sayılı Hâkimler ve Savcılar Kanunu",
-                                "D": "6087 sayılı Hâkimler ve Savcılar Yüksek Kuru - lu Kanunu",
-                                "E": "2992 sayılı Adalet Bakanlığının Teşkilat ve Görevleri Hakkında Kanun24. Adalet Komisyonu ile ilgili aşağıdakilerden hangisi yanlıştır?"
+                                "D": "6087 sayılı Hâkimler ve Savcılar Yüksek Kuru-lu Kanunu",
+                                "E": "2992 sayılı Adalet Bakanlığının Teşkilat ve Görevleri Hakkında Kanun"
                             },
                             "dogru_cevap": "2802 sayılı Hâkimler ve Savcılar Kanunu",
-                            "ozet": "Seçenekler mevzuat/tanımsal çerçeveye göre değerlendirildiğinde doğru cevap, kurala/ilkeye tam uyan 2802 sayılı Hâkimler ve Savcılar Kanunu olur; diğer şıklar kapsam dışı veya eksiktir."
+                            "ozet": "Adli Yargı İlk Derece Komisyonlarının kuruluşu **2802 sayılı Hâkimler ve Savcılar Kanunu** (C) ile düzenlenmiştir."
                         },
                         {
-                            "soru_no": 4,
+                            "soru_no": 24,
                             "soru": "Adalet Komisyonu ile ilgili aşağıdakilerden hangisi yanlıştır?",
                             "secenekler": {
-                                "A": "Komisyonda",
+                                "A": "Komisyonda yazı işleri müdürü bulunur.",
                                 "B": "Birden fazla komisyon başkanı bulunmaz.",
                                 "C": "Komisyonda idari işler müdürü bulunmaz.",
-                                "D": "Komisyon personeli Adalet Bakanlığı tarafından belirlenir.",
+                                "D": "Komisyon personeli Adalet Bakanlığı tarafın-dan belirlenir.",
                                 "E": "Personel özlük işleri komisyon tarafından yapılır."
                             },
-                            "dogru_cevap": "Komisyon personeli Adalet Bakanlığı tarafından belirlenir.",
-                            "ozet": "Soru olumsuz köklüdür; seçenekler arasından kuralın/kurumun kapsamına GİRMEYEN/yanlış ifade Komisyon personeli Adalet Bakanlığı tarafından belirlenir.’tir. Diğer şıklar ilgili mevzuata/tanıma uygundur."
+                            "dogru_cevap": "Komisyon personeli Adalet Bakanlığı tarafın-dan belirlenir.",
+                            "ozet": "Adalet Komisyonu personeli, komisyonun görev alanındaki işleri yürütür ve personel özlük işleri komisyon tarafından yapılır. **Komisyon personelinin Adalet Bakanlığı tarafından belirlendiği** (D) hükmü yanlıştır."
                         },
                         {
-                            "soru_no": 5,
+                            "soru_no": 25,
                             "soru": "Danıştay Başkanının seçimi ile ilgili olarak hangisi yanlıştır?",
                             "secenekler": {
                                 "A": "4 yıl için seçilir.",
@@ -2751,36 +2751,36 @@
                                 "E": "Genel kurul üye tam sayısının salt çoğunluğu ile seçilir."
                             },
                             "dogru_cevap": "Bir defadan fazla seçilemez.",
-                            "ozet": "Soru olumsuz köklüdür; seçenekler arasından kuralın/kurumun kapsamına GİRMEYEN/yanlış ifade Bir defadan fazla seçilemez.’tir. Diğer şıklar ilgili mevzuata/tanıma uygundur."
+                            "ozet": "Danıştay Başkanı, kural olarak **birden fazla seçilebilir**; bu nedenle (C) seçeneği yanlıştır."
                         },
                         {
-                            "soru_no": 6,
+                            "soru_no": 26,
                             "soru": "Ceza Mahkemeleri ile ilgili bilgilerden hangisi doğrudur?",
                             "secenekler": {
-                                "A": "Bağımsız olarak hükmedilecek adli para ceza - sı ve güvenlik tedbirlerinin uygulanması asliye ceza mahkemelerinin görevi içindedir.",
-                                "B": "Resmî belgede sahtecilik (Türk Ceza Kanu - nu madde 204/2), nitelikli dolandırıcılık (Türk Ceza Kanunu madde 158) suçlarına bakmakla görevli olan ağır ceza mahkemeleridir.",
+                                "A": "Bağımsız olarak hükmedilecek adli para ceza-sı ve güvenlik tedbirlerinin uygulanması asliye ceza mahkemelerinin görevi içindedir.",
+                                "B": "Resmî belgede sahtecilik (Türk Ceza Kanu-nu madde 204/2), nitelikli dolandırıcılık (Türk Ceza Kanunu madde 158) suçlarına bakmakla görevli olan ağır ceza mahkemeleridir.",
                                 "C": "Adalet Bakanlığının olumlu görüşü alınarak Hâkimler Savcılar Yüksek Kurulu tarafından kurulur.",
-                                "D": "İş durumu gerekli kılsa bile ceza mahkemeleri - nin birden fazla dairesi bulunamaz.",
-                                "E": "Sadece il merkezlerinde kurulur. 6 İDARİ İŞLER MÜDÜRÜ A27. Tüzel kişilere kazai tebligat yapıldıktan sonra adreslerini değiştirip kazai mercine bildirme - mişlerse sonradan yapılacak tebligatı tebliğ memuru nasıl yapmalıdır?"
+                                "D": "İş durumu gerekli kılsa bile ceza mahkemeleri-nin birden fazla dairesi bulunamaz.",
+                                "E": "Sadece il merkezlerinde kurulur."
                             },
-                            "dogru_cevap": "Resmî belgede sahtecilik (Türk Ceza Kanu - nu madde 204/2), nitelikli dolandırıcılık (Türk Ceza Kanunu madde 158) suçlarına bakmakla görevli olan ağır ceza mahkemeleridir.",
-                            "ozet": "Seçenekler mevzuat/tanımsal çerçeveye göre değerlendirildiğinde doğru cevap, kurala/ilkeye tam uyan Resmî belgede sahtecilik (Türk Ceza Kanu - nu madde 204/2), nitelikli dolandırıcılık (Türk Ceza Kanunu madde 158) suçlarına bakmakla görevli olan ağır ceza mahkemeleridir. olur; diğer şıklar kapsam dışı veya eksiktir."
+                            "dogru_cevap": "Resmî belgede sahtecilik (Türk Ceza Kanu-nu madde 204/2), nitelikli dolandırıcılık (Türk Ceza Kanunu madde 158) suçlarına bakmakla görevli olan ağır ceza mahkemeleridir.",
+                            "ozet": "T.C.K. m. 204/2 ve m. 158'de belirtilen suçlar (2013 mevzuatına göre) Ağır Ceza Mahkemelerinin görev alanına girmektedir (B)."
                         },
                         {
-                            "soru_no": 7,
-                            "soru": "Tüzel kişilere kazai tebligat yapıldıktan sonra adreslerini değiştirip kazai mercine bildirmemişlerse sonradan yapılacak tebligatı tebliğ memuru nasıl yapmalıdır?",
+                            "soru_no": 27,
+                            "soru": "Tüzel kişilere kazai tebligat yapıldıktan sonra adreslerini değiştirip kazai mercine bildirme-mişlerse sonradan yapılacak tebligatı tebliğ memuru nasıl yapmalıdır?",
                             "secenekler": {
                                 "A": "Muhtara",
                                 "B": "Komşularına",
-                                "C": "Resmi kayıtlardaki adrese",
+                                "C": "Resmî kayıtlardaki adrese",
                                 "D": "Adres araştırması için iade",
-                                "E": "Bağlı bulunduğu oda temsilcisine"
+                                "E": "Bağlı bulunduğu oda temsilcine"
                             },
-                            "dogru_cevap": "Resmi kayıtlardaki adrese",
-                            "ozet": "Tebligatta temel ilke adres kaydına göre tebligattır; tüzel kişi bildirim yapmamışsa resmî kayıttaki adrese tebligat geçerlidir. Bu nedenle Resmi kayıtlardaki adrese seçilir."
+                            "dogru_cevap": "Resmî kayıtlardaki adrese",
+                            "ozet": "Adresini değiştiren tüzel kişiye tebligat, adresini bildirmediği sürece **resmî kayıtlardaki adrese** (C) yapılır."
                         },
                         {
-                            "soru_no": 8,
+                            "soru_no": 28,
                             "soru": "Kazai tebligat hangi kazai mercileri kapsar?",
                             "secenekler": {
                                 "A": "Sadece adli",
@@ -2790,10 +2790,10 @@
                                 "E": "Sadece adli ve idari"
                             },
                             "dogru_cevap": "Adli, idari ve askerî",
-                            "ozet": "Tebligatta temel ilke adres kaydına göre tebligattır; tüzel kişi bildirim yapmamışsa resmî kayıttaki adrese tebligat geçerlidir. Bu nedenle Adli, idari ve askerî seçilir."
+                            "ozet": "Kazai tebligat, **Adli, idari ve askerî** (D) yargı mercilerini kapsar."
                         },
                         {
-                            "soru_no": 9,
+                            "soru_no": 29,
                             "soru": "Muhatap yerine kendisine tebliğ yapılacak kim-senin yaş şartı aşağıdakilerden hangisidir?",
                             "secenekler": {
                                 "A": "12 yaşından gün almış olmak",
@@ -2803,24 +2803,24 @@
                                 "E": "Görünüşüne nazaran 18 yaşından aşağı olmamak"
                             },
                             "dogru_cevap": "Görünüşüne nazaran 18 yaşından aşağı olmamak",
-                            "ozet": "Seçenekler mevzuat/tanımsal çerçeveye göre değerlendirildiğinde doğru cevap, kurala/ilkeye tam uyan Görünüşüne nazaran 18 yaşından aşağı olmamak olur; diğer şıklar kapsam dışı veya eksiktir."
+                            "ozet": "Muhatap yerine tebliğ yapılacak kişinin, görünüşüne nazaran **18 yaşından aşağı olmaması** (E) gerekir."
                         },
                         {
-                            "soru_no": 10,
-                            "soru": "Aşağıdakilerden hangisi Tebligat Kanunu’nun 35. maddesine dayanarak tebligat yapamaz ?",
+                            "soru_no": 30,
+                            "soru": "Aşağıdakilerden hangisi Tebligat Kanunu’nun 35. maddesine dayanarak tebligat yapamaz?",
                             "secenekler": {
                                 "A": "Valilik",
                                 "B": "Askeri Kazai mercii",
                                 "C": "İdari Kazai mercii",
                                 "D": "Asliye Hukuk Mahkemesi",
-                                "E": "Sulh Ceza Mahkemesi31. Aşağıdakilerden hangisi insan haklarının te - mel özelliklerinden biri değildir ?"
+                                "E": "Sulh Ceza Mahkemesi"
                             },
                             "dogru_cevap": "Valilik",
-                            "ozet": "Tebligatta temel ilke adres kaydına göre tebligattır; tüzel kişi bildirim yapmamışsa resmî kayıttaki adrese tebligat geçerlidir. Bu nedenle Valilik seçilir."
+                            "ozet": "Tebligat Kanunu'nun 35. maddesi, kazai mercilerin yapacağı tebligatlarla ilgilidir. **Valilik** (A) idari bir merci olduğundan bu maddeye dayanarak tebligat yapamaz."
                         },
                         {
-                            "soru_no": 11,
-                            "soru": "Aşağıdakilerden hangisi insan haklarının temel özelliklerinden biri değildir?",
+                            "soru_no": 31,
+                            "soru": "Aşağıdakilerden hangisi insan haklarının te-mel özelliklerinden biri değildir?",
                             "secenekler": {
                                 "A": "Devredilmezlik",
                                 "B": "Evrensellik",
@@ -2829,50 +2829,50 @@
                                 "E": "Öngörülmezlik"
                             },
                             "dogru_cevap": "Öngörülmezlik",
-                            "ozet": "Soru olumsuz köklüdür; seçenekler arasından kuralın/kurumun kapsamına GİRMEYEN/yanlış ifade Öngörülmezlik’tir. Diğer şıklar ilgili mevzuata/tanıma uygundur."
+                            "ozet": "İnsan haklarının temel özellikleri arasında Devredilmezlik, Evrensellik, Dokunulmazlık ve Vazgeçilmezlik yer alır; **Öngörülmezlik** (E) yer almaz."
                         },
                         {
-                            "soru_no": 12,
-                            "soru": "Aşağıdakilerden hangisi Avrupa İnsan Hakları Mahkemesine yapılan bir başvurunun kabul edilebilirlik koşullarından değildir ?",
+                            "soru_no": 32,
+                            "soru": "Aşağıdakilerden hangisi Avrupa İnsan Hakları Mahkemesine yapılan bir başvurunun kabul edilebilirlik koşullarından değildir?",
                             "secenekler": {
                                 "A": "İç hukuk yollarının tüketilmesi",
                                 "B": "Başvurunun doğrudan yapılması",
                                 "C": "Başvuru hakkının kötüye kullanılması",
-                                "D": "Başvurunun açıkça dayanaktan yoksun (mes - netsiz) olması",
+                                "D": "Başvurunun açıkça dayanaktan yoksun (mes-netsiz) olması",
                                 "E": "İç hukuktaki kesin karar tarihinden itibaren altı ay içerisinde başvurunun yapılması"
                             },
                             "dogru_cevap": "Başvurunun doğrudan yapılması",
-                            "ozet": "Soru olumsuz köklüdür; seçenekler arasından kuralın/kurumun kapsamına GİRMEYEN/yanlış ifade Başvurunun doğrudan yapılması’tir. Diğer şıklar ilgili mevzuata/tanıma uygundur."
+                            "ozet": "AİHM’ye yapılan başvuruların kabul edilebilirliği, iç hukuk yollarının tüketilmesini, 6 aylık süreye uyulmasını, dayanaktan yoksun olmamasını ve kötüye kullanılmamasını gerektirir. **Başvurunun doğrudan yapılması** (B) AİHM kabul edilebilirlik koşullarından değildir."
                         },
                         {
-                            "soru_no": 13,
-                            "soru": "Aşağıdakilerden hangisi, Avrupa İnsan Hakları Sözleşmesi’nin 2. maddesinde düzenlenen yaşama hakkının istisnalarından değildir ?",
+                            "soru_no": 33,
+                            "soru": "Aşağıdakilerden hangisi, Avrupa İnsan Hakları Sözleşmesi’nin 2. maddesinde düzenlenen yaşama hakkının istisnalarından değildir?",
                             "secenekler": {
                                 "A": "Mahkemece hükmedilen ölüm cezasının infazı",
-                                "B": "Suçun önlenmesi amacıyla ölümcül zor kulla - nılması",
-                                "C": "Bir kimsenin usulüne uygun olarak yakalan - masını gerçekleştirme",
-                                "D": "Bir kimsenin yasa dışı şiddete karşı korunma - sının sağlanması",
+                                "B": "Suçun önlenmesi amacıyla ölümcül zor kulla-nılması",
+                                "C": "Bir kimsenin usulüne uygun olarak yakalan-masını gerçekleştirme",
+                                "D": "Bir kimsenin yasa dışı şiddete karşı korunma-sının sağlanması",
                                 "E": "Bir ayaklanma veya isyanın yasaya uygun olarak bastırılması"
                             },
-                            "dogru_cevap": "Suçun önlenmesi amacıyla ölümcül zor kulla - nılması",
-                            "ozet": "Soru olumsuz köklüdür; seçenekler arasından kuralın/kurumun kapsamına GİRMEYEN/yanlış ifade Suçun önlenmesi amacıyla ölümcül zor kulla - nılması’tir. Diğer şıklar ilgili mevzuata/tanıma uygundur."
+                            "dogru_cevap": "Suçun önlenmesi amacıyla ölümcül zor kulla-nılması",
+                            "ozet": "AİHS’nin 2. Maddesi, zor kullanmanın mutlak gereklilik hâlinde ve aşağıdaki amaçlarla (C, E seçenekleri) yapılmasını istisna tutar. **Suçun önlenmesi amacıyla ölümcül zor kullanılması** (B) istisnalardan değildir."
                         },
                         {
-                            "soru_no": 14,
-                            "soru": "Aşağıdakilerden hangisi Avrupa İnsan Hakları Sözleşmesi’yle güvence altına alınan hak ve özgürlüklerden değildir ?",
+                            "soru_no": 34,
+                            "soru": "Aşağıdakilerden hangisi Avrupa İnsan Hakları Sözleşmesi’yle güvence altına alınan hak ve özgürlüklerden değildir?",
                             "secenekler": {
                                 "A": "Evlenme Hakkı",
                                 "B": "İfade Özgürlüğü",
                                 "C": "Özgürlük ve Güvenlik Hakkı",
                                 "D": "Sağlıklı Çevrede Yaşama Hakkı",
-                                "E": "Düşünce, Vicdan ve Din Özgürlüğü İDARİ İŞLER MÜDÜRÜ7 A35. Yüz, beden, bedensel temas, mekân kullanımı gibi çeşitli araçlar kullanılarak gerçekleştirilen iletişime ne ad verilir?"
+                                "E": "Düşünce, Vicdan ve Din Özgürlüğü"
                             },
                             "dogru_cevap": "Sağlıklı Çevrede Yaşama Hakkı",
-                            "ozet": "Soru olumsuz köklüdür; seçenekler arasından kuralın/kurumun kapsamına GİRMEYEN/yanlış ifade Sağlıklı Çevrede Yaşama Hakkı’tir. Diğer şıklar ilgili mevzuata/tanıma uygundur."
+                            "ozet": "**Sağlıklı Çevrede Yaşama Hakkı** (D), AİHS’nin kendisinde değil, daha sonraki bazı Ek Protokollerde veya içtihatlarla dolaylı olarak korunmaktadır."
                         },
                         {
-                            "soru_no": 15,
-                            "soru": "Yüz, beden, bedensel temas, mekan kullanımı gibi çeşitli araçlar kullanılarak gerçekleştirilen iletişime ne ad verilir?",
+                            "soru_no": 35,
+                            "soru": "Yüz, beden, bedensel temas, mekân kullanımı gibi çeşitli araçlar kullanılarak gerçekleştirilen iletişime ne ad verilir?",
                             "secenekler": {
                                 "A": "Sözlü iletişim",
                                 "B": "Kitle iletişimi",
@@ -2881,24 +2881,24 @@
                                 "E": "Kişiler arası iletişim"
                             },
                             "dogru_cevap": "Sözsüz iletişim",
-                            "ozet": "Seçenekler mevzuat/tanımsal çerçeveye göre değerlendirildiğinde doğru cevap, kurala/ilkeye tam uyan Sözsüz iletişim olur; diğer şıklar kapsam dışı veya eksiktir."
+                            "ozet": "Yüz, beden, temas ve mekân kullanarak gerçekleştirilen iletişim **Sözsüz iletişim** (D) olarak adlandırılır."
                         },
                         {
-                            "soru_no": 16,
+                            "soru_no": 36,
                             "soru": "İletişimin temel amacı nedir?",
                             "secenekler": {
                                 "A": "İyi insan ilişkileri kurmaktır.",
                                 "B": "İsteklerimizin karşılanmasıdır.",
                                 "C": "Duygularımızı ifade etmektir.",
                                 "D": "Çatışmadan kaçınmaktır.",
-                                "E": "Ortak noktalarda anlaşma ve uzlaşmaya var - mak, gereksinimlerimizi gidermektir."
+                                "E": "Ortak noktalarda anlaşma ve uzlaşmaya var-mak, gereksinimlerimizi gidermektir."
                             },
-                            "dogru_cevap": "Ortak noktalarda anlaşma ve uzlaşmaya var - mak, gereksinimlerimizi gidermektir.",
-                            "ozet": "Seçenekler mevzuat/tanımsal çerçeveye göre değerlendirildiğinde doğru cevap, kurala/ilkeye tam uyan Ortak noktalarda anlaşma ve uzlaşmaya var - mak, gereksinimlerimizi gidermektir. olur; diğer şıklar kapsam dışı veya eksiktir."
+                            "dogru_cevap": "Ortak noktalarda anlaşma ve uzlaşmaya var-mak, gereksinimlerimizi gidermektir.",
+                            "ozet": "İletişimin temel amacı **Ortak noktalarda anlaşma ve uzlaşmaya varmak, gereksinimlerimizi gidermektir** (E)."
                         },
                         {
-                            "soru_no": 17,
-                            "soru": "Aşağıdakilerden hangisi iletişim sürecinin iş - leyişini bozan, alıcının mesajı doğru almasına engel olan iletişim ögesidir?",
+                            "soru_no": 37,
+                            "soru": "Aşağıdakilerden hangisi iletişim sürecinin iş-leyişini bozan, alıcının mesajı doğru almasına engel olan iletişim ögesidir?",
                             "secenekler": {
                                 "A": "Gürültü",
                                 "B": "Kanal",
@@ -2907,23 +2907,23 @@
                                 "E": "İçerik"
                             },
                             "dogru_cevap": "Gürültü",
-                            "ozet": "Bu konu pozitif hukukta açık bir süre sınırına bağlanmıştır; ilgili düzenleme Gürültü değerini öngörür. Diğer seçenekler mevzuattaki süre/sınırla uyuşmaz."
+                            "ozet": "İletişim sürecinin işleyişini bozan, mesajın doğru alınmasına engel olan öge **Gürültü** (A)'dür."
                         },
                         {
-                            "soru_no": 18,
-                            "soru": "Aşağıdakilerden hangisi empatik iletişim ba - samaklarından biri değildir ?",
+                            "soru_no": 38,
+                            "soru": "Aşağıdakilerden hangisi empatik iletişim ba-samaklarından biri değildir?",
                             "secenekler": {
-                                "A": "Senin problemin karşısında başkaları ne düşü - nür, ne hisseder?",
+                                "A": "Senin problemin karşısında başkaları ne düşü-nür, ne hisseder?",
                                 "B": "Akıl verme",
                                 "C": "Sempati kurma",
                                 "D": "Soruna eğilme",
-                                "E": "Benim duygularım39. Aşağıdakilerden hangisi bir yöneticinin sahip olması gereken temel becerilerden biridir?"
+                                "E": "Benim duygularım"
                             },
                             "dogru_cevap": "Sempati kurma",
-                            "ozet": "Soru olumsuz köklüdür; seçenekler arasından kuralın/kurumun kapsamına GİRMEYEN/yanlış ifade Sempati kurma’tir. Diğer şıklar ilgili mevzuata/tanıma uygundur."
+                            "ozet": "Empati kurmak, karşıdaki kişinin duygularını anlamaktır, ancak sempati kurmak (duygusal olarak aynı hissetmek) empatik iletişimin basamaklarından biri değildir. Bu nedenle (C) şıkkı yanlıştır."
                         },
                         {
-                            "soru_no": 19,
+                            "soru_no": 39,
                             "soru": "Aşağıdakilerden hangisi bir yöneticinin sahip olması gereken temel becerilerden biridir?",
                             "secenekler": {
                                 "A": "İnisiyatif alabilme",
@@ -2933,26 +2933,26 @@
                                 "E": "Çalışanların düşüncesine önem vermeme"
                             },
                             "dogru_cevap": "İnisiyatif alabilme",
-                            "ozet": "Seçenekler mevzuat/tanımsal çerçeveye göre değerlendirildiğinde doğru cevap, kurala/ilkeye tam uyan İnisiyatif alabilme olur; diğer şıklar kapsam dışı veya eksiktir."
+                            "ozet": "Bir yöneticinin sahip olması gereken temel becerilerden biri **İnisiyatif alabilme** (A)'dir."
                         },
                         {
-                            "soru_no": 20,
+                            "soru_no": 40,
                             "soru": "Başarılı bir ekipte aşağıdakilerden hangisi vardır?",
                             "secenekler": {
                                 "A": "Grup amiri yeteneklidir, iş birliği istemez.",
                                 "B": "Her üye birçok alanda uzmanlaşmıştır.",
-                                "C": "Üye hedef ve görüşü ile ekibin hedef ve görü - şü farklılaşır.",
+                                "C": "Üye hedef ve görüşü ile ekibin hedef ve görü-şü farklılaşır.",
                                 "D": "Ekip, üyelerin kendilerini iyi hissettikleri bir ortama sahiptir.",
                                 "E": "Ekip, takım oyunu sayesinde içten ve dıştan gelecek yeni fikirlere ve gelişime kapalıdır."
                             },
                             "dogru_cevap": "Ekip, üyelerin kendilerini iyi hissettikleri bir ortama sahiptir.",
-                            "ozet": "Seçenekler mevzuat/tanımsal çerçeveye göre değerlendirildiğinde doğru cevap, kurala/ilkeye tam uyan Ekip, üyelerin kendilerini iyi hissettikleri bir ortama sahiptir. olur; diğer şıklar kapsam dışı veya eksiktir."
+                            "ozet": "Başarılı bir ekip, üyelerinin kendilerini güvende ve iyi hissettikleri, açık iletişimin olduğu bir ortama sahiptir (D)."
                         }
                     ],
-                    "2013 İdare İşler Müdürü Çıkmış Sorular 3": [
+                    "2013 İdari İşler Müdürü Çıkmış Sorular 3": [
                         {
-                            "soru_no": 1,
-                            "soru": "Aşağıdakilerden hangisi adli yargı hukuk mah - kemesi değildir ?",
+                            "soru_no": 41,
+                            "soru": "Aşağıdakilerden hangisi adli yargı hukuk mah-kemesi değildir?",
                             "secenekler": {
                                 "A": "İş Mahkemesi",
                                 "B": "İcra Mahkemesi",
@@ -2961,24 +2961,24 @@
                                 "E": "Kadastro Mahkemesi"
                             },
                             "dogru_cevap": "Çocuk Mahkemesi",
-                            "ozet": "Soru olumsuz köklüdür; seçenekler arasından kuralın/kurumun kapsamına GİRMEYEN/yanlış ifade Çocuk Mahkemesi’tir. Diğer şıklar ilgili mevzuata/tanıma uygundur."
+                            "ozet": "**Çocuk Mahkemesi** (C), adli yargıda ceza mahkemesi olarak görev yapar. Diğer seçenekler hukuk mahkemeleridir."
                         },
                         {
-                            "soru_no": 2,
+                            "soru_no": 42,
                             "soru": "Aşağıdakilerden hangisi idari işler müdürünün görevleri arasında yer alır?",
                             "secenekler": {
                                 "A": "Arşivin düzenli tutulmasını sağlamak",
                                 "B": "Ayniyat ve levazım işlerini düzenlemek",
-                                "C": "Harç tahsil müzekkerelerini yazmak ve kesin - leştirme işlemlerini yapmak",
+                                "C": "Harç tahsil müzekkerelerini yazmak ve kesin-leştirme işlemlerini yapmak",
                                 "D": "Dosyaya ait kıymetli evrak ve değerli eşyanın uygun yerde muhafazasını sağlamak",
-                                "E": "Tarafların dosyaları incelemesine nezaret et-mek ve dosya inceleme tutanağını düzenlemek 8 İDARİ İŞLER MÜDÜRÜ A43. Aşağıdakilerden hangisi ilgili yönetmelik gere - ğince Cumhuriyet başsavcılıklarınca tutulması gereken defterlerden değildir ?"
+                                "E": "Tarafların dosyaları incelemesine nezaret etmek ve dosya inceleme tutanağını düzenlemek"
                             },
                             "dogru_cevap": "Ayniyat ve levazım işlerini düzenlemek",
-                            "ozet": "Seçenekler mevzuat/tanımsal çerçeveye göre değerlendirildiğinde doğru cevap, kurala/ilkeye tam uyan Ayniyat ve levazım işlerini düzenlemek olur; diğer şıklar kapsam dışı veya eksiktir."
+                            "ozet": "İdari İşler Müdürünün görevleri arasında, **Ayniyat ve levazım işlerini düzenlemek** (B) yer alır."
                         },
                         {
-                            "soru_no": 3,
-                            "soru": "Aşağıdakilerden hangisi ilgili yönetmelik gereğince Cumhuriyet başsavcılıklarınca tutulması gereken defterlerden değildir?",
+                            "soru_no": 43,
+                            "soru": "Aşağıdakilerden hangisi ilgili yönetmelik gere-ğince Cumhuriyet başsavcılıklarınca tutulması gereken defterlerden değildir?",
                             "secenekler": {
                                 "A": "İstinabe defteri",
                                 "B": "Arama defteri",
@@ -2986,12 +2986,12 @@
                                 "D": "Muhabere defteri",
                                 "E": "Değişik işler defteri"
                             },
-                            "dogru_cevap": "Kitaplık defteri",
-                            "ozet": "Soru olumsuz köklüdür; seçenekler arasından kuralın/kurumun kapsamına GİRMEYEN/yanlış ifade Kitaplık defteri’tir. Diğer şıklar ilgili mevzuata/tanıma uygundur."
+                            "dogru_cevap": "Değişik işler defteri",
+                            "ozet": "Cumhuriyet Başsavcılıklarında **Değişik işler defteri** (E) tutulması zorunlu değildir. (Bu defter Hukuk Mahkemelerinde tutulur.)."
                         },
                         {
-                            "soru_no": 4,
-                            "soru": "Aşağıdakilerden hangisi ilgili yönetmelik ge - reğince Cumhuriyet başsavcılıklarınca tutulan kartonlardan değildir ?",
+                            "soru_no": 44,
+                            "soru": "Aşağıdakilerden hangisi ilgili yönetmelik ge-reğince Cumhuriyet başsavcılıklarınca tutulan kartonlardan değildir?",
                             "secenekler": {
                                 "A": "Temyiz kartonu",
                                 "B": "Fezleke kartonu",
@@ -3000,24 +3000,24 @@
                                 "E": "Görevsizlik ve yetkisizlik kartonu"
                             },
                             "dogru_cevap": "Dava dağıtım kartonu",
-                            "ozet": "Soru olumsuz köklüdür; seçenekler arasından kuralın/kurumun kapsamına GİRMEYEN/yanlış ifade Dava dağıtım kartonu’tir. Diğer şıklar ilgili mevzuata/tanıma uygundur."
+                            "ozet": "Cumhuriyet başsavcılıklarında tutulan kartonlar arasında **Dava dağıtım kartonu** (D) yer almaz."
                         },
                         {
-                            "soru_no": 5,
+                            "soru_no": 45,
                             "soru": "Kademe ilerlemesinin durdurulması cezası kural olarak hangi organ tarafından verilir?",
                             "secenekler": {
                                 "A": "Bakanlık Disiplin Kurulunun uygunluk kararı alındıktan sonra atamaya yetkili amir tarafından",
                                 "B": "Atamaya yetkili amirin teklifi üzerine Bakanlık Disiplin Kurulu tarafından",
                                 "C": "Atamaya yekili amirin teklifi üzerine Yüksek Disiplin Kurulu tarafından",
-                                "D": "Disiplin amirinin teklifi üzerine Bakanlık Disip - lin Kurulu tarafından",
-                                "E": "Bakanlık Disiplin Kurulunun uygunluk kararı alındıktan sonra Yüksek Disiplin Kurulu tara - fından46. Kademe ilerlemesinin durdurulması cezası-na karşı; bu konudaki kararın ilgilisine tebliğ tarihinden itibaren kaç gün içinde nereye itiraz edilebilir?"
+                                "D": "Disiplin amirinin teklifi üzerine Bakanlık Disip-lin Kurulu tarafından",
+                                "E": "Bakanlık Disiplin Kurulunun uygunluk kararı alındıktan sonra Yüksek Disiplin Kurulu tara-fından"
                             },
                             "dogru_cevap": "Bakanlık Disiplin Kurulunun uygunluk kararı alındıktan sonra atamaya yetkili amir tarafından",
-                            "ozet": "Seçenekler mevzuat/tanımsal çerçeveye göre değerlendirildiğinde doğru cevap, kurala/ilkeye tam uyan Bakanlık Disiplin Kurulunun uygunluk kararı alındıktan sonra atamaya yetkili amir tarafından olur; diğer şıklar kapsam dışı veya eksiktir."
+                            "ozet": "Kademe ilerlemesinin durdurulması cezası, kural olarak **Bakanlık Disiplin Kurulunun uygunluk kararı alındıktan sonra atamaya yetkili amir tarafından** (A) verilir."
                         },
                         {
-                            "soru_no": 6,
-                            "soru": "Kademe ilerlemesinin durdurulması cezasına karşı; bu konudaki kararın ilgilisine tebliğ tarihinden itibaren kaç gün içinde nereye itiraz edilebilir?",
+                            "soru_no": 46,
+                            "soru": "Kademe ilerlemesinin durdurulması cezası-na karşı; bu konudaki kararın ilgilisine tebliğ tarihinden itibaren kaç gün içinde nereye itiraz edilebilir?",
                             "secenekler": {
                                 "A": "15 gün içinde komisyona",
                                 "B": "10 gün içinde disiplin kuruluna",
@@ -3025,11 +3025,11 @@
                                 "D": "60 gün içinde üst disiplin amirine",
                                 "E": "7 gün içinde Yüksek Disiplin Kuruluna"
                             },
-                            "dogru_cevap": "15 gün içinde komisyona",
-                            "ozet": "Bu konu pozitif hukukta açık bir süre sınırına bağlanmıştır; ilgili düzenleme 15 gün içinde komisyona değerini öngörür. Diğer seçenekler mevzuattaki süre/sınırla uyuşmaz."
+                            "dogru_cevap": "7 gün içinde Yüksek Disiplin Kuruluna",
+                            "ozet": "Kademe ilerlemesinin durdurulması cezasına karşı, tebliğ tarihinden itibaren **7 gün içinde Yüksek Disiplin Kuruluna** (E) itiraz edilebilir."
                         },
                         {
-                            "soru_no": 7,
+                            "soru_no": 47,
                             "soru": "Aşağıdakilerden hangisi Devlet memurlarına uygulanacak olan disiplin cezalarından değildir?",
                             "secenekler": {
                                 "A": "Devlet memurluğundan çıkarma",
@@ -3039,24 +3039,24 @@
                                 "E": "Kınama"
                             },
                             "dogru_cevap": "Görevden uzaklaştırma",
-                            "ozet": "Soru olumsuz köklüdür; seçenekler arasından kuralın/kurumun kapsamına GİRMEYEN/yanlış ifade Görevden uzaklaştırma’tir. Diğer şıklar ilgili mevzuata/tanıma uygundur."
+                            "ozet": "**Görevden uzaklaştırma** (B), bir disiplin cezası değil, soruşturma aşamasında uygulanan bir **koruma tedbiridir**."
                         },
                         {
-                            "soru_no": 8,
-                            "soru": "Kınama cezası alan bir memur bu cezanın öz - lük dosyasından silinebilmesi için gerekli süre içerisinde aynı fiili tekrar işlerse hangi ceza ile cezalandırılır?",
+                            "soru_no": 48,
+                            "soru": "Kınama cezası alan bir memur bu cezanın öz-lük dosyasından silinebilmesi için gerekli süre içerisinde aynı fiili tekrar işlerse hangi ceza ile cezalandırılır?",
                             "secenekler": {
                                 "A": "Kınama",
                                 "B": "Uyarma",
                                 "C": "Aylıktan kesme",
                                 "D": "Görev yeri değişikliği",
-                                "E": "Kademe ilerlemesinin durdurulması İDARİ İŞLER MÜDÜRÜ9 A49. I- Yargı yetkisi, Türk Milleti adına Hâkimler ve Savcılar Yüksek Kurulu (HSYK) tarafından kullanılır. II- Yasama yetkisi, Türk Milleti adına Türkiye Büyük Millet Meclisinindir. III- Yürütme yetkisi ve görevi, Cumhurbaşkanı ve Bakanlar Kurulu tarafından, Anayasa’ya ve kanunlara uygun olarak kullanılır. T.C. Anayasası’na göre “yasama, yürütme ve yargı yetkisi” ile ilgili yukarıdakilerden hangi - leri doğrudur?"
+                                "E": "Kademe ilerlemesinin durdurulması"
                             },
                             "dogru_cevap": "Aylıktan kesme",
-                            "ozet": "Bu konu pozitif hukukta açık bir süre sınırına bağlanmıştır; ilgili düzenleme Aylıktan kesme değerini öngörür. Diğer seçenekler mevzuattaki süre/sınırla uyuşmaz."
+                            "ozet": "Disiplin cezasının özlük dosyasından silinmesi için belirlenen süre içinde aynı fiilin tekrarlanması durumunda, bir derece ağır olan ceza uygulanır. Kınama cezasının bir derece ağırı **Aylıktan kesme** (C) cezasıdır."
                         },
                         {
-                            "soru_no": 9,
-                            "soru": "T.C. Anayasasına göre 'yasama, yürütme ve yargı yetkisi' ile ilgili yukarıdakilerden hangileri doğrudur? I- Yargı yetkisi, Türk Milleti adına Hakimler ve Savcılar Yüksek Kurulu (HSYK) tarafından kullanılır. II- Yasama yetkisi, Türk Milleti adına Türkiye Büyük Millet Meclisinindir. III- Yürütme yetkisi ve görevi, Cumhurbaşkanı ve Bakanlar Kurulu tarafından, Anayasaya ve kanunlara uygun olarak kullanılır.",
+                            "soru_no": 49,
+                            "soru": "T.C. Anayasası’na göre “yasama, yürütme ve yargı yetkisi” ile ilgili yukarıdakilerden hangi-leri doğrudur?\nI- Yargı yetkisi, Türk Milleti adına Hâkimler ve Savcılar Yüksek Kurulu (HSYK) tarafından kullanılır.\nII- Yasama yetkisi, Türk Milleti adına Türkiye Büyük Millet Meclisinindir.\nIII- Yürütme yetkisi ve görevi, Cumhurbaşkanı ve Bakanlar Kurulu tarafından, Anayasa’ya ve kanunlara uygun olarak kullanılır.",
                             "secenekler": {
                                 "A": "I ve II",
                                 "B": "I ve III",
@@ -3064,38 +3064,38 @@
                                 "D": "I, II ve III",
                                 "E": "Yalnız I"
                             },
-                            "dogru_cevap": "I, II ve III",
-                            "ozet": "Anayasa’ya göre yasama TBMM’ye, yürütme Cumhurbaşkanı ve Bakanlar Kuruluna; yargı ise bağımsız mahkemelere aittir. Bu dizilimi doğru veren seçenek I, II ve III’tir."
+                            "dogru_cevap": "II ve III",
+                            "ozet": "Anayasa'ya göre Yargı yetkisi bağımsız mahkemelerce kullanılır (I yanlıştır). Yasama (II) ve Yürütme (III) yetkilerine dair hükümler doğrudur."
                         },
                         {
-                            "soru_no": 10,
+                            "soru_no": 50,
                             "soru": "T.C. Anayasası’na göre “dilekçe hakkı” ile ilgili olarak aşağıdaki hükümlerden hangisi yanlıştır?",
                             "secenekler": {
-                                "A": "Vatandaşlar kendileriyle ilgili istekleri hak - kında, yetkili makamlara yazı ile başvurma hakkına sahiptir.",
-                                "B": "Vatandaşlar kamu ile ilgili şikâyetleri hakkında, Türkiye Büyük Millet Meclisine yazı ile başvur - ma hakkına sahiptir.",
-                                "C": "Vatandaşların şikâyetleriyle ilgili başvuruları - nın sonucu, gecikmeksizin kendilerine yazılı olarak bildirilir.",
+                                "A": "Vatandaşlar kendileriyle ilgili istekleri hak-kında, yetkili makamlara yazı ile başvurma hakkına sahiptir.",
+                                "B": "Vatandaşlar kamu ile ilgili şikâyetleri hakkında, Türkiye Büyük Millet Meclisine yazı ile başvur-ma hakkına sahiptir.",
+                                "C": "Vatandaşların şikâyetleriyle ilgili başvuruları-nın sonucu, gecikmeksizin kendilerine yazılı olarak bildirilir.",
                                 "D": "Türkiye’de ikamet eden yabancılar karşılıklılık esası gözetilmek kaydıyla da olsa kamu ile ilgili şikâyetleri hakkında Türkiye Büyük Millet Meclisine yazı ile başvurma hakkına sahip değildir.",
-                                "E": "Karşılıklılık esası gözetilmek şartıyla Türkiye’de ikamet eden yabancılar kendileri ile ilgili dilek ve şikâyetleri hakkında yetkili ma - kamlara yazı ile başvurma hakkına sahiptir."
+                                "E": "Karşılıklılık esası gözetilmek şartıyla Türkiye’de ikamet eden yabancılar kendileri ile ilgili dilek ve şikâyetleri hakkında yetkili ma-kamlara yazı ile başvurma hakkına sahiptir."
                             },
                             "dogru_cevap": "Türkiye’de ikamet eden yabancılar karşılıklılık esası gözetilmek kaydıyla da olsa kamu ile ilgili şikâyetleri hakkında Türkiye Büyük Millet Meclisine yazı ile başvurma hakkına sahip değildir.",
-                            "ozet": "Soru olumsuz köklüdür; seçenekler arasından kuralın/kurumun kapsamına GİRMEYEN/yanlış ifade Türkiye’de ikamet eden yabancılar karşılıklılık esası gözetilmek kaydıyla da olsa kamu ile ilgili şikâyetleri hakkında Türkiye Büyük Millet Meclisine yazı ile başvurma hakkına sahip değildir.’tir. Diğer şıklar ilgili mevzuata/tanıma uygundur."
+                            "ozet": "Türkiye'de ikamet eden yabancılar, karşılıklılık esası gözetilmek şartıyla, kamu ile ilgili şikâyetleri hakkında **TBMM’ye de** başvurma hakkına sahiptir."
                         },
                         {
-                            "soru_no": 11,
+                            "soru_no": 51,
                             "soru": "T.C. Anayasası’na göre kaç yaşını dolduran her Türk vatandaşı, seçme ve halk oylamasına katılma hakkına sahiptir?",
                             "secenekler": {
                                 "A": "Yirmi bir",
                                 "B": "Yirmi",
                                 "C": "On dokuz",
                                 "D": "On sekiz",
-                                "E": "Yirmi beş52. I- Kanunlar gibi yayımlanır. II- Kanunlara aykırı olmamalıdır.III- Sayıştayın incelemesinden geçmelidir.IV- Cumhurbaşkanınca imzalanmalıdır. T.C. Anayasası’na göre Bakanlar Kurulu Ka - rarıyla çıkarılan “tüzük” ile ilgili doğru olanlar aşağıdakilerin hangisinde birlikte verilmiştir?"
+                                "E": "Yirmi beş"
                             },
                             "dogru_cevap": "On sekiz",
-                            "ozet": "Seçenekler mevzuat/tanımsal çerçeveye göre değerlendirildiğinde doğru cevap, kurala/ilkeye tam uyan On sekiz olur; diğer şıklar kapsam dışı veya eksiktir."
+                            "ozet": "Seçme ve halk oylamasına katılma hakkına sahip olmak için **On sekiz** (D) yaşını doldurmak gerekir."
                         },
                         {
-                            "soru_no": 12,
-                            "soru": "T.C. Anayasasına göre Bakanlar Kurulu Kararıyla çıkarılan 'tüzük' ile ilgili doğru olanlar aşağıdakilerin hangisinde birlikte verilmiştir? I- Kanunlar gibi yayımlanır. II- Kanunlara aykırı olmamalıdır. III- Sayıştayın incelemesinden geçmelidir. IV- Cumhurbaşkanınca imzalanmalıdır.",
+                            "soru_no": 52,
+                            "soru": "T.C. Anayasası’na göre Bakanlar Kurulu Ka-rarıyla çıkarılan “tüzük” ile ilgili doğru olanlar aşağıdakilerin hangisinde birlikte verilmiştir?\nI- Kanunlar gibi yayımlanır.\nII- Kanunlara aykırı olmamalıdır.\nIII- Sayıştayın incelemesinden geçmelidir.\nIV- Cumhurbaşkanınca imzalanmalıdır.",
                             "secenekler": {
                                 "A": "I, II ve II",
                                 "B": "III ve IV",
@@ -3104,37 +3104,37 @@
                                 "E": "I, II ve IV"
                             },
                             "dogru_cevap": "I, II ve IV",
-                            "ozet": "Bu konu pozitif hukukta açık bir süre sınırına bağlanmıştır; ilgili düzenleme I, II ve IV değerini öngörür. Diğer seçenekler mevzuattaki süre/sınırla uyuşmaz."
+                            "ozet": "Tüzükler Kanunlar gibi yayımlanır (I), Kanunlara aykırı olmamalıdır (II) ve Cumhurbaşkanınca imzalanmalıdır (IV). Sayıştay incelemesi zorunlu değildir (III yanlıştır)."
                         },
                         {
-                            "soru_no": 13,
-                            "soru": "T.C. Anayasası’na göre aşağıdakilerden han - gisi Cumhurbaşkanının yürütme ile ilgili görev ve yetkilerindendir?",
+                            "soru_no": 53,
+                            "soru": "T.C. Anayasası’na göre aşağıdakilerden han-gisi Cumhurbaşkanının yürütme ile ilgili görev ve yetkilerindendir?",
                             "secenekler": {
                                 "A": "Millî Güvenlik Kuruluna Başkanlık etmek",
-                                "B": "Türkiye Büyük Millet Meclisi seçimlerinin yeni - lenmesine karar vermek",
-                                "C": "Anayasa değişikliklerine ilişkin kanunları ge - rekli gördüğü takdirde halkoyuna sunmak",
+                                "B": "Türkiye Büyük Millet Meclisi seçimlerinin yeni-lenmesine karar vermek",
+                                "C": "Anayasa değişikliklerine ilişkin kanunları ge-rekli gördüğü takdirde halkoyuna sunmak",
                                 "D": "Kanun hükmünde kararnamelerin Anayasa’ya şekil veya esas bakımından aykırı oldukları gerekçesi ile Anayasa Mahkemesinde iptal davası açmak",
                                 "E": "Kanunları tekrar görüşülmek üzere Türkiye Büyük Millet Meclisine göndermek"
                             },
                             "dogru_cevap": "Millî Güvenlik Kuruluna Başkanlık etmek",
-                            "ozet": "Seçenekler mevzuat/tanımsal çerçeveye göre değerlendirildiğinde doğru cevap, kurala/ilkeye tam uyan Millî Güvenlik Kuruluna Başkanlık etmek olur; diğer şıklar kapsam dışı veya eksiktir."
+                            "ozet": "Cumhurbaşkanının yürütme ile ilgili görev ve yetkilerinden biri **Millî Güvenlik Kuruluna Başkanlık etmektir** (A)."
                         },
                         {
-                            "soru_no": 14,
+                            "soru_no": 54,
                             "soru": "T.C. Anayasası’na göre Devlet Denetleme Kurulunun üyeleri aşağıdakilerden hangisi tarafından atanır?",
                             "secenekler": {
                                 "A": "Başbakan",
                                 "B": "Cumhurbaşkanı",
                                 "C": "Bakanlar Kurulu",
                                 "D": "Türkiye Büyük Millet Meclisi",
-                                "E": "Hâkimler ve Savcılar Yüksek Kurulu 10 İDARİ İŞLER MÜDÜRÜ A55. I. İnönü Savaşı’nı kazanarak gücünü ispat eden TBMM Hükûmetiyle 16 Mart 1921’de “Dostluk ve İş Birliği Antlaşması” imzalayan devlet, aşağıdakilerden hangisidir?"
+                                "E": "Hâkimler ve Savcılar Yüksek Kurulu"
                             },
                             "dogru_cevap": "Cumhurbaşkanı",
-                            "ozet": "DDK üyeleri yürütme organının başı olan Cumhurbaşkanınca atanır; bu atama yetkisi kanundan gelir. Bu yüzden Cumhurbaşkanı doğrudur."
+                            "ozet": "Devlet Denetleme Kurulunun üyeleri **Cumhurbaşkanı** (B) tarafından atanır."
                         },
                         {
-                            "soru_no": 15,
-                            "soru": "I. İnönü Savaşını kazanarak gücünü ispat eden TBMM Hükümetiyle 16 Mart 1921'de 'Dostluk ve İş Birliği Antlaşması' imzalayan devlet, aşağıdakilerden hangisidir?",
+                            "soru_no": 55,
+                            "soru": "I. İnönü Savaşı’nı kazanarak gücünü ispat eden TBMM Hükûmetiyle 16 Mart 1921’de “Dostluk ve İş Birliği Antlaşması” imzalayan devlet, aşağıdakilerden hangisidir?",
                             "secenekler": {
                                 "A": "İngiltere",
                                 "B": "Fransa",
@@ -3143,10 +3143,10 @@
                                 "E": "Sovyet Rusya"
                             },
                             "dogru_cevap": "Sovyet Rusya",
-                            "ozet": "I. İnönü sonrası Sovyet Rusya ile 16 Mart 1921’de Moskova Antlaşması imzalanmıştır; bu nedenle doğru yanıt Sovyet Rusya’tir."
+                            "ozet": "I. İnönü Savaşı sonrası 16 Mart 1921'de 'Dostluk ve İş Birliği Antlaşması' (Moskova Antlaşması) **Sovyet Rusya** (E) ile imzalanmıştır."
                         },
                         {
-                            "soru_no": 16,
+                            "soru_no": 56,
                             "soru": "Aşağıdaki olaylardan hangisinin sonucunda, Ankara’da TBMM’nin açılması gerekli hâle gelmiştir?",
                             "secenekler": {
                                 "A": "Saltanata son verilmesi",
@@ -3156,11 +3156,11 @@
                                 "E": "Sevr Antlaşması’nın imzalanması"
                             },
                             "dogru_cevap": "Son Osmanlı Mebusan Meclisinin dağıtılması",
-                            "ozet": "Seçenekler mevzuat/tanımsal çerçeveye göre değerlendirildiğinde doğru cevap, kurala/ilkeye tam uyan Son Osmanlı Mebusan Meclisinin dağıtılması olur; diğer şıklar kapsam dışı veya eksiktir."
+                            "ozet": "İstanbul'un işgali ve **Son Osmanlı Mebusan Meclisinin dağıtılması** (C) sonucunda TBMM'nin açılması zorunlu hale gelmiştir."
                         },
                         {
-                            "soru_no": 17,
-                            "soru": "Fert, aile ve sınıf egemenliğine izin vermeyen ve bütün vatandaşların kanun önünde eşitli - ğini esas alan Atatürk ilkesi aşağıdakilerden hangisidir?",
+                            "soru_no": 57,
+                            "soru": "Fert, aile ve sınıf egemenliğine izin vermeyen ve bütün vatandaşların kanun önünde eşitli-ğini esas alan Atatürk ilkesi aşağıdakilerden hangisidir?",
                             "secenekler": {
                                 "A": "Devletçilik",
                                 "B": "Halkçılık",
@@ -3169,24 +3169,24 @@
                                 "E": "Cumhuriyetçilik"
                             },
                             "dogru_cevap": "Halkçılık",
-                            "ozet": "Seçenekler mevzuat/tanımsal çerçeveye göre değerlendirildiğinde doğru cevap, kurala/ilkeye tam uyan Halkçılık olur; diğer şıklar kapsam dışı veya eksiktir."
+                            "ozet": "Fert, aile ve sınıf egemenliğine izin vermeyen ve kanun önünde eşitliği esas alan Atatürk ilkesi **Halkçılık** (B)'tır."
                         },
                         {
-                            "soru_no": 18,
-                            "soru": "Elde edilmesi hâlinde millî menfaatlere ulaş - mayı sağlayan sonuçlara ne denir?",
+                            "soru_no": 58,
+                            "soru": "Elde edilmesi hâlinde millî menfaatlere ulaş-mayı sağlayan sonuçlara ne denir?",
                             "secenekler": {
                                 "A": "Millî strateji",
                                 "B": "Millî bütünlük",
                                 "C": "Millî güç",
                                 "D": "Millî hedef",
-                                "E": "Millî güvenlik59. İlçelerin kurulması, kaldırılması, ad ve merkez- lerinin belirtilmesi ve değiştirilmesi aşağıdaki - lerden hangisi ile gerçekleşir?"
+                                "E": "Millî güvenlik"
                             },
                             "dogru_cevap": "Millî hedef",
-                            "ozet": "Seçenekler mevzuat/tanımsal çerçeveye göre değerlendirildiğinde doğru cevap, kurala/ilkeye tam uyan Millî hedef olur; diğer şıklar kapsam dışı veya eksiktir."
+                            "ozet": "Elde edilmesi hâlinde millî menfaatlere ulaşmayı sağlayan sonuçlar **Millî hedef** (D) olarak adlandırılır."
                         },
                         {
-                            "soru_no": 19,
-                            "soru": "İlçelerin kurulması, kaldırılması, ad ve merkezlerinin belirtilmesi ve değiştirilmesi aşağıdakilerden hangisi ile gerçekleşir?",
+                            "soru_no": 59,
+                            "soru": "İlçelerin kurulması, kaldırılması, ad ve merkez-lerinin belirtilmesi ve değiştirilmesi aşağıdaki-lerden hangisi ile gerçekleşir?",
                             "secenekler": {
                                 "A": "Kanun",
                                 "B": "Yönetmelik",
@@ -3195,11 +3195,11 @@
                                 "E": "İçişleri Bakanının onayı"
                             },
                             "dogru_cevap": "Kanun",
-                            "ozet": "İlçe kurulması/kaldırılması idari işlemle değil, kanunla yapılır; yürütme veya mahallî kararlar yeterli değildir. Bu yüzden Kanun doğrudur."
+                            "ozet": "İlçelerin kurulması, kaldırılması, ad ve merkezlerinin belirtilmesi ve değiştirilmesi **Kanun** (A) ile gerçekleşir."
                         },
                         {
-                            "soru_no": 20,
-                            "soru": "I- İl özel idareleri II- BelediyelerIII- KöylerIV- KİT V- Üniversiteler Hizmet yönünden yerinden yönetim kuruluşla - rı içinde yer alanlar aşağıdakilerin hangisinde birlikte verilmiştir?",
+                            "soru_no": 60,
+                            "soru": "Hizmet yönünden yerinden yönetim kuruluşla-rı içinde yer alanlar aşağıdakilerin hangisinde birlikte verilmiştir?\nI- İl özel idareleri\nII- Belediyeler\nIII- Köyler\nIV- KİT\nV- Üniversiteler",
                             "secenekler": {
                                 "A": "II ve IV",
                                 "B": "IV ve V",
@@ -3208,26 +3208,26 @@
                                 "E": "I, II ve V"
                             },
                             "dogru_cevap": "IV ve V",
-                            "ozet": "Seçenekler mevzuat/tanımsal çerçeveye göre değerlendirildiğinde doğru cevap, kurala/ilkeye tam uyan IV ve V olur; diğer şıklar kapsam dışı veya eksiktir."
+                            "ozet": "Hizmet yönünden yerinden yönetim kuruluşları, mahalli idareler dışındaki kurumları (teknik ve ekonomik hizmetler) kapsar. Bu kapsamda **KİT (IV)** ve **Üniversiteler (V)** yer alır."
                         }
                     ],
-                    "2013 İdare İşler Müdürü Çıkmış Sorular 4": [
+                    "2013 İdari İşler Müdürü Çıkmış Sorular 4": [
                         {
-                            "soru_no": 1,
-                            "soru": "Genel müdür ve ana hizmet birimi niteliğin - deki daire başkanlıkları için zorunlu hâllerde müşterek kararname ile en fazla kaç adet yardımcı kadro ihdas edilebilir?",
+                            "soru_no": 61,
+                            "soru": "Genel müdür ve ana hizmet birimi niteliğin-deki daire başkanlıkları için zorunlu hâllerde müşterek kararname ile en fazla kaç adet yardımcı kadro ihdas edilebilir?",
                             "secenekler": {
                                 "A": "2",
                                 "B": "3",
                                 "C": "4",
                                 "D": "5",
-                                "E": "6 İDARİ İŞLER MÜDÜRÜ11 A62. 657 sayılı Devlet Memurları Kanunu’na göre sözleşmeli personel şeklinde istihdam edi - lenler, sözleşme dönemi içerisinde Bakanlar Kurulu Kararı ile belirlenen istisnalar hariç sözleşmeyi tek taraflı feshetmeleri durumun-da, fesih tarihinden itibaren ne kadar süre geçmedikçe kurumların sözleşmeli personel pozisyonlarında istihdam edilemezler?"
+                                "E": "6"
                             },
-                            "dogru_cevap": "5",
-                            "ozet": "Seçenekler mevzuat/tanımsal çerçeveye göre değerlendirildiğinde doğru cevap, kurala/ilkeye tam uyan 5 olur; diğer şıklar kapsam dışı veya eksiktir."
+                            "dogru_cevap": "4",
+                            "ozet": "Genel müdür ve daire başkanlıkları için müşterek kararname ile en fazla **4** (C) adet yardımcı kadro ihdas edilebilir."
                         },
                         {
-                            "soru_no": 2,
-                            "soru": "657 sayılı Devlet Memurları Kanununa göre sözleşmeli personel şeklinde istihdam edilenler ... sözleşmeyi tek taraflı feshetmeleri durumunda ne kadar süre geçmedikçe kurumların sözleşmeli personel pozisyonlarında istihdam edilemezler?",
+                            "soru_no": 62,
+                            "soru": "657 sayılı Devlet Memurları Kanunu’na göre sözleşmeli personel şeklinde istihdam edi-lenler, sözleşme dönemi içerisinde Bakanlar Kurulu Kararı ile belirlenen istisnalar hariç sözleşmeyi tek taraflı feshetmeleri durumun-da, fesih tarihinden itibaren ne kadar süre geçmedikçe kurumların sözleşmeli personel pozisyonlarında istihdam edilemezler?",
                             "secenekler": {
                                 "A": "Bir yıl",
                                 "B": "On sekiz ay",
@@ -3236,10 +3236,10 @@
                                 "E": "Altı ay"
                             },
                             "dogru_cevap": "Bir yıl",
-                            "ozet": "Bu konu pozitif hukukta açık bir süre sınırına bağlanmıştır; ilgili düzenleme Bir yıl değerini öngörür. Diğer seçenekler mevzuattaki süre/sınırla uyuşmaz."
+                            "ozet": "Sözleşmeyi tek taraflı fesheden sözleşmeli personel, istisnalar hariç, fesih tarihinden itibaren **Bir yıl** (A) geçmedikçe yeniden istihdam edilemez."
                         },
                         {
-                            "soru_no": 3,
+                            "soru_no": 63,
                             "soru": "657 sayılı Devlet Memurları Kanunu’na göre Devlete ait resmî belge, araç, gereç ve benzeri eşyayı kasıtlı olarak korumamanın yaptırımı aşağıdaki cezalardan hangisidir?",
                             "secenekler": {
                                 "A": "Uyarma",
@@ -3249,24 +3249,24 @@
                                 "E": "Kademe ilerlemesinin durdurulması"
                             },
                             "dogru_cevap": "Aylıktan kesme",
-                            "ozet": "657 sayılı DMK ilgili fiil ve süreçleri açık biçimde düzenler; doğru şık mevzuattaki tanım/süre/merciiye uymaktadır: Aylıktan kesme. Diğer seçenekler kanundaki hükümle bağdaşmaz."
+                            "ozet": "Resmî belge, araç, gereç ve benzeri eşyayı kasıtlı olarak korumamanın yaptırımı **Aylıktan kesme** (C) cezasıdır."
                         },
                         {
-                            "soru_no": 4,
-                            "soru": "657 sayılı Devlet Memurları Kanunu’na göre aşağıdakilerden hangisi memurlar için öngö - rülen hizmet sınıflarından değildir ?",
+                            "soru_no": 64,
+                            "soru": "657 sayılı Devlet Memurları Kanunu’na göre aşağıdakilerden hangisi memurlar için öngö-rülen hizmet sınıflarından değildir?",
                             "secenekler": {
                                 "A": "Teknik Hizmetler Sınıfı",
                                 "B": "Avukatlık Hizmetleri Sınıfı",
                                 "C": "Yardımcı Hizmetler Sınıfı",
                                 "D": "Emniyet Hizmetleri Sınıfı",
-                                "E": "Silahlı Kuvvetler Hizmetleri Sınıfı65. 4483 sayılı Memurlar ve Diğer Kamu Görevli - lerinin Yargılanması Hakkında Kanun’a göre, memurlar ve diğer kamu görevlileri hakkında, yetkili merci, soruşturma izni konusundaki kararını suçun öğrenilmesinden itibaren ön in - celeme dâhil (zorunlu hâllerdeki uzatma hariç) en geç kaç gün içinde vermelidir?"
+                                "E": "Silahlı Kuvvetler Hizmetleri Sınıfı"
                             },
-                            "dogru_cevap": "Silahlı Kuvvetler Hizmetleri Sınıfı65. 4483 sayılı Memurlar ve Diğer Kamu Görevli - lerinin Yargılanması Hakkında Kanun’a göre, memurlar ve diğer kamu görevlileri hakkında, yetkili merci, soruşturma izni konusundaki kararını suçun öğrenilmesinden itibaren ön in - celeme dâhil (zorunlu hâllerdeki uzatma hariç) en geç kaç gün içinde vermelidir?",
-                            "ozet": "Soru olumsuz köklüdür; seçenekler arasından kuralın/kurumun kapsamına GİRMEYEN/yanlış ifade Silahlı Kuvvetler Hizmetleri Sınıfı65. 4483 sayılı Memurlar ve Diğer Kamu Görevli - lerinin Yargılanması Hakkında Kanun’a göre, memurlar ve diğer kamu görevlileri hakkında, yetkili merci, soruşturma izni konusundaki kararını suçun öğrenilmesinden itibaren ön in - celeme dâhil (zorunlu hâllerdeki uzatma hariç) en geç kaç gün içinde vermelidir?"
+                            "dogru_cevap": "Silahlı Kuvvetler Hizmetleri Sınıfı",
+                            "ozet": "657 sayılı Kanun kapsamında memurlar için öngörülen hizmet sınıflarından biri **Silahlı Kuvvetler Hizmetleri Sınıfı** (E) değildir."
                         },
                         {
-                            "soru_no": 5,
-                            "soru": "4483 sayılı Memurlar ve Diğer Kamu Görevlilerinin Yargılanması Hakkında Kanuna göre ... en geç kaç gün içinde vermelidir?",
+                            "soru_no": 65,
+                            "soru": "4483 sayılı Memurlar ve Diğer Kamu Görevli-lerinin Yargılanması Hakkında Kanun’a göre, memurlar ve diğer kamu görevlileri hakkında, yetkili merci, soruşturma izni konusundaki kararını suçun öğrenilmesinden itibaren ön in-celeme dâhil (zorunlu hâllerdeki uzatma hariç) en geç kaç gün içinde vermelidir?",
                             "secenekler": {
                                 "A": "Yedi",
                                 "B": "On",
@@ -3275,10 +3275,10 @@
                                 "E": "Kırk beş"
                             },
                             "dogru_cevap": "Otuz",
-                            "ozet": "Bu konu pozitif hukukta açık bir süre sınırına bağlanmıştır; ilgili düzenleme Otuz değerini öngörür. Diğer seçenekler mevzuattaki süre/sınırla uyuşmaz."
+                            "ozet": "Soruşturma izni kararı, suçun öğrenilmesinden itibaren ön inceleme dahil, en geç **otuz gün** (D) içinde verilmelidir."
                         },
                         {
-                            "soru_no": 6,
+                            "soru_no": 66,
                             "soru": "657 sayılı Devlet Memurları Kanunu’na göre yüksek mühendis, mühendis, mimar gibi unvanları kazanmış olanların çalıştırıldıkları hizmet sınıflarına bakılmaksızın giriş derece ve kademelerine kaç kademe/derece eklenir?",
                             "secenekler": {
                                 "A": "Bir derece",
@@ -3288,11 +3288,11 @@
                                 "E": "Bir derece ve bir kademe"
                             },
                             "dogru_cevap": "Bir derece",
-                            "ozet": "657 sayılı DMK ilgili fiil ve süreçleri açık biçimde düzenler; doğru şık mevzuattaki tanım/süre/merciiye uymaktadır: Bir derece. Diğer seçenekler kanundaki hükümle bağdaşmaz."
+                            "ozet": "Yüksek mühendis, mimar gibi unvanları kazanmış olanların giriş derece ve kademelerine **bir derece** (A) eklenir."
                         },
                         {
-                            "soru_no": 7,
-                            "soru": "657 sayılı Devlet Memurları Kanunu’na göre personel çalıştıran kurum ve kuruluşlar, top - lam dolu kadro sayısının (yurt dışı teşkilatı hariç) % kaçı oranında özürlü personel çalış - tırmak zorundadırlar?",
+                            "soru_no": 67,
+                            "soru": "657 sayılı Devlet Memurları Kanunu’na göre personel çalıştıran kurum ve kuruluşlar, toplam dolu kadro sayısının (yurt dışı teşkilatı hariç) % kaçı oranında özürlü personel çalış-tırmak zorundadırlar?",
                             "secenekler": {
                                 "A": "2",
                                 "B": "3",
@@ -3301,36 +3301,36 @@
                                 "E": "7"
                             },
                             "dogru_cevap": "3",
-                            "ozet": "657 sayılı DMK ilgili fiil ve süreçleri açık biçimde düzenler; doğru şık mevzuattaki tanım/süre/merciiye uymaktadır: 3. Diğer seçenekler kanundaki hükümle bağdaşmaz."
+                            "ozet": "Kurum ve kuruluşlar, toplam dolu kadro sayısının %**3** (B) oranında özürlü personel çalıştırmak zorundadırlar."
                         },
                         {
-                            "soru_no": 8,
+                            "soru_no": 68,
                             "soru": "657 sayılı Devlet Memurları Kanunu’na göre kadın memura, doğum sonrası analık izni süresinin bitim tarihinden itibaren ilk altı ayda günde kaç saat süt izni verilir?",
                             "secenekler": {
                                 "A": "Birbuçuk",
                                 "B": "İki",
                                 "C": "Üç",
                                 "D": "Dört",
-                                "E": "Beş 12 İDARİ İŞLER MÜDÜRÜ A69. Aşağıdaki cümlelerin hangisinde yazım yanlışı vardır?"
+                                "E": "Beş"
                             },
                             "dogru_cevap": "Üç",
-                            "ozet": "Bu konu pozitif hukukta açık bir süre sınırına bağlanmıştır; ilgili düzenleme Üç değerini öngörür. Diğer seçenekler mevzuattaki süre/sınırla uyuşmaz."
+                            "ozet": "Doğum sonrası analık izni süresinin bitim tarihinden itibaren ilk altı ayda günde **üç saat** (C) süt izni verilir."
                         },
                         {
-                            "soru_no": 9,
+                            "soru_no": 69,
                             "soru": "Aşağıdaki cümlelerin hangisinde yazım yanlışı vardır?",
                             "secenekler": {
                                 "A": "Zafer Meydanı yeni açıldı.",
                                 "B": "Gazi mahallesi çok uzaklarda.",
-                                "C": "En son 1955'te görüşmüşlerdi.",
+                                "C": "En son 1955’te görüşmüşlerdi.",
                                 "D": "Onlar Etimesgut ilçesinde oturuyorlar.",
                                 "E": "Galata Köprüsü, İstanbul için çok önemlidir."
                             },
                             "dogru_cevap": "Gazi mahallesi çok uzaklarda.",
-                            "ozet": "Doğru yazım kuralı gereği özel adların bağlı unsurları büyük harfle yazılır; bu bakımdan Gazi mahallesi çok uzaklarda. kural ihlali içerir/doğru kullanım olur."
+                            "ozet": "Yer adlarında özel isme dahil olan 'mahalle' kelimesi büyük harfle başlamalıdır ('Gazi **Mahallesi**'). Bu nedenle (B) seçeneğinde yazım yanlışı vardır."
                         },
                         {
-                            "soru_no": 10,
+                            "soru_no": 70,
                             "soru": "Aşağıdaki cümlelerin hangisinde soru işareti yanlış kullanılmıştır?",
                             "secenekler": {
                                 "A": "Çok yakından mı bu sesler, çok uzaklardan mı?",
@@ -3340,10 +3340,10 @@
                                 "E": "Sular mı yandı?"
                             },
                             "dogru_cevap": "Akşam oldu mu sürüler döner?",
-                            "ozet": "Seçenekler mevzuat/tanımsal çerçeveye göre değerlendirildiğinde doğru cevap, kurala/ilkeye tam uyan Akşam oldu mu sürüler döner? olur; diğer şıklar kapsam dışı veya eksiktir."
+                            "ozet": "D seçeneğinde 'mu' eki zaman anlamı (şart) kattığı için cümlenin sonunda **soru işareti yanlış kullanılmıştır**."
                         },
                         {
-                            "soru_no": 11,
+                            "soru_no": 71,
                             "soru": "Aşağıdakilerden hangisi devrik cümledir?",
                             "secenekler": {
                                 "A": "Kütüphanenin yolunu tuttu.",
@@ -3353,24 +3353,24 @@
                                 "E": "Beni görünce saygıdan ayağa kalktı."
                             },
                             "dogru_cevap": "Altın kaplamalı saati düştü elinden.",
-                            "ozet": "Seçenekler mevzuat/tanımsal çerçeveye göre değerlendirildiğinde doğru cevap, kurala/ilkeye tam uyan Altın kaplamalı saati düştü elinden. olur; diğer şıklar kapsam dışı veya eksiktir."
+                            "ozet": "C seçeneğinde yüklem ('düştü') sonda olmadığı için cümle **devrik**tir."
                         },
                         {
-                            "soru_no": 12,
+                            "soru_no": 72,
                             "soru": "Aşağıdaki cümlelerden hangisi isim cümlesidir?",
                             "secenekler": {
                                 "A": "Kan beynine sıçradı.",
                                 "B": "Araba süratli hareket etti.",
                                 "C": "Herkes buraya toplanmıştı.",
                                 "D": "Doktorlar onu çok kötü bulmuş.",
-                                "E": "Onun çok güzel arkadaşları var.73. Aşağıdaki sözcüklerden hangisinin sonuna ünlü ile başlayan bir ek getirilirse kelimenin sonundaki ünsüz herhangi bir değişime uğra- maz?"
+                                "E": "Onun çok güzel arkadaşları var."
                             },
-                            "dogru_cevap": "Onun çok güzel arkadaşları var.73. Aşağıdaki sözcüklerden hangisinin sonuna ünlü ile başlayan bir ek getirilirse kelimenin sonundaki ünsüz herhangi bir değişime uğra- maz?",
-                            "ozet": "Seçenekler mevzuat/tanımsal çerçeveye göre değerlendirildiğinde doğru cevap, kurala/ilkeye tam uyan Onun çok güzel arkadaşları var.73. Aşağıdaki sözcüklerden hangisinin sonuna ünlü ile başlayan bir ek getirilirse kelimenin sonundaki ünsüz herhangi bir değişime uğra- maz?"
+                            "dogru_cevap": "Onun çok güzel arkadaşları var.",
+                            "ozet": "E seçeneğinde yüklem ('var') isim soylu bir kelime olduğu için cümle **isim cümlesidir**."
                         },
                         {
-                            "soru_no": 13,
-                            "soru": "Aşağıdaki sözcüklerden hangisinin sonuna ünlü ile başlayan bir ek getirilirse kelimenin sonundaki ünsüz herhangi bir değişime uğramaz?",
+                            "soru_no": 73,
+                            "soru": "Aşağıdaki sözcüklerden hangisinin sonuna ünlü ile başlayan bir ek getirilirse kelimenin sonundaki ünsüz herhangi bir değişime uğra-maz?",
                             "secenekler": {
                                 "A": "Balık",
                                 "B": "Araç",
@@ -3378,12 +3378,12 @@
                                 "D": "Senet",
                                 "E": "Kulak"
                             },
-                            "dogru_cevap": "Kulak",
-                            "ozet": "Seçenekler mevzuat/tanımsal çerçeveye göre değerlendirildiğinde doğru cevap, kurala/ilkeye tam uyan Kulak olur; diğer şıklar kapsam dışı veya eksiktir."
+                            "dogru_cevap": "Sepet",
+                            "ozet": "Sepet (C), ünlü ile başlayan bir ek aldığında (Sepet-i), sonundaki ünsüz (t) değişime (yumuşamaya) uğramaz."
                         },
                         {
-                            "soru_no": 14,
-                            "soru": "Herhangi bir olayın nasıl, ne zaman, nerede ve ne şekilde meydana geldiğini, nasıl sonuçlan - dığını tespit eden kısa yazılara ne denir?",
+                            "soru_no": 74,
+                            "soru": "Herhangi bir olayın nasıl, ne zaman, nerede ve ne şekilde meydana geldiğini, nasıl sonuçlan-dığını tespit eden kısa yazılara ne denir?",
                             "secenekler": {
                                 "A": "Tutanak",
                                 "B": "Rapor",
@@ -3392,11 +3392,11 @@
                                 "E": "Dilekçe"
                             },
                             "dogru_cevap": "Tutanak",
-                            "ozet": "Seçenekler mevzuat/tanımsal çerçeveye göre değerlendirildiğinde doğru cevap, kurala/ilkeye tam uyan Tutanak olur; diğer şıklar kapsam dışı veya eksiktir."
+                            "ozet": "Bir olayın meydana gelişini tespit eden kısa yazılara **Tutanak** (A) denir."
                         },
                         {
-                            "soru_no": 15,
-                            "soru": "Aşağıdakilerden hangisi halkla ilişkilerin te - mel ilkelerindendir?",
+                            "soru_no": 75,
+                            "soru": "Aşağıdakilerden hangisi halkla ilişkilerin te-mel ilkelerindendir?",
                             "secenekler": {
                                 "A": "Disiplin",
                                 "B": "Hoşgörü",
@@ -3405,24 +3405,24 @@
                                 "E": "Dürüstlük"
                             },
                             "dogru_cevap": "Dürüstlük",
-                            "ozet": "Seçenekler mevzuat/tanımsal çerçeveye göre değerlendirildiğinde doğru cevap, kurala/ilkeye tam uyan Dürüstlük olur; diğer şıklar kapsam dışı veya eksiktir."
+                            "ozet": "Halkla ilişkilerin temel ilkelerinden biri **Dürüstlük** (E)'tür."
                         },
                         {
-                            "soru_no": 16,
-                            "soru": "Aşağıdakilerden hangisi halkla ilişkilerde kullanılan sosyal ve kültürel etkinliklerden biri değildir ?",
+                            "soru_no": 76,
+                            "soru": "Aşağıdakilerden hangisi halkla ilişkilerde kullanılan sosyal ve kültürel etkinliklerden biri değildir?",
                             "secenekler": {
                                 "A": "Geziler",
                                 "B": "Yarışmalar",
                                 "C": "Sponsorluk",
                                 "D": "Konferanslar",
-                                "E": "Yönlendirici yol göstericiler İDARİ İŞLER MÜDÜRÜ13 A77. Kamu makamlarının mevzuata uygun politi - kalarını, kararlarını ve eylemlerini engelleme aşağıdakilerden hangisiyle adlandırılır?"
+                                "E": "Yönlendirici yol göstericiler"
                             },
-                            "dogru_cevap": "Yönlendirici yol göstericiler İDARİ İŞLER MÜDÜRÜ13 A77. Kamu makamlarının mevzuata uygun politi - kalarını, kararlarını ve eylemlerini engelleme aşağıdakilerden hangisiyle adlandırılır?",
-                            "ozet": "Soru olumsuz köklüdür; seçenekler arasından kuralın/kurumun kapsamına GİRMEYEN/yanlış ifade Yönlendirici yol göstericiler İDARİ İŞLER MÜDÜRÜ13 A77. Kamu makamlarının mevzuata uygun politi - kalarını, kararlarını ve eylemlerini engelleme aşağıdakilerden hangisiyle adlandırılır?"
+                            "dogru_cevap": "Yönlendirici yol göstericiler",
+                            "ozet": "**Yönlendirici yol göstericiler** (E), halkla ilişkilerde kullanılan bir sosyal veya kültürel etkinlik türü değildir."
                         },
                         {
-                            "soru_no": 17,
-                            "soru": "Kamu makamlarının mevzuata uygun politikalarını, kararlarını ve eylemlerini engelleme aşağıdakilerden hangisiyle adlandırılır?",
+                            "soru_no": 77,
+                            "soru": "Kamu makamlarının mevzuata uygun politi-kalarını, kararlarını ve eylemlerini engelleme aşağıdakilerden hangisiyle adlandırılır?",
                             "secenekler": {
                                 "A": "Bürokratik oligarşi",
                                 "B": "Bürokratik sabotaj",
@@ -3431,10 +3431,10 @@
                                 "E": "Yetki genişliği"
                             },
                             "dogru_cevap": "Bürokratik sabotaj",
-                            "ozet": "Seçenekler mevzuat/tanımsal çerçeveye göre değerlendirildiğinde doğru cevap, kurala/ilkeye tam uyan Bürokratik sabotaj olur; diğer şıklar kapsam dışı veya eksiktir."
+                            "ozet": "Kamu makamlarının mevzuata uygun politika ve eylemlerinin engellenmesi **Bürokratik sabotaj** (B) olarak adlandırılır."
                         },
                         {
-                            "soru_no": 18,
+                            "soru_no": 78,
                             "soru": "Kamu Görevlileri Etik Kurulunun, kamu görevlilerinin mal bildirimlerindeki bilgilerin doğruluğunun kontrolü amacıyla ilgili kişi ve kuruluşlardan talep ettikleri bilgileri ilgili kişi ve kuruluşlar en geç kaç gün içinde Kurula vermekle yükümlüdürler?",
                             "secenekler": {
                                 "A": "Yedi",
@@ -3444,24 +3444,24 @@
                                 "E": "Altmış"
                             },
                             "dogru_cevap": "Otuz",
-                            "ozet": "Bu konu pozitif hukukta açık bir süre sınırına bağlanmıştır; ilgili düzenleme Otuz değerini öngörür. Diğer seçenekler mevzuattaki süre/sınırla uyuşmaz."
+                            "ozet": "Kamu Görevlileri Etik Kuruluna istenen bilgilerin en geç **Otuz gün** (C) içinde verilmesi yükümlülüğü vardır."
                         },
                         {
-                            "soru_no": 19,
-                            "soru": "I- Yazılı dilekçe II- Elektronik postaIII- Tutanağa geçirilen sözlü başvuru Etik davranış ilkelerine aykırılık iddiasıyla Kamu Görevlileri Etik Kuruluna ya da etik ko - misyonlarına yapılabilecek başvuru biçimleri, aşağıdakilerin hangisinde birlikte verilmiştir?",
+                            "soru_no": 79,
+                            "soru": "Etik davranış ilkelerine aykırılık iddiasıyla Kamu Görevlileri Etik Kuruluna ya da etik ko-misyonlarına yapılabilecek başvuru biçimleri, aşağıdakilerin hangisinde birlikte verilmiştir?\nI- Yazılı dilekçe\nII- Elektronik posta\nIII- Tutanağa geçirilen sözlü başvuru",
                             "secenekler": {
                                 "A": "I ve II",
                                 "B": "I ve III",
                                 "C": "II ve III",
                                 "D": "I, II ve III",
-                                "E": "Yalnız I80. “Bir kamu görevine atamada aynı okuldan ve aynı diploma derecesiyle mezun olan ve yapılan sınavlarda da aynı performansı göste - ren iki aday arasından birinin tercih edilmesi zorunluluğu bulunmaktadır.” Yukarıdaki durum, aşağıdakilerden hangisiyle adlandırılır?"
+                                "E": "Yalnız I"
                             },
                             "dogru_cevap": "I, II ve III",
-                            "ozet": "Seçenekler mevzuat/tanımsal çerçeveye göre değerlendirildiğinde doğru cevap, kurala/ilkeye tam uyan I, II ve III olur; diğer şıklar kapsam dışı veya eksiktir."
+                            "ozet": "Etik Kuruluna başvurular **yazılı dilekçe (I)**, **elektronik posta (II)** ve **tutanağa geçirilen sözlü başvuru (III)** olmak üzere her üç şekilde de yapılabilir."
                         },
                         {
-                            "soru_no": 20,
-                            "soru": "Bir kamu görevine atamada aynı okuldan ve aynı diploma derecesiyle mezun olan ve yapılan sınavlarda da aynı performansı gösteren iki aday arasından birinin tercih edilmesi zorunluluğu bulunmaktadır. Yukarıdaki durum, aşağıdakilerden hangisiyle adlandırılır?",
+                            "soru_no": 80,
+                            "soru": "“Bir kamu görevine atamada aynı okuldan ve aynı diploma derecesiyle mezun olan ve yapılan sınavlarda da aynı performansı göste-ren iki aday arasından birinin tercih edilmesi zorunluluğu bulunmaktadır.”\nYukarıdaki durum, aşağıdakilerden hangisiyle adlandırılır?",
                             "secenekler": {
                                 "A": "Etik ikilem",
                                 "B": "Kişilik çatışması",
@@ -3470,7 +3470,7 @@
                                 "E": "Saydamlık ve katılımcılık"
                             },
                             "dogru_cevap": "Etik ikilem",
-                            "ozet": "Seçenekler mevzuat/tanımsal çerçeveye göre değerlendirildiğinde doğru cevap, kurala/ilkeye tam uyan Etik ikilem olur; diğer şıklar kapsam dışı veya eksiktir."
+                            "ozet": "Aynı niteliklere sahip iki eşit aday arasından seçim yapma zorunluluğu, çözümü zor olan bir **Etik ikilem** (A) durumu olarak adlandırılır."
                         }
                     ],
                     "2017 İdare İşler Müdürü Çıkmış Sorular 1": [
