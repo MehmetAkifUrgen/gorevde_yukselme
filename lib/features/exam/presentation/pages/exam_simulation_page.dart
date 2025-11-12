@@ -51,6 +51,9 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
   bool _showResults = false;
   bool _showAnswerFeedback = false;
   final Set<String> _starredIds = <String>{};
+  
+  // Review (history) navigation: when not null, we are viewing a past question index in view-only mode
+  int? _reviewCursor; // 0..currentQuestionIndex
 
   @override
   void initState() {
@@ -682,7 +685,9 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
       );
     }
 
-    final Question currentQuestion = exam.questions[exam.currentQuestionIndex];
+    // Determine which question to display: review mode shows past question; else show current
+    final int displayIndex = _reviewCursor ?? exam.currentQuestionIndex;
+    final Question currentQuestion = exam.questions[displayIndex];
     final int? userAnswer = exam.userAnswers[currentQuestion.id];
 
     return Scaffold(
@@ -713,11 +718,11 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
               padding: const EdgeInsets.all(16),
               child: ExamQuestionCard(
                 question: currentQuestion,
-                selectedAnswerIndex: _selectedAnswerIndex ?? userAnswer,
-                onAnswerSelected: _selectAnswer,
-                isReviewMode: exam.status == ExamStatus.completed,
-                showCorrectAnswer: exam.status == ExamStatus.completed,
-                showAnswerFeedback: _showAnswerFeedback,
+                selectedAnswerIndex: (_reviewCursor != null) ? userAnswer : (_selectedAnswerIndex ?? userAnswer),
+                onAnswerSelected: (_reviewCursor != null) ? (_) {} : _selectAnswer,
+                isReviewMode: (_reviewCursor != null) || (exam.status == ExamStatus.completed),
+                showCorrectAnswer: (_reviewCursor != null) || (exam.status == ExamStatus.completed),
+                showAnswerFeedback: (_reviewCursor != null) ? true : _showAnswerFeedback,
                 fontSize: fontSize,
                 onShowSolution: _showSolution,
                 isStarredOverride: _starredIds.contains(currentQuestion.id),
@@ -761,11 +766,59 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
             ),
             child: Row(
               children: [
+                // Previous (enters or moves within review)
+                Expanded(
+                  child: OutlinedButton(
+                    onPressed: () {
+                      if (exam.currentQuestionIndex > 0) {
+                        setState(() {
+                          if (_reviewCursor == null) {
+                            _reviewCursor = exam.currentQuestionIndex - 1;
+                          } else if (_reviewCursor! > 0) {
+                            _reviewCursor = _reviewCursor! - 1;
+                          }
+                          // View-only, no changes to selection state needed
+                          _showAnswerFeedback = true;
+                        });
+                      }
+                    },
+                    style: OutlinedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      side: const BorderSide(color: AppTheme.primaryNavyBlue),
+                      foregroundColor: AppTheme.primaryNavyBlue,
+                    ),
+                    child: const Text('Önceki'),
+                  ),
+                ),
+                const SizedBox(width: 16),
+                // Next/Bitir (moves forward in review; when caught up, proceeds in live flow)
                 Expanded(
                   child: ElevatedButton(
                     onPressed: () {
+                      if (_reviewCursor != null) {
+                        if (_reviewCursor! < exam.currentQuestionIndex) {
+                          setState(() {
+                            _reviewCursor = _reviewCursor! + 1;
+                            _showAnswerFeedback = true;
+                          });
+                        } else {
+                          // Exit review and proceed
+                          setState(() {
+                            _reviewCursor = null;
+                            _showAnswerFeedback = false;
+                            _selectedAnswerIndex = null;
+                          });
+                          if (exam.currentQuestionIndex < exam.questions.length - 1) {
+                            _checkAndShowAd();
+                          } else {
+                            _completeExam();
+                          }
+                        }
+                        return;
+                      }
+
+                      // Live flow
                       if (exam.currentQuestionIndex < exam.questions.length - 1) {
-                        // Hide feedback and check if we should show an ad before moving to next question
                         setState(() {
                           _showAnswerFeedback = false;
                           _selectedAnswerIndex = null;
@@ -781,22 +834,10 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
                       padding: const EdgeInsets.symmetric(vertical: 12),
                     ),
                     child: Text(
-                      exam.currentQuestionIndex < exam.questions.length - 1
-                          ? 'Sonraki'
-                          : 'Bitir',
+                      (_reviewCursor == null)
+                          ? (exam.currentQuestionIndex < exam.questions.length - 1 ? 'Sonraki' : 'Bitir')
+                          : (_reviewCursor! < exam.currentQuestionIndex ? 'Sonraki' : 'Sonraki'),
                     ),
-                  ),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: OutlinedButton(
-                    onPressed: _showEndExamConfirmation,
-                    style: OutlinedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(vertical: 12),
-                      side: const BorderSide(color: Colors.red),
-                      foregroundColor: Colors.red,
-                    ),
-                    child: const Text('Bitir'),
                   ),
                 ),
               ],

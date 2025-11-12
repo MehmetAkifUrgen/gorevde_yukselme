@@ -126,8 +126,9 @@ class ExamQuestionCard extends StatelessWidget {
                 ),
                 if (!isReviewMode) ...[
                   const SizedBox(width: 8),
-                  Row(
+                  Column(
                     mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       IconButton(
                         icon: const Icon(

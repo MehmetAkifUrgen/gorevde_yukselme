@@ -9,6 +9,8 @@ class QuestionCard extends StatefulWidget {
   final Function(int) onAnswered;
   final VoidCallback onStarToggle;
   final bool showStarIcon;
+  final bool viewOnly;
+  final int? initialSelectedIndex;
 
   const QuestionCard({
     super.key,
@@ -17,6 +19,8 @@ class QuestionCard extends StatefulWidget {
     required this.onAnswered,
     required this.onStarToggle,
     this.showStarIcon = true,
+    this.viewOnly = false,
+    this.initialSelectedIndex,
   });
 
   @override
@@ -33,8 +37,14 @@ class _QuestionCardState extends State<QuestionCard> {
     // Reset state when question changes
     if (oldWidget.question.id != widget.question.id) {
       setState(() {
-        selectedAnswer = null;
-        showExplanation = false;
+        // If initialSelectedIndex provided (review mode), prefill selection and show explanation
+        if (widget.initialSelectedIndex != null) {
+          selectedAnswer = widget.initialSelectedIndex;
+          showExplanation = true;
+        } else {
+          selectedAnswer = null;
+          showExplanation = false;
+        }
       });
     }
   }
@@ -66,8 +76,9 @@ class _QuestionCardState extends State<QuestionCard> {
                   ),
                 ),
                 const SizedBox(width: 8),
-                Row(
+                Column(
                   mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     IconButton(
                       icon: const Icon(
@@ -134,7 +145,7 @@ class _QuestionCardState extends State<QuestionCard> {
               return Padding(
                 padding: const EdgeInsets.only(bottom: 8),
                 child: GestureDetector(
-                  onTap: selectedAnswer == null ? () {
+                  onTap: (!widget.viewOnly && selectedAnswer == null) ? () {
                     setState(() {
                       selectedAnswer = index;
                       showExplanation = true;

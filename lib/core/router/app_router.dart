@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../../features/splash/presentation/pages/splash_page.dart';
 import '../../features/auth/presentation/pages/login_page.dart';
 import '../../features/auth/presentation/pages/registration_page.dart';
 import '../../features/auth/presentation/pages/forgot_password_page.dart';
@@ -18,6 +19,7 @@ import '../../core/providers/auth_providers.dart';
 
 class AppRouter {
   static const String login = '/login';
+  static const String splash = '/splash';
   static const String registration = '/registration';
   static const String forgotPassword = '/forgot-password';
   static const String emailVerification = '/email-verification';
@@ -41,7 +43,7 @@ class AppRouter {
     final isEmailVerified = user?.emailVerified ?? false;
     
     return GoRouter(
-      initialLocation: home,
+      initialLocation: splash,
       redirect: (context, state) {
         // Eğer kullanıcı giriş yapmışsa ama email doğrulanmamışsa
         if (isAuthenticated && !isEmailVerified) {
@@ -65,6 +67,10 @@ class AppRouter {
         ),
       ),
       routes: [
+        GoRoute(
+          path: splash,
+          builder: (context, state) => const SplashPage(),
+        ),
         GoRoute(
           path: login,
           builder: (context, state) {

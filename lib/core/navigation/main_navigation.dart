@@ -77,12 +77,21 @@ class _MainNavigationState extends ConsumerState<MainNavigation> {
   }
 
   void _onItemTapped(int index) {
-    if (_selectedIndex != index) {
+    int targetIndex = index;
+    final isAuthenticated = ref.read(isAuthenticatedProvider);
+    // If Favorites tab (index 2) tapped without auth, warn and go to Login tab (index 4)
+    if (index == 2 && !isAuthenticated) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Favoriler için lütfen giriş yapın.')),
+      );
+      targetIndex = 4;
+    }
+    if (_selectedIndex != targetIndex) {
       setState(() {
-        _selectedIndex = index;
+        _selectedIndex = targetIndex;
       });
       _pageController.animateToPage(
-        index,
+        targetIndex,
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );

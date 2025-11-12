@@ -100,7 +100,13 @@ class MainApp extends ConsumerWidget {
       upgrader: Upgrader(
         messages: UpgraderMessages(code: 'tr'),
         countryCode: 'TR',
+        // Her uygulama açılışında güncelleme kontrol et
+        durationUntilAlertAgain: Duration.zero,
+        // İsteğe bağlı: minimum versiyon belirleyebilirsiniz
+        // minAppVersion: '1.0.0',
       ),
+      // Dialog'u geri tuşuyla kapatabilme (Android)
+      shouldPopScope: () => true,
       child: MaterialApp.router(
         title: 'Kamu Sınavlarına Hazırlık - Sınav Hazırlık Uygulaması',
         theme: AppTheme.lightTheme,

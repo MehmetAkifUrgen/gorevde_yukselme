@@ -260,10 +260,19 @@ class _StarredQuestionsPageState extends ConsumerState<StarredQuestionsPage> {
   void _onStarToggle() {
     if (filteredQuestions.isEmpty) return;
     final q = filteredQuestions[currentQuestionIndex];
+    // Require login to favorite
+    final firebaseUser = ref.read(currentFirebaseUserProvider);
+    if (firebaseUser == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Favorilere eklemek için lütfen giriş yapın.')),
+      );
+      // Navigate to login
+      Navigator.of(context).pushNamed('/login');
+      return;
+    }
     // Optimistic: update provider and local list
     ref.read(questionsProvider.notifier).toggleQuestionStar(q.id);
-    final firebaseUser = ref.read(currentFirebaseUserProvider);
-    final userId = firebaseUser?.uid ?? '';
+    final userId = firebaseUser.uid;
     final favoritesService = ref.read(favoritesServiceProvider);
     final newIsStarred = !q.isStarred;
     favoritesService.setStarStatus(userId: userId, questionId: q.id, isStarred: newIsStarred);
@@ -497,12 +506,28 @@ class _StarredQuestionsPageState extends ConsumerState<StarredQuestionsPage> {
                   ),
                 ),
                 const SizedBox(width: 16),
-                Expanded(
-                  child: ElevatedButton(
-                    onPressed: currentQuestionIndex < questions.length - 1 ? _nextQuestion : null,
-                    child: const Text('Sonraki'),
+                if (currentQuestionIndex < questions.length - 1)
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: _nextQuestion,
+                      child: const Text('Sonraki'),
+                    ),
+                  )
+                else
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        // Bitir: practice modundan çık ve liste moduna dön
+                        setState(() {
+                          isPracticeMode = false;
+                          currentQuestionIndex = 0;
+                          answers.clear();
+                          isAnswered.clear();
+                        });
+                      },
+                      child: const Text('Bitir'),
+                    ),
                   ),
-                ),
               ],
             ),
           ),

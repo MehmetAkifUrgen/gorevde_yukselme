@@ -8,6 +8,7 @@ import '../../../../core/models/question_model.dart';
 import '../../../../core/providers/app_providers.dart';
 import '../../../../core/providers/auth_providers.dart';
 import '../../../../core/providers/ad_providers.dart';
+import '../../../../core/router/app_router.dart';
 import '../../../../core/services/premium_features_service.dart';
 import '../widgets/question_card.dart';
 
@@ -39,6 +40,12 @@ class _RandomQuestionsPracticePageState extends ConsumerState<RandomQuestionsPra
   int? _selectedAnswerIndex;
   final Set<String> _answeredQuestionIds = <String>{};
   final PremiumFeaturesService _premiumService = PremiumFeaturesService();
+  
+  // Review mode state
+  final List<Question> _history = <Question>[]; // answered questions in order
+  final Map<String, int> _selectionMap = <String, int>{}; // questionId -> selected index
+  bool _viewOnly = false;
+  int? _historyCursor; // null => live mode, otherwise index into _history
   
   // Timer variables for mini questions
   Timer? _timer;
@@ -116,7 +123,11 @@ class _RandomQuestionsPracticePageState extends ConsumerState<RandomQuestionsPra
     // Remove selected question from available questions to prevent repetition
     _availableQuestions.removeAt(randomIndex);
     
-    setState(() {});
+    setState(() {
+      _selectedAnswerIndex = null;
+      _viewOnly = false;
+      _historyCursor = null;
+    });
   }
 
   void _handleQuestionAnswered(int selectedIndex) {
@@ -176,6 +187,10 @@ class _RandomQuestionsPracticePageState extends ConsumerState<RandomQuestionsPra
         );
         print('[RandomQuestionsPracticePage] Answer saved successfully');
     }
+
+    // Save to history for review
+    _selectionMap[currentQuestion.id] = selectedIndex;
+    _history.add(currentQuestion);
 
     // Show feedback
     _showAnswerFeedback(isCorrect, currentQuestion);
@@ -433,6 +448,29 @@ class _RandomQuestionsPracticePageState extends ConsumerState<RandomQuestionsPra
     });
   }
 
+  void _showPreviousInHistory() {
+    if (_history.isEmpty) return;
+    setState(() {
+      // If not yet in history mode, jump appropriately:
+      // - If the last answered is the current question, go to one before it (if available)
+      // - Otherwise, go to last answered
+      if (_historyCursor == null) {
+        int target = _history.length - 1;
+        if (_currentQuestion != null && _history.isNotEmpty && _history.last.id == _currentQuestion!.id) {
+          target = _history.length - 2; // skip current just-answered
+        }
+        if (target < 0) target = 0;
+        _historyCursor = target;
+      } else if (_historyCursor! > 0) {
+        _historyCursor = _historyCursor! - 1;
+      }
+      final q = _history[_historyCursor!];
+      _currentQuestion = q;
+      _selectedAnswerIndex = _selectionMap[q.id];
+      _viewOnly = true;
+    });
+  }
+
   void _shuffleQuestions() {
     // Reset available questions with all questions
     _availableQuestions = List<Question>.from(_allQuestions);
@@ -623,29 +661,80 @@ class _RandomQuestionsPracticePageState extends ConsumerState<RandomQuestionsPra
                     fontSize: fontSize,
                     onAnswered: _handleQuestionAnswered,
                     onStarToggle: () {
+                      final firebaseUser = ref.read(currentFirebaseUserProvider);
+                      if (firebaseUser == null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Favorilere eklemek için lütfen giriş yapın.')),
+                        );
+                        context.push(AppRouter.login);
+                        return;
+                      }
                       ref.read(questionsProvider.notifier).toggleQuestionStar(currentQuestion.id);
                     },
+                    viewOnly: _viewOnly,
+                    initialSelectedIndex: _viewOnly ? _selectedAnswerIndex : null,
                   ),
                   
                   const SizedBox(height: 16),
                   
-                  // Sonraki Soru butonu - cevap seçildiğinde görünür
-                  if (_selectedAnswerIndex != null)
-                    ElevatedButton(
-                      onPressed: _goToNextQuestion,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppTheme.primaryNavyBlue,
-                        foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
+                  // Navigation buttons: Previous (history) + Next/Bitir (combined)
+                  Row(
+                    children: [
+                      Expanded(
+                        child: ElevatedButton.icon(
+                          onPressed: _history.isNotEmpty ? _showPreviousInHistory : null,
+                          icon: const Icon(Icons.arrow_back),
+                          label: const Text('Önceki'),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppTheme.primaryNavyBlue,
+                            foregroundColor: Colors.white,
+                          ),
                         ),
                       ),
-                      child: Text(
-                        _totalAnswered < _targetQuestionCount ? 'Sonraki Soru' : 'Sonuçları Gör',
-                        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: ElevatedButton.icon(
+                          onPressed: (_historyCursor != null) || (_selectedAnswerIndex != null)
+                              ? () {
+                                  if (_historyCursor != null) {
+                                    // If not at the end of history, move forward in history
+                                    if (_historyCursor! < _history.length - 1) {
+                                      setState(() {
+                                        _historyCursor = _historyCursor! + 1;
+                                        final q = _history[_historyCursor!];
+                                        _currentQuestion = q;
+                                        _selectedAnswerIndex = _selectionMap[q.id];
+                                        _viewOnly = true;
+                                      });
+                                    } else {
+                                      // End of history: exit to live and go to next new question
+                                      setState(() {
+                                        _historyCursor = null;
+                                        _viewOnly = false;
+                                        _selectedAnswerIndex = null;
+                                      });
+                                      _goToNextQuestion();
+                                    }
+                                  } else {
+                                    _goToNextQuestion();
+                                  }
+                                }
+                              : null,
+                          icon: const Icon(Icons.arrow_forward),
+                          label: Text(
+                            (_historyCursor == null && _totalAnswered >= _targetQuestionCount)
+                                ? 'Bitir'
+                                : 'Sonraki',
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppTheme.primaryNavyBlue,
+                            foregroundColor: Colors.white,
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
                   
                   const SizedBox(height: 16),
                   
