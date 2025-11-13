@@ -2428,11 +2428,11 @@
                     "2013 İdari İşler Müdürü Çıkmış Sorular 1": [
                         {
                             "soru_no": 1,
-                            "soru": "Aynı anda basıldığında bilgisayarın açma –ka-pama düğmesine basmadan hafızayı tamamen silmemizi ve bilgisayarı yeniden başlatmamızı sağlayan ve ayrıca tuş kilitlenmesini de açan kısayol aşağıdakilerden hangisidir?",
+                            "soru": "Aynı anda basıldığında bilgisayarın açma kapama düğmesine basmadan hafızayı tamamen silmemizi ve bilgisayarı yeniden başlatmamızı sağlayan ve ayrıca tuş kilitlenmesini de açan kısayol aşağıdakilerden hangisidir?",
                             "secenekler": {
                                 "A": "Ctrl+C",
                                 "B": "Ctrl+X",
-                                "C": "Ctrl+doğukan",
+                                "C": "Ctrl+A",
                                 "D": "Ctrl+F",
                                 "E": "Ctrl+Alt+Del"
                             },
