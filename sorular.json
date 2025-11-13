@@ -2432,7 +2432,7 @@
                             "secenekler": {
                                 "A": "Ctrl+C",
                                 "B": "Ctrl+X",
-                                "C": "Ctrl+A",
+                                "C": "Ctrl+doğukan",
                                 "D": "Ctrl+F",
                                 "E": "Ctrl+Alt+Del"
                             },
