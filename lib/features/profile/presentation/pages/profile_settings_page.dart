@@ -5,9 +5,9 @@ import '../../../../core/theme/app_theme.dart';
 import '../../../../core/models/user_model.dart';
 import '../../../../core/models/user_statistics.dart';
 import '../../../../core/providers/auth_providers.dart';
-import '../../../../core/widgets/support_dialog.dart';
 import '../widgets/change_password_dialog.dart';
 import '../widgets/delete_account_dialog.dart';
+import '../widgets/profile_report_dialog.dart';
 
 class ProfileSettingsPage extends ConsumerStatefulWidget {
   const ProfileSettingsPage({super.key});
@@ -363,23 +363,14 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
               ),
             ),
             const SizedBox(height: 16),
-            
-
             _buildActionTile(
-              'Destek ile İletişim',
-              'Destek ekibimizden yardım alın',
-              Icons.support_agent,
-              Colors.green,
-              _contactSupport,
+              'Bildir',
+              '',
+              Icons.report,
+              Colors.orange,
+              _reportFeedback,
             ),
-            
-            _buildActionTile(
-                'Uygulamayı Değerlendir',
-                'App Store\'da bizi değerlendirin',
-                Icons.star_rate,
-                Colors.amber,
-                _rateApp,
-              ),
+            const Divider(),
             
             _buildActionTile(
               'Çıkış Yap',
@@ -402,7 +393,7 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
     return ListTile(
       leading: Icon(icon, color: color),
       title: Text(title),
-      subtitle: Text(subtitle),
+      subtitle: subtitle.isEmpty ? null : Text(subtitle),
       trailing: const Icon(Icons.chevron_right),
       onTap: onTap,
       contentPadding: EdgeInsets.zero,
@@ -440,23 +431,14 @@ class _ProfileSettingsPageState extends ConsumerState<ProfileSettingsPage> {
     context.push('/help');
   }
 
-  void _contactSupport() {
+  void _reportFeedback() {
     final userProfile = ref.read(currentUserProfileProvider).value;
     if (userProfile != null) {
       showDialog(
         context: context,
-        builder: (context) => SupportDialog(userProfile: userProfile),
+        builder: (context) => ProfileReportDialog(userProfile: userProfile),
       );
     }
-  }
-
-  void _rateApp() {
-    // App Store rating - will be implemented when app is published
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Uygulama henüz yayınlanmadı. Yayınlandıktan sonra değerlendirebilirsiniz.'),
-      ),
-    );
   }
 
   void _signOut() async {

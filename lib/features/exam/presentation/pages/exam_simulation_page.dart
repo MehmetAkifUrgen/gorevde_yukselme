@@ -229,9 +229,8 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
           _showErrorDialog('Sorular yüklenemedi. Lütfen tekrar deneyin.');
           return;
         }
-        // Tüm soruları kullan, kısıtlama yok
-        final List<Question> shuffled = List<Question>.from(filtered)..shuffle();
-        questions = shuffled;
+        // Tüm soruları kullan, kısıtlama yok (karıştırma yok)
+        questions = List<Question>.from(filtered);
       } else {
         // Tüm random soruları al (kısıtlama yok)
         final List<Question> randomQuestions = ref.read(randomQuestionsProvider(0));
