@@ -97,15 +97,7 @@ class MainApp extends ConsumerWidget {
     final router = AppRouter.createRouter(ref);
     
     return UpgradeAlert(
-      upgrader: Upgrader(
-        messages: UpgraderMessages(code: 'tr'),
-        countryCode: 'TR',
-        // Her uygulama açılışında güncelleme kontrol et
-        durationUntilAlertAgain: Duration.zero,
-        // İsteğe bağlı: minimum versiyon belirleyebilirsiniz
-        // minAppVersion: '1.0.0',
-      ),
-      // Dialog'u geri tuşuyla kapatabilme (Android)
+      upgrader: Upgrader(),
       shouldPopScope: () => true,
       child: MaterialApp.router(
         title: 'Kamu Sınavlarına Hazırlık - Sınav Hazırlık Uygulaması',
