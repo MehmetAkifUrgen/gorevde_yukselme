@@ -87,27 +87,27 @@ class AdDisplayNotifier extends StateNotifier<bool> {
     // Show ad every 3rd wrong answer
     if (wrongAnswerCount > 0 && wrongAnswerCount % 3 == 0) {
       print('[AdDisplayNotifier] Showing ad for wrong answer #$wrongAnswerCount');
-      return await _showInterstitialAd();
+      return await _showInterstitialAd(AdPlacement.exam);
     }
     
     return false;
   }
 
   /// Show interstitial ad
-  Future<bool> _showInterstitialAd() async {
+  Future<bool> _showInterstitialAd(AdPlacement placement) async {
     try {
       final adMobService = _ref.read(adMobServiceProvider);
       
-      // Try to load ad if not already loaded
-      if (!adMobService.isInterstitialAdLoaded) {
+      // Try to load ad if not already loaded for this placement
+      if (!adMobService.isAdLoadedForPlacement(placement)) {
         print('[AdDisplayNotifier] Loading interstitial ad...');
-        await adMobService.loadInterstitialAd();
+        await adMobService.loadInterstitialAd(placement: placement);
         // Wait a bit for ad to load
         await Future.delayed(const Duration(milliseconds: 1500));
       }
       
       // Show ad if loaded
-      if (adMobService.isInterstitialAdLoaded) {
+      if (adMobService.isAdLoadedForPlacement(placement)) {
         print('[AdDisplayNotifier] Showing interstitial ad...');
         state = true; // Set loading state
         final success = await adMobService.showInterstitialAd();
@@ -142,14 +142,14 @@ class AdDisplayNotifier extends StateNotifier<bool> {
     // Show ad every 4th question
     if (questionCount > 0 && questionCount % 4 == 0) {
       print('[AdDisplayNotifier] Showing ad for question #$questionCount');
-      return await _showInterstitialAd();
+      return await _showInterstitialAd(AdPlacement.randomPractice);
     }
     
     return false;
   }
 
   /// Force show ad (for testing purposes)
-  Future<bool> forceShowAd() async {
+  Future<bool> forceShowAd(AdPlacement placement) async {
     final isPremium = _ref.read(isPremiumUserProvider);
     
     if (isPremium) {
@@ -157,7 +157,7 @@ class AdDisplayNotifier extends StateNotifier<bool> {
       return false;
     }
     
-    return await _showInterstitialAd();
+    return await _showInterstitialAd(placement);
   }
 }
 

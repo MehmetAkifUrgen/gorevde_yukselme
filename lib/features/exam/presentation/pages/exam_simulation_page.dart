@@ -9,6 +9,7 @@ import '../../../../core/models/user_model.dart';
 import '../../../../core/providers/app_providers.dart';
 import '../../../../core/providers/questions_providers.dart';
 import '../../../../core/providers/ad_providers.dart';
+import '../../../../core/services/admob_service.dart';
 import '../../../../core/widgets/standard_app_bar.dart';
 import '../widgets/exam_timer_widget.dart';
 import '../widgets/exam_progress_bar.dart';
@@ -70,7 +71,7 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
       final adMobService = ref.read(adMobServiceProvider);
       
       print('[ExamSimulationPage] Loading interstitial ad...');
-      await adMobService.loadInterstitialAd();
+      await adMobService.loadInterstitialAd(placement: AdPlacement.exam);
       print('[ExamSimulationPage] Interstitial ad loaded');
     } catch (e) {
       print('[ExamSimulationPage] AdMob initialization failed: $e');
@@ -252,6 +253,12 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
       );
 
       ref.read(currentExamProvider.notifier).startExam(exam);
+      if (mounted) {
+        setState(() {
+          _reviewCursor = null;
+          _showResults = false;
+        });
+      }
       
       // Reset wrong answer counter for new exam
       ref.read(wrongAnswerCounterProvider.notifier).reset();
@@ -454,11 +461,72 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
     localStats.incrementTestCompleted(userId: userId);
     print('[ExamSimulationPage] Test completed - UserId: $userId');
     
-    // Show final ad before showing results
-    await ref.read(adDisplayProvider.notifier).forceShowAd();
-    
     setState(() {
       _showResults = true;
+    });
+  }
+
+  void _handleReviewAnswers() {
+    final Exam? exam = ref.read(currentExamProvider);
+    if (exam == null || exam.questions.isEmpty) return;
+
+    setState(() {
+      _reviewCursor = 0;
+      _showResults = false;
+      _showAnswerFeedback = true;
+    });
+  }
+
+  Future<void> _handleRetakeExam() async {
+    await ref.read(adDisplayProvider.notifier).forceShowAd(AdPlacement.exam);
+    if (!mounted) return;
+
+    setState(() {
+      _showResults = false;
+      _reviewCursor = null;
+      _selectedAnswerIndex = null;
+      _showAnswerFeedback = false;
+    });
+
+    await _initializeExam();
+  }
+
+  Future<void> _handleBackToHome() async {
+    await ref.read(adDisplayProvider.notifier).forceShowAd(AdPlacement.exam);
+    if (!mounted) return;
+
+    ref.read(currentExamProvider.notifier).clearExam();
+    if (context.mounted) {
+      context.go('/home');
+    }
+  }
+
+  void _goToPreviousReviewQuestion() {
+    if (_reviewCursor == null || _reviewCursor == 0) return;
+
+    setState(() {
+      _reviewCursor = _reviewCursor! - 1;
+    });
+  }
+
+  void _goToNextReviewQuestion() {
+    final Exam? exam = ref.read(currentExamProvider);
+    if (exam == null || _reviewCursor == null) return;
+
+    if (_reviewCursor! < exam.questions.length - 1) {
+      setState(() {
+        _reviewCursor = _reviewCursor! + 1;
+      });
+    } else {
+      _exitReviewMode();
+    }
+  }
+
+  void _exitReviewMode() {
+    setState(() {
+      _reviewCursor = null;
+      _showAnswerFeedback = false;
+      _selectedAnswerIndex = null;
     });
   }
 
@@ -649,6 +717,9 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
       );
     }
 
+    final bool isInReviewMode = _reviewCursor != null;
+    final bool questionReviewState = isInReviewMode || (exam.status == ExamStatus.completed);
+
     if (_showResults) {
       final ExamResult result = ExamResult(
         examId: exam.id,
@@ -666,21 +737,9 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
       
       return ExamResultsModal(
         result: result,
-        onReviewAnswers: () {
-          setState(() {
-            _showResults = false;
-          });
-        },
-        onRetakeExam: () {
-          _initializeExam();
-          setState(() {
-            _showResults = false;
-          });
-        },
-        onBackToHome: () {
-          ref.read(currentExamProvider.notifier).clearExam();
-          context.go('/home');
-        },
+        onReviewAnswers: _handleReviewAnswers,
+        onRetakeExam: _handleRetakeExam,
+        onBackToHome: _handleBackToHome,
       );
     }
 
@@ -719,9 +778,9 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
                 question: currentQuestion,
                 selectedAnswerIndex: (_reviewCursor != null) ? userAnswer : (_selectedAnswerIndex ?? userAnswer),
                 onAnswerSelected: (_reviewCursor != null) ? (_) {} : _selectAnswer,
-                isReviewMode: (_reviewCursor != null) || (exam.status == ExamStatus.completed),
-                showCorrectAnswer: (_reviewCursor != null) || (exam.status == ExamStatus.completed),
-                showAnswerFeedback: (_reviewCursor != null) ? true : _showAnswerFeedback,
+                isReviewMode: questionReviewState,
+                showCorrectAnswer: questionReviewState,
+                showAnswerFeedback: isInReviewMode ? true : _showAnswerFeedback,
                 fontSize: fontSize,
                 onShowSolution: _showSolution,
                 isStarredOverride: _starredIds.contains(currentQuestion.id),
@@ -768,19 +827,9 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
                 // Previous (enters or moves within review)
                 Expanded(
                   child: OutlinedButton(
-                    onPressed: () {
-                      if (exam.currentQuestionIndex > 0) {
-                        setState(() {
-                          if (_reviewCursor == null) {
-                            _reviewCursor = exam.currentQuestionIndex - 1;
-                          } else if (_reviewCursor! > 0) {
-                            _reviewCursor = _reviewCursor! - 1;
-                          }
-                          // View-only, no changes to selection state needed
-                          _showAnswerFeedback = true;
-                        });
-                      }
-                    },
+                    onPressed: isInReviewMode
+                        ? (_reviewCursor! > 0 ? _goToPreviousReviewQuestion : null)
+                        : (exam.currentQuestionIndex > 0 ? _previousQuestion : null),
                     style: OutlinedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 12),
                       side: const BorderSide(color: AppTheme.primaryNavyBlue),
@@ -793,30 +842,7 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
                 // Next/Bitir (moves forward in review; when caught up, proceeds in live flow)
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () {
-                      if (_reviewCursor != null) {
-                        if (_reviewCursor! < exam.currentQuestionIndex) {
-                          setState(() {
-                            _reviewCursor = _reviewCursor! + 1;
-                            _showAnswerFeedback = true;
-                          });
-                        } else {
-                          // Exit review and proceed
-                          setState(() {
-                            _reviewCursor = null;
-                            _showAnswerFeedback = false;
-                            _selectedAnswerIndex = null;
-                          });
-                          if (exam.currentQuestionIndex < exam.questions.length - 1) {
-                            _checkAndShowAd();
-                          } else {
-                            _completeExam();
-                          }
-                        }
-                        return;
-                      }
-
-                      // Live flow
+                    onPressed: isInReviewMode ? _goToNextReviewQuestion : () {
                       if (exam.currentQuestionIndex < exam.questions.length - 1) {
                         setState(() {
                           _showAnswerFeedback = false;
@@ -833,9 +859,9 @@ class _ExamSimulationPageState extends ConsumerState<ExamSimulationPage> {
                       padding: const EdgeInsets.symmetric(vertical: 12),
                     ),
                     child: Text(
-                      (_reviewCursor == null)
-                          ? (exam.currentQuestionIndex < exam.questions.length - 1 ? 'Sonraki' : 'Bitir')
-                          : (_reviewCursor! < exam.currentQuestionIndex ? 'Sonraki' : 'Sonraki'),
+                      isInReviewMode
+                          ? (_reviewCursor! >= exam.questions.length - 1 ? 'İncelemeyi Bitir' : 'Sonraki')
+                          : (exam.currentQuestionIndex < exam.questions.length - 1 ? 'Sonraki' : 'Bitir'),
                     ),
                   ),
                 ),

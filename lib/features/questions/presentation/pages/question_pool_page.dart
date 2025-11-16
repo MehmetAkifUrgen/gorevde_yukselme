@@ -194,7 +194,7 @@ class _QuestionPoolPageState extends ConsumerState<QuestionPoolPage> {
                       onPressed: () => _startMiniQuiz(context),
                       icon: const Icon(Icons.quiz, size: 28),
                       label: const Text(
-                        'Mini Quiz',
+                        'AI Destekli Eşsiz Sorular',
                         style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                       ),
                       style: ElevatedButton.styleFrom(

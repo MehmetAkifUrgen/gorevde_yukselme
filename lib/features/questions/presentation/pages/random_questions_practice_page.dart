@@ -8,6 +8,7 @@ import '../../../../core/models/question_model.dart';
 import '../../../../core/providers/app_providers.dart';
 import '../../../../core/providers/auth_providers.dart';
 import '../../../../core/providers/ad_providers.dart';
+import '../../../../core/services/admob_service.dart';
 import '../../../../core/router/app_router.dart';
 import '../../../../core/services/premium_features_service.dart';
 import '../widgets/question_card.dart';
@@ -272,7 +273,7 @@ class _RandomQuestionsPracticePageState extends ConsumerState<RandomQuestionsPra
       final miniCounter = ref.read(miniQuestionsCounterProvider);
       if (miniCounter == 5) {
         // 5. sorudan sonra reklam göster
-        ref.read(adDisplayProvider.notifier).forceShowAd();
+        ref.read(adDisplayProvider.notifier).forceShowAd(AdPlacement.aiPractice);
       }
     } else {
       ref.read(questionCounterProvider.notifier).increment();
@@ -310,7 +311,8 @@ class _RandomQuestionsPracticePageState extends ConsumerState<RandomQuestionsPra
     }
     
     // Show final ad before showing results
-    await ref.read(adDisplayProvider.notifier).forceShowAd();
+    final placement = widget.isMiniQuestions ? AdPlacement.aiPractice : AdPlacement.randomPractice;
+    await ref.read(adDisplayProvider.notifier).forceShowAd(placement);
     
     // Show results after ad
     _showSessionResults();
@@ -491,8 +493,12 @@ class _RandomQuestionsPracticePageState extends ConsumerState<RandomQuestionsPra
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Oturumdan Çık'),
-        content: const Text('Oturumdan çıkmak istediğinizden emin misiniz? İlerlemeniz kaydedilmeyecek.'),
+        title: Text(widget.isMiniQuestions ? 'AI Destekli Oturumu Kapat' : 'Oturumdan Çık'),
+        content: Text(
+          widget.isMiniQuestions
+              ? 'Cevapladığınız sorular istatistiklerinize kaydedildi. Bu oturumu kapatırsanız kalan sorulara daha sonra yeniden başlamanız gerekir.'
+              : 'Cevapladığınız sorular istatistiklerinize kaydedildi. Oturumdan çıkarsanız kalan soruları daha sonra yeniden başlatmanız gerekir.',
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
